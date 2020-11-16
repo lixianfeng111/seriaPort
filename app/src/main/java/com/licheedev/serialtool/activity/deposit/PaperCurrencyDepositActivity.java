@@ -29,6 +29,9 @@ import static com.licheedev.serialtool.comn.message.LogManager.EXIT_WORK_COMMAND
 import static com.licheedev.serialtool.comn.message.LogManager.FINISH_DEPOSIT;
 import static com.licheedev.serialtool.comn.message.LogManager.SEARCH_LEAD;
 
+/**
+ * 纸币存款
+ */
 public class PaperCurrencyDepositActivity extends BaseActivity {
 
     public static final int REQUEST_CODE_DEPOSIT = 1;
