@@ -38,7 +38,7 @@ public class CurrenySelectUtil {
         CurrenySelectAdapter adapter = new CurrenySelectAdapter(context, stringlist);
         LinearLayout view = (LinearLayout) LayoutInflater.from(context).inflate(R.layout.currency_select_view, null, false);
         RecyclerView recyclerView = view.findViewById(R.id.currencyList);
-        GridLayoutManager manager = new GridLayoutManager(context, 3);
+        GridLayoutManager manager = new GridLayoutManager(context, 4);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
         adapter.setMyViewHolerClicks(new CurrenySelectAdapter.MyViewHolerClicks() {

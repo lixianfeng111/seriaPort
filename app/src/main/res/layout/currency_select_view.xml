@@ -4,13 +4,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+<!--    <TextView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="20dp"-->
+<!--        android:gravity="center"-->
+<!--        android:background="@drawable/rectangle_solide_topleft_blue"/>-->
+
     <TextView
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"
+        android:textSize="30sp"
+        android:text="@string/dialog_select_currency"
         android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:gravity="center"
-        android:background="@drawable/rectangle_solide_topleft_blue"/>
+        android:layout_height="wrap_content"/>
 
     <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="20dp"
         android:id="@+id/currencyList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

@@ -190,4 +190,5 @@
     <string name="details">详细</string>
     <string name="download">下载</string>
 
+    <string name="dialog_select_currency">选择币种</string>
 </resources>
