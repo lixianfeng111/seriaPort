@@ -5,13 +5,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.licheedev.serialtool.R;
-import com.licheedev.serialtool.activity.base.BaseActivity;
+import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.activity.dapter.BaseRecyclerAdapter;
 import com.licheedev.serialtool.activity.dapter.RecyclerViewHolder;
+import com.licheedev.serialtool.base.BasePresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,18 +24,13 @@ import butterknife.OnClick;
  */
 public class DepositRecordActivity extends BaseActivity implements BaseRecyclerAdapter.Delegate {
 
-    @BindView(R.id.textView)
-    TextView tvTitle;
-    @BindView(R.id.recyclerview)
-    RecyclerView mRecyclerView;
-    @BindView(R.id.btnUpload)
-    Button btnallprint;
-    @BindView(R.id.btLogout)
-    Button btnUpload;
-
 
     private BaseRecyclerAdapter adapter;
     private List<Integer> list = new ArrayList<>();
+    private Button btnUpload;
+    private Button btLogout;
+    private TextView tvTitle;
+    private RecyclerView recyclerview;
 
     @Override
     protected int getLayoutId() {
@@ -43,11 +38,35 @@ public class DepositRecordActivity extends BaseActivity implements BaseRecyclerA
     }
 
     @Override
+    public void initListener() {
+
+    }
+
+    @Override
+    public void initVariable() {
+
+    }
+
+    @Override
+    public BasePresenter initPresenter() {
+        return null;
+    }
+
+    @Override
+    public void initData() {
+
+    }
+
+    @Override
     protected void initView() {
         super.initView();
 
-        btnallprint.setText(getResources().getString(R.string.record_allprint));
-        btnUpload.setText(getResources().getString(R.string.record_updaloddata));
+        btnUpload = findViewById(R.id.btnUpload);
+        btLogout = findViewById(R.id.btLogout);
+        tvTitle = findViewById(R.id.textView);
+        recyclerview = findViewById(R.id.recyclerview);
+        btnUpload.setText(getResources().getString(R.string.record_allprint));
+        btLogout.setText(getResources().getString(R.string.record_updaloddata));
         boolean iscurrent = getIntent().getBooleanExtra("iscurrent", false);
         if (iscurrent) {
             tvTitle.setText(getResources().getString(R.string.current_deposit));
@@ -56,9 +75,9 @@ public class DepositRecordActivity extends BaseActivity implements BaseRecyclerA
         }
 
         LinearLayoutManager manager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(manager);
+        recyclerview.setLayoutManager(manager);
         adapter = new BaseRecyclerAdapter(this, this);
-        mRecyclerView.setAdapter(adapter);
+        recyclerview.setAdapter(adapter);
 
         list.add(1);
         list.add(1);

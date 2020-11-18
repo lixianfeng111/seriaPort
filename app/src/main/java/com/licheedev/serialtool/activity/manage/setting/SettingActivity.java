@@ -4,7 +4,8 @@ import android.content.Intent;
 import android.view.View;
 
 import com.licheedev.serialtool.R;
-import com.licheedev.serialtool.activity.base.BaseActivity;
+import com.licheedev.serialtool.base.BaseActivity;
+import com.licheedev.serialtool.base.BasePresenter;
 
 import butterknife.OnClick;
 
@@ -18,6 +19,26 @@ public class SettingActivity extends BaseActivity {
     @Override
     protected int getLayoutId() {
         return R.layout.activity_setting;
+    }
+
+    @Override
+    public void initListener() {
+
+    }
+
+    @Override
+    public void initVariable() {
+
+    }
+
+    @Override
+    public BasePresenter initPresenter() {
+        return null;
+    }
+
+    @Override
+    public void initData() {
+
     }
 
     @OnClick({R.id.tvDevice, R.id.tvNetwork, R.id.tvFunction, R.id.tvenvelope, R.id.btnBack, R.id.btLogout})

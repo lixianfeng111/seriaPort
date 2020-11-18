@@ -1,6 +1,7 @@
 package com.licheedev.serialtool;
 
 import android.app.Application;
+import android.content.Context;
 import android.os.Handler;
 
 import com.licheedev.serialtool.comn.SerialPortManager;
@@ -14,7 +15,7 @@ public class App extends Application {
 
     private Handler mUiHandler;
     private static App sInstance;
-
+    public static Context mContext;
     @Override
     public void onCreate() {
         super.onCreate();

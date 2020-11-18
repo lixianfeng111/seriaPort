@@ -1,26 +1,20 @@
 package com.licheedev.serialtool.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.serialport.SerialPortFinder;
-import android.text.TextUtils;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import com.licheedev.serialtool.R;
-import com.licheedev.serialtool.activity.base.BaseActivity;
+import com.licheedev.serialtool.base.BaseActivity;
+import com.licheedev.serialtool.base.BasePresenter;
 import com.licheedev.serialtool.comn.Device;
 import com.licheedev.serialtool.comn.SerialPortManager;
 import com.licheedev.serialtool.util.AllCapTransformationMethod;
 import com.licheedev.serialtool.util.PrefHelper;
-import com.licheedev.serialtool.util.ToastUtil;
 import com.licheedev.serialtool.util.constant.PreferenceKeys;
 
 import static com.licheedev.serialtool.R.array.baudrates;
@@ -123,6 +117,26 @@ public class MainActivity extends BaseActivity  {
     @Override
     protected int getLayoutId() {
         return R.layout.activity_main;
+    }
+
+    @Override
+    public void initListener() {
+
+    }
+
+    @Override
+    public void initVariable() {
+
+    }
+
+    @Override
+    public BasePresenter initPresenter() {
+        return null;
+    }
+
+    @Override
+    public void initData() {
+
     }
 
     /**

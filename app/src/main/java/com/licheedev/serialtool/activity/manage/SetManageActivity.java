@@ -4,12 +4,13 @@ import android.content.Intent;
 import android.view.View;
 
 import com.licheedev.serialtool.R;
-import com.licheedev.serialtool.activity.base.BaseActivity;
+import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.activity.manage.maintain.MaintainActivity;
 import com.licheedev.serialtool.activity.manage.manage.ManageActivity;
 import com.licheedev.serialtool.activity.manage.print.SystemPrintActivity;
 import com.licheedev.serialtool.activity.manage.setting.SettingActivity;
 import com.licheedev.serialtool.activity.manage.update.VersionUpdateActivity;
+import com.licheedev.serialtool.base.BasePresenter;
 
 import butterknife.OnClick;
 
@@ -22,6 +23,26 @@ public class SetManageActivity extends BaseActivity {
     @Override
     protected int getLayoutId() {
         return R.layout.activity_setmanager;
+    }
+
+    @Override
+    public void initListener() {
+
+    }
+
+    @Override
+    public void initVariable() {
+
+    }
+
+    @Override
+    public BasePresenter initPresenter() {
+        return null;
+    }
+
+    @Override
+    public void initData() {
+
     }
 
     @OnClick({R.id.ibtn_manager, R.id.ibtn_setting, R.id.ibtn_maintain, R.id.ibtn_print

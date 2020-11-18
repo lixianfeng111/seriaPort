@@ -4,8 +4,8 @@ import android.content.Intent;
 import android.view.View;
 
 import com.licheedev.serialtool.R;
-import com.licheedev.serialtool.activity.base.BaseActivity;
-import com.licheedev.serialtool.activity.manage.manage.DeviceManageActivity;
+import com.licheedev.serialtool.base.BaseActivity;
+import com.licheedev.serialtool.base.BasePresenter;
 
 import butterknife.OnClick;
 
@@ -18,6 +18,26 @@ public class DebugActivity extends BaseActivity {
     @Override
     protected int getLayoutId() {
         return R.layout.activity_debug;
+    }
+
+    @Override
+    public void initListener() {
+
+    }
+
+    @Override
+    public void initVariable() {
+
+    }
+
+    @Override
+    public BasePresenter initPresenter() {
+        return null;
+    }
+
+    @Override
+    public void initData() {
+
     }
 
     @OnClick({R.id.tvsysytemclear, R.id.tvsysdebug, R.id.btnBack

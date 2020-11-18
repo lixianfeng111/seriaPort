@@ -5,12 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.licheedev.serialtool.R;
-import com.licheedev.serialtool.activity.base.BaseActivity;
+import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.activity.dapter.BaseRecyclerAdapter;
 import com.licheedev.serialtool.activity.dapter.RecyclerViewHolder;
+import com.licheedev.serialtool.base.BasePresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +36,26 @@ public class ClearingRecordActivity extends BaseActivity implements BaseRecycler
     @Override
     protected int getLayoutId() {
         return R.layout.activity_clearing_record;
+    }
+
+    @Override
+    public void initListener() {
+
+    }
+
+    @Override
+    public void initVariable() {
+
+    }
+
+    @Override
+    public BasePresenter initPresenter() {
+        return null;
+    }
+
+    @Override
+    public void initData() {
+
     }
 
     @Override

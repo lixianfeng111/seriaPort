@@ -6,9 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.licheedev.serialtool.R;
-import com.licheedev.serialtool.activity.base.BaseFragment;
+import com.licheedev.serialtool.base.BaseFragment;
 import com.licheedev.serialtool.activity.dapter.BaseRecyclerAdapter;
 import com.licheedev.serialtool.activity.dapter.RecyclerViewHolder;
+import com.licheedev.serialtool.base.BasePresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +44,16 @@ public class ValveProofreadFragment extends BaseFragment implements BaseRecycler
         list.add(1);
         list.add(1);
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected BasePresenter initBasePresenter() {
+        return null;
+    }
+
+    @Override
+    protected void initVariable() {
+
     }
 
     @Override

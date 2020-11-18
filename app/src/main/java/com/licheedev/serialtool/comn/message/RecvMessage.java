@@ -1,9 +1,5 @@
 package com.licheedev.serialtool.comn.message;
 
-import android.widget.Toast;
-
-import com.licheedev.serialtool.activity.MainActivity;
-import com.licheedev.serialtool.activity.base.BaseActivity;
 import com.licheedev.serialtool.util.TimeUtil;
 
 /**

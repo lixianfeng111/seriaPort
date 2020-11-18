@@ -8,11 +8,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.licheedev.serialtool.R;
-import com.licheedev.serialtool.activity.base.BaseActivity;
+import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.activity.dapter.BaseRecyclerAdapter;
 import com.licheedev.serialtool.activity.dapter.RecyclerViewHolder;
-import com.licheedev.serialtool.activity.deposit.PaperCurrencyDepositActivity;
-import com.licheedev.serialtool.dialog.CurrenySelectUtil;
+import com.licheedev.serialtool.base.BasePresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +36,26 @@ public class UserManageActivity extends BaseActivity implements BaseRecyclerAdap
     @Override
     protected int getLayoutId() {
         return R.layout.activity_user_manage;
+    }
+
+    @Override
+    public void initListener() {
+
+    }
+
+    @Override
+    public void initVariable() {
+
+    }
+
+    @Override
+    public BasePresenter initPresenter() {
+        return null;
+    }
+
+    @Override
+    public void initData() {
+
     }
 
     @Override

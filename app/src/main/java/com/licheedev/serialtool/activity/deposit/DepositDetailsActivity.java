@@ -1,16 +1,20 @@
 package com.licheedev.serialtool.activity.deposit;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
+import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.licheedev.serialtool.R;
-import com.licheedev.serialtool.activity.base.BaseActivity;
+import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.activity.dapter.BaseRecyclerAdapter;
 import com.licheedev.serialtool.activity.dapter.RecyclerViewHolder;
+import com.licheedev.serialtool.base.BasePresenter;
 import com.licheedev.serialtool.comn.SerialPortManager;
 import com.licheedev.serialtool.comn.message.LogManager;
 import com.licheedev.serialtool.dialog.CurrenySelectUtil;
@@ -25,9 +29,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-import static com.licheedev.serialtool.activity.deposit.PaperCurrencyDepositActivity.REQUEST_CODE_DEPOSIT;
 import static com.licheedev.serialtool.activity.deposit.PaperCurrencyDepositActivity.RESULT_CODE_DEPOSIT;
-import static com.licheedev.serialtool.comn.message.LogManager.FINISH_DEPOSIT;
 import static com.licheedev.serialtool.comn.message.LogManager.SAVE_SUCCESS_COMMAND;
 import static com.licheedev.serialtool.util.constant.Money.Denomination_100_CNY;
 import static com.licheedev.serialtool.util.constant.Money.Denomination_10_CNY;
@@ -51,12 +53,24 @@ public class DepositDetailsActivity extends BaseActivity implements BaseRecycler
     TextView tvAlreadyCount;
     @BindView(R.id.tvAlreadySum)
     TextView tvAlreadySum;
-    @BindView(R.id.recyclerview)
-    RecyclerView mRecyclerView;
     private Dialog overDepositDialogdialog;
 
     private BaseRecyclerAdapter adapter;
     private List<DepositDetailBean> list = new ArrayList<>();
+
+    @Override
+    protected void initView() {
+        super.initView();
+
+        //此处不能用ButterKnife，只能findViewById，不然崩溃
+        RecyclerView recyclerview_detail = findViewById(R.id.recyclerview_detail);
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+        recyclerview_detail.setLayoutManager(manager);
+        manager.setOrientation(OrientationHelper.VERTICAL);
+        adapter = new BaseRecyclerAdapter(this, this);
+        recyclerview_detail.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+    }
 
     @Override
     protected int getLayoutId() {
@@ -64,15 +78,23 @@ public class DepositDetailsActivity extends BaseActivity implements BaseRecycler
     }
 
     @Override
-    protected void initView() {
-        super.initView();
+    public void initListener() {
 
+    }
 
-        LinearLayoutManager manager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(manager);
-        adapter = new BaseRecyclerAdapter(this, this);
-        mRecyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+    @Override
+    public void initVariable() {
+
+    }
+
+    @Override
+    public BasePresenter initPresenter() {
+        return null;
+    }
+
+    @Override
+    public void initData() {
+
     }
 
     @OnClick({R.id.btnOverDeposit, R.id.btnContiniu})

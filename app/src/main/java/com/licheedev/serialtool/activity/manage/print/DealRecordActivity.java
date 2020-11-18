@@ -7,9 +7,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.licheedev.serialtool.R;
-import com.licheedev.serialtool.activity.base.BaseActivity;
+import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.activity.dapter.BaseRecyclerAdapter;
 import com.licheedev.serialtool.activity.dapter.RecyclerViewHolder;
+import com.licheedev.serialtool.base.BasePresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +37,26 @@ public class DealRecordActivity extends BaseActivity implements BaseRecyclerAdap
     @Override
     protected int getLayoutId() {
         return R.layout.activity_deal_record;
+    }
+
+    @Override
+    public void initListener() {
+
+    }
+
+    @Override
+    public void initVariable() {
+
+    }
+
+    @Override
+    public BasePresenter initPresenter() {
+        return null;
+    }
+
+    @Override
+    public void initData() {
+
     }
 
     @Override

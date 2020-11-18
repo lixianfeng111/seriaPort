@@ -4,14 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.licheedev.serialtool.R;
-import com.licheedev.serialtool.activity.base.BaseActivity;
-import com.licheedev.serialtool.activity.deposit.DepositRecordActivity;
+import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.activity.deposit.SelectDepositActivitys;
 import com.licheedev.serialtool.activity.manage.SetManageActivity;
-import com.licheedev.serialtool.util.LogPlus;
+import com.licheedev.serialtool.base.BasePresenter;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -23,11 +21,6 @@ public class LoginActivity extends BaseActivity {
     EditText editText;
     @BindView(R.id.editText2)
     EditText editText2;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @OnClick({R.id.btLogin,})
     public void onViewClicked(View view) {
@@ -59,5 +52,24 @@ public class LoginActivity extends BaseActivity {
         return R.layout.activity_login;
     }
 
+    @Override
+    public void initListener() {
+
+    }
+
+    @Override
+    public void initVariable() {
+
+    }
+
+    @Override
+    public BasePresenter initPresenter() {
+        return null;
+    }
+
+    @Override
+    public void initData() {
+
+    }
 
 }

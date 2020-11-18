@@ -1,12 +1,11 @@
 package com.licheedev.serialtool.activity.manage.manage;
 
 import android.view.View;
-import android.widget.EditText;
 
 import com.licheedev.serialtool.R;
-import com.licheedev.serialtool.activity.base.BaseActivity;
+import com.licheedev.serialtool.base.BaseActivity;
+import com.licheedev.serialtool.base.BasePresenter;
 
-import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
@@ -18,6 +17,26 @@ public class DataUploadActivity extends BaseActivity {
     @Override
     protected int getLayoutId() {
         return R.layout.activity_data_upload;
+    }
+
+    @Override
+    public void initListener() {
+
+    }
+
+    @Override
+    public void initVariable() {
+
+    }
+
+    @Override
+    public BasePresenter initPresenter() {
+        return null;
+    }
+
+    @Override
+    public void initData() {
+
     }
 
     @OnClick({R.id.tv_depositdata, R.id.tv_bill_data, R.id.btnBack, R.id.btnUpload, R.id.btLogout})

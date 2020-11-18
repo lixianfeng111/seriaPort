@@ -4,7 +4,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.licheedev.serialtool.R;
-import com.licheedev.serialtool.activity.base.BaseActivity;
+import com.licheedev.serialtool.base.BaseActivity;
+import com.licheedev.serialtool.base.BasePresenter;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -20,6 +21,26 @@ public class BillBagsettingActivity extends BaseActivity {
     @Override
     protected int getLayoutId() {
         return R.layout.activity_bill_bag;
+    }
+
+    @Override
+    public void initListener() {
+
+    }
+
+    @Override
+    public void initVariable() {
+
+    }
+
+    @Override
+    public BasePresenter initPresenter() {
+        return null;
+    }
+
+    @Override
+    public void initData() {
+
     }
 
     @Override

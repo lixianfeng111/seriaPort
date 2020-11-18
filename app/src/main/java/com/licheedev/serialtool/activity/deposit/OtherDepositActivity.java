@@ -2,15 +2,11 @@ package com.licheedev.serialtool.activity.deposit;
 
 import android.content.Intent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.RadioGroup;
-import android.widget.TextView;
 
 import com.licheedev.serialtool.R;
-import com.licheedev.serialtool.activity.base.BaseActivity;
-import com.licheedev.serialtool.dialog.CurrenySelectUtil;
+import com.licheedev.serialtool.base.BaseActivity;
+import com.licheedev.serialtool.base.BasePresenter;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -26,6 +22,26 @@ public class OtherDepositActivity extends BaseActivity {
     @Override
     protected int getLayoutId() {
         return R.layout.activity_other_deposit;
+    }
+
+    @Override
+    public void initListener() {
+
+    }
+
+    @Override
+    public void initVariable() {
+
+    }
+
+    @Override
+    public BasePresenter initPresenter() {
+        return null;
+    }
+
+    @Override
+    public void initData() {
+
     }
 
     @OnClick({R.id.ibtn_ok, R.id.ibtn_cancel, R.id.btnBack})

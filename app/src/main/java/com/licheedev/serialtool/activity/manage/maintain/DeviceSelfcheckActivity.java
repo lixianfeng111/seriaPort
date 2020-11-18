@@ -6,10 +6,11 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.licheedev.serialtool.R;
-import com.licheedev.serialtool.activity.base.BaseActivity;
+import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.activity.dapter.TabAdapter;
 import com.licheedev.serialtool.activity.manage.maintain.fragment.SenserStatusFragment;
 import com.licheedev.serialtool.activity.manage.maintain.fragment.ValveProofreadFragment;
+import com.licheedev.serialtool.base.BasePresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,26 @@ public class DeviceSelfcheckActivity extends BaseActivity {
     @Override
     protected int getLayoutId() {
         return R.layout.activity_device_selfcheck;
+    }
+
+    @Override
+    public void initListener() {
+
+    }
+
+    @Override
+    public void initVariable() {
+
+    }
+
+    @Override
+    public BasePresenter initPresenter() {
+        return null;
+    }
+
+    @Override
+    public void initData() {
+
     }
 
     @Override

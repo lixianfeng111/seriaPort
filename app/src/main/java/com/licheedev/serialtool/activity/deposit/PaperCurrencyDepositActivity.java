@@ -10,7 +10,8 @@ import android.widget.TextView;
 import com.licheedev.serialtool.R;
 import com.licheedev.serialtool.activity.MainActivity;
 import com.licheedev.serialtool.activity.ScreenUtil;
-import com.licheedev.serialtool.activity.base.BaseActivity;
+import com.licheedev.serialtool.base.BaseActivity;
+import com.licheedev.serialtool.base.BasePresenter;
 import com.licheedev.serialtool.comn.SerialPortManager;
 import com.licheedev.serialtool.comn.message.LogManager;
 import com.licheedev.serialtool.dialog.CurrenySelectUtil;
@@ -56,6 +57,7 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
     Deposit deposit;
     boolean exit;
     Dialog continueDepositDialogdialog, exitFailDialog0, exitFailDialog1;
+
 
     public static class Deposit {
 
@@ -271,6 +273,26 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
     @Override
     protected int getLayoutId() {
         return R.layout.activity_paper_currency_deposit;
+    }
+
+    @Override
+    public void initListener() {
+
+    }
+
+    @Override
+    public void initVariable() {
+
+    }
+
+    @Override
+    public BasePresenter initPresenter() {
+        return null;
+    }
+
+    @Override
+    public void initData() {
+
     }
 
 

@@ -4,8 +4,8 @@ import android.content.Intent;
 import android.view.View;
 
 import com.licheedev.serialtool.R;
-import com.licheedev.serialtool.activity.base.BaseActivity;
-import com.licheedev.serialtool.activity.manage.SetManageActivity;
+import com.licheedev.serialtool.base.BaseActivity;
+import com.licheedev.serialtool.base.BasePresenter;
 
 import butterknife.OnClick;
 
@@ -18,6 +18,26 @@ public class SelectDepositActivitys extends BaseActivity {
     @Override
     protected int getLayoutId() {
         return R.layout.activity_select_deposit;
+    }
+
+    @Override
+    public void initListener() {
+
+    }
+
+    @Override
+    public void initVariable() {
+
+    }
+
+    @Override
+    public BasePresenter initPresenter() {
+        return null;
+    }
+
+    @Override
+    public void initData() {
+
     }
 
     @OnClick({R.id.ibtn_paper_select, R.id.ibtn_other_select, R.id.ibtn_record})

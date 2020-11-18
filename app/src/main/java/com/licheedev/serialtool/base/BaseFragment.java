@@ -1,4 +1,4 @@
-package com.licheedev.serialtool.activity.base;
+package com.licheedev.serialtool.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,13 +14,14 @@ import butterknife.Unbinder;
  * Created by xiangfenr on 16/7/13 13:29.
  * Describe: Fragment
  */
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
 
     private Unbinder unbinder;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        initVariable();
         if (getFragmentView() == null) {
             View view = LayoutInflater.from(getContext()).inflate(getFragmentViewById(), null);
             unbinder = ButterKnife.bind(this, view);
@@ -28,6 +29,7 @@ public abstract class BaseFragment extends Fragment {
         } else {
             return getFragmentView();
         }
+
     }
 
     @Override
@@ -37,10 +39,13 @@ public abstract class BaseFragment extends Fragment {
         initData();
     }
 
+    protected abstract void initVariable();
+
     protected abstract void initData();
 
     protected abstract void initView();
 
+    protected abstract T initBasePresenter();
     public View getFragmentView() {
         return null;
     }
