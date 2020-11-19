@@ -1,6 +1,5 @@
 package com.licheedev.serialtool.comn;
 
-import android.app.Application;
 import android.os.HandlerThread;
 import android.serialport.SerialPort;
 import android.serialport.SerialPortFinder;
@@ -194,6 +193,7 @@ public class SerialPortManager {
     private SerialPort mSerialPort;
 
     private SerialPortManager() {
+
     }
 
     /**
@@ -228,9 +228,9 @@ public class SerialPortManager {
 
             mOutputStream = mSerialPort.getOutputStream();
 
-            mWriteThread = new HandlerThread("write-thread");
-            mWriteThread.start();
-            mSendScheduler = AndroidSchedulers.from(mWriteThread.getLooper());
+//            mWriteThread = new HandlerThread("write-thread");
+//            mWriteThread.start();
+//            mSendScheduler = AndroidSchedulers.from(mWriteThread.getLooper());
 
             return mSerialPort;
         } catch (Throwable tr) {
@@ -322,11 +322,13 @@ public class SerialPortManager {
         // TODO: 2018/3/22  
         LogPlus.i("发送命令：" + command);
 //        ToastUtil.show(App.instance(),"发送命令command = " + command);
-
+        mWriteThread = new HandlerThread("write-thread");
+        mWriteThread.start();
         byte[] bytes = ByteUtil.hexStr2bytes(command);
-        rxSendData(bytes).subscribeOn(mSendScheduler).subscribe(new Observer<Object>() {
+        rxSendData(bytes).subscribeOn(AndroidSchedulers.from(mWriteThread.getLooper())).subscribe(new Observer<Object>() {
             @Override
             public void onSubscribe(Disposable d) {
+
             }
 
             @Override
