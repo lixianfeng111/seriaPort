@@ -1,9 +1,11 @@
 package com.licheedev.serialtool.activity.deposit;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
 import com.licheedev.serialtool.R;
+import com.licheedev.serialtool.activity.clear.ClearDeviceHintActivity;
 import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.base.BasePresenter;
 
@@ -54,7 +56,7 @@ public class ClearDeviceTestActivity extends BaseActivity {
 
                 break;
             case R.id.ibtn_ok:
-
+                startActivity(new Intent(this, ClearDeviceHintActivity.class));
                 break;
             case R.id.ibtn_cancel:
                 finish();

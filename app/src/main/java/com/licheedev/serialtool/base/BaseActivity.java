@@ -6,18 +6,14 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.View;
 
 import butterknife.ButterKnife;
 
-import com.licheedev.serialtool.App;
 import com.licheedev.serialtool.R;
 import com.licheedev.serialtool.fragment.LogFragment;
 import com.licheedev.serialtool.comn.message.IMessage;
 import com.licheedev.serialtool.comn.message.LogManager;
 import com.licheedev.serialtool.receiver.NetReceiver;
-import com.licheedev.serialtool.util.ToastUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -34,6 +30,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         super.onCreate(savedInstanceState);
         if (getLayoutId() != 0) {
             setContentView(getLayoutId());
+            ButterKnife.bind(this);
             initView();
             initVariable();
             miBasePresenter = initPresenter();
@@ -48,7 +45,6 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
                 //设置监听
                 netBroadcastReceiver.setNetStatuMonitor(this);
             }
-            ButterKnife.bind(this);
         } else {
             finish();
         }

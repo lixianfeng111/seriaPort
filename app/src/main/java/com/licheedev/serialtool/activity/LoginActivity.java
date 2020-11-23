@@ -1,11 +1,11 @@
 package com.licheedev.serialtool.activity;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
 import com.licheedev.serialtool.R;
+import com.licheedev.serialtool.activity.deposit.ClearDeviceTestActivity;
 import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.activity.deposit.SelectDepositActivitys;
 import com.licheedev.serialtool.activity.manage.SetManageActivity;
@@ -27,11 +27,14 @@ public class LoginActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.btLogin:
                 //  startActivity(new Intent(this, SetManageActivity.class));
-                if (checkLogin()) {
+                if (checkLogin()==1) {
                     startActivity(new Intent(this, SetManageActivity.class));
                     finish();
-                } else {
+                } else if (checkLogin()==2){
                     startActivity(new Intent(this, SelectDepositActivitys.class));
+                    finish();
+                }else {
+                    startActivity(new Intent(this, ClearDeviceTestActivity.class));
                     finish();
                 }
                 break;
@@ -40,10 +43,15 @@ public class LoginActivity extends BaseActivity {
 
     }
 
-    private boolean checkLogin() {
+//    private boolean checkLogin() {
+//        String user = editText.getText().toString();
+//        String passwd = editText2.getText().toString();
+//        return "123".equals(user) && "123".equals(passwd);
+//    }
+    private int checkLogin() {
         String user = editText.getText().toString();
         String passwd = editText2.getText().toString();
-        return "123".equals(user) && "123".equals(passwd);
+        return 3;
     }
 
 

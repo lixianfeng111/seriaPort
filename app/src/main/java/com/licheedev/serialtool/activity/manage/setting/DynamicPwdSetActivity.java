@@ -18,8 +18,7 @@ public class DynamicPwdSetActivity extends BaseActivity {
 
     @BindView(R.id.editIp)
     EditText editIp;
-    @BindView(R.id.btnUpload)
-    Button btnUpload;
+    private Button btnUpload1;
 
     @Override
     protected int getLayoutId() {
@@ -49,7 +48,8 @@ public class DynamicPwdSetActivity extends BaseActivity {
     @Override
     protected void initView() {
         super.initView();
-        btnUpload.setText(getResources().getString(R.string.set));
+        btnUpload1 = findViewById(R.id.btnUpload);
+        btnUpload1.setText(getResources().getString(R.string.set));
     }
 
     @OnClick({R.id.btnBack, R.id.btnUpload, R.id.btLogout})

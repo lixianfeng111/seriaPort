@@ -26,12 +26,13 @@ public class UserManageActivity extends BaseActivity implements BaseRecyclerAdap
 
     @BindView(R.id.textView)
     TextView tvTitle;
-    @BindView(R.id.recyclerview)
-    RecyclerView mRecyclerView;
+//    @BindView(R.id.recyclerview)
+//    RecyclerView mRecyclerView;
     private Dialog overDepositDialogdialog;
 
     private BaseRecyclerAdapter adapter;
     private List<Integer> list = new ArrayList<>();
+    private RecyclerView recyclerview;
 
     @Override
     protected int getLayoutId() {
@@ -62,10 +63,11 @@ public class UserManageActivity extends BaseActivity implements BaseRecyclerAdap
     protected void initView() {
         super.initView();
 
+        recyclerview = findViewById(R.id.recyclerview);
         LinearLayoutManager manager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(manager);
+        recyclerview.setLayoutManager(manager);
         adapter = new BaseRecyclerAdapter(this, this);
-        mRecyclerView.setAdapter(adapter);
+        recyclerview.setAdapter(adapter);
 
         list.add(1);
         list.add(1);

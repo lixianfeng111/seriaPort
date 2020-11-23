@@ -194,6 +194,9 @@
             android:name=".activity.manage.update.UpdateSettingActivity"
             android:screenOrientation="landscape" />
 
+        <activity
+            android:name=".activity.clear.ClearDeviceHintActivity"
+            android:screenOrientation="landscape" />
 
     </application>
 

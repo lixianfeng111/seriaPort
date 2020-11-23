@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
@@ -51,16 +53,37 @@
             android:layout_marginLeft="50dp"
             android:src="@mipmap/home_menu" />
 
-        <!--        <ImageButton-->
-        <!--            android:id="@+id/ibtn_record"-->
-        <!--            android:layout_width="100dp"-->
-        <!--            android:layout_height="100dp"-->
-        <!--            android:layout_marginLeft="30dp"-->
-        <!--            android:background="@drawable/rectangle_solide_blue"-->
-        <!--            android:src="@mipmap/home_time" />-->
+<!--                <ImageButton-->
+<!--                    android:id="@+id/ibtn_record"-->
+<!--                    android:layout_width="100dp"-->
+<!--                    android:layout_height="100dp"-->
+<!--                    android:layout_marginLeft="30dp"-->
+<!--                    android:background="@drawable/rectangle_solide_blue"-->
+<!--                    android:src="@mipmap/home_time" />-->
 
 
     </LinearLayout>
 
+<!--    <ImageView-->
+<!--        android:layout_marginRight="10dp"-->
+<!--        android:background="@color/color00baff"-->
+<!--        android:layout_alignParentRight="true"-->
+<!--        android:layout_marginBottom="250dp"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:id="@+id/right_image"-->
+<!--        android:layout_width="100dp"-->
+<!--        android:layout_height="100dp"-->
+<!--        app:srcCompat="@drawable/efp_dark__ic_action_ok" />-->
+
+<!--    <ImageView-->
+<!--        android:layout_marginRight="10dp"-->
+<!--        android:background="@color/color00baff"-->
+<!--        android:layout_alignParentRight="true"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_marginBottom="100dp"-->
+<!--        android:id="@+id/cancel_image"-->
+<!--        android:layout_width="100dp"-->
+<!--        android:layout_height="100dp"-->
+<!--        app:srcCompat="@drawable/efp_dark__ic_action_cancel" />-->
 
 </RelativeLayout>
