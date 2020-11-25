@@ -140,6 +140,36 @@ public class CurrenySelectUtil {
 
     }
 
+
+    /**
+     * 确认退出
+     * @param context
+     * @param
+     * @return
+     */
+    public static Dialog showQuitDialog(Context context) {
+        ViewGroup view = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.clear_hint_quit, null, false);
+        ImageButton btConfirm = view.findViewById(R.id.btConfirm);
+        ImageButton btCancel = view.findViewById(R.id.btCancel);
+
+        final AlertDialog alertDialog = new AlertDialog
+                .Builder(context)
+                .create();
+        alertDialog.setView(view);
+        alertDialog.show();
+        alertDialog.getWindow().setLayout(350, 190);
+        btConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+            }
+        });
+        return alertDialog;
+    }
+
+
+
+
     public static class DialogItemAdapter extends BaseAdapter {
         //这里可以传递个对象，用来控制不同的item的效果
         //比如每个item的背景资源，选中样式等

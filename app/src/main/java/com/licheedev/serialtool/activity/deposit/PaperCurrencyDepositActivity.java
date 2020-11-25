@@ -87,7 +87,6 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         swtichWorkMode();
-
         int screenWidth = ScreenUtil.getScreenWidth(this);
         int screenHeight = ScreenUtil.getScreenHeight(this);
         int a = 0;

@@ -108,7 +108,6 @@ public class SerialPortManager {
         SerialPortManager.instance().sendCommand(byteArrayToHexString(commandClearError));
     }
 
-
     public void sendSDcardAck() {
         SerialPortManager.instance().sendCommand(byteArrayToHexString(commandSDcardACK));
     }
@@ -226,11 +225,12 @@ public class SerialPortManager {
             mReadThread = new SerialReadThread(mSerialPort.getInputStream());
             mReadThread.start();
 
+
             mOutputStream = mSerialPort.getOutputStream();
 
-//            mWriteThread = new HandlerThread("write-thread");
-//            mWriteThread.start();
-//            mSendScheduler = AndroidSchedulers.from(mWriteThread.getLooper());
+            mWriteThread = new HandlerThread("write-thread");
+            mWriteThread.start();
+            mSendScheduler = AndroidSchedulers.from(mWriteThread.getLooper());
 
             return mSerialPort;
         } catch (Throwable tr) {
@@ -239,6 +239,10 @@ public class SerialPortManager {
             return null;
         }
     }
+
+
+
+
 
     /**
      * 关闭串口

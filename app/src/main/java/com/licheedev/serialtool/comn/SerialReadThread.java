@@ -1,16 +1,20 @@
 package com.licheedev.serialtool.comn;
 
+import android.app.IntentService;
 import android.content.Context;
 import android.os.SystemClock;
 import android.widget.Toast;
 
 import com.licheedev.serialtool.activity.MainActivity;
+import com.licheedev.serialtool.comn.event.StatusEvent;
 import com.licheedev.serialtool.comn.message.IMessage;
 import com.licheedev.serialtool.comn.message.LogManager;
 import com.licheedev.serialtool.comn.message.RecvMessage;
 import com.licheedev.serialtool.util.ByteUtil;
 import com.licheedev.serialtool.util.LogPlus;
 import com.licheedev.serialtool.util.constant.Money;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -118,7 +122,7 @@ public class SerialReadThread extends Thread {
      * @param received
      * @param size
      */
-    private void onDataReceive(byte[] received, int size) {
+    public void onDataReceive(byte[] received, int size) {
         // TODO: 2018/3/22 解决粘包、分包等
         String hexstr1 = null;
         byte[] version=new byte[160];
@@ -192,10 +196,19 @@ public class SerialReadThread extends Thread {
             if(((char)(received[7]&0xff)&0x01)==0x00)
             {hexstr1=hexStr+"   钞箱未到位";
                 LogManager.instance().postError("钞箱未到位");
+                EventBus.getDefault().post(new StatusEvent(2));
             }
+
             else if(((char)(received[7]&0xff)&0x02)==0x00)
             {hexstr1=hexStr+"   保险柜门未关";
                 LogManager.instance().postError("保险柜门未关");
+                EventBus.getDefault().post(new StatusEvent(1));
+            }
+
+            else if(((char)(received[7]&0xff)&0x02)==0x02)
+            {hexstr1=hexStr+"   保险柜门已关";
+                LogPlus.d(hexstr1);
+                EventBus.getDefault().post(new StatusEvent(4));
             }
             else if(((char)(received[7]&0xff)&0x04)==0x00)
             {hexstr1=hexStr+"   报警器报警";

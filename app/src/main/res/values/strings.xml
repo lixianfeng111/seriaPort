@@ -108,6 +108,7 @@
     <string name="continue_deposit">继续存钱</string>
     <string name="is_continiu_deposit">您有一笔钞票未存入，\n是否继续存入？</string>
     <string name="is_over_deposit">是否结束存款？</string>
+    <string name="clear_hint_quit">确认退出</string>
     <string name="user_number">序号</string>
     <string name="user_account">账号</string>
     <string name="user_roles">角色</string>

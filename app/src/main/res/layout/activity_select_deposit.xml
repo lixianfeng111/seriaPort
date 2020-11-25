@@ -29,6 +29,7 @@
         android:src="@mipmap/home_record" />
 
     <LinearLayout
+        android:id="@+id/select_l"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView"
@@ -53,37 +54,20 @@
             android:layout_marginLeft="50dp"
             android:src="@mipmap/home_menu" />
 
-<!--                <ImageButton-->
-<!--                    android:id="@+id/ibtn_record"-->
-<!--                    android:layout_width="100dp"-->
-<!--                    android:layout_height="100dp"-->
-<!--                    android:layout_marginLeft="30dp"-->
-<!--                    android:background="@drawable/rectangle_solide_blue"-->
-<!--                    android:src="@mipmap/home_time" />-->
 
 
     </LinearLayout>
 
-<!--    <ImageView-->
-<!--        android:layout_marginRight="10dp"-->
-<!--        android:background="@color/color00baff"-->
-<!--        android:layout_alignParentRight="true"-->
-<!--        android:layout_marginBottom="250dp"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:id="@+id/right_image"-->
-<!--        android:layout_width="100dp"-->
-<!--        android:layout_height="100dp"-->
-<!--        app:srcCompat="@drawable/efp_dark__ic_action_ok" />-->
+    <Button
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/select_l"
+        android:id="@+id/button"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:background="@drawable/rectangle_solide_blue"
+        android:text="结束存款"
+        android:textColor="@color/white"/>
 
-<!--    <ImageView-->
-<!--        android:layout_marginRight="10dp"-->
-<!--        android:background="@color/color00baff"-->
-<!--        android:layout_alignParentRight="true"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:layout_marginBottom="100dp"-->
-<!--        android:id="@+id/cancel_image"-->
-<!--        android:layout_width="100dp"-->
-<!--        android:layout_height="100dp"-->
-<!--        app:srcCompat="@drawable/efp_dark__ic_action_cancel" />-->
 
 </RelativeLayout>

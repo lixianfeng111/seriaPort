@@ -149,6 +149,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
             mLogFragment.add(message);
         }
     }
+
     @Override
     public void onNetChange(boolean netStatus) {
     }
