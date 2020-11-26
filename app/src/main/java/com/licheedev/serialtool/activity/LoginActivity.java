@@ -29,13 +29,13 @@ public class LoginActivity extends BaseActivity {
                 //  startActivity(new Intent(this, SetManageActivity.class));
                 if (checkLogin()==1) {
                     startActivity(new Intent(this, SetManageActivity.class));
-                    finish();
+//                    finish();
                 } else if (checkLogin()==2){
                     startActivity(new Intent(this, SelectDepositActivitys.class));
-                    finish();
+//                    finish();
                 }else {
                     startActivity(new Intent(this, ClearDeviceTestActivity.class));
-                    finish();
+//                    finish();
                 }
                 break;
         }
@@ -51,7 +51,7 @@ public class LoginActivity extends BaseActivity {
     private int checkLogin() {
         String user = editText.getText().toString();
         String passwd = editText2.getText().toString();
-        return 3;
+        return 2;
     }
 
 

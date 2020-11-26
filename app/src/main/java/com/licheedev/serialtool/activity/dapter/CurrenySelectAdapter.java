@@ -2,7 +2,11 @@ package com.licheedev.serialtool.activity.dapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Rect;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +44,6 @@ public class CurrenySelectAdapter extends RecyclerView.Adapter<CurrenySelectAdap
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
         holder.btnCurrency.setText(datas.get(position));
-
         if (myViewHolerClicks != null) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -85,4 +88,6 @@ public class CurrenySelectAdapter extends RecyclerView.Adapter<CurrenySelectAdap
         void onItemClick(int position);
     }
 
+
+    
 }

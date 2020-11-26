@@ -11,6 +11,7 @@
 
     <TextView
         android:id="@+id/hint"
+        android:textSize="18sp"
         android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,8 +35,8 @@
             <ImageView
                 android:id="@+id/open_door"
                 android:src="@mipmap/open_door"
-                android:layout_width="100dp"
-                android:layout_height="70dp"/>
+                android:layout_width="128dp"
+                android:layout_height="79dp"/>
 
             <Space
                 android:layout_weight="1"
@@ -43,14 +44,14 @@
                 android:layout_height="wrap_content"/>
             <ImageView
                 android:id="@+id/close_door"
-                android:layout_width="100dp"
-                android:layout_height="70dp"
+                android:layout_width="128dp"
+                android:layout_height="79dp"
                 android:layout_marginTop="80dp"
                 android:src="@mipmap/close_door" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginLeft="80dp"
+            android:layout_marginLeft="70dp"
             android:gravity="center_vertical"
             android:layout_marginTop="20.5dp"
             android:layout_width="wrap_content"
@@ -60,8 +61,8 @@
             <ImageView
                 android:layout_marginTop="24dp"
                 android:src="@mipmap/clear_right"
-                android:layout_width="30dp"
-                android:layout_height="16dp"/>
+                android:layout_width="20dp"
+                android:layout_height="11dp"/>
             <Space
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
@@ -71,37 +72,36 @@
                 android:layout_marginBottom="24dp"
                 android:layout_marginTop="80dp"
                 android:src="@mipmap/clear_left"
-                android:layout_width="30dp"
-                android:layout_height="16dp"/>
+                android:layout_width="20dp"
+                android:layout_height="11dp"/>
         </LinearLayout>
 
         <LinearLayout
-
             android:layout_marginLeft="80dp"
             android:gravity="center"
             android:layout_marginTop="20.5dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/take_out"
                 android:src="@mipmap/take_out"
-                android:layout_width="100dp"
-                android:layout_height="70dp"/>
+                android:layout_width="111dp"
+                android:layout_height="66dp"/>
 
             <ImageView
                 android:layout_marginTop="70dp"
                 android:src="@mipmap/clear_down"
-                android:layout_width="30dp"
-                android:layout_height="16dp"/>
+                android:layout_width="40dp"
+                android:layout_height="21dp"/>
 
             <ImageView
                 android:id="@+id/put_in"
                 android:layout_marginTop="80dp"
                 android:src="@mipmap/put_in"
-                android:layout_width="100dp"
-                android:layout_height="70dp"/>
+                android:layout_width="111dp"
+                android:layout_height="66dp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -113,7 +113,7 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="30dp"
                 android:src="@mipmap/clear_btn"
                 android:layout_marginLeft="30dp"
                 android:id="@+id/start_clear"

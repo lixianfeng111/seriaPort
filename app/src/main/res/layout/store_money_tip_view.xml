@@ -8,11 +8,11 @@
 
     <ImageButton
         android:id="@+id/btConfirm"
-        android:layout_width="100dp"
-        android:layout_height="60dp"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
         android:layout_marginTop="20dp"
         android:background="@color/color00baff"
-        android:src="@mipmap/ic_right"
+        android:src="@drawable/efp_dark__ic_action_ok"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvMessage" />
@@ -30,10 +30,11 @@
 
     <View
         android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:background="#007EFF"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
+        tools:layout_editor_absoluteX="0dp"
+        tools:ignore="MissingConstraints" />
 
 </android.support.constraint.ConstraintLayout>

@@ -40,7 +40,7 @@ public class SelectDepositActivitys extends BaseActivity {
 
     }
 
-    @OnClick({R.id.ibtn_paper_select, R.id.ibtn_other_select, R.id.ibtn_record})
+    @OnClick({R.id.ibtn_paper_select, R.id.ibtn_other_select, R.id.ibtn_record,R.id.button})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ibtn_paper_select:
@@ -53,6 +53,9 @@ public class SelectDepositActivitys extends BaseActivity {
                 Intent intent = new Intent(this, DepositRecordActivity.class);
                 intent.putExtra("iscurrent", false);
                 startActivity(intent);
+                break;
+            case R.id.button:
+                finish();
                 break;
         }
     }

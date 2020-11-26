@@ -1,10 +1,14 @@
 package com.licheedev.serialtool.dialog;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +20,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.licheedev.serialtool.R;
+import com.licheedev.serialtool.activity.clear.ClearDeviceHintActivity;
 import com.licheedev.serialtool.activity.dapter.CurrenySelectAdapter;
 import com.licheedev.serialtool.activity.deposit.PaperCurrencyDepositActivity;
 import com.licheedev.serialtool.util.constant.Money;
@@ -29,16 +34,17 @@ public class CurrenySelectUtil {
      * 币种选择弹窗
      * @param context
      */
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public static void showCurreny(Context context) {
         final AlertDialog alertDialog = new AlertDialog
                 .Builder(context)
                 .create();
-
         List<String> stringlist = Arrays.asList(Money.CURRENCY_ARRAY);
         CurrenySelectAdapter adapter = new CurrenySelectAdapter(context, stringlist);
         LinearLayout view = (LinearLayout) LayoutInflater.from(context).inflate(R.layout.currency_select_view, null, false);
         RecyclerView recyclerView = view.findViewById(R.id.currencyList);
-        GridLayoutManager manager = new GridLayoutManager(context, 4);
+
+        GridLayoutManager manager = new GridLayoutManager(context, 3);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
         adapter.setMyViewHolerClicks(new CurrenySelectAdapter.MyViewHolerClicks() {
@@ -50,7 +56,7 @@ public class CurrenySelectUtil {
 
         alertDialog.setView(view);
         alertDialog.show();
-        alertDialog.getWindow().setLayout(800, 500);
+        alertDialog.getWindow().setLayout(350, 190);
     }
 
     public static Dialog showContinueDepositDialog(Context context, final PaperCurrencyDepositActivity.Callback callback) {
@@ -147,7 +153,7 @@ public class CurrenySelectUtil {
      * @param
      * @return
      */
-    public static Dialog showQuitDialog(Context context) {
+    public static Dialog showQuitDialog(final Context context, final ClearDeviceHintActivity.Callback callback) {
         ViewGroup view = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.clear_hint_quit, null, false);
         ImageButton btConfirm = view.findViewById(R.id.btConfirm);
         ImageButton btCancel = view.findViewById(R.id.btCancel);
@@ -157,8 +163,15 @@ public class CurrenySelectUtil {
                 .create();
         alertDialog.setView(view);
         alertDialog.show();
-        alertDialog.getWindow().setLayout(350, 190);
+        alertDialog.getWindow().setLayout(300, 170);
         btConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+                callback.onQuitDialogClick();
+            }
+        });
+        btCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 alertDialog.dismiss();
@@ -220,5 +233,4 @@ public class CurrenySelectUtil {
             public TextView typeTextview;
         }
     }
-
 }

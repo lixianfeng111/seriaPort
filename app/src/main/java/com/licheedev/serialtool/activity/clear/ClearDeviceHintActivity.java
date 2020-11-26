@@ -35,7 +35,6 @@ public class ClearDeviceHintActivity extends BaseActivity {
     private boolean isTakeOut=false;
     private boolean isPutIn=false;
     private boolean isClose=false;
-    private Dialog overDepositDialogdialog;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_clear_hint;
@@ -65,9 +64,17 @@ public class ClearDeviceHintActivity extends BaseActivity {
         clear_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CurrenySelectUtil.showQuitDialog(ClearDeviceHintActivity.this);
+                CurrenySelectUtil.showQuitDialog(ClearDeviceHintActivity.this, new Callback() {
+                    @Override
+                    public void onQuitDialogClick() {
+                        finish();
+                    }
+                });
             }
         });
+    }
+    public interface Callback {
+        void onQuitDialogClick();
     }
 
     @Override
