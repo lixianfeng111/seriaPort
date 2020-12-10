@@ -25,6 +25,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     private LogFragment mLogFragment;
     protected T miBasePresenter;
     private NetReceiver netBroadcastReceiver;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

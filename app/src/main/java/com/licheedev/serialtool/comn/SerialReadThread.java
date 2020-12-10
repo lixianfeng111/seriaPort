@@ -1,25 +1,17 @@
 package com.licheedev.serialtool.comn;
 
-import android.app.IntentService;
-import android.content.Context;
 import android.os.SystemClock;
-import android.widget.Toast;
 
-import com.licheedev.serialtool.activity.MainActivity;
 import com.licheedev.serialtool.comn.event.StatusEvent;
-import com.licheedev.serialtool.comn.message.IMessage;
 import com.licheedev.serialtool.comn.message.LogManager;
-import com.licheedev.serialtool.comn.message.RecvMessage;
 import com.licheedev.serialtool.util.ByteUtil;
 import com.licheedev.serialtool.util.LogPlus;
-import com.licheedev.serialtool.util.constant.Money;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
 
 import static com.licheedev.serialtool.comn.message.LogManager.SAVE_SUCCESS_COMMAND;
 import static com.licheedev.serialtool.comn.message.LogManager.SEARCH_LEAD;
@@ -205,11 +197,6 @@ public class SerialReadThread extends Thread {
                 EventBus.getDefault().post(new StatusEvent(1));
             }
 
-            else if(((char)(received[7]&0xff)&0x02)==0x02)
-            {hexstr1=hexStr+"   保险柜门已关";
-                LogPlus.d(hexstr1);
-                EventBus.getDefault().post(new StatusEvent(4));
-            }
             else if(((char)(received[7]&0xff)&0x04)==0x00)
             {hexstr1=hexStr+"   报警器报警";
                 LogManager.instance().postError("报警器报警");

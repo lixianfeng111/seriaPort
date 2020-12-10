@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <EditText
+        android:id="@+id/comboEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:textColor="#444444"
+        android:focusable="false"
+        android:focusableInTouchMode="true"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/comboButton"
+        android:layout_alignTop="@+id/comboButton"
+        android:layout_alignBottom="@+id/comboButton"
+        android:background="@null" >
+
+    </EditText>
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/comboButton"
+        android:layout_alignParentRight="true">
+    </Button>
+</RelativeLayout>

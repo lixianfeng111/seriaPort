@@ -6,6 +6,8 @@ import android.view.View;
 import com.licheedev.serialtool.R;
 import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.base.BasePresenter;
+import com.licheedev.serialtool.comn.SerialPortManager;
+import com.licheedev.serialtool.comn.SerialPortManager2;
 
 import butterknife.OnClick;
 
@@ -18,6 +20,13 @@ public class SelectDepositActivitys extends BaseActivity {
     @Override
     protected int getLayoutId() {
         return R.layout.activity_select_deposit;
+    }
+
+    @Override
+    protected void initView() {
+        SerialPortManager2.instance().close();
+        SerialPortManager.instance().initDevice();
+        super.initView();
     }
 
     @Override

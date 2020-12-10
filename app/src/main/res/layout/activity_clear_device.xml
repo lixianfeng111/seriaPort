@@ -41,14 +41,18 @@
             android:textColor="@color/white"
             android:textSize="18sp" />
 
-        <TextView
+        <EditText
             android:id="@+id/tvOriginalNum"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
-            android:gravity="center_vertical"
+            android:ems="10"
             android:text="00000000"
             android:textColor="@color/white"
+            android:hint="原钞袋数"
+            android:background="@null"
+            android:inputType="textPersonName"
+            android:textColorHint="@color/white"
             android:textSize="18sp" />
 
     </LinearLayout>
@@ -75,14 +79,18 @@
             android:textColor="@color/white"
             android:textSize="18sp" />
 
-        <TextView
+        <EditText
             android:id="@+id/tvNewNum"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
-            android:gravity="center_vertical"
+            android:ems="10"
             android:text="00000000"
             android:textColor="@color/white"
+            android:hint="新钞袋数"
+            android:background="@null"
+            android:inputType="textPersonName"
+            android:textColorHint="@color/white"
             android:textSize="18sp" />
 
     </LinearLayout>
@@ -109,14 +117,16 @@
             android:textColor="@color/white"
             android:textSize="18sp" />
 
-        <TextView
+        <EditText
             android:id="@+id/tvLead"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
-            android:gravity="center_vertical"
-            android:text=""
+            android:ems="10"
             android:textColor="@color/white"
+            android:background="@null"
+            android:inputType="textPersonName"
+            android:textColorHint="@color/white"
             android:textSize="18sp" />
 
     </LinearLayout>

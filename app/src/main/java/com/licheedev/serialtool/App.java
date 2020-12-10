@@ -6,6 +6,7 @@ import android.os.Handler;
 
 import com.licheedev.serialtool.comn.SerialPortManager;
 import com.licheedev.serialtool.util.PrefHelper;
+import com.licheedev.serialtool.util.SpzUtils;
 
 /**
  * Created by Administrator on 2017/3/28 0028.
@@ -22,7 +23,8 @@ public class App extends Application {
         sInstance = this;
         mUiHandler = new Handler();
         initUtils();
-        SerialPortManager.instance().initDevice();
+        SpzUtils.init(this);
+//        SerialPortManager.instance().initDevice();
     }
 
     private void initUtils() {

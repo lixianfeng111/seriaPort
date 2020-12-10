@@ -2,7 +2,9 @@ package com.licheedev.serialtool.activity.deposit;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -16,6 +18,7 @@ import com.licheedev.serialtool.comn.SerialPortManager;
 import com.licheedev.serialtool.comn.message.LogManager;
 import com.licheedev.serialtool.dialog.CurrenySelectUtil;
 import com.licheedev.serialtool.util.LogPlus;
+import com.licheedev.serialtool.util.SpzUtils;
 import com.licheedev.serialtool.util.ToastUtil;
 import com.licheedev.serialtool.util.constant.Money;
 
@@ -35,8 +38,10 @@ import static com.licheedev.serialtool.comn.message.LogManager.SEARCH_LEAD;
  */
 public class PaperCurrencyDepositActivity extends BaseActivity {
 
+    private boolean isPutPrint=false;
     public static final int REQUEST_CODE_DEPOSIT = 1;
     public static final int RESULT_CODE_DEPOSIT = 1111;
+
     int[] commandWorkMode = new int[]{0xA1, 0xA2, 0xA3, 0xA4,/*STX 4byte*/
             0x12, 0x00,/*size 2byte*/
             0x21,/*CMD 1byte*/
@@ -96,16 +101,13 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
         SerialPortManager.instance().sendCommand(SerialPortManager.byteArrayToHexString(commandWorkMode));
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @OnClick({R.id.ibtn_ok, R.id.ibtn_cancel, R.id.button4, R.id.btnCurrency, R.id.llLead,R.id.tvStatus})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ibtn_ok:
-//                if(deposit != null && deposit.isEmpty()){
-//                    return;
-//                }
                 SerialPortManager.instance().sendSaveCommand();
                 startActivityForResult(new Intent(this, DepositDetailsActivity.class), REQUEST_CODE_DEPOSIT);
-//                startActivity(new Intent(this, DepositDetailsActivity.class));
                 break;
             case R.id.ibtn_cancel:
                 if (deposit == null || deposit.isEmpty()) {
@@ -147,6 +149,7 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
         tvStatus.setText(error + ":点击清除");
         tvStatus .setVisibility(View.VISIBLE);
     }
+
 
 
     @Subscribe(threadMode = ThreadMode.MAIN)

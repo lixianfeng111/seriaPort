@@ -18,7 +18,9 @@ import com.licheedev.serialtool.base.BasePresenter;
 import com.licheedev.serialtool.comn.SerialPortManager;
 import com.licheedev.serialtool.comn.message.LogManager;
 import com.licheedev.serialtool.dialog.CurrenySelectUtil;
+import com.licheedev.serialtool.util.IsPrint;
 import com.licheedev.serialtool.util.LogPlus;
+import com.licheedev.serialtool.util.SpzUtils;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -54,7 +56,7 @@ public class DepositDetailsActivity extends BaseActivity implements BaseRecycler
     @BindView(R.id.tvAlreadySum)
     TextView tvAlreadySum;
     private Dialog overDepositDialogdialog;
-
+//    private IsPrint isPrint = new IsPrint();
     private BaseRecyclerAdapter adapter;
     private List<DepositDetailBean> list = new ArrayList<>();
 
@@ -224,6 +226,9 @@ public class DepositDetailsActivity extends BaseActivity implements BaseRecycler
             adapter.notifyDataSetChanged();
         }
 
+        if (sum>0){
+            SpzUtils.putBoolean("isPrint", true);
+        }
     }
 
 
