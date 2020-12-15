@@ -101,13 +101,18 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
         SerialPortManager.instance().sendCommand(SerialPortManager.byteArrayToHexString(commandWorkMode));
     }
 
+
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     @OnClick({R.id.ibtn_ok, R.id.ibtn_cancel, R.id.button4, R.id.btnCurrency, R.id.llLead,R.id.tvStatus})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ibtn_ok:
-                SerialPortManager.instance().sendSaveCommand();
-                startActivityForResult(new Intent(this, DepositDetailsActivity.class), REQUEST_CODE_DEPOSIT);
+                if (exit){
+                    SerialPortManager.instance().sendSaveCommand();
+                    startActivityForResult(new Intent(this, DepositDetailsActivity.class), REQUEST_CODE_DEPOSIT);
+                    exit=false;
+                }
                 break;
             case R.id.ibtn_cancel:
                 if (deposit == null || deposit.isEmpty()) {
@@ -183,6 +188,9 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
                 tvMoneyNum.setText("" + money);
                 int reject = received[49];
                 tvRrfuse.setText("" + reject);
+                if (count>0){
+                    exit=true;
+                }
 
                 deposit = new Deposit(money, count, reject);
             }

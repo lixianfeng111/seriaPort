@@ -7,17 +7,18 @@
     android:background="@color/black"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="@string/network_test"
+    <EditText
+        android:id="@+id/editIp"
+        android:layout_width="280dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rectangle_solide_blue"
+        android:paddingLeft="10dp"
         android:textColor="@color/white"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tvinput"
+        app:layout_constraintStart_toStartOf="@+id/tvinput"
+        app:layout_constraintTop_toBottomOf="@+id/tvinput"
         tools:ignore="MissingConstraints" />
 
 
@@ -37,18 +38,17 @@
         app:layout_constraintTop_toBottomOf="@+id/textView"
         tools:ignore="MissingConstraints" />
 
-    <EditText
-        android:id="@+id/editIp"
-        android:layout_width="280dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="20dp"
-        android:paddingLeft="10dp"
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="@string/network_test"
         android:textColor="@color/white"
         android:textSize="14sp"
-        android:background="@drawable/rectangle_solide_blue"
-        app:layout_constraintEnd_toEndOf="@+id/tvinput"
-        app:layout_constraintStart_toStartOf="@+id/tvinput"
-        app:layout_constraintTop_toBottomOf="@+id/tvinput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
 

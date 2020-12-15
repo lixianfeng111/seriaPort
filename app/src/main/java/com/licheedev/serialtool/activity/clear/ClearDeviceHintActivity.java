@@ -25,7 +25,11 @@ import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.base.BasePresenter;
 import com.licheedev.serialtool.comn.event.StatusEvent;
 import com.licheedev.serialtool.dialog.CurrenySelectUtil;
+import com.licheedev.serialtool.util.DepositRecordUtil;
 import com.licheedev.serialtool.util.PermissionsUtils;
+import com.licheedev.serialtool.util.SpzUtils;
+import com.licheedev.serialtool.util.TimeFormartUtils;
+import com.licheedev.serialtool.util.ToastUtil;
 import com.sun.jna.Pointer;
 
 import com.sun.jna.ptr.IntByReference;
@@ -160,12 +164,13 @@ public class ClearDeviceHintActivity extends BaseActivity {
                 if (isCleared){
                     if (n>0){
                         n--;
+                        ToastUtil.show(ClearDeviceHintActivity.this,n+"");
                         TestFunction.Test_Pos_SampleTicket_80MM_2(ClearDeviceHintActivity.this,h);
                     }else {
+                        DepositRecordUtil.saveDepositRecord();
                         isCleared=false;
-                        n=0;
+                        n=5;
                     }
-
                 }
             }
         });
@@ -175,6 +180,7 @@ public class ClearDeviceHintActivity extends BaseActivity {
                 CurrenySelectUtil.showQuitDialog(ClearDeviceHintActivity.this, new Callback() {
                     @Override
                     public void onQuitDialogClick() {
+                        DepositRecordUtil.saveDepositRecord();
                         finish();
                     }
                 });
@@ -198,7 +204,8 @@ public class ClearDeviceHintActivity extends BaseActivity {
 
     @Override
     public void initData() {
-
+        SpzUtils.putString("timeDay",TimeFormartUtils.getTimeDay());
+        SpzUtils.putString("time",TimeFormartUtils.getTime());
     }
     //请求权限
     @Override

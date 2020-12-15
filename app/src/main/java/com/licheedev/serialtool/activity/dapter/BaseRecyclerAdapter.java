@@ -21,14 +21,14 @@ public class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerViewHol
     private OnItemClickListener mClickListener;
     private Delegate delegate;
     public interface Delegate{
-        <T> List<T> getData();
+        <T> List<Integer> getData();
         int getView(ViewGroup parent, int viewType);
         <T> void bindView(RecyclerViewHolder holder, int position, T item);
     }
 
     public BaseRecyclerAdapter(Context ctx,Delegate delegate) {
         this.delegate = delegate;
-        mData = (delegate.<T>getData() != null) ? delegate.<T>getData() : new ArrayList<T>();
+        mData = (delegate.<T>getData() != null) ? (List<T>) delegate.<T>getData() : new ArrayList<T>();
         mContext = ctx;
         mInflater = LayoutInflater.from(ctx);
     }

@@ -11,7 +11,6 @@ import com.licheedev.serialtool.comn.message.SendMessage;
 import com.licheedev.serialtool.util.ByteUtil;
 import com.licheedev.serialtool.util.LogPlus;
 import com.licheedev.serialtool.util.PrefHelper;
-import com.licheedev.serialtool.util.ToastUtil;
 import com.licheedev.serialtool.util.constant.PreferenceKeys;
 
 import io.reactivex.Observable;

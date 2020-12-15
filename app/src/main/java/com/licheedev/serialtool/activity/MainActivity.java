@@ -1,5 +1,6 @@
 package com.licheedev.serialtool.activity;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.serialport.SerialPortFinder;
 import android.view.View;
@@ -14,8 +15,11 @@ import com.licheedev.serialtool.base.BasePresenter;
 import com.licheedev.serialtool.comn.Device;
 import com.licheedev.serialtool.comn.SerialPortManager;
 import com.licheedev.serialtool.util.AllCapTransformationMethod;
+import com.licheedev.serialtool.util.LanguageUtils;
 import com.licheedev.serialtool.util.PrefHelper;
 import com.licheedev.serialtool.util.constant.PreferenceKeys;
+
+import java.util.Locale;
 
 import static com.licheedev.serialtool.R.array.baudrates;
 
@@ -104,11 +108,20 @@ public class MainActivity extends BaseActivity  {
     }
 
     @Override
+    protected void initView() {
+        super.initView();
+//        LanguageUtils.shiftLanguage("en",this);
+
+    }
+    @Override
     protected void onDestroy() {
         SerialPortManager.instance().close();
         super.onDestroy();
     }
-
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+    }
     @Override
     protected boolean hasActionBar() {
         return false;

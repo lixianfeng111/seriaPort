@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.view.View;
 
 import com.licheedev.serialtool.R;
+import com.licheedev.serialtool.activity.deposit.ClearDeviceTestActivity;
 import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.activity.manage.NetWorkTestActivity;
 import com.licheedev.serialtool.base.BasePresenter;
@@ -46,7 +47,7 @@ public class DeviceManageActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tvdevicemanage:
-                startActivity(new Intent(DeviceManageActivity.this, NetWorkTestActivity.class));
+                startActivity(new Intent(DeviceManageActivity.this, ClearDeviceTestActivity.class));
                 break;
             case R.id.btnBack:
                 finish();

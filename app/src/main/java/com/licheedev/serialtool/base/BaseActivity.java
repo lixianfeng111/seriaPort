@@ -1,5 +1,6 @@
 package com.licheedev.serialtool.base;
 
+import android.content.Context;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
@@ -14,12 +15,13 @@ import com.licheedev.serialtool.fragment.LogFragment;
 import com.licheedev.serialtool.comn.message.IMessage;
 import com.licheedev.serialtool.comn.message.LogManager;
 import com.licheedev.serialtool.receiver.NetReceiver;
+import com.licheedev.serialtool.util.LanguageUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements NetReceiver.NetStatuMonitor {
+public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity  {
 
     protected ActionBar mActionBar;
     private LogFragment mLogFragment;
@@ -38,14 +40,14 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
             initData();
             initListener();
             //注册广播
-            if (netBroadcastReceiver == null) {
-                netBroadcastReceiver = new NetReceiver();
-                IntentFilter filter = new IntentFilter();
-                filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
-                registerReceiver(netBroadcastReceiver, filter);
-                //设置监听
-                netBroadcastReceiver.setNetStatuMonitor(this);
-            }
+//            if (netBroadcastReceiver == null) {
+//                netBroadcastReceiver = new NetReceiver();
+//                IntentFilter filter = new IntentFilter();
+//                filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+//                registerReceiver(netBroadcastReceiver, filter);
+//                //设置监听
+//                netBroadcastReceiver.setNetStatuMonitor(this);
+//            }
         } else {
             finish();
         }
@@ -101,6 +103,12 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         }
     }
 
+
+    //切换英语
+//    @Override
+//    protected void attachBaseContext(Context newBase) {
+//        super.attachBaseContext(LanguageUtils.attachBaseContext(newBase));
+//    }
     /**
      * 初始化日志Fragment
      */
@@ -151,9 +159,9 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         }
     }
 
-    @Override
-    public void onNetChange(boolean netStatus) {
-    }
+//    @Override
+//    public void onNetChange(boolean netStatus) {
+//    }
 
     @Override
     public void onDetachedFromWindow() {

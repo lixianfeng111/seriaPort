@@ -220,7 +220,6 @@ public class SerialReadThread2 extends Thread {
             }
             else
             {hexstr1=hexStr;}
-
             LogPlus.e("read_thread","传感器 " + hexstr1);
 //            SerialPortManager.instance().sendCommand(sendok);
         }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.licheedev.serialtool">
 
 
@@ -12,6 +13,10 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"></uses-permission>
     <uses-permission android:name="android.permission.WAKE_LOCK"></uses-permission>
 
+    <!-- 接收开机广播的权限，开机是很危险的行为，所以需要此权限 -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION"
+        tools:ignore="ProtectedPermissions" />
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -20,6 +25,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:largeHeap="true"
+        android:configChanges="locale"
         android:theme="@style/AppTheme">
 
         <uses-library android:name="org.apache.http.legacy"
@@ -33,6 +39,11 @@
 
         </activity>
 
+        <receiver android:name=".receiver.NetReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" /> <!-- 开机广播 -->
+            </intent-filter>
+        </receiver>
         <activity
             android:name=".activity.LoginActivity"
             android:windowSoftInputMode="stateHidden|adjustPan"
@@ -46,6 +57,10 @@
 
         <activity
             android:name=".activity.deposit.DepositDetailsActivity"
+            android:screenOrientation="landscape" />
+
+        <activity
+            android:name=".activity.deposit.PaperCurrencyDepositActivity"
             android:screenOrientation="landscape" />
 
         <activity
@@ -100,10 +115,6 @@
 
         <activity
             android:name=".activity.manage.setting.DeviceSettingActivity"
-            android:screenOrientation="landscape" />
-
-        <activity
-            android:name=".activity.deposit.PaperCurrencyDepositActivity"
             android:screenOrientation="landscape" />
 
         <activity

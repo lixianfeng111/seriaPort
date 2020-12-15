@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.caysn.autoreplyprint.AutoReplyPrint;
 import com.licheedev.serialtool.R;
 import com.licheedev.serialtool.activity.clear.TestFunction;
+import com.licheedev.serialtool.activity.deposit.bean.ListBean;
 import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.activity.dapter.BaseRecyclerAdapter;
 import com.licheedev.serialtool.activity.dapter.RecyclerViewHolder;
@@ -19,7 +20,6 @@ import com.sun.jna.Pointer;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
@@ -97,7 +97,7 @@ public class DepositRecordActivity extends BaseActivity implements BaseRecyclerA
                 finish();
                 break;
             case R.id.btnUpload: //汇总打印
-                TestFunction.deposit_Print_SampleTicket(DepositRecordActivity.this,h);
+                TestFunction.deposit_Print_SampleTicket(DepositRecordActivity.this, ListBean.getList(),h);
                 break;
             case R.id.btLogout: //上传数据
 

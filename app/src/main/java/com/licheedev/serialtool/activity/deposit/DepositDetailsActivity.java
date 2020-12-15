@@ -1,16 +1,16 @@
 package com.licheedev.serialtool.activity.deposit;
 
 import android.app.Dialog;
-import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
-import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.licheedev.serialtool.R;
+import com.licheedev.serialtool.activity.deposit.bean.ListBean;
 import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.activity.dapter.BaseRecyclerAdapter;
 import com.licheedev.serialtool.activity.dapter.RecyclerViewHolder;
@@ -18,19 +18,21 @@ import com.licheedev.serialtool.base.BasePresenter;
 import com.licheedev.serialtool.comn.SerialPortManager;
 import com.licheedev.serialtool.comn.message.LogManager;
 import com.licheedev.serialtool.dialog.CurrenySelectUtil;
-import com.licheedev.serialtool.util.IsPrint;
 import com.licheedev.serialtool.util.LogPlus;
 import com.licheedev.serialtool.util.SpzUtils;
+import com.licheedev.serialtool.util.ToastUtil;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import static com.licheedev.serialtool.activity.deposit.PaperCurrencyDepositActivity.REQUEST_CODE_DEPOSIT;
 import static com.licheedev.serialtool.activity.deposit.PaperCurrencyDepositActivity.RESULT_CODE_DEPOSIT;
 import static com.licheedev.serialtool.comn.message.LogManager.SAVE_SUCCESS_COMMAND;
 import static com.licheedev.serialtool.util.constant.Money.Denomination_100_CNY;
@@ -58,13 +60,14 @@ public class DepositDetailsActivity extends BaseActivity implements BaseRecycler
     private Dialog overDepositDialogdialog;
 //    private IsPrint isPrint = new IsPrint();
     private BaseRecyclerAdapter adapter;
-    private List<DepositDetailBean> list = new ArrayList<>();
+    private List<DepositDetailBean> list=new ArrayList<>();
+    private ListBean listBean=new ListBean(list);
+    private List<DepositDetailBean> list2;
+
 
     @Override
     protected void initView() {
         super.initView();
-
-        //此处不能用ButterKnife，只能findViewById，不然崩溃
         RecyclerView recyclerview_detail = findViewById(R.id.recyclerview_detail);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerview_detail.setLayoutManager(manager);
@@ -89,6 +92,7 @@ public class DepositDetailsActivity extends BaseActivity implements BaseRecycler
 
     }
 
+
     @Override
     public BasePresenter initPresenter() {
         return null;
@@ -96,6 +100,7 @@ public class DepositDetailsActivity extends BaseActivity implements BaseRecycler
 
     @Override
     public void initData() {
+        list2 = SpzUtils.getDataList(this, "list");
 
     }
 
@@ -107,6 +112,10 @@ public class DepositDetailsActivity extends BaseActivity implements BaseRecycler
                     @Override
                     public void onDialogClick(int which, Dialog dialog) {
                         if (which == 1) {
+                            if (list2.size()!=0){
+                                list.addAll(list2);
+                            }
+                            SpzUtils.setDataList(DepositDetailsActivity.this,"list", list);
                             SerialPortManager.instance().sendSaveAck();
                             setResult(RESULT_CODE_DEPOSIT);
                             finish();
@@ -116,6 +125,10 @@ public class DepositDetailsActivity extends BaseActivity implements BaseRecycler
             }
             break;
             case R.id.btnContiniu: {
+                if (list2.size()!=0){
+                    list.addAll(list2);
+                }
+                SpzUtils.setDataList(DepositDetailsActivity.this,"list", list);
                 SerialPortManager.instance().sendSaveAck();
                 finish();
             }
@@ -123,6 +136,13 @@ public class DepositDetailsActivity extends BaseActivity implements BaseRecycler
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_CODE_DEPOSIT) {
+            finish();
+        }
+    }
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(LogManager.ReceiveData data) {
         byte[] received = data.data;
@@ -183,29 +203,35 @@ public class DepositDetailsActivity extends BaseActivity implements BaseRecycler
 
         if (CNY_100 > 0) {
             DepositDetailBean depositDetailBean = new DepositDetailBean(Denomination_100_CNY, CNY_100);
-            list.add(depositDetailBean);
+//            list.add(depositDetailBean);
+            listBean.getList().add(depositDetailBean);
         }
         if (CNY_50 > 0) {
             DepositDetailBean depositDetailBean = new DepositDetailBean(Denomination_50_CNY, CNY_50);
-            list.add(depositDetailBean);
+//            list.add(depositDetailBean);
+            listBean.getList().add(depositDetailBean);
         }
         if (CNY_20 > 0) {
             DepositDetailBean depositDetailBean = new DepositDetailBean(Denomination_20_CNY, CNY_20);
-            list.add(depositDetailBean);
+//            list.add(depositDetailBean);
+            listBean.getList().add(depositDetailBean);
         }
         if (CNY_10 > 0) {
             DepositDetailBean depositDetailBean = new DepositDetailBean(Denomination_10_CNY, CNY_10);
-            list.add(depositDetailBean);
+//            list.add(depositDetailBean);
+            listBean.getList().add(depositDetailBean);
+
         }
         if (CNY_5 > 0) {
             DepositDetailBean depositDetailBean = new DepositDetailBean(Denomination_5_CNY, CNY_5);
-            list.add(depositDetailBean);
+//            list.add(depositDetailBean);
+            listBean.getList().add(depositDetailBean);
         }
         if (CNY_1 > 0) {
             DepositDetailBean depositDetailBean = new DepositDetailBean(Denomination_1_CNY, CNY_1);
-            list.add(depositDetailBean);
+//            list.add(depositDetailBean);
+            listBean.getList().add(depositDetailBean);
         }
-
         long sum = CNY_100 * Denomination_100_CNY +
                 CNY_50 * Denomination_50_CNY +
                 CNY_20 * Denomination_20_CNY +
@@ -268,7 +294,9 @@ public class DepositDetailsActivity extends BaseActivity implements BaseRecycler
 
     }
 
-    public static class DepositDetailBean {
+
+
+    public static class DepositDetailBean implements Serializable{
         public int deposit;
         public int count;
         public int sum;
@@ -279,4 +307,5 @@ public class DepositDetailsActivity extends BaseActivity implements BaseRecycler
             this.sum = deposit * count;
         }
     }
+
 }

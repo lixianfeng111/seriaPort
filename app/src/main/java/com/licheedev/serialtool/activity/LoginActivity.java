@@ -7,17 +7,19 @@ import android.widget.EditText;
 
 import com.caysn.autoreplyprint.AutoReplyPrint;
 import com.licheedev.serialtool.R;
-import com.licheedev.serialtool.activity.clear.ClearDeviceHintActivity;
 import com.licheedev.serialtool.activity.clear.TestFunction;
 import com.licheedev.serialtool.activity.deposit.ClearDeviceTestActivity;
+import com.licheedev.serialtool.activity.deposit.DepositDetailsActivity;
 import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.activity.deposit.SelectDepositActivitys;
 import com.licheedev.serialtool.activity.manage.SetManageActivity;
 import com.licheedev.serialtool.base.BasePresenter;
-import com.licheedev.serialtool.util.IsPrint;
+import com.licheedev.serialtool.util.DepositRecordUtil;
 import com.licheedev.serialtool.util.SpzUtils;
 import com.licheedev.serialtool.util.ToastUtil;
 import com.sun.jna.Pointer;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -29,7 +31,7 @@ public class LoginActivity extends BaseActivity {
     EditText editText;
     @BindView(R.id.editText2)
     EditText editText2;
-//    private IsPrint isPrint = new IsPrint();
+    int ci=0;
     @OnClick({R.id.btLogin,})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -58,7 +60,12 @@ public class LoginActivity extends BaseActivity {
         super.onResume();
         boolean isPrint = SpzUtils.getBoolean("isPrint", false);
         if (isPrint){
-            TestFunction.deposit_Print_SampleTicket(LoginActivity.this,h);
+            List<DepositDetailsActivity.DepositDetailBean> list = SpzUtils.getDataList(this, "list");
+            if (list!=null){
+                TestFunction.deposit_Print_SampleTicket(LoginActivity.this,list,h);
+                list.clear();
+                SpzUtils.setDataList(LoginActivity.this,"list", list);
+            }
             SpzUtils.putBoolean("isPrint", false);
         }
     }
@@ -91,7 +98,12 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void initData() {
-
+        int ci = SpzUtils.getInt("ci", -1);
+        if (ci<=0){
+            DepositRecordUtil.saveDepositRecord();
+        }else {
+            SpzUtils.putInt("ci",1);
+        }
     }
     private void OpenPort() {
         new Thread(new Runnable() {

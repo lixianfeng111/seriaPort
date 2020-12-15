@@ -7,12 +7,17 @@ import android.graphics.BitmapFactory;
 import android.text.TextUtils;
 import android.util.Base64;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.licheedev.serialtool.activity.deposit.DepositDetailsActivity;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -213,7 +218,7 @@ public class SpzUtils {
      * @param key  存储的键
      * @param list 存储的集合
      */
-    public static void putList(String key, List<? extends Serializable> list) {
+    public static void putList(String key, List<?> list) {
         try {
             put(key, list);
         } catch (Exception e) {
@@ -225,17 +230,25 @@ public class SpzUtils {
      * 获取List集合
      *
      * @param key 键
-     * @param <E> 指定泛型
+     * @param <> 指定泛型
      * @return List集合
      */
-    public static <E extends Serializable> List<E> getList(String key) {
+    public static List<?> getList(String key) {
         try {
-            return (List<E>) get(key);
+            return (List<?>) get(key);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
+//    public static <E extends Serializable> List<E> getList(String key) {
+//        try {
+//            return (List<E>) get(key);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
 
     /**
      * 存储Map集合
@@ -304,4 +317,68 @@ public class SpzUtils {
         ois.close();
         return obj;
     }
+
+    /**
+     * 使用SharedPreferences保存List
+     * 支持类型：List<String>，List<JavaBean>
+     *
+     * @param context  上下文
+     * @param key      储存的key
+     * @param dataList 存储数据
+     */
+//    SPUtil.setDataList(this, "list", userList);
+    public static void setDataList(Context context, String key, List<DepositDetailsActivity.DepositDetailBean> dataList) {
+        if (null == dataList || dataList.size() < 0) {
+            return;
+        }
+
+        SharedPreferences sp = context.getSharedPreferences("list", Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        //转换成json数据，再保存
+        String strJson = gson.toJson(dataList);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString(key, strJson);
+        editor.commit();
+    }
+
+    /**
+     * 获取SharedPreferences保存的List
+     *
+     * @param context 上下文
+     * @param key     储存的key
+     * @return 存储List<T>数据
+     */
+    public static List<DepositDetailsActivity.DepositDetailBean> getDataList(Context context, String key) {
+        SharedPreferences sp = context.getSharedPreferences("list", Context.MODE_PRIVATE);
+        List<DepositDetailsActivity.DepositDetailBean> dataList = new ArrayList<>();
+        String strJson = sp.getString(key, null);
+        if (null == strJson) {
+            return dataList;
+        }
+
+        Gson gson = new Gson();
+
+        //使用泛型解析数据会出错，返回的数据类型是LinkedTreeMap
+        dataList = gson.fromJson(strJson, new TypeToken<List<DepositDetailsActivity.DepositDetailBean>>() {
+        }.getType());
+
+        return dataList;
+    }
+//
+//    public static <T> List<T> getDataList(Context context, String key) {
+//        SharedPreferences sp = context.getSharedPreferences("list", Context.MODE_PRIVATE);
+//        List<T> dataList = new ArrayList<T>();
+//        String strJson = sp.getString(key, null);
+//        if (null == strJson) {
+//            return dataList;
+//        }
+//
+//        Gson gson = new Gson();
+//
+//        //使用泛型解析数据会出错，返回的数据类型是LinkedTreeMap
+//        dataList = gson.fromJson(strJson, new TypeToken<List<T>>() {
+//        }.getType());
+//
+//        return dataList;
+//    }
 }

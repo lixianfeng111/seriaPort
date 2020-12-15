@@ -41,18 +41,13 @@
             android:textColor="@color/white"
             android:textSize="18sp" />
 
-        <EditText
+        <TextView
             android:id="@+id/tvOriginalNum"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:ems="10"
-            android:text="00000000"
+            android:gravity="center_vertical"
+            android:text="000000"
             android:textColor="@color/white"
-            android:hint="原钞袋数"
-            android:background="@null"
-            android:inputType="textPersonName"
-            android:textColorHint="@color/white"
             android:textSize="18sp" />
 
     </LinearLayout>
@@ -85,7 +80,6 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
             android:ems="10"
-            android:text="00000000"
             android:textColor="@color/white"
             android:hint="新钞袋数"
             android:background="@null"
