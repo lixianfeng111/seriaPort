@@ -1,5 +1,6 @@
 package com.licheedev.serialtool.activity.deposit;
 
+import android.os.Build;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -10,11 +11,12 @@ import android.widget.TextView;
 import com.caysn.autoreplyprint.AutoReplyPrint;
 import com.licheedev.serialtool.R;
 import com.licheedev.serialtool.activity.clear.TestFunction;
-import com.licheedev.serialtool.activity.deposit.bean.ListBean;
 import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.activity.dapter.BaseRecyclerAdapter;
 import com.licheedev.serialtool.activity.dapter.RecyclerViewHolder;
 import com.licheedev.serialtool.base.BasePresenter;
+import com.licheedev.serialtool.util.SpzUtils;
+import com.licheedev.serialtool.util.TimeFormartUtils;
 import com.sun.jna.Pointer;
 
 import java.util.ArrayList;
@@ -29,12 +31,16 @@ public class DepositRecordActivity extends BaseActivity implements BaseRecyclerA
 
 
     private BaseRecyclerAdapter adapter;
-    private List<Integer> list = new ArrayList<>();
+    private List<DepositRecordBean> list = new ArrayList<>();
     private Button btnUpload;
     private Button btLogout;
     private TextView tvTitle;
     private RecyclerView recyclerview;
     private Pointer h=Pointer.NULL;
+    private int currency_record;
+    private String KIND;
+    private int money_record;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_deposit_record;
@@ -51,44 +57,54 @@ public class DepositRecordActivity extends BaseActivity implements BaseRecyclerA
     }
 
     @Override
-    public BasePresenter initPresenter() {
-        return null;
-    }
-
-    @Override
-    public void initData() {
-
-    }
-
-    @Override
     protected void initView() {
         super.initView();
-
         btnUpload = findViewById(R.id.btnUpload);
         btLogout = findViewById(R.id.btLogout);
         tvTitle = findViewById(R.id.textView);
         recyclerview = findViewById(R.id.recyclerview);
         btnUpload.setText(getResources().getString(R.string.record_allprint));
         btLogout.setText(getResources().getString(R.string.record_updaloddata));
+
         boolean iscurrent = getIntent().getBooleanExtra("iscurrent", false);
+        currency_record = getIntent().getIntExtra("currency_record", -1);
+        money_record = getIntent().getIntExtra("money_record", 0);
         if (iscurrent) {
             tvTitle.setText(getResources().getString(R.string.current_deposit));
         } else {
             tvTitle.setText(getResources().getString(R.string.print_deposit_record));
         }
-
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerview.setLayoutManager(manager);
         adapter = new BaseRecyclerAdapter(this, this);
         recyclerview.setAdapter(adapter);
-
-        list.add(1);
-        list.add(1);
-        list.add(1);
         adapter.notifyDataSetChanged();
 
         OpenPort();
     }
+
+    @Override
+    public BasePresenter initPresenter() {
+        return null;
+    }
+
+    @Override
+    public void initData() {
+        if (currency_record==0){
+            KIND="硬币";
+        }else if (currency_record==1){
+            KIND="支票";
+        }else if (currency_record==2){
+            KIND="钞票";
+        }else if (currency_record==3){
+            KIND="其他";
+        }else {
+            KIND="人民币";
+        }
+        DepositRecordBean depositRecordBean=new DepositRecordBean(TimeFormartUtils.getTimeDay(),SpzUtils.getString("user"),KIND,1000,"1234522331133","2813","hhh" );
+        list.add(depositRecordBean);
+    }
+
 
     @OnClick({R.id.btnBack, R.id.btnUpload, R.id.btLogout})
     public void onViewClicked(View view) {
@@ -97,7 +113,7 @@ public class DepositRecordActivity extends BaseActivity implements BaseRecyclerA
                 finish();
                 break;
             case R.id.btnUpload: //汇总打印
-                TestFunction.deposit_Print_SampleTicket(DepositRecordActivity.this, ListBean.getList(),h);
+                TestFunction.record_deposit_Print_SampleTicket(DepositRecordActivity.this, currency_record,money_record,h);
                 break;
             case R.id.btLogout: //上传数据
 
@@ -106,7 +122,7 @@ public class DepositRecordActivity extends BaseActivity implements BaseRecyclerA
     }
 
     @Override
-    public List<Integer> getData() {
+    public List<DepositRecordBean> getData() {
         return list;
     }
 
@@ -130,15 +146,50 @@ public class DepositRecordActivity extends BaseActivity implements BaseRecyclerA
         } else {
             viewBottom.setVisibility(View.GONE);
         }
-
+        DepositRecordBean recordBean= (DepositRecordBean) item;
+        TextView userName = (TextView) holder.getView(R.id.userName);
+        TextView bankId = (TextView) holder.getView(R.id.bankId);
+        TextView category = (TextView) holder.getView(R.id.category);
+        TextView sum = (TextView) holder.getView(R.id.sum);
+        TextView remark = (TextView) holder.getView(R.id.remark);
+        TextView coding = (TextView) holder.getView(R.id.coding);
+        TextView time = (TextView) holder.getView(R.id.time);
+        userName.setText(recordBean.userName);
+        bankId.setText(recordBean.bankId);
+        sum.setText(recordBean.sum+"");
+        category.setText(recordBean.category);
+        remark.setText(recordBean.remark);
+        coding.setText(recordBean.coding);
+        time.setText(recordBean.time);
     }
+
     private void OpenPort() {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 h = AutoReplyPrint.INSTANCE.CP_Port_OpenCom("/dev/ttyS3", 9600, AutoReplyPrint.CP_ComDataBits_8, AutoReplyPrint.CP_ComParity_NoParity, AutoReplyPrint.CP_ComStopBits_One, AutoReplyPrint.CP_ComFlowControl_XonXoff, 0);
-
             }
         }).start();
+    }
+
+    private static class DepositRecordBean{
+        private String time;
+        private String userName;
+        private String category;
+        private int sum;
+        private String bankId;
+        private String coding;
+        private String remark;
+
+
+        public DepositRecordBean(String time, String userName, String category, int sum, String bankId, String coding, String remark) {
+            this.time = time;
+            this.userName = userName;
+            this.category = category;
+            this.sum = sum;
+            this.bankId = bankId;
+            this.coding = coding;
+            this.remark = remark;
+        }
     }
 }

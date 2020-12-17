@@ -58,12 +58,13 @@ public class DepositDetailsActivity extends BaseActivity implements BaseRecycler
     @BindView(R.id.tvAlreadySum)
     TextView tvAlreadySum;
     private Dialog overDepositDialogdialog;
-//    private IsPrint isPrint = new IsPrint();
     private BaseRecyclerAdapter adapter;
     private List<DepositDetailBean> list=new ArrayList<>();
     private ListBean listBean=new ListBean(list);
     private List<DepositDetailBean> list2;
-
+    private int num;
+    private int counts;
+    private int n=0;
 
     @Override
     protected void initView() {
@@ -101,7 +102,8 @@ public class DepositDetailsActivity extends BaseActivity implements BaseRecycler
     @Override
     public void initData() {
         list2 = SpzUtils.getDataList(this, "list");
-
+        num = SpzUtils.getInt("num", 0);
+        counts = SpzUtils.getInt("counts", 0);
     }
 
     @OnClick({R.id.btnOverDeposit, R.id.btnContiniu})
@@ -148,8 +150,8 @@ public class DepositDetailsActivity extends BaseActivity implements BaseRecycler
         byte[] received = data.data;
         switch (data.what) {
             case SAVE_SUCCESS_COMMAND: {
-                amountSaveMoney(data.data);
                 amountReceiveMoney(data.data);
+                amountSaveMoney(data.data);
             }
             break;
         }
@@ -180,8 +182,8 @@ public class DepositDetailsActivity extends BaseActivity implements BaseRecycler
                 CNY_5 +
                 CNY_1;
 
-        tvAlreadySum.setText(sum + "");
-        tvAlreadyCount.setText(count + "");
+//        tvAlreadySum.setText(sum + "");
+//        tvAlreadyCount.setText(count + "");
 
     }
 
@@ -203,33 +205,30 @@ public class DepositDetailsActivity extends BaseActivity implements BaseRecycler
 
         if (CNY_100 > 0) {
             DepositDetailBean depositDetailBean = new DepositDetailBean(Denomination_100_CNY, CNY_100);
-//            list.add(depositDetailBean);
             listBean.getList().add(depositDetailBean);
         }
         if (CNY_50 > 0) {
             DepositDetailBean depositDetailBean = new DepositDetailBean(Denomination_50_CNY, CNY_50);
-//            list.add(depositDetailBean);
             listBean.getList().add(depositDetailBean);
+
         }
         if (CNY_20 > 0) {
             DepositDetailBean depositDetailBean = new DepositDetailBean(Denomination_20_CNY, CNY_20);
-//            list.add(depositDetailBean);
             listBean.getList().add(depositDetailBean);
+
         }
         if (CNY_10 > 0) {
             DepositDetailBean depositDetailBean = new DepositDetailBean(Denomination_10_CNY, CNY_10);
-//            list.add(depositDetailBean);
             listBean.getList().add(depositDetailBean);
 
         }
         if (CNY_5 > 0) {
             DepositDetailBean depositDetailBean = new DepositDetailBean(Denomination_5_CNY, CNY_5);
-//            list.add(depositDetailBean);
             listBean.getList().add(depositDetailBean);
+
         }
         if (CNY_1 > 0) {
             DepositDetailBean depositDetailBean = new DepositDetailBean(Denomination_1_CNY, CNY_1);
-//            list.add(depositDetailBean);
             listBean.getList().add(depositDetailBean);
         }
         long sum = CNY_100 * Denomination_100_CNY +
@@ -248,6 +247,13 @@ public class DepositDetailsActivity extends BaseActivity implements BaseRecycler
         tvPresentSum.setText(sum + "");
         tvPresentCount.setText(count + "");
 
+        if (n==0){
+            num+=sum;
+            counts+=count;
+            tvAlreadySum.setText(num + "");
+            tvAlreadyCount.setText(counts + "");
+            n++;
+        }
         if (adapter != null) {
             adapter.notifyDataSetChanged();
         }
@@ -255,6 +261,9 @@ public class DepositDetailsActivity extends BaseActivity implements BaseRecycler
         if (sum>0){
             SpzUtils.putBoolean("isPrint", true);
         }
+        //保存已存累计
+        SpzUtils.putInt("num",num);
+        SpzUtils.putInt("counts",counts);
     }
 
 

@@ -6,6 +6,8 @@ import android.view.View;
 import com.licheedev.serialtool.R;
 import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.base.BasePresenter;
+import com.licheedev.serialtool.util.SpzUtils;
+import com.licheedev.serialtool.util.TimeFormartUtils;
 
 import butterknife.OnClick;
 
@@ -60,6 +62,11 @@ public class MaintainActivity extends BaseActivity {
                 startActivity(new Intent(this, DepositErrorActivity.class));
                 break;
             case R.id.tvbillinit:
+                SpzUtils.putString("old_bagId","0");
+                SpzUtils.putString("old_lead_seal","0");
+                SpzUtils.putString("timeDay2", TimeFormartUtils.getTimeDay());
+                SpzUtils.putString("time2",TimeFormartUtils.getTime());
+                SpzUtils.putBoolean("start",true);
                 break;
             case R.id.btnBack:
                 finish();

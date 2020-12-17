@@ -27,6 +27,7 @@
             android:background="@color/white" />
 
         <TextView
+            android:id="@+id/time"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -41,6 +42,7 @@
             android:background="@color/white" />
 
         <TextView
+            android:id="@+id/userName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -55,6 +57,7 @@
             android:background="@color/white" />
 
         <TextView
+            android:id="@+id/category"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -69,6 +72,22 @@
             android:background="@color/white" />
 
         <TextView
+            android:id="@+id/sum"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="1000"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/white" />
+
+        <TextView
+            android:id="@+id/bankId"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
@@ -83,6 +102,7 @@
             android:background="@color/white" />
 
         <TextView
+            android:id="@+id/coding"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -97,6 +117,7 @@
             android:background="@color/white" />
 
         <TextView
+            android:id="@+id/remark"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

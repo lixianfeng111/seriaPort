@@ -15,6 +15,9 @@ import butterknife.OnClick;
 public class DepositManageActivity extends BaseActivity {
 
 
+    private int currency;
+    private int money;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_deposit_manage;
@@ -38,6 +41,9 @@ public class DepositManageActivity extends BaseActivity {
     @Override
     public void initData() {
 
+        Intent intent = getIntent();
+        currency = intent.getIntExtra("currency",-1);
+        money = intent.getIntExtra("money", 0);
     }
 
     @OnClick({R.id.tv_current_deposit, R.id.tv_record, R.id.tv_ping, R.id.ibtn_back})
@@ -46,6 +52,8 @@ public class DepositManageActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.tv_current_deposit: //当前存款
                 intent.putExtra("iscurrent", true);
+                intent.putExtra("currency_record",currency);
+                intent.putExtra("money_record",money);
                 startActivity(intent);
                 break;
             case R.id.tv_record:

@@ -3,7 +3,6 @@ import android.Manifest;
 import android.graphics.Color;
 
 import android.os.Build;
-import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
 
@@ -11,12 +10,9 @@ import android.support.annotation.NonNull;
 import android.view.View;
 
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.caysn.autoreplyprint.AutoReplyPrint;
 import com.licheedev.serialtool.App;
@@ -31,8 +27,6 @@ import com.licheedev.serialtool.util.SpzUtils;
 import com.licheedev.serialtool.util.TimeFormartUtils;
 import com.licheedev.serialtool.util.ToastUtil;
 import com.sun.jna.Pointer;
-
-import com.sun.jna.ptr.IntByReference;
 
 
 
@@ -61,52 +55,6 @@ public class ClearDeviceHintActivity extends BaseActivity {
     private Pointer h=Pointer.NULL;
     private boolean isCleared=false;
     private static final int RequestCode_RequestAllPermissions = 1;
-    AutoReplyPrint.CP_OnPortOpenedEvent_Callback opened_callback = new AutoReplyPrint.CP_OnPortOpenedEvent_Callback() {
-        @Override
-        public void CP_OnPortOpenedEvent(Pointer handle, String name, Pointer private_data) {
-            clearDeviceHintActivity.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-//                    Toast.makeText(clearDeviceHintActivity, "Open Success", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-    };
-
-    AutoReplyPrint.CP_OnPortOpenFailedEvent_Callback openfailed_callback = new AutoReplyPrint.CP_OnPortOpenFailedEvent_Callback() {
-        @Override
-        public void CP_OnPortOpenFailedEvent(Pointer handle, String name, Pointer private_data) {
-
-            clearDeviceHintActivity.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(clearDeviceHintActivity, "Open Failed", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-    };
-    AutoReplyPrint.CP_OnPortClosedEvent_Callback closed_callback = new AutoReplyPrint.CP_OnPortClosedEvent_Callback() {
-        @Override
-        public void CP_OnPortClosedEvent(Pointer pointer, Pointer pointer1) {
-
-            clearDeviceHintActivity.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    ClosePort();
-                }
-            });
-        }
-    };
-    private void AddCallback() {
-        AutoReplyPrint.INSTANCE.CP_Port_AddOnPortOpenedEvent(opened_callback, Pointer.NULL);
-        AutoReplyPrint.INSTANCE.CP_Port_AddOnPortOpenFailedEvent(openfailed_callback, Pointer.NULL);
-        AutoReplyPrint.INSTANCE.CP_Port_AddOnPortClosedEvent(closed_callback, Pointer.NULL);
-    }
-    private void RemoveCallback() {
-        AutoReplyPrint.INSTANCE.CP_Port_RemoveOnPortOpenedEvent(opened_callback);
-        AutoReplyPrint.INSTANCE.CP_Port_RemoveOnPortOpenFailedEvent(openfailed_callback);
-        AutoReplyPrint.INSTANCE.CP_Port_RemoveOnPortClosedEvent(closed_callback);
-    }
 
     @Override
     protected int getLayoutId() {
@@ -131,7 +79,6 @@ public class ClearDeviceHintActivity extends BaseActivity {
         red = Color.parseColor("#FF0404");
         color=red;
         handler.sendEmptyMessage(1);
-        AddCallback();
         OpenPort();
     }
 
@@ -158,6 +105,7 @@ public class ClearDeviceHintActivity extends BaseActivity {
     };
     @Override
     public void initListener() {
+        //打印凭证
         start_clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -174,6 +122,7 @@ public class ClearDeviceHintActivity extends BaseActivity {
                 }
             }
         });
+        //返回
         clear_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -204,8 +153,7 @@ public class ClearDeviceHintActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        SpzUtils.putString("timeDay",TimeFormartUtils.getTimeDay());
-        SpzUtils.putString("time",TimeFormartUtils.getTime());
+
     }
     //请求权限
     @Override
@@ -230,6 +178,8 @@ public class ClearDeviceHintActivity extends BaseActivity {
                     put_in.setColorFilter(Color.parseColor("#00FF06"));
                     handler.sendEmptyMessage(4);
                     isPutIn=false;
+                    SpzUtils.putString("timeDay",TimeFormartUtils.getTimeDay());//保存放入新钞箱的时间
+                    SpzUtils.putString("time",TimeFormartUtils.getTime());
                 }
                 break;
             case 2:
@@ -335,7 +285,7 @@ public class ClearDeviceHintActivity extends BaseActivity {
     }
     @Override
     protected void onDestroy() {
-        RemoveCallback();
+        ClosePort();
         isCleared=false;
         n=0;
         super.onDestroy();

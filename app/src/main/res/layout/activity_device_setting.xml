@@ -34,7 +34,7 @@
             android:id="@+id/tvUsermanage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableTop="@mipmap/deviceset2"
+            android:drawableTop="@mipmap/system_time"
             android:drawablePadding="10dp"
             android:text="@string/system_time"
             android:textColor="@color/white"
@@ -50,6 +50,19 @@
             android:drawableTop="@mipmap/deviceset2"
             android:drawablePadding="10dp"
             android:text="@string/language_select"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textSize="14sp"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/basic_information"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:drawableTop="@mipmap/basic_information"
+            android:drawablePadding="10dp"
+            android:text="@string/basic_information"
             android:textColor="@color/white"
             android:gravity="center"
             android:textSize="14sp"

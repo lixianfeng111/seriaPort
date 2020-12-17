@@ -24,6 +24,7 @@
     <string name="login_input_pwd">请输入密码</string>
     <string name="login_money">零钱</string>
     <string name="login_currency">币种</string>
+    <string name="sum">金额</string>
     <string name="login_menu">菜单</string>
     <string name="login_login">登  录</string>
     <string name="login_complete">完成</string>
@@ -77,6 +78,16 @@
     <string name="input_register_code">请输入注册码</string>
     <string name="system_time">系统时间</string>
     <string name="language_select">语言选择</string>
+    <!--    基本信息-->
+    <string name="basic_information">基本信息</string>
+    <string name="client">客户</string>
+    <string name="site">地点</string>
+    <string name="machine_number">机器号</string>
+    <string name="old_bagId">原钞袋ID</string>
+    <string name="old_lead_seal">原封铅ID</string>
+    <string name="please_complete_it">请补充完整</string>
+
+
     <string name="plase_paper_put">请把纸币放入存款口</string>
     <string name="currency_numer">张数 :</string>
     <string name="monery_number">金额 :</string>

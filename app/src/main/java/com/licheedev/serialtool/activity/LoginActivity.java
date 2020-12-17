@@ -1,5 +1,6 @@
 package com.licheedev.serialtool.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
@@ -26,7 +27,7 @@ import butterknife.OnClick;
 
 public class LoginActivity extends BaseActivity {
 
-    Pointer h=Pointer.NULL;
+    private Pointer h=Pointer.NULL;
     @BindView(R.id.editText)
     EditText editText;
     @BindView(R.id.editText2)
@@ -40,18 +41,29 @@ public class LoginActivity extends BaseActivity {
                 break;
         }
     }
+
     private void checkLogin() {
         String user = editText.getText().toString();
         String passwd = editText2.getText().toString();
         if (TextUtils.isEmpty(user)&&TextUtils.isEmpty(passwd)){
             ToastUtil.show(this,"账号或密码为空");
         }else if (user.equals("111")&&passwd.equals("111")){
+            SpzUtils.putString("user",user+"");
             startActivity(new Intent(this, SelectDepositActivitys.class));
+            clearUserAndPassword();
         }else if (user.equals("333")&&passwd.equals("333")){
+            SpzUtils.putString("user",user+"");
             startActivity(new Intent(this, ClearDeviceTestActivity.class));
+            clearUserAndPassword();
         }else{
             startActivity(new Intent(this, SetManageActivity.class));
+            clearUserAndPassword();
         }
+    }
+
+    private void clearUserAndPassword() {
+        editText2.setText("");
+        editText.setText("");
     }
 
 
@@ -65,11 +77,16 @@ public class LoginActivity extends BaseActivity {
                 TestFunction.deposit_Print_SampleTicket(LoginActivity.this,list,h);
                 list.clear();
                 SpzUtils.setDataList(LoginActivity.this,"list", list);
+                SpzUtils.putInt("num",0);
+                SpzUtils.putInt("counts",0);
+            }else {
+                TestFunction.deposit_Print_SampleTicket(LoginActivity.this,list,h);
             }
             SpzUtils.putBoolean("isPrint", false);
         }
     }
 
+    @SuppressLint("HardwareIds")
     @Override
     protected void initView() {
         super.initView();

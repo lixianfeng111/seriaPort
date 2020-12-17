@@ -43,14 +43,18 @@ public class ClearDeviceTestActivity extends BaseActivity {
         SerialPortManager.instance().close();
         SerialPortManager2.instance().initDevice();
         //获取原钞袋号
-        String bag = SpzUtils.getString("new_bagId");
+        String bag = SpzUtils.getString("old_bagId");
+        String old_lead_seal = SpzUtils.getString("old_lead_seal");
         if (!TextUtils.isEmpty(bag)){
             tvOriginalNum.setText(bag);
+            SpzUtils.putString("bagId",bag);
+        }
+        if (!TextUtils.isEmpty(old_lead_seal)){
+            SpzUtils.putString("lead_seal",old_lead_seal);
         }
         //设置只能输入数字
         tvLead.setInputType( InputType.TYPE_CLASS_NUMBER);
         tvNewNum.setInputType( InputType.TYPE_CLASS_NUMBER);
-
     }
 
     @Override
@@ -82,7 +86,7 @@ public class ClearDeviceTestActivity extends BaseActivity {
             case R.id.ibtn_ok:
                 //获取本次钞袋号并保存
                 Editable text1 =  tvNewNum.getText();
-                SpzUtils.putString("new_bagId",text1+"");
+                SpzUtils.putString("old_bagId",text1+"");
                 //获取本次封铅号
                 Editable text2 = tvLead.getText();
                 SpzUtils.putString("old_lead_seal",SpzUtils.getString("new_lead_seal"));

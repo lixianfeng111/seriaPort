@@ -26,6 +26,7 @@
         android:supportsRtl="true"
         android:largeHeap="true"
         android:configChanges="locale"
+        android:installLocation="internalOnly"
         android:theme="@style/AppTheme">
 
         <uses-library android:name="org.apache.http.legacy"
@@ -39,8 +40,12 @@
 
         </activity>
 
-        <receiver android:name=".receiver.NetReceiver">
-            <intent-filter>
+        <!--注册广播-->
+<!--        <category android:name="android.intent.category.LAUNCHER"></category>-->
+        <receiver android:name=".receiver.NetReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter android:priority="1000">
                 <action android:name="android.intent.action.BOOT_COMPLETED" /> <!-- 开机广播 -->
             </intent-filter>
         </receiver>
@@ -105,6 +110,7 @@
         <activity
             android:name=".activity.manage.manage.DeviceManageActivity"
             android:screenOrientation="landscape" />
+
         <activity
             android:name=".activity.manage.maintain.MaintainActivity"
             android:screenOrientation="landscape" />
@@ -221,7 +227,7 @@
                 android:resource="@xml/device_filter" />
         </activity>
         <activity
-            android:name=".activity.clear.StartActivity"
+            android:name=".activity.manage.setting.BasicInformationActivity"
             android:screenOrientation="landscape" />
     </application>
 
