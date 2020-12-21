@@ -55,7 +55,7 @@ public class LoginActivity extends BaseActivity {
             SpzUtils.putString("user",user+"");
             startActivity(new Intent(this, ClearDeviceTestActivity.class));
             clearUserAndPassword();
-        }else{
+        }else{//进入管理页面
             startActivity(new Intent(this, SetManageActivity.class));
             clearUserAndPassword();
         }

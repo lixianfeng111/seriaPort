@@ -8,6 +8,7 @@ import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.base.BasePresenter;
 import com.licheedev.serialtool.util.SpzUtils;
 import com.licheedev.serialtool.util.TimeFormartUtils;
+import com.licheedev.serialtool.util.ToastUtil;
 
 import butterknife.OnClick;
 
@@ -67,6 +68,7 @@ public class MaintainActivity extends BaseActivity {
                 SpzUtils.putString("timeDay2", TimeFormartUtils.getTimeDay());
                 SpzUtils.putString("time2",TimeFormartUtils.getTime());
                 SpzUtils.putBoolean("start",true);
+                ToastUtil.show(this,"初始化成功");
                 break;
             case R.id.btnBack:
                 finish();

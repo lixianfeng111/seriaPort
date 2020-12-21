@@ -1,126 +1,198 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/black">
+    android:background="#000000">
+
 
     <TextView
-        android:id="@+id/hint"
-        android:textSize="18sp"
         android:layout_marginTop="30dp"
-        android:layout_width="match_parent"
+        android:textSize="28sp"
+        android:textColor="#FFFFFF"
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
         android:text="清机提示"
-        android:textColor="@color/white" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
 
     <LinearLayout
-        android:layout_marginLeft="42dp"
+        android:id="@+id/line1"
+        android:layout_marginLeft="72dp"
         android:layout_marginTop="20dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView">
 
-        <LinearLayout
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="20.5dp"
+        <ImageView
+            android:id="@+id/open_door"
+            android:tint="#ffffff"
+            android:paddingLeft="30dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/open_door"
-                android:src="@mipmap/open_door"
-                android:layout_width="168dp"
-                android:layout_height="107dp"/>
-
-            <ImageView
-                android:id="@+id/close_door"
-                android:layout_width="168dp"
-                android:layout_height="107dp"
-                android:layout_marginTop="90dp"
-                android:src="@mipmap/close_door" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="20.5dp"
+            app:srcCompat="@mipmap/open_door" />
+        <TextView
+            android:id="@+id/first"
+            android:layout_marginTop="10dp"
+            android:textSize="16sp"
+            android:textColor="#ffffff"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_weight="1"
-                android:layout_marginTop="24dp"
-                android:src="@mipmap/clear_right"
-                android:layout_width="40dp"
-                android:layout_height="21dp"/>
-
-            <ImageView
-                android:layout_weight="1"
-                android:layout_marginBottom="24dp"
-                android:layout_marginTop="90dp"
-                android:src="@mipmap/clear_left"
-                android:layout_width="40dp"
-                android:layout_height="21dp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="50dp"
-            android:gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/take_out"
-                android:src="@mipmap/take_out"
-                android:layout_width="151dp"
-                android:layout_height="106dp"/>
-
-            <ImageView
-                android:layout_marginTop="25dp"
-                android:src="@mipmap/clear_down"
-                android:layout_width="65dp"
-                android:layout_height="40dp"/>
-
-            <ImageView
-                android:id="@+id/put_in"
-                android:layout_marginTop="25dp"
-                android:src="@mipmap/put_in"
-                android:layout_width="151dp"
-                android:layout_height="106dp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_marginLeft="50dp"
-            android:gravity="bottom"
-            android:layout_marginTop="20.5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <com.licheedev.serialtool.activity.clear.ComboBox
-                android:layout_marginBottom="30dp"
-                android:background="@mipmap/clear_btn"
-                android:layout_marginLeft="30dp"
-                android:id="@+id/start_clear"
-                android:layout_width="70dp"
-                android:layout_height="40dp" />
-
-            <ImageButton
-                android:id="@+id/clear_back"
-                android:layout_marginLeft="30dp"
-                android:layout_width="70dp"
-                android:layout_height="40dp"
-                android:background="@color/color00baff"
-                app:srcCompat="@drawable/efp_dark__ic_action_cancel" />
-        </LinearLayout>
-
+            android:layout_height="wrap_content"
+            android:text="第一步：打开保险柜门"/>
     </LinearLayout>
 
-</LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="60dp"
+        app:layout_constraintLeft_toRightOf="@+id/line1"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:srcCompat="@mipmap/clear_left"
+        tools:ignore="MissingConstraints" />
+
+    <LinearLayout
+        android:id="@+id/line2"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintLeft_toRightOf="@+id/imageView3"
+        app:layout_constraintTop_toBottomOf="@+id/textView">
+
+        <ImageView
+            android:id="@+id/take_out"
+            android:layout_width="178dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="32dp"
+            android:tint="#ffffff"
+            app:srcCompat="@mipmap/take_out" />
+
+        <TextView
+            android:id="@+id/second"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="第二步：拿出旧钞袋"
+            android:textColor="#ffffff"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/clear_down"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="26dp"
+        app:layout_constraintStart_toStartOf="@+id/line2"
+        app:layout_constraintTop_toBottomOf="@+id/line2"
+        app:srcCompat="@mipmap/clear_down"
+        tools:ignore="MissingConstraints" />
+
+
+    <LinearLayout
+        android:id="@+id/line3"
+        android:layout_marginTop="35dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintTop_toBottomOf="@id/clear_down"
+        app:layout_constraintStart_toStartOf="@+id/line2">
+
+        <ImageView
+            android:id="@+id/put_in"
+            android:layout_width="187dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="32dp"
+            app:srcCompat="@mipmap/put_in" />
+
+        <TextView
+            android:id="@+id/third"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="第三部：放入新钞袋"
+            android:textColor="#ffffff"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/clear_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:layout_marginRight="48dp"
+        app:layout_constraintRight_toLeftOf="@+id/line3"
+        app:layout_constraintTop_toBottomOf="@+id/clear_down"
+        app:srcCompat="@mipmap/clear_left"
+        tools:ignore="MissingConstraints" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="52dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:layout_constraintRight_toLeftOf="@id/clear_left"
+        app:layout_constraintTop_toBottomOf="@+id/line1"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:paddingLeft="30dp"
+            android:id="@+id/close_door"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@mipmap/close_door" />
+
+        <TextView
+            android:id="@+id/fourth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="第四步：关闭保险柜门"
+            android:textColor="#ffffff"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/start_clear"
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="76dp"
+        android:background="@mipmap/clear_btn"
+        app:layout_constraintLeft_toRightOf="@+id/line3"
+        app:layout_constraintTop_toBottomOf="@+id/line2"
+        tools:ignore="MissingConstraints" />
+
+    <ImageButton
+        android:id="@+id/clear_back"
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="60dp"
+        app:layout_constraintLeft_toRightOf="@+id/line3"
+        app:layout_constraintTop_toBottomOf="@+id/start_clear"
+        android:background="@color/color00baff"
+        app:srcCompat="@drawable/efp_dark__ic_action_cancel"
+        tools:ignore="MissingConstraints" />
+
+    </android.support.constraint.ConstraintLayout>

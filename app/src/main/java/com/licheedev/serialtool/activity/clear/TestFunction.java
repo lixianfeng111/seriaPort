@@ -79,21 +79,11 @@ public class TestFunction {
 
         {
             AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
-            boolean start = SpzUtils.getBoolean("start", false);
-            if (start){
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("开始："));
-                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 130);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString("timeDay2")));
-                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 280);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString("time2")+"\r\n"));
-                SpzUtils.putBoolean("start",false);
-            }else {
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("开始："));
-                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 130);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString("timeDay")));
-                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 280);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString("time")+"\r\n"));
-            }
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("开始："));
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 130);
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString("old_timeDay")));
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 280);
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString("old_time")+"\r\n"));
 
 
             AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 1);

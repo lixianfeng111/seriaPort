@@ -67,8 +67,8 @@ public class DepositRecordActivity extends BaseActivity implements BaseRecyclerA
         btLogout.setText(getResources().getString(R.string.record_updaloddata));
 
         boolean iscurrent = getIntent().getBooleanExtra("iscurrent", false);
-        currency_record = getIntent().getIntExtra("currency_record", -1);
-        money_record = getIntent().getIntExtra("money_record", 0);
+        currency_record = SpzUtils.getInt("currency_record",0);
+        money_record = SpzUtils.getInt("money_record", 0);
         if (iscurrent) {
             tvTitle.setText(getResources().getString(R.string.current_deposit));
         } else {
@@ -101,7 +101,7 @@ public class DepositRecordActivity extends BaseActivity implements BaseRecyclerA
         }else {
             KIND="人民币";
         }
-        DepositRecordBean depositRecordBean=new DepositRecordBean(TimeFormartUtils.getTimeDay(),SpzUtils.getString("user"),KIND,1000,"1234522331133","2813","hhh" );
+        DepositRecordBean depositRecordBean=new DepositRecordBean(TimeFormartUtils.getTimeDay(),SpzUtils.getString("user"),KIND,money_record,"1234522331133","2813","hhh" );
         list.add(depositRecordBean);
     }
 

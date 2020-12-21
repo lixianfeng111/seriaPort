@@ -2,10 +2,13 @@ package com.licheedev.serialtool.comn;
 
 import android.os.SystemClock;
 
+import com.licheedev.serialtool.App;
+import com.licheedev.serialtool.comn.event.IsCoveringEvent;
 import com.licheedev.serialtool.comn.event.StatusEvent;
 import com.licheedev.serialtool.comn.message.LogManager;
 import com.licheedev.serialtool.util.ByteUtil;
 import com.licheedev.serialtool.util.LogPlus;
+import com.licheedev.serialtool.util.ToastUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -169,17 +172,24 @@ public class SerialReadThread extends Thread {
             if(((char)(received[10]&0xff)&0x01)==0x01)
             {hexstr1=hexStr+"   置钞口有纸币"; }
             else if(((char)(received[10]&0xff)&0x02)==0x02)
-            {hexstr1=hexStr+"   PS05中错误"; }
+            {
+                hexstr1=hexStr+"   PS05中错误";
+                EventBus.getDefault().post(new IsCoveringEvent(true));
+            }
             else if(((char)(received[10]&0xff)&0x04)==0x04)
-            {hexstr1=hexStr+"   PS05左错误"; }
+            {
+                hexstr1=hexStr+"   PS05左错误";
+                EventBus.getDefault().post(new IsCoveringEvent(true));
+            }
             else if(((char)(received[10]&0xff)&0x08)==0x08)
-            {hexstr1=hexStr+"   PS05右错误"; }
+            {
+                hexstr1=hexStr+"   PS05右错误";
+                EventBus.getDefault().post(new IsCoveringEvent(true));
+            }
 
             else
             {hexstr1=hexStr;}
 
-//           SerialPortManager.instance().close();
-//           SerialPortManager.instance().open("/dev/ttyS4","115200");
             SerialPortManager.instance().sendCommand(sendok1);
 
         }
@@ -188,13 +198,11 @@ public class SerialReadThread extends Thread {
             if(((char)(received[7]&0xff)&0x01)==0x00)
             {hexstr1=hexStr+"   钞箱未到位";
                 LogManager.instance().postError("钞箱未到位");
-                EventBus.getDefault().post(new StatusEvent(2));
             }
 
             else if(((char)(received[7]&0xff)&0x02)==0x00)
             {hexstr1=hexStr+"   保险柜门未关";
                 LogManager.instance().postError("保险柜门未关");
-                EventBus.getDefault().post(new StatusEvent(1));
             }
 
             else if(((char)(received[7]&0xff)&0x04)==0x00)

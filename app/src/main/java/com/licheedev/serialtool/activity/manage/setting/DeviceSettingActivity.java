@@ -18,7 +18,7 @@ public class DeviceSettingActivity extends BaseActivity {
 
 
     private TextView basic_information;
-//    private TextView system_time;
+    private TextView system_time;
 
     @Override
     protected int getLayoutId() {
@@ -34,13 +34,13 @@ public class DeviceSettingActivity extends BaseActivity {
                 startActivity(new Intent(DeviceSettingActivity.this,BasicInformationActivity.class));
             }
         });
-//        system_time.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                //进入系统时间页面
-//                startActivity(new Intent(Settings.ACTION_DATE_SETTINGS));
-//            }
-//        });
+        system_time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //进入系统时间页面
+                startActivity(new Intent(Settings.ACTION_DATE_SETTINGS));
+            }
+        });
     }
 
     @Override
@@ -62,7 +62,7 @@ public class DeviceSettingActivity extends BaseActivity {
     protected void initView() {
         super.initView();
         basic_information = findViewById(R.id.basic_information);
-//        system_time = findViewById(R.id.system_time);
+        system_time = findViewById(R.id.system_time);
     }
 
     @OnClick({R.id.btnBack, R.id.btLogout})

@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import butterknife.ButterKnife;
 
+import com.licheedev.serialtool.AppManager;
 import com.licheedev.serialtool.R;
 import com.licheedev.serialtool.fragment.LogFragment;
 import com.licheedev.serialtool.comn.message.IMessage;
@@ -39,15 +40,8 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
             miBasePresenter = initPresenter();
             initData();
             initListener();
-            //注册广播
-//            if (netBroadcastReceiver == null) {
-//                netBroadcastReceiver = new NetReceiver();
-//                IntentFilter filter = new IntentFilter();
-//                filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
-//                registerReceiver(netBroadcastReceiver, filter);
-//                //设置监听
-//                netBroadcastReceiver.setNetStatuMonitor(this);
-//            }
+//            AppManager.getAppManager().addActivity(this);
+
         } else {
             finish();
         }

@@ -1,19 +1,17 @@
 package com.licheedev.serialtool.activity.clear;
+
 import android.Manifest;
 import android.graphics.Color;
-
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
-
 import android.support.annotation.NonNull;
 import android.view.View;
-
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.caysn.autoreplyprint.AutoReplyPrint;
 import com.licheedev.serialtool.App;
 import com.licheedev.serialtool.R;
@@ -25,9 +23,7 @@ import com.licheedev.serialtool.util.DepositRecordUtil;
 import com.licheedev.serialtool.util.PermissionsUtils;
 import com.licheedev.serialtool.util.SpzUtils;
 import com.licheedev.serialtool.util.TimeFormartUtils;
-import com.licheedev.serialtool.util.ToastUtil;
 import com.sun.jna.Pointer;
-
 
 
 import org.greenrobot.eventbus.Subscribe;
@@ -42,8 +38,10 @@ public class ClearDeviceHintActivity extends BaseActivity {
     private ImageView open_door;
     private int n=5;
     private int red;
+    private int blue;
     int color;
     private ImageButton clear_back;
+    private Button start_clear;
     private ImageView take_out;
     private ImageView put_in;
     private ImageView close_door;
@@ -51,10 +49,14 @@ public class ClearDeviceHintActivity extends BaseActivity {
     private boolean isTakeOut=false;
     private boolean isPutIn=false;
     private boolean isClose=false;
-    private ComboBox start_clear;
     private Pointer h=Pointer.NULL;
     private boolean isCleared=false;
     private static final int RequestCode_RequestAllPermissions = 1;
+    private TextView first;
+    private TextView second;
+    private TextView third;
+    private TextView fourth;
+
 
     @Override
     protected int getLayoutId() {
@@ -75,8 +77,14 @@ public class ClearDeviceHintActivity extends BaseActivity {
         put_in = findViewById(R.id.put_in);
         //关闭保险柜门
         close_door = findViewById(R.id.close_door);
+        //获取对应的文本 第一步……第四步
+        first = findViewById(R.id.first);
+        second = findViewById(R.id.second);
+        third = findViewById(R.id.third);
+        fourth = findViewById(R.id.fourth);
         start_clear = findViewById(R.id.start_clear);
         red = Color.parseColor("#FF0404");
+        blue = Color.parseColor("#00FF06");
         color=red;
         handler.sendEmptyMessage(1);
         OpenPort();
@@ -103,6 +111,7 @@ public class ClearDeviceHintActivity extends BaseActivity {
             }).start();
         }
     };
+
     @Override
     public void initListener() {
         //打印凭证
@@ -112,7 +121,6 @@ public class ClearDeviceHintActivity extends BaseActivity {
                 if (isCleared){
                     if (n>0){
                         n--;
-                        ToastUtil.show(ClearDeviceHintActivity.this,n+"");
                         TestFunction.Test_Pos_SampleTicket_80MM_2(ClearDeviceHintActivity.this,h);
                     }else {
                         DepositRecordUtil.saveDepositRecord();
@@ -169,23 +177,37 @@ public class ClearDeviceHintActivity extends BaseActivity {
             case 1://保险柜门的状态
                 if (!isOpen){//打开了保险柜门
                     handler.removeMessages(1);
-                    open_door.setColorFilter(Color.parseColor("#00FF06"));
+                    open_door.setColorFilter(blue);
+                    first.setTextColor(blue);
                     handler.sendEmptyMessage(2);
                     isOpen=true;
                 }
                 if (isPutIn){//重新放入钞箱
                     handler.removeMessages(3);
-                    put_in.setColorFilter(Color.parseColor("#00FF06"));
+                    put_in.setColorFilter(blue);
+                    third.setTextColor(blue);
                     handler.sendEmptyMessage(4);
                     isPutIn=false;
-                    SpzUtils.putString("timeDay",TimeFormartUtils.getTimeDay());//保存放入新钞箱的时间
+
+                    boolean start = SpzUtils.getBoolean("start", false);
+                    if (start){//判断是不是第一次清机
+                        SpzUtils.putString("old_timeDay",SpzUtils.getString("timeDay2"));
+                        SpzUtils.putString("old_time",SpzUtils.getString("time2"));
+                        SpzUtils.putBoolean("start",false);
+                    }else {//存上次放入朝箱时间
+                        SpzUtils.putString("old_timeDay",SpzUtils.getString("timeDay"));
+                        SpzUtils.putString("old_time",SpzUtils.getString("time"));
+                    }
+                    //保存放入新钞箱的时间
+                    SpzUtils.putString("timeDay",TimeFormartUtils.getTimeDay());
                     SpzUtils.putString("time",TimeFormartUtils.getTime());
                 }
                 break;
             case 2:
                 if (!isTakeOut){//取出钞箱
                     handler.removeMessages(2);
-                    take_out.setColorFilter(Color.parseColor("#00FF06"));
+                    take_out.setColorFilter(blue);
+                    second.setTextColor(blue);
                     isPutIn=true;
                     handler.sendEmptyMessage(3);
                     isTakeOut=true;
@@ -195,7 +217,8 @@ public class ClearDeviceHintActivity extends BaseActivity {
             case 4:
                 if (isClose){//关闭保险柜门
                     handler.removeMessages(4);
-                    close_door.setColorFilter(Color.parseColor("#00FF06"));
+                    close_door.setColorFilter(blue);
+                    fourth.setTextColor(blue);
                     isPutIn=false;
                     isTakeOut=false;
                     isOpen=false;
@@ -211,40 +234,48 @@ public class ClearDeviceHintActivity extends BaseActivity {
             switch (msg.what){
                 case 1://打开保险柜门闪烁
                     if (color==Color.WHITE){
-                        open_door.setColorFilter(red);
+                        open_door.setColorFilter(color);
+                        first.setTextColor(color);
                         color=red;
                     }else if (color==red){
-                        open_door.setColorFilter(Color.WHITE);
+                        open_door.setColorFilter(color);
+                        first.setTextColor(color);
                         color=Color.WHITE;
                     }
                     handler.sendEmptyMessageDelayed(1,1000);
                     break;
                 case 2://取出钞袋闪烁
                     if (color==Color.WHITE){
-                        take_out.setColorFilter(red);
+                        take_out.setColorFilter(color);
+                        second.setTextColor(color);
                         color=red;
                     }else if (color==red){
-                        take_out.setColorFilter(Color.WHITE);
+                        take_out.setColorFilter(color);
+                        second.setTextColor(color);
                         color=Color.WHITE;
                     }
                     handler.sendEmptyMessageDelayed(2,1000);
                     break;
                 case 3://放入新钞袋闪烁
                     if (color==Color.WHITE){
-                        put_in.setColorFilter(red);
+                        put_in.setColorFilter(color);
+                        third.setTextColor(color);
                         color=red;
-                    }else if (color==red){
-                        put_in.setColorFilter(Color.WHITE);
+                    }else if (color==color){
+                        put_in.setColorFilter(color);
+                        third.setTextColor(color);
                         color=Color.WHITE;
                     }
                     handler.sendEmptyMessageDelayed(3,1000);
                     break;
                 case 4://关闭保险柜门闪烁
                     if (color==Color.WHITE){
-                        close_door.setColorFilter(red);
+                        close_door.setColorFilter(color);
+                        fourth.setTextColor(color);
                         color=red;
                     }else if (color==red){
-                        close_door.setColorFilter(Color.WHITE);
+                        close_door.setColorFilter(color);
+                        fourth.setTextColor(color);
                         color=Color.WHITE;
                     }
                     handler.sendEmptyMessageDelayed(4,1000);

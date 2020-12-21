@@ -31,7 +31,7 @@
         tools:ignore="MissingConstraints">
 
         <TextView
-            android:id="@+id/tvUsermanage"
+            android:id="@+id/system_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableTop="@mipmap/system_time"

@@ -59,7 +59,7 @@ public class SelectDepositActivitys extends BaseActivity {
                 startActivity(new Intent(this, OtherDepositActivity.class));
                 break;
             case R.id.ibtn_record:
-                Intent intent = new Intent(this, DepositRecordActivity.class);
+                Intent intent = new Intent(this, DepositManageActivity.class);
                 intent.putExtra("iscurrent", false);
                 startActivity(intent);
                 break;

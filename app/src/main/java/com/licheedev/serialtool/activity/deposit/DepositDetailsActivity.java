@@ -264,6 +264,9 @@ public class DepositDetailsActivity extends BaseActivity implements BaseRecycler
         //保存已存累计
         SpzUtils.putInt("num",num);
         SpzUtils.putInt("counts",counts);
+        //记录
+        SpzUtils.putInt("money_record",num);
+        SpzUtils.putInt("currency_record",2);
     }
 
 

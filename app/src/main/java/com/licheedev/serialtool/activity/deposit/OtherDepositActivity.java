@@ -8,27 +8,22 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
-
 import com.caysn.autoreplyprint.AutoReplyPrint;
 import com.licheedev.serialtool.R;
 import com.licheedev.serialtool.activity.clear.TestFunction;
 import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.base.BasePresenter;
 import com.licheedev.serialtool.comn.SerialPortManager;
+import com.licheedev.serialtool.comn.event.IsCoveringEvent;
 import com.licheedev.serialtool.comn.message.LogManager;
 import com.licheedev.serialtool.util.SpzUtils;
-import com.licheedev.serialtool.util.ToastUtil;
-import com.licheedev.serialtool.weight.MultiLineRadioGroup;
 import com.sun.jna.Pointer;
-
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-
 import butterknife.BindView;
 import butterknife.OnClick;
-
 import static com.licheedev.serialtool.comn.message.LogManager.SAVE_SUCCESS_COMMAND;
+
 
 /**
  * 存款方式选择
@@ -52,7 +47,7 @@ public class OtherDepositActivity extends BaseActivity {
     private RadioButton rd_bill;
     private RadioButton rd_other;
     private int count;
-
+    private boolean isCovered=false;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_other_deposit;
@@ -130,7 +125,7 @@ public class OtherDepositActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.ibtn_ok, R.id.ibtn_cancel, R.id.btnBack})
+    @OnClick({R.id.ibtn_ok, R.id.ibtn_cancel})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ibtn_ok:
@@ -139,7 +134,10 @@ public class OtherDepositActivity extends BaseActivity {
                     count = Integer.parseInt(text + "");
                     if (isOpenDoor){
                         SerialPortManager.instance().closeMaskDoor();//关闭罩门
-                        SerialPortManager.instance().sendSaveCommand();
+                        if (isCovered){//判断有没有被遮挡
+                            SerialPortManager.instance().sendSaveCommand();
+                            isCovered=false;
+                        }
                         isOpenDoor=false;
                         isSaved=true;
                         isGo=false;
@@ -156,29 +154,30 @@ public class OtherDepositActivity extends BaseActivity {
                 }
                 break;
             case R.id.ibtn_cancel:
-                startActivity(new Intent(OtherDepositActivity.this, DepositDetailsActivity.class));
-                break;
-            case R.id.btnBack:
                 SerialPortManager.instance().sendSaveAck();
                 SerialPortManager.instance().sendExitWorkModeCommand();
                 finish();
                 break;
         }
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onIsCoveringEvent(IsCoveringEvent isCoveringEvent){
+        isCovered=isCoveringEvent.isCovering();
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(LogManager.ReceiveData data) {
-
         byte[] received = data.data;
         switch (data.what) {
             case SAVE_SUCCESS_COMMAND: {
                 if (!isGo){
-                    Intent intent=new Intent(this,DepositManageActivity.class);
-                    intent.putExtra("currency",n);
-                    intent.putExtra("money",count);
-                    startActivity(intent);
+                    SpzUtils.putInt("currency_record",n);
+                    SpzUtils.putInt("money_record",count);
                     isGo = true;
                     SerialPortManager.instance().sendSaveAck();
                     SerialPortManager.instance().sendExitWorkModeCommand();
+                    finish();
                 }
             }
             break;
@@ -188,6 +187,7 @@ public class OtherDepositActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        SerialPortManager.instance().sendSaveAck();
         SerialPortManager.instance().sendExitWorkModeCommand();
     }
 

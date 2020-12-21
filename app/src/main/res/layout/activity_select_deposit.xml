@@ -54,8 +54,6 @@
             android:layout_marginLeft="50dp"
             android:src="@mipmap/home_menu" />
 
-
-
     </LinearLayout>
 
     <Button
