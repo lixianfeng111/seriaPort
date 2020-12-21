@@ -6,7 +6,6 @@ import android.view.View;
 import com.licheedev.serialtool.R;
 import com.licheedev.serialtool.activity.deposit.ClearDeviceTestActivity;
 import com.licheedev.serialtool.base.BaseActivity;
-import com.licheedev.serialtool.activity.manage.NetWorkTestActivity;
 import com.licheedev.serialtool.base.BasePresenter;
 
 import butterknife.OnClick;

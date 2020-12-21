@@ -13,13 +13,13 @@
         android:layout_marginTop="50dp"
         android:text="@string/setma_select"
         android:textColor="@color/white"
-        android:textSize="18sp" />
+        android:textSize="28sp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         android:orientation="horizontal">
 
         <TextView
@@ -31,7 +31,7 @@
             android:gravity="center"
             android:text="@string/manaage"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/ibtn_setting"
@@ -43,7 +43,7 @@
             android:gravity="center"
             android:text="@string/setting"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/ibtn_maintain"
@@ -55,7 +55,7 @@
             android:gravity="center"
             android:text="@string/maintain_title"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/ibtn_print"
@@ -67,7 +67,7 @@
             android:gravity="center"
             android:text="@string/print_all"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="20sp" />
 
 
     </LinearLayout>
@@ -88,7 +88,7 @@
             android:gravity="center"
             android:text="@string/device_register"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/ibtn_update"
@@ -100,7 +100,7 @@
             android:gravity="center"
             android:text="@string/version_update"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/ibtn_stop"
@@ -112,7 +112,7 @@
             android:gravity="center"
             android:text="@string/logout"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/ibtn_close"
@@ -124,7 +124,7 @@
             android:gravity="center"
             android:text="@string/exit"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="20sp" />
 
 
     </LinearLayout>
