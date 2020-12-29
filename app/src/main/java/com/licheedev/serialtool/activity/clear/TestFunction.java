@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.os.Build;
 
 import com.caysn.autoreplyprint.AutoReplyPrint;
+import com.licheedev.serialtool.App;
+import com.licheedev.serialtool.R;
 import com.licheedev.serialtool.activity.deposit.DepositDetailsActivity;
 import com.licheedev.serialtool.activity.deposit.OtherDepositActivity;
 import com.licheedev.serialtool.util.SpzUtils;
@@ -15,31 +17,36 @@ import java.util.List;
 
 public class TestFunction {
     private static String serial = Build.SERIAL;//HARDWARE
-    public static Activity ctx = null;
+    public static Activity activity2;
 
     //清机测试打印
-    public static void Test_Pos_SampleTicket_80MM_2(Activity activity, Pointer h) {
-
+    public static void Test_Pos_SampleTicket_80MM(Activity activity, Pointer h) {
+        activity2=activity;
         int num=0,total=0,totalAll=0;
+        //获取各个面值的张数
         int num100 = SpzUtils.getInt("num100", -1);
         int num50 = SpzUtils.getInt("num50", -1);
         int num20 = SpzUtils.getInt("num20", -1);
         int num10 = SpzUtils.getInt("num10", -1);
         int num5 = SpzUtils.getInt("num5", -1);
         int num1 = SpzUtils.getInt("num1", -1);
+        //获取各面值总金额
         int money100 = SpzUtils.getInt("money100", -1);
         int money50 = SpzUtils.getInt("money50", -1);
         int money20 = SpzUtils.getInt("money20", -1);
         int money10 = SpzUtils.getInt("money10", -1);
         int money5 = SpzUtils.getInt("money5", -1);
         int money1 = SpzUtils.getInt("money1", -1);
-        //其他存款
+        //获取其他存款
         int coin2 = SpzUtils.getInt("coin2", 0);
         int cheque2 = SpzUtils.getInt("cheque2", 0);
         int paper_money2 = SpzUtils.getInt("paper_money2", 0);
         int other2 = SpzUtils.getInt("other2", 0);
+        //得到钞票总张数
         num=num1+num5+num10+num20+num50+num100;
+        //得到钞票总金额
         total=money1+money5+money10+money20+money50+money100;
+        //总计
         totalAll=total+coin2+cheque2+paper_money2+other2;
         {
             AutoReplyPrint.INSTANCE.CP_Printer_ClearPrinterBuffer(h);
@@ -53,33 +60,33 @@ public class TestFunction {
             AutoReplyPrint.INSTANCE.CP_Pos_PrintHorizontalLine(h, 0, 575);
             AutoReplyPrint.INSTANCE.CP_Pos_SetAlignment(h, AutoReplyPrint.CP_Pos_Alignment_HCenter);
             AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 1);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("*** 钞袋替换报告 ***\r\n"));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("*** "+content(R.string.replace_money_bag)+" ***\r\n"));
         }
 
         {
             AutoReplyPrint.INSTANCE.CP_Pos_SetAlignment(h, AutoReplyPrint.CP_Pos_Alignment_Left);
             AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
             AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 0);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("客户："));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.client_print)));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString("client")+"\r\n"));
 
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("地点："));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.site_print)));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString("site")+"\r\n"));
 
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("机器号："));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.machine_No_print)));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(serial+"\r\n"));
 
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("用户："));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.user_print)));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString("user")+"\r\n"));
         }
 
         {
             AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("开始："));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.start_print)));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 130);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString("old_timeDay")));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 280);
@@ -87,33 +94,33 @@ public class TestFunction {
 
 
             AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 1);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("原钞袋ID"));
-            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 130);
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.old_money_bag_print)));
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 280);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString("bagId")+"\r\n"));
 
             String old_lead_seal = SpzUtils.getString("old_lead_seal");
             AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 0);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("原封箱ID"));
-            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 130);
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.old_sealing_print)));
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 280);
             if (!old_lead_seal.isEmpty()){
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(old_lead_seal+"\r\n"));
             }else {
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString("lead_seal")+"\r\n"));
             }
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("结束："));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.end_print)));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 130);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(TimeFormartUtils.getTimeDay()));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 280);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(TimeFormartUtils.getTime()+"\r\n"));
 
             AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 1);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("新钞袋ID"));
-            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 130);
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.new_money_bag_print)));
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 280);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString("old_bagId")+"\r\n"));
 
             AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 0);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("新封箱ID"));
-            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 130);
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.new_sealing_print)));
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 280);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString("new_lead_seal")+"\r\n"));
 
         }
@@ -135,13 +142,13 @@ public class TestFunction {
         {
             AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
             AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 1);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("钞票：CNY\r\n"));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.currency_print)+"CNY\r\n"));
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("Banknote\r\n"));
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("面额"));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.face_value)));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("张"));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.piece)));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 300);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("金额\r\n"));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.sum_print)+"\r\n"));
         }
 
         {
@@ -182,7 +189,7 @@ public class TestFunction {
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 300);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(money1+"\r\n"));
 
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("总数"));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.amount_print)));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(num+""));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 300);
@@ -192,36 +199,36 @@ public class TestFunction {
         {
             AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
             AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 1);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("其他：\r\n"));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.other_print)+"\r\n"));
         }
 
         {
             AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 0);
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 20);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("钞票"));
-            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 100);
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.bill)));
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("CNY "+paper_money2+"\r\n"));
 
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 20);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("硬币"));
-            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 100);
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.coin)));
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("CNY "+coin2+"\r\n"));
 
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 20);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("支票"));
-            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 100);
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.check)));
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("CNY "+cheque2+"\r\n"));
 
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 20);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("其他"));
-            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 100);
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.other)));
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("CNY "+other2+"\r\n"));
         }
 
         {
             AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
             AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 1);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("STC 总计：\r\n"));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("STC "+content(R.string.total_print)+"\r\n"));
         }
 
         {
@@ -233,7 +240,7 @@ public class TestFunction {
 
             AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
             AutoReplyPrint.INSTANCE.CP_Pos_SetAlignment(h, AutoReplyPrint.CP_Pos_Alignment_HCenter);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("*** 完 ***\r\n\r\n\r\n"));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("*** "+content(R.string.finish_print)+" ***\r\n\r\n\r\n"));
             AutoReplyPrint.INSTANCE.CP_Pos_FeedAndHalfCutPaper(h);
             AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
             AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
@@ -243,6 +250,7 @@ public class TestFunction {
 
     //存款报告打印
     public static void deposit_Print_SampleTicket(Activity activity, List<DepositDetailsActivity.DepositDetailBean> list, Pointer h){
+        activity2=activity;
         int total=0;
         int num=0;
         int num100 = SpzUtils.getInt("num100", 0);
@@ -264,7 +272,7 @@ public class TestFunction {
         int cheque2 = SpzUtils.getInt("cheque2", 0);
         int paper_money2 = SpzUtils.getInt("paper_money2", 0);
         int other2 = SpzUtils.getInt("other2", 0);
-
+        //将其他存款数累加
         coin2+=coin;
         cheque2+=cheque;
         paper_money2+=paper_money;
@@ -281,30 +289,30 @@ public class TestFunction {
             AutoReplyPrint.INSTANCE.CP_Pos_PrintHorizontalLine(h, 0, 575);
             AutoReplyPrint.INSTANCE.CP_Pos_SetAlignment(h, AutoReplyPrint.CP_Pos_Alignment_HCenter);
             AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 1);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("*** 存款报告 ***\r\n"));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("*** "+content(R.string.deposit_report)+" ***\r\n"));
         }
 
         {
             AutoReplyPrint.INSTANCE.CP_Pos_SetAlignment(h, AutoReplyPrint.CP_Pos_Alignment_Left);
             AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
             AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 0);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("客户："));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.client_print)));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString("client")+"\r\n"));
 
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("地点："));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.site_print)));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString("site")+"\r\n"));
 
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("存款类别："));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.deposit_category_print)));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("钞票\r\n"));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.bill)+"\r\n"));
 
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("机器号："));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.machine_No_print)));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(serial+"\r\n"));
 
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("用户："));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.user_print)));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString("user")+"\r\n"));
 
@@ -316,16 +324,16 @@ public class TestFunction {
         {
             AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
             AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 1);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("币种：CNY\r\n"));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.currency_print)+"CNY\r\n"));
 
             AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("钞票\r\n"));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.banknotes_print)+"\r\n"));
 
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("面额"));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.face_value)));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("张"));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.piece)));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 300);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("金额\r\n"));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.sum_print)+"\r\n"));
         }
 
         {
@@ -384,6 +392,7 @@ public class TestFunction {
                     }
                 }
             }
+
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("100"));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(save_num100+""));
@@ -433,53 +442,52 @@ public class TestFunction {
             {
                 AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
                 AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 1);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("其他：\r\n"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.other_print)+"\r\n"));
             }
 
             {
-
                 AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 22);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("种类"));
-                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 100);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("硬币\r\n"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.kind_print)));
+                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.coin)+"\r\n"));
 
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 22);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("金额"));
-                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 100);
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.sum_print)));
+                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("CNY "+coin+"\r\n"));
 
                 AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 22);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("种类"));
-                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 100);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("支票\r\n"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.kind_print)));
+                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.check)+"\r\n"));
 
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 22);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("金额"));
-                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 100);
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.sum_print)));
+                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("CNY "+cheque+"\r\n"));
 
                 AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 22);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("种类"));
-                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 100);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("钞票\r\n"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.kind_print)));
+                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.bill)+"\r\n"));
 
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 22);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("金额"));
-                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 100);
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.sum_print)));
+                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("CNY "+paper_money+"\r\n"));
 
                 AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 22);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("种类"));
-                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 100);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("其他\r\n"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.kind_print)));
+                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.other)+"\r\n"));
 
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 22);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("金额"));
-                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 100);
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.sum_print)));
+                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("CNY "+other+"\r\n"));
 
             }
@@ -488,15 +496,15 @@ public class TestFunction {
                 total=total+coin+cheque+paper_money+other;
                 AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
                 AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 1);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("STC 总计："));
-                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("STC "+content(R.string.total_print)));
+                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(total+""));
             }
 
             {
                 AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
                 AutoReplyPrint.INSTANCE.CP_Pos_SetAlignment(h, AutoReplyPrint.CP_Pos_Alignment_HCenter);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("*** 完 ***"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("*** "+content(R.string.finish_print)+" ***"));
                 AutoReplyPrint.INSTANCE.CP_Pos_FeedAndHalfCutPaper(h);
                 AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
                 AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
@@ -530,11 +538,10 @@ public class TestFunction {
         }
     }
 
-
     private static int coin,cheque,paper_money,other;
     //选择存款报告打印
-    public static void select_deposit_Print_SampleTicket(Activity activity,int n, Pointer h){
-
+    public static void select_deposit_Print_SampleTicket(Activity activity, int n, Pointer h){
+        activity2=activity;
         int how_much = SpzUtils.getInt("how_much", -1);
 
         {
@@ -549,38 +556,38 @@ public class TestFunction {
             AutoReplyPrint.INSTANCE.CP_Pos_PrintHorizontalLine(h, 0, 575);
             AutoReplyPrint.INSTANCE.CP_Pos_SetAlignment(h, AutoReplyPrint.CP_Pos_Alignment_HCenter);
             AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 1);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("*** 其他存款 ***\r\n"));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("*** "+content(R.string.other_deposit_print)+" ***\r\n"));
         }
 
         {
             AutoReplyPrint.INSTANCE.CP_Pos_SetAlignment(h, AutoReplyPrint.CP_Pos_Alignment_Left);
             AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
             AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 0);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("客户："));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.client_print)));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString("client")+"\r\n"));
 
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("地点："));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.site_print)));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString("site")+"\r\n"));
 
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("存款类别："));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.deposit_category_print)));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
             if (n==0){
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("硬币\r\n"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.coin)+"\r\n"));
             }else if (n==1){
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("支票\r\n"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.check)+"\r\n"));
             } else if (n == 2) {
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("钞票\r\n"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.bill)+"\r\n"));
             }else {
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("其他\r\n"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.other)+"\r\n"));
             }
 
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("机器号："));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.machine_No_print)));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(serial+"\r\n"));
 
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("用户："));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.user_print)));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString("user")+"\r\n"));
 
@@ -591,55 +598,55 @@ public class TestFunction {
         {
             AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
             AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 1);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("其他：\r\n"));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.other_print)+"\r\n"));
         }
         {
             if (n==0){
                 AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 22);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("种类"));
-                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 100);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("硬币\r\n"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.kind_print)));
+                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.coin)+"\r\n"));
 
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 22);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("金额"));
-                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 100);
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.sum_print)));
+                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("CNY "+how_much+"\r\n"));
                 coin+=how_much;
             }else if (n==1){
                 AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 22);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("种类"));
-                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 100);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("支票\r\n"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.kind_print)));
+                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.check)+"\r\n"));
 
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 22);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("金额"));
-                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 100);
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.kind_print)));
+                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("CNY "+how_much+"\r\n"));
                 cheque+=how_much;
             }else if (n==2){
                 AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 22);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("种类"));
-                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 100);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("钞票\r\n"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.kind_print)));
+                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.bill)+"\r\n"));
 
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 22);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("金额"));
-                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 100);
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.sum_print)));
+                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("CNY "+how_much+"\r\n"));
                 paper_money+=how_much;
             }else if (n==3){
                 AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 22);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("种类"));
-                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 100);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("其他\r\n"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.kind_print)));
+                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.other)+"\r\n"));
 
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 22);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("金额"));
-                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 100);
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.sum_print)));
+                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("CNY "+how_much+"\r\n"));
                 other+=how_much;
             }
@@ -648,15 +655,15 @@ public class TestFunction {
             {
                 AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
                 AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 1);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("STC 总计："));
-                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("STC "+content(R.string.total_print)));
+                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(how_much+""));
             }
 
             {
                 AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
                 AutoReplyPrint.INSTANCE.CP_Pos_SetAlignment(h, AutoReplyPrint.CP_Pos_Alignment_HCenter);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("*** 完 ***"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("*** "+content(R.string.finish_print)+" ***"));
                 AutoReplyPrint.INSTANCE.CP_Pos_FeedAndHalfCutPaper(h);
                 AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
                 AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
@@ -667,7 +674,7 @@ public class TestFunction {
 
     //记录存款报告打印
     public static void record_deposit_Print_SampleTicket(Activity activity,int n,int money, Pointer h) {
-
+            activity2=activity;
         {
             AutoReplyPrint.INSTANCE.CP_Printer_ClearPrinterBuffer(h);
             AutoReplyPrint.INSTANCE.CP_Pos_ResetPrinter(h);
@@ -680,38 +687,38 @@ public class TestFunction {
             AutoReplyPrint.INSTANCE.CP_Pos_PrintHorizontalLine(h, 0, 575);
             AutoReplyPrint.INSTANCE.CP_Pos_SetAlignment(h, AutoReplyPrint.CP_Pos_Alignment_HCenter);
             AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 1);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("*** 其他存款 ***\r\n"));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("*** "+content(R.string.other_deposit_print)+" ***\r\n"));
         }
 
         {
             AutoReplyPrint.INSTANCE.CP_Pos_SetAlignment(h, AutoReplyPrint.CP_Pos_Alignment_Left);
             AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
             AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 0);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("客户："));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.client_print)));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString("client")+"\r\n"));
 
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("地点："));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.site_print)));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString("site")+"\r\n"));
 
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("存款类别："));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.deposit_category_print)));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
             if (n==0){
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("硬币\r\n"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.coin)+"\r\n"));
             }else if (n==1){
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("支票\r\n"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.check)+"\r\n"));
             } else if (n == 2) {
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("钞票\r\n"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.bill)+"\r\n"));
             }else {
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("其他\r\n"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.other)+"\r\n"));
             }
 
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("机器号："));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.machine_No_print)));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(serial+"\r\n"));
 
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("用户："));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.user_print)));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString("user")+"\r\n"));
 
@@ -723,56 +730,60 @@ public class TestFunction {
         {
             AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
             AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 1);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("其他：\r\n"));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.other_print)+"\r\n"));
         }
 
         {
             if (n==0){
                 AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
+                AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 0);
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 22);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("种类"));
-                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 100);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("硬币\r\n"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.kind_print)));
+                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.coin)+"\r\n"));
 
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 22);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("金额"));
-                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 100);
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.sum_print)));
+                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("CNY "+money+"\r\n"));
 
             }else if (n==1){
                 AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
+                AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 0);
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 22);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("种类"));
-                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 100);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("支票\r\n"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.kind_print)));
+                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.check)+"\r\n"));
 
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 22);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("金额"));
-                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 100);
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.sum_print)));
+                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("CNY "+money+"\r\n"));
 
             }else if (n==2){
                 AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
+                AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 0);
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 22);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("种类"));
-                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 100);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("钞票\r\n"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.kind_print)));
+                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.bill)+"\r\n"));
 
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 22);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("金额"));
-                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 100);
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.sum_print)));
+                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("CNY "+money+"\r\n"));
 
             }else if (n==3){
                 AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
+                AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 0);
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 22);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("种类"));
-                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 100);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("其他\r\n"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.kind_print)));
+                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.other)+"\r\n"));
 
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 22);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("金额"));
-                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 100);
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.sum_print)));
+                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("CNY "+money+"\r\n"));
 
             }
@@ -782,20 +793,26 @@ public class TestFunction {
         {
             AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
             AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 1);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("STC 总计："));
-            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("STC "+content(R.string.total_print)));
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(money+""));
         }
 
         {
             AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
             AutoReplyPrint.INSTANCE.CP_Pos_SetAlignment(h, AutoReplyPrint.CP_Pos_Alignment_HCenter);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("*** 完 ***"));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("*** "+content(R.string.finish_print)+" ***"));
             AutoReplyPrint.INSTANCE.CP_Pos_FeedAndHalfCutPaper(h);
             AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
             AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
             AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
             AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
         }
+
         }
+
+    private static String content(int site_print) {
+        String string = activity2.getResources().getString(site_print);
+        return string;
+    }
 }

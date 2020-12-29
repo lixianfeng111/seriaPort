@@ -11,7 +11,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:text="@string/maintain_title"
         android:textColor="@color/white"
         android:textSize="28sp"
@@ -25,7 +25,7 @@
         android:id="@+id/ll11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="15dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="@+id/textView"
         app:layout_constraintStart_toStartOf="@+id/textView"
@@ -41,33 +41,33 @@
             android:gravity="center"
             android:text="@string/maint_sysinfo"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="13sp"
             tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/tvDeviceSet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="35dp"
+            android:layout_marginLeft="30dp"
             android:drawableTop="@mipmap/maintain2"
             android:drawablePadding="10dp"
             android:gravity="center"
             android:text="@string/maint_set"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="13sp"
             tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/tvDebug"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="35dp"
+            android:layout_marginLeft="30dp"
             android:drawableTop="@mipmap/maintain3"
             android:drawablePadding="10dp"
             android:gravity="center"
             android:text="@string/maint_debug"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="13sp"
             tools:ignore="MissingConstraints" />
 
 
@@ -92,32 +92,33 @@
             android:gravity="center"
             android:text="@string/maint_control"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="13sp"
             tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/tvErrorClear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="35dp"
+            android:layout_marginLeft="30dp"
             android:drawableTop="@mipmap/maintain5"
             android:drawablePadding="10dp"
             android:gravity="center"
             android:text="@string/maint_error_clear"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="13sp"
             tools:ignore="MissingConstraints" />
 
         <TextView
+            android:gravity="center"
             android:id="@+id/tvbillinit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="35dp"
+            android:layout_marginLeft="30dp"
             android:drawableTop="@mipmap/maintain6"
             android:drawablePadding="10dp"
             android:text="@string/maint_bill_init"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="13sp"
             tools:ignore="MissingConstraints" />
 
 

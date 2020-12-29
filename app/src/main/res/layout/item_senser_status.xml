@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="上钞通道(上)"
+            android:text="@string/up_money"
             android:textColor="@color/white"
             android:textSize="12sp" />
 
@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="ps01"
+            android:text="PS01"
             android:textColor="@color/white"
             android:textSize="12sp" />
 
@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="左右"
+            android:text="@string/left_or_right"
             android:textColor="@color/white"
             android:textSize="12sp" />
 

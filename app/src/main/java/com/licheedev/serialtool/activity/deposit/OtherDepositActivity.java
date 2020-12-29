@@ -1,6 +1,5 @@
 package com.licheedev.serialtool.activity.deposit;
 
-import android.content.Intent;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -17,13 +16,13 @@ import com.licheedev.serialtool.comn.SerialPortManager;
 import com.licheedev.serialtool.comn.event.IsCoveringEvent;
 import com.licheedev.serialtool.comn.message.LogManager;
 import com.licheedev.serialtool.util.SpzUtils;
+import com.licheedev.serialtool.util.ToastUtil;
 import com.sun.jna.Pointer;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import butterknife.BindView;
 import butterknife.OnClick;
 import static com.licheedev.serialtool.comn.message.LogManager.SAVE_SUCCESS_COMMAND;
-
 
 /**
  * 存款方式选择
@@ -97,7 +96,6 @@ public class OtherDepositActivity extends BaseActivity {
                 if (b){
                     n=3;
                 }
-
             }
         });
     }
@@ -122,7 +120,6 @@ public class OtherDepositActivity extends BaseActivity {
     public void initData() {
         editText.setInputType(InputType.TYPE_CLASS_NUMBER);
         OpenPort();
-
     }
 
     @OnClick({R.id.ibtn_ok, R.id.ibtn_cancel})
@@ -133,16 +130,18 @@ public class OtherDepositActivity extends BaseActivity {
                 if (!TextUtils.isEmpty(text)){
                     count = Integer.parseInt(text + "");
                     if (isOpenDoor){
-                        SerialPortManager.instance().closeMaskDoor();//关闭罩门
                         if (isCovered){//判断有没有被遮挡
+                            SerialPortManager.instance().closeMaskDoor();//关闭罩门
                             SerialPortManager.instance().sendSaveCommand();
                             isCovered=false;
+                            isOpenDoor=false;
+                            isSaved=true;
+                            isGo=false;
+                            editText.setText("");
+                            SpzUtils.putBoolean("isPrint",true);
+                        }else {
+                            ToastUtil.show(OtherDepositActivity.this,"Please put envelope into the deposit pocket");
                         }
-                        isOpenDoor=false;
-                        isSaved=true;
-                        isGo=false;
-                        editText.setText("");
-                        SpzUtils.putBoolean("isPrint",true);
                     }else {
                         if (count >0){
                             SpzUtils.putInt("how_much", count);
@@ -151,11 +150,15 @@ public class OtherDepositActivity extends BaseActivity {
                             isOpenDoor=true;
                         }
                     }
+                }else if (isOpenDoor){
+                    ToastUtil.show(OtherDepositActivity.this,getResources().getString(R.string.put_envelope_into));
                 }
                 break;
             case R.id.ibtn_cancel:
-                SerialPortManager.instance().sendSaveAck();
-                SerialPortManager.instance().sendExitWorkModeCommand();
+                if (isOpenDoor){
+                    SerialPortManager.instance().closeMaskDoor();//关闭罩门
+                }
+                back();
                 finish();
                 break;
         }
@@ -175,8 +178,7 @@ public class OtherDepositActivity extends BaseActivity {
                     SpzUtils.putInt("currency_record",n);
                     SpzUtils.putInt("money_record",count);
                     isGo = true;
-                    SerialPortManager.instance().sendSaveAck();
-                    SerialPortManager.instance().sendExitWorkModeCommand();
+                    back();
                     finish();
                 }
             }
@@ -187,8 +189,7 @@ public class OtherDepositActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        SerialPortManager.instance().sendSaveAck();
-        SerialPortManager.instance().sendExitWorkModeCommand();
+        back();
     }
 
     private void OpenPort() {
@@ -204,4 +205,8 @@ public class OtherDepositActivity extends BaseActivity {
         SerialPortManager.instance().sendCommand(SerialPortManager.byteArrayToHexString(commandWorkMode));
     }
 
+    private void back(){
+        SerialPortManager.instance().sendSaveAck();
+        SerialPortManager.instance().sendExitWorkModeCommand();
+    }
 }

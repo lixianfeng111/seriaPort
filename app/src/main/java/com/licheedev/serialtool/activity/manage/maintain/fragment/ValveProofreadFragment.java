@@ -41,8 +41,6 @@ public class ValveProofreadFragment extends BaseFragment implements BaseRecycler
         mRecyclerView.setAdapter(adapter);
 
         list.add(1);
-        list.add(1);
-        list.add(1);
         adapter.notifyDataSetChanged();
     }
 

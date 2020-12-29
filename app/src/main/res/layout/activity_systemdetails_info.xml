@@ -11,10 +11,10 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:text="@string/systeminfo"
         android:textColor="@color/white"
-        android:textSize="14sp"
+        android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,29 +23,29 @@
         android:id="@+id/llin1"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="@+id/textView"
         app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/textView">
 
         <TextView
-            android:layout_width="100dp"
+            android:layout_width="123dp"
             android:layout_height="match_parent"
             android:background="@drawable/rectangle_solide_blue"
             android:gravity="center"
             android:text="@string/serial_num"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/editIp"
-            android:layout_width="182dp"
+            android:layout_width="274dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
+            android:layout_marginLeft="4dp"
             android:background="@drawable/rectangle_solide_baff"
             android:paddingLeft="10dp"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="15sp" />
 
     </LinearLayout>
 
@@ -59,22 +59,22 @@
         app:layout_constraintTop_toBottomOf="@+id/llin1">
 
         <TextView
-            android:layout_width="100dp"
+            android:layout_width="123dp"
             android:layout_height="match_parent"
             android:background="@drawable/rectangle_solide_blue"
             android:gravity="center"
             android:text="@string/device_num"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="15sp" />
 
         <TextView
-            android:layout_width="182dp"
+            android:layout_width="274dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
+            android:layout_marginLeft="4dp"
             android:background="@drawable/rectangle_solide_baff"
             android:paddingLeft="10dp"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="15sp" />
 
     </LinearLayout>
 
@@ -88,22 +88,22 @@
         app:layout_constraintTop_toBottomOf="@+id/llin2">
 
         <TextView
-            android:layout_width="100dp"
+            android:layout_width="123dp"
             android:layout_height="match_parent"
             android:background="@drawable/rectangle_solide_blue"
             android:gravity="center"
             android:text="@string/software_num"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="15sp" />
 
         <TextView
-            android:layout_width="182dp"
+            android:layout_width="274dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
+            android:layout_marginLeft="4dp"
             android:background="@drawable/rectangle_solide_baff"
             android:paddingLeft="10dp"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="15sp" />
 
     </LinearLayout>
 
@@ -117,22 +117,22 @@
         app:layout_constraintTop_toBottomOf="@+id/llin3">
 
         <TextView
-            android:layout_width="100dp"
+            android:layout_width="123dp"
             android:layout_height="match_parent"
             android:background="@drawable/rectangle_solide_blue"
             android:gravity="center"
             android:text="@string/zhubannum"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="15sp" />
 
         <TextView
-            android:layout_width="182dp"
+            android:layout_width="274dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
+            android:layout_marginLeft="4dp"
             android:background="@drawable/rectangle_solide_baff"
             android:paddingLeft="10dp"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="15sp" />
 
     </LinearLayout>
 
@@ -146,27 +146,27 @@
         app:layout_constraintTop_toBottomOf="@+id/llin4">
 
         <TextView
-            android:layout_width="100dp"
+            android:layout_width="123dp"
             android:layout_height="match_parent"
             android:background="@drawable/rectangle_solide_blue"
             android:gravity="center"
             android:text="@string/imagenum"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="15sp" />
 
         <TextView
-            android:layout_width="182dp"
+            android:layout_width="274dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
+            android:layout_marginLeft="4dp"
             android:background="@drawable/rectangle_solide_baff"
             android:paddingLeft="10dp"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="15sp" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="287dp"
+        android:layout_width="401dp"
         android:layout_height="40dp"
         android:layout_marginTop="15dp"
         app:layout_constraintEnd_toEndOf="@+id/llin5"
@@ -182,7 +182,7 @@
             android:gravity="center"
             android:text="@string/softwareupdate"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:layout_width="0dp"
@@ -193,7 +193,7 @@
             android:gravity="center"
             android:text="@string/gujianupdate"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:layout_width="0dp"
@@ -204,7 +204,7 @@
             android:gravity="center"
             android:text="@string/imagebanupdate"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="15sp" />
 
 
     </LinearLayout>

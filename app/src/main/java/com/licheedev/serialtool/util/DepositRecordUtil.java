@@ -14,7 +14,6 @@ public class DepositRecordUtil {
         SpzUtils.putInt("money10",0);
         SpzUtils.putInt("money5",0);
         SpzUtils.putInt("money1",0);
-        SpzUtils.putInt("ci",1);
         //其他存款
         SpzUtils.putInt("coin2",0);
         SpzUtils.putInt("cheque2",0);

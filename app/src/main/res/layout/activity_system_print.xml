@@ -25,7 +25,7 @@
         android:id="@+id/ll11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="@+id/textView"
         app:layout_constraintStart_toStartOf="@+id/textView"
@@ -41,33 +41,33 @@
             android:gravity="center"
             android:text="@string/print_bill_d"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="15sp"
             tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/tvclearrecord"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="35dp"
+            android:layout_marginLeft="70dp"
             android:drawableTop="@mipmap/print2"
             android:drawablePadding="10dp"
             android:gravity="center"
             android:text="@string/print_clear_record"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="15sp"
             tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/tvdepositrecored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="35dp"
+            android:layout_marginLeft="70dp"
             android:drawableTop="@mipmap/print3"
             android:drawablePadding="10dp"
             android:gravity="center"
             android:text="@string/deal_record"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="15sp"
             tools:ignore="MissingConstraints" />
 
 

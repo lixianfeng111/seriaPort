@@ -3,8 +3,10 @@ package com.licheedev.serialtool.activity.manage.manage;
 import android.view.View;
 
 import com.licheedev.serialtool.R;
+import com.licheedev.serialtool.activity.LoginActivity;
 import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.base.BasePresenter;
+import com.licheedev.serialtool.util.LogOutUtil;
 
 import butterknife.OnClick;
 
@@ -44,19 +46,17 @@ public class DataUploadActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.tv_depositdata:
                 break;
-
             case R.id.tv_bill_data:
                 break;
-
-
             case R.id.btnBack:
                 finish();
                 break;
             case R.id.btnUpload:
                 break;
             case R.id.btLogout:
+                LogOutUtil.LogOut(this, LoginActivity.class);
+                finish();
                 break;
-
         }
     }
 

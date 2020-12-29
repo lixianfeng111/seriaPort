@@ -39,7 +39,7 @@ android:orientation="vertical">
         android:text="@string/set_network"
         android:gravity="center"
         android:textColor="@color/white"
-        android:textSize="14sp"
+        android:textSize="15sp"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -52,7 +52,7 @@ android:orientation="vertical">
         android:text="@string/server_setting"
         android:textColor="@color/white"
         android:gravity="center"
-        android:textSize="14sp"
+        android:textSize="15sp"
         tools:ignore="MissingConstraints" />
 
 

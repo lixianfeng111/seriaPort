@@ -39,6 +39,8 @@
 
     <EditText
         android:id="@+id/editCode"
+        android:singleLine="true"
+        android:inputType="number"
         android:layout_width="400dp"
         android:layout_height="60dp"
         android:layout_marginTop="20dp"

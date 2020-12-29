@@ -124,7 +124,7 @@
             android:paddingLeft="15dp"
             android:text="@string/monery_number"
             android:textColor="@color/white"
-            android:textSize="26sp" />
+            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/editText"
@@ -137,7 +137,7 @@
             android:inputType="number"
             android:textColor="#fff"
             android:textColorHint="#999999"
-            android:textSize="26sp" />
+            android:textSize="18sp" />
 
     </LinearLayout>
 

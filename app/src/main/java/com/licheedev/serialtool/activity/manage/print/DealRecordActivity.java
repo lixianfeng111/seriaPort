@@ -7,10 +7,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.licheedev.serialtool.R;
+import com.licheedev.serialtool.activity.LoginActivity;
 import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.activity.dapter.BaseRecyclerAdapter;
 import com.licheedev.serialtool.activity.dapter.RecyclerViewHolder;
 import com.licheedev.serialtool.base.BasePresenter;
+import com.licheedev.serialtool.util.LogOutUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,7 +88,8 @@ public class DealRecordActivity extends BaseActivity implements BaseRecyclerAdap
             case R.id.btnUpload: //汇总打印
                 break;
             case R.id.btLogout: //上传数据
-
+                LogOutUtil.LogOut(this, LoginActivity.class);
+                finish();
                 break;
         }
     }

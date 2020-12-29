@@ -2,9 +2,14 @@ package com.licheedev.serialtool.activity.dapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.Layout;
+import android.text.TextPaint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.licheedev.serialtool.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +56,7 @@ public class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerViewHol
     @Override
     public void onBindViewHolder(RecyclerViewHolder holder, int position) {
         delegate.bindView(holder, position, mData.get(position));
+        TextView value = holder.itemView.findViewById(R.id.value);
     }
 
     @Override

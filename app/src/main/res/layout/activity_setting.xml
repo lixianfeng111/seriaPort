@@ -39,63 +39,53 @@
             android:text="@string/set_device"
             android:textColor="@color/white"
             android:gravity="center"
-            android:textSize="20sp"
+            android:textSize="15sp"
             tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/tvNetwork"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="35dp"
+            android:layout_marginLeft="70dp"
             android:drawableTop="@mipmap/setting2"
             android:drawablePadding="10dp"
             android:text="@string/set_network"
             android:gravity="center"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="15sp"
             tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/tvFunction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="35dp"
+            android:layout_marginLeft="70dp"
             android:drawableTop="@mipmap/setting3"
             android:drawablePadding="10dp"
             android:gravity="center"
             android:text="@string/set_function"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="15sp"
             tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/tvenvelope"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="35dp"
+            android:layout_marginLeft="70dp"
             android:drawableTop="@mipmap/setting4"
             android:drawablePadding="10dp"
             android:text="@string/set_envelope"
             android:gravity="center"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="15sp"
             tools:ignore="MissingConstraints" />
 
     </LinearLayout>
 
     <include layout="@layout/common_btnback"/>
 
-    <Button
-        android:id="@+id/btLogout"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_marginRight="80dp"
-        android:layout_marginBottom="30dp"
-        android:background="#18f"
-        android:text="@string/logout"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+    <include layout="@layout/common_btnlogout"/>
 
 
 </android.support.constraint.ConstraintLayout>

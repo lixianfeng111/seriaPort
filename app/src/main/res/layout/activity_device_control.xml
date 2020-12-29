@@ -32,24 +32,24 @@
 
         <TextView
             android:id="@+id/tv_printdebug"
-            android:layout_width="126dp"
-            android:layout_height="40dp"
+            android:layout_width="190dp"
+            android:layout_height="60dp"
             android:background="@drawable/blue_button_clicked"
             android:gravity="center"
             android:text="@string/printdevice_debug"
             android:textColor="@color/white"
-            android:textSize="18sp"
+            android:textSize="26sp"
             />
 
         <TextView
-            android:layout_width="126dp"
-            android:layout_height="40dp"
+            android:layout_width="190dp"
+            android:layout_height="60dp"
             android:layout_marginLeft="20dp"
             android:background="@drawable/blue_button_clicked"
             android:gravity="center"
             android:text="@string/printdevice_debug"
             android:textColor="@color/white"
-            android:textSize="18sp" />
+            android:textSize="26sp" />
 
     </LinearLayout>
 
@@ -64,23 +64,23 @@
         app:layout_constraintTop_toBottomOf="@+id/line1">
 
         <TextView
-            android:layout_width="126dp"
-            android:layout_height="40dp"
+            android:layout_width="190dp"
+            android:layout_height="60dp"
             android:background="@drawable/blue_button_clicked"
             android:gravity="center"
             android:text="@string/scanner_debug"
             android:textColor="@color/white"
-            android:textSize="18sp" />
+            android:textSize="26sp" />
 
         <TextView
-            android:layout_width="126dp"
-            android:layout_height="40dp"
+            android:layout_width="190dp"
+            android:layout_height="60dp"
             android:layout_marginLeft="20dp"
             android:background="@drawable/blue_button_clicked"
             android:gravity="center"
             android:text="@string/scanner_debug"
             android:textColor="@color/white"
-            android:textSize="18sp" />
+            android:textSize="26sp" />
 
     </LinearLayout>
 

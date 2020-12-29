@@ -39,33 +39,33 @@
             android:text="@string/system_time"
             android:textColor="@color/white"
             android:gravity="center"
-            android:textSize="20sp"
+            android:textSize="15sp"
             tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/tvDeviceManage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="35dp"
+            android:layout_marginLeft="70dp"
             android:drawableTop="@mipmap/deviceset2"
             android:drawablePadding="10dp"
             android:text="@string/language_select"
             android:textColor="@color/white"
             android:gravity="center"
-            android:textSize="20sp"
+            android:textSize="15sp"
             tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/basic_information"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="35dp"
+            android:layout_marginLeft="70dp"
             android:drawableTop="@mipmap/basic_information"
             android:drawablePadding="10dp"
             android:text="@string/basic_information"
             android:textColor="@color/white"
             android:gravity="center"
-            android:textSize="20sp"
+            android:textSize="15sp"
             tools:ignore="MissingConstraints" />
 
     </LinearLayout>

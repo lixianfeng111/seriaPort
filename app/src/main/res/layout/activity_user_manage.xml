@@ -14,13 +14,12 @@
         android:layout_marginTop="20dp"
         android:text="@string/user_manaage"
         android:textColor="@color/white"
-        android:textSize="18sp" />
-
+        android:textSize="28sp" />
 
     <LinearLayout
         android:id="@+id/lltitle"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="40dp"
         android:layout_below="@+id/textView"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
@@ -41,7 +40,7 @@
             android:gravity="center"
             android:text="@string/user_number"
             android:textColor="@color/white"
-            android:textSize="12sp" />
+            android:textSize="24sp" />
 
 
         <View
@@ -56,7 +55,7 @@
             android:gravity="center"
             android:text="@string/user_account"
             android:textColor="@color/white"
-            android:textSize="12sp" />
+            android:textSize="24sp" />
 
         <View
             android:layout_width="1dp"
@@ -70,7 +69,7 @@
             android:gravity="center"
             android:text="@string/user_roles"
             android:textColor="@color/white"
-            android:textSize="12sp" />
+            android:textSize="24sp" />
 
         <View
             android:layout_width="1dp"
@@ -117,21 +116,23 @@
         android:orientation="horizontal">
 
         <Button
+            android:textAllCaps="false"
             android:id="@+id/btnBack"
             android:layout_width="0dp"
-            android:layout_height="30dp"
+            android:layout_height="50dp"
             android:layout_marginTop="5dp"
             android:layout_weight="1"
             android:background="@mipmap/dedetails_btn_bg"
             android:minWidth="100dp"
             android:text="@string/back"
             android:textColor="@color/white"
-            android:textSize="13sp" />
+            android:textSize="18sp" />
 
         <Button
+            android:textAllCaps="false"
             android:id="@+id/btnClearSync"
             android:layout_width="0dp"
-            android:layout_height="30dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
             android:layout_weight="1"
@@ -139,12 +140,13 @@
             android:minWidth="100dp"
             android:text="@string/clear_sync"
             android:textColor="@color/white"
-            android:textSize="13sp" />
+            android:textSize="18sp" />
 
         <Button
+            android:textAllCaps="false"
             android:id="@+id/btnsyncAcc"
             android:layout_width="0dp"
-            android:layout_height="30dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
             android:layout_weight="1"
@@ -152,12 +154,13 @@
             android:minWidth="100dp"
             android:text="@string/sync_account"
             android:textColor="@color/white"
-            android:textSize="13sp" />
+            android:textSize="18sp" />
 
         <Button
+            android:textAllCaps="false"
             android:id="@+id/btnLogout"
             android:layout_width="0dp"
-            android:layout_height="30dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
             android:layout_weight="1"
@@ -165,8 +168,7 @@
             android:minWidth="100dp"
             android:text="@string/logout"
             android:textColor="@color/white"
-            android:textSize="13sp" />
-
+            android:textSize="18sp" />
 
     </LinearLayout>
 

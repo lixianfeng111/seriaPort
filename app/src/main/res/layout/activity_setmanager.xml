@@ -19,55 +19,52 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/ibtn_manager"
-            android:layout_width="wrap_content"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:drawableTop="@mipmap/setmanage1"
             android:drawablePadding="10dp"
             android:gravity="center"
             android:text="@string/manaage"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/ibtn_setting"
-            android:layout_width="wrap_content"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
             android:drawableTop="@mipmap/setmanage2"
             android:drawablePadding="10dp"
             android:gravity="center"
             android:text="@string/setting"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/ibtn_maintain"
-            android:layout_width="wrap_content"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
             android:drawableTop="@mipmap/setmanage3"
             android:drawablePadding="10dp"
             android:gravity="center"
             android:text="@string/maintain_title"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/ibtn_print"
-            android:layout_width="wrap_content"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
             android:drawableTop="@mipmap/setmanage4"
             android:drawablePadding="10dp"
             android:gravity="center"
             android:text="@string/print_all"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
 
 
     </LinearLayout>
@@ -81,50 +78,47 @@
 
         <TextView
             android:id="@+id/ibtn_device_register"
-            android:layout_width="wrap_content"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:drawableTop="@mipmap/setmanage5"
             android:drawablePadding="10dp"
             android:gravity="center"
             android:text="@string/device_register"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/ibtn_update"
-            android:layout_width="wrap_content"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
             android:drawableTop="@mipmap/setmanage6"
             android:drawablePadding="10dp"
             android:gravity="center"
             android:text="@string/version_update"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/ibtn_stop"
-            android:layout_width="wrap_content"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
             android:drawableTop="@mipmap/setmanage8"
             android:drawablePadding="10dp"
             android:gravity="center"
             android:text="@string/logout"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/ibtn_close"
-            android:layout_width="wrap_content"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
             android:drawableTop="@mipmap/setmanage7"
             android:drawablePadding="10dp"
             android:gravity="center"
             android:text="@string/exit"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
 
 
     </LinearLayout>

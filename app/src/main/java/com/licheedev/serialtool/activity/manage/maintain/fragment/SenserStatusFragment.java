@@ -2,8 +2,11 @@ package com.licheedev.serialtool.activity.manage.maintain.fragment;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Layout;
+import android.text.TextPaint;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.licheedev.serialtool.R;
 import com.licheedev.serialtool.base.BaseFragment;
@@ -90,4 +93,5 @@ public class SenserStatusFragment extends BaseFragment implements BaseRecyclerAd
         }
 
     }
+
 }

@@ -4,8 +4,13 @@ import android.content.Intent;
 import android.view.View;
 
 import com.licheedev.serialtool.R;
+import com.licheedev.serialtool.activity.LoginActivity;
 import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.base.BasePresenter;
+import com.licheedev.serialtool.util.LanguageUtils;
+import com.licheedev.serialtool.util.LogOutUtil;
+import com.licheedev.serialtool.util.SpzUtils;
+import com.licheedev.serialtool.util.ToastUtil;
 
 import butterknife.OnClick;
 
@@ -30,6 +35,7 @@ public class SettingActivity extends BaseActivity {
     public void initVariable() {
 
     }
+
 
     @Override
     public BasePresenter initPresenter() {
@@ -60,8 +66,9 @@ public class SettingActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.btLogout:
+                LogOutUtil.LogOut(this, LoginActivity.class);
+                finish();
                 break;
-
         }
     }
 

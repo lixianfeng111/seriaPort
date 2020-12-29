@@ -1,8 +1,7 @@
 package com.licheedev.serialtool.base;
 
 import android.content.Context;
-import android.content.IntentFilter;
-import android.net.ConnectivityManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
@@ -10,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import butterknife.ButterKnife;
 
+import com.licheedev.serialtool.App;
 import com.licheedev.serialtool.AppManager;
 import com.licheedev.serialtool.R;
 import com.licheedev.serialtool.fragment.LogFragment;
@@ -17,6 +17,8 @@ import com.licheedev.serialtool.comn.message.IMessage;
 import com.licheedev.serialtool.comn.message.LogManager;
 import com.licheedev.serialtool.receiver.NetReceiver;
 import com.licheedev.serialtool.util.LanguageUtils;
+import com.licheedev.serialtool.util.SpzUtils;
+import com.licheedev.serialtool.util.constant.Money;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -27,7 +29,6 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     protected ActionBar mActionBar;
     private LogFragment mLogFragment;
     protected T miBasePresenter;
-    private NetReceiver netBroadcastReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +86,10 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     protected void onResume() {
         super.onResume();
         refreshLogList();
+//        Resources resource = getResources();
+//        Configuration c = resource.getConfiguration() ;
+//        c.fontScale = 1.0f;
+//        resource.updateConfiguration(c, resource.getDisplayMetrics());
     }
 
 
@@ -99,10 +104,12 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
 
 
     //切换英语
-//    @Override
-//    protected void attachBaseContext(Context newBase) {
-//        super.attachBaseContext(LanguageUtils.attachBaseContext(newBase));
-//    }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        boolean language = SpzUtils.getBoolean("language",false);
+        super.attachBaseContext(LanguageUtils.attachBaseContext(newBase,language));
+    }
+
     /**
      * 初始化日志Fragment
      */
@@ -162,15 +169,6 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         super.onDetachedFromWindow();
         if (miBasePresenter != null) {
             miBasePresenter.onDestory();
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        //注销广播
-        if (netBroadcastReceiver!=null){
-            unregisterReceiver(netBroadcastReceiver);
         }
     }
 }

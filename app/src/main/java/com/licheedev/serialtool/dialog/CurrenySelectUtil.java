@@ -1,5 +1,6 @@
 package com.licheedev.serialtool.dialog;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -15,16 +16,22 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.licheedev.serialtool.App;
 import com.licheedev.serialtool.R;
 import com.licheedev.serialtool.activity.clear.ClearDeviceHintActivity;
 import com.licheedev.serialtool.activity.dapter.CurrenySelectAdapter;
 import com.licheedev.serialtool.activity.deposit.PaperCurrencyDepositActivity;
+import com.licheedev.serialtool.util.LanguageUtils;
+import com.licheedev.serialtool.util.SpzUtils;
+import com.licheedev.serialtool.util.ToastUtil;
 import com.licheedev.serialtool.util.constant.Money;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class CurrenySelectUtil {
+
+    private static List<String> stringlist;
 
     /**
      * 币种选择弹窗
@@ -35,7 +42,11 @@ public class CurrenySelectUtil {
         final AlertDialog alertDialog = new AlertDialog
                 .Builder(context)
                 .create();
-        List<String> stringlist = Arrays.asList(Money.CURRENCY_ARRAY);
+        if (!SpzUtils.getBoolean("language",false)){//判断是否为中文
+            stringlist = Arrays.asList(Money.CURRENCY_ARRAY_en);
+        }else {
+            stringlist = Arrays.asList(Money.CURRENCY_ARRAY);
+        }
         CurrenySelectAdapter adapter = new CurrenySelectAdapter(context, stringlist);
         LinearLayout view = (LinearLayout) LayoutInflater.from(context).inflate(R.layout.currency_select_view, null, false);
         RecyclerView recyclerView = view.findViewById(R.id.currencyList);
@@ -52,7 +63,8 @@ public class CurrenySelectUtil {
 
         alertDialog.setView(view);
         alertDialog.show();
-        alertDialog.getWindow().setLayout(350, 190);
+        alertDialog.getWindow().setLayout(400, 210);
+//        alertDialog.getWindow().setLayout(350, 190);
     }
 
     public static Dialog showContinueDepositDialog(Context context, final PaperCurrencyDepositActivity.Callback callback) {
@@ -65,7 +77,7 @@ public class CurrenySelectUtil {
                 .create();
         alertDialog.setView(view);
         alertDialog.show();
-        alertDialog.getWindow().setLayout(350, 190);
+        alertDialog.getWindow().setLayout(400, 210);
 
         btCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,7 +111,7 @@ public class CurrenySelectUtil {
                 .create();
         alertDialog.setView(view);
         alertDialog.show();
-        alertDialog.getWindow().setLayout(350, 190);
+        alertDialog.getWindow().setLayout(400, 210);
 
         btCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,7 +141,7 @@ public class CurrenySelectUtil {
                 .create();
         alertDialog.setView(view);
         alertDialog.show();
-        alertDialog.getWindow().setLayout(350, 190);
+        alertDialog.getWindow().setLayout(400, 210);
         tvMessage.setText(message);
         btConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,7 +171,8 @@ public class CurrenySelectUtil {
                 .create();
         alertDialog.setView(view);
         alertDialog.show();
-        alertDialog.getWindow().setLayout(300, 170);
+        alertDialog.getWindow().setLayout(400, 210);
+//        alertDialog.getWindow().setLayout(300, 170);
         btConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

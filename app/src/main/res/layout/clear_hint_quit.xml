@@ -6,11 +6,11 @@
     android:layout_gravity="center"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
-
+<!-- 70 30-->
     <ImageButton
         android:id="@+id/btConfirm"
-        android:layout_width="70dp"
-        android:layout_height="30dp"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
         android:layout_marginTop="34dp"
         android:layout_marginRight="50dp"
         android:background="@drawable/dialog_btn"
@@ -23,8 +23,8 @@
     <ImageButton
         android:layout_marginRight="5dp"
         android:id="@+id/btCancel"
-        android:layout_width="70dp"
-        android:layout_height="30dp"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
         android:background="@drawable/dialog_btn"
         android:src="@drawable/efp_dark__ic_action_cancel"
         app:layout_constraintBottom_toBottomOf="@+id/btConfirm"
@@ -36,6 +36,7 @@
 
     <TextView
         android:typeface="normal"
+        android:textSize="24sp"
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -4,8 +4,10 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.licheedev.serialtool.R;
+import com.licheedev.serialtool.activity.LoginActivity;
 import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.base.BasePresenter;
+import com.licheedev.serialtool.util.LogOutUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -51,8 +53,9 @@ public class DeviceRegisterActivity extends BaseActivity {
                 break;
 
             case R.id.btLogout:
+                LogOutUtil.LogOut(this, LoginActivity.class);
+                finish();
                 break;
-
         }
     }
 

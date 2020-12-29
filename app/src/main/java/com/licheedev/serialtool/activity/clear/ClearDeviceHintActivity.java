@@ -1,11 +1,9 @@
 package com.licheedev.serialtool.activity.clear;
 
-import android.Manifest;
+
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -13,18 +11,16 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.caysn.autoreplyprint.AutoReplyPrint;
-import com.licheedev.serialtool.App;
+
 import com.licheedev.serialtool.R;
 import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.base.BasePresenter;
 import com.licheedev.serialtool.comn.event.StatusEvent;
 import com.licheedev.serialtool.dialog.CurrenySelectUtil;
 import com.licheedev.serialtool.util.DepositRecordUtil;
-import com.licheedev.serialtool.util.PermissionsUtils;
 import com.licheedev.serialtool.util.SpzUtils;
 import com.licheedev.serialtool.util.TimeFormartUtils;
 import com.sun.jna.Pointer;
-
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -51,7 +47,6 @@ public class ClearDeviceHintActivity extends BaseActivity {
     private boolean isClose=false;
     private Pointer h=Pointer.NULL;
     private boolean isCleared=false;
-    private static final int RequestCode_RequestAllPermissions = 1;
     private TextView first;
     private TextView second;
     private TextView third;
@@ -101,7 +96,7 @@ public class ClearDeviceHintActivity extends BaseActivity {
                 public void run() {
                     try {
                         TestFunction fun = new TestFunction();
-                        fun.ctx = clearDeviceHintActivity;
+                        fun.activity2 = clearDeviceHintActivity;
                         Method m = TestFunction.class.getDeclaredMethod(functionName, Pointer.class);
                         m.invoke(fun, h);
                     } catch (Throwable tr) {
@@ -121,7 +116,7 @@ public class ClearDeviceHintActivity extends BaseActivity {
                 if (isCleared){
                     if (n>0){
                         n--;
-                        TestFunction.Test_Pos_SampleTicket_80MM_2(ClearDeviceHintActivity.this,h);
+                        TestFunction.Test_Pos_SampleTicket_80MM(ClearDeviceHintActivity.this,h);
                     }else {
                         DepositRecordUtil.saveDepositRecord();
                         isCleared=false;
@@ -162,13 +157,6 @@ public class ClearDeviceHintActivity extends BaseActivity {
     @Override
     public void initData() {
 
-    }
-    //请求权限
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        //就多一个参数this
-        PermissionsUtils.getInstance().onRequestPermissionsResult(((ClearDeviceHintActivity) App.mContext), requestCode, permissions, grantResults);
     }
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onStatusEvent(StatusEvent statusEvent){
@@ -284,19 +272,6 @@ public class ClearDeviceHintActivity extends BaseActivity {
 
         }
     };
-
-    private void requestAllPermissions() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            String permissions[] = {
-                    Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_COARSE_LOCATION,
-                    Manifest.permission.CAMERA,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                    Manifest.permission.READ_EXTERNAL_STORAGE,
-            };
-            requestPermissions(permissions, RequestCode_RequestAllPermissions);
-        }
-    }
 
     private void ClosePort() {
         if (h != Pointer.NULL) {

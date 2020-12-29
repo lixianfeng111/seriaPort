@@ -3,12 +3,12 @@
 <Button xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/btnCurrency"
     android:layout_gravity="center"
-    android:layout_width="60dp"
-    android:layout_height="30dp"
+    android:layout_width="80dp"
+    android:layout_height="40dp"
     android:layout_marginLeft="10dp"
-    android:layout_marginTop="20dp"
+    android:layout_marginTop="10dp"
     android:background="@drawable/blue_button_clicked"
     android:text="@string/back"
     android:textColor="@color/white"
     android:textSize="14dp" />
-
+<!--60 30-->

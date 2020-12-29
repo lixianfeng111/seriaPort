@@ -21,6 +21,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         sInstance = this;
+        mContext=this;
         mUiHandler = new Handler();
         initUtils();
         SpzUtils.init(this);
@@ -32,6 +33,9 @@ public class App extends Application {
     }
 
     public static App instance() {
+        if (sInstance==null){
+           sInstance = new App();
+        }
         return sInstance;
     }
 

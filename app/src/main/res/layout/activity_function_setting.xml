@@ -11,10 +11,10 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:text="@string/functiongsetting"
         android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,66 +22,70 @@
     <LinearLayout
         android:id="@+id/llin1"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginTop="30dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="@+id/textView"
         app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/textView">
 
         <TextView
-            android:layout_width="110dp"
+            android:layout_width="123dp"
             android:layout_height="match_parent"
             android:background="@drawable/rectangle_solide_blue"
             android:gravity="center"
             android:text="@string/savecapa"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="18sp" />
 
         <EditText
+            android:singleLine="true"
+            android:inputType="textPersonName"
             android:id="@+id/editIp"
-            android:layout_width="182dp"
+            android:layout_width="274dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
+            android:layout_marginLeft="4dp"
             android:background="@drawable/rectangle_solide_baff"
             android:paddingLeft="10dp"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="18sp" />
 
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/llin2"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="45dp"
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="@+id/llin1"
         app:layout_constraintStart_toStartOf="@+id/llin1"
         app:layout_constraintTop_toBottomOf="@+id/llin1">
 
         <TextView
-            android:layout_width="110dp"
+            android:layout_width="123dp"
             android:layout_height="match_parent"
             android:background="@drawable/rectangle_solide_blue"
             android:gravity="center"
             android:text="@string/exitmoneycapa"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="18sp" />
 
         <EditText
-            android:layout_width="182dp"
+            android:singleLine="true"
+            android:inputType="textPersonName"
+            android:layout_width="274dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
+            android:layout_marginLeft="4dp"
             android:background="@drawable/rectangle_solide_baff"
             android:paddingLeft="10dp"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="18sp" />
 
     </LinearLayout>
 
         <CheckBox
         android:id="@+id/rd_updatepwd"
-        android:layout_width="136dp"
-        android:layout_height="40dp"
+        android:layout_width="190dp"
+        android:layout_height="45dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/rectangle_solide_blue"
         android:button="@null"
@@ -91,33 +95,33 @@
         android:paddingLeft="15dp"
         android:text="@string/updatepwd"
         android:textColor="@color/white"
-        android:textSize="14sp"
+        android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/llin2"
         app:layout_constraintStart_toStartOf="@+id/llin2"
         app:layout_constraintTop_toBottomOf="@+id/llin2" />
 
     <CheckBox
         android:id="@+id/autoLogout"
-        android:layout_width="136dp"
-        android:layout_height="40dp"
+        android:layout_width="190dp"
+        android:layout_height="45dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/rectangle_solide_blue"
         android:button="@null"
         android:drawableRight="@drawable/radio_button"
         android:paddingRight="20dp"
         android:paddingLeft="15dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="21dp"
         android:text="@string/autologout"
         android:textColor="@color/white"
-        android:textSize="14sp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/rd_updatepwd"
         app:layout_constraintLeft_toRightOf="@+id/rd_updatepwd" />
 
 
     <CheckBox
         android:id="@+id/rd_turnoff"
-        android:layout_width="144dp"
-        android:layout_height="40dp"
+        android:layout_width="190dp"
+        android:layout_height="45dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/rectangle_solide_blue"
         android:button="@null"
@@ -127,15 +131,15 @@
         android:paddingLeft="15dp"
         android:text="@string/turnoff"
         android:textColor="@color/white"
-        android:textSize="14sp"
+        android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/rd_updatepwd"
         app:layout_constraintStart_toStartOf="@+id/rd_updatepwd"
         app:layout_constraintTop_toBottomOf="@+id/rd_updatepwd" />
 
     <CheckBox
         android:id="@+id/rd_isdispalybtn"
-        android:layout_width="200dp"
-        android:layout_height="40dp"
+        android:layout_width="260dp"
+        android:layout_height="45dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/rectangle_solide_blue"
         android:button="@null"
@@ -145,7 +149,7 @@
         android:paddingLeft="15dp"
         android:text="@string/isdisplaybtn"
         android:textColor="@color/white"
-        android:textSize="14sp"
+        android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/rd_turnoff"
         app:layout_constraintStart_toStartOf="@+id/rd_turnoff"
         app:layout_constraintTop_toBottomOf="@+id/rd_turnoff" />

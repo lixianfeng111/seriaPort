@@ -3,14 +3,16 @@
 <Button xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/btnBack"
-    android:layout_width="100dp"
-    android:layout_height="30dp"
-    android:layout_marginLeft="20dp"
-    android:layout_marginBottom="20dp"
+    android:layout_width="150dp"
+    android:layout_height="50dp"
+    android:layout_marginLeft="40dp"
+    android:layout_marginBottom="40dp"
     android:background="@drawable/blue_button_clicked"
     android:text="@string/back"
     android:textColor="@color/white"
-    android:textSize="14dp"
+    android:textSize="20sp"
+    android:textAllCaps="false"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintStart_toStartOf="parent" />
 
+<!--    android:textAllCaps="false" 解决按钮自动大写的问题-->

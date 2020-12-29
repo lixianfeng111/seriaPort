@@ -1,5 +1,6 @@
 package com.licheedev.serialtool.activity;
 
+import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.serialport.SerialPortFinder;
@@ -110,9 +111,14 @@ public class MainActivity extends BaseActivity  {
     @Override
     protected void initView() {
         super.initView();
-//        LanguageUtils.shiftLanguage("en",this);
-
     }
+
+    @Override
+    protected void onResume() {
+
+        super.onResume();
+    }
+
     @Override
     protected void onDestroy() {
         SerialPortManager.instance().close();
@@ -122,6 +128,7 @@ public class MainActivity extends BaseActivity  {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
     }
+
     @Override
     protected boolean hasActionBar() {
         return false;

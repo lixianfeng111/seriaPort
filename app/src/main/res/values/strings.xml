@@ -22,6 +22,8 @@
     <string name="login_welcome">欢迎使用智能存款机</string>
     <string name="login_input_user">请输入用户名</string>
     <string name="login_input_pwd">请输入密码</string>
+    <string name="user_or_psw">账号或密码为空</string>
+
     <string name="login_money">零钱</string>
     <string name="login_currency">币种</string>
     <string name="sum">金额</string>
@@ -33,17 +35,28 @@
     <string name="home_title">首选项</string>
 
     <string name="deposit_select">请选择存款方式</string>
-    <string name="deposit_other_select">请选择其他的存款方式</string>
+    <string name="deposit_other_select">其他的存款方式</string>
+    <string name="deposit_over">结束存款</string>
     <string name="back">返回</string>
-    <string name="test">测试</string>
+    <string name="test">测试</string>Q
     <string name="logout">注销</string>
     <string name="exit">退出</string>
+    
     <string name="clear_deveic_test">清机测试</string>
     <string name="original_bill_num">原钞袋数:</string>
     <string name="new_bill_num">新钞袋数:</string>
     <string name="lead_seal_num">封 铅 号:</string>
+    
+    <string name="clear_deveic_hint">清机提示</string>
+    <string name="first">第一步：打开保险柜门</string>
+    <string name="second">第二步：拿出旧钞袋</string>
+    <string name="third">第三步：放入新钞袋</string>
+    <string name="fourth">第四步：关闭保险柜门</string>
+
     <string name="manaage">管理</string>
-    <string name="user_manaage">用户管理</string>
+    <string name="setting">设定</string>
+    <string name="print_all">统计打印</string>
+    <string name="user_manaage">用户列表</string>
     <string name="device_manaage">机器管理</string>
     <string name="data_upload">数据上传</string>
     <string name="network_test">网络测试</string>
@@ -51,8 +64,8 @@
     <string name="deposit_data">存款数据</string>
     <string name="bill_data">钞贷数据</string>
     <string name="upload">上传</string>
-    <string name="setting">设定</string>
     <string name="set">设置</string>
+
     <string name="set_device">机器设定</string>
     <string name="set_network">网络设定</string>
     <string name="set_function">功能设定</string>
@@ -65,7 +78,7 @@
     <string name="maint_error_clear">错误清除</string>
     <string name="maint_bill_init">钞袋初始化</string>
     <string name="print_sys_title">系统打印</string>
-    <string name="print_all">统计打印</string>
+
     <string name="print_bill_d">当前钞袋</string>
     <string name="print_clear_record">清机记录</string>
     <string name="print_deposit_record">存款记录</string>
@@ -203,4 +216,54 @@
     <string name="download">下载</string>
 
     <string name="dialog_select_currency">选择币种</string>
+<!--    后期添加-->
+<!--    弹框选择币种-->
+    <string name="rmb">人民币</string>
+    <string name="usd">美元</string>
+    <string name="eur">欧元</string>
+    <string name="thb">泰铢</string>
+<!--    存款记录打印-->
+    <string name="other_deposit_print">存款记录</string>
+    <string name="client_print">客户：</string>
+    <string name="site_print">地点：</string>
+    <string name="deposit_category_print">存款类别：</string>
+    <string name="machine_No_print">机器号：</string>
+    <string name="user_print">用户：</string>
+    <string name="other_print">其他：</string>
+    <string name="kind_print">种类</string>
+    <string name="sum_print">金额</string>
+    <string name="total_print">总计：</string>
+    <string name="finish_print">完</string>
+<!--    存款报告-->
+    <string name="deposit_report">存款报告</string>
+    <string name="currency_print">币种：</string>
+    <string name="face_value">面额</string>
+    <string name="piece">张</string>
+    <string name="amount_print">总数</string>
+
+<!--    清机打印-->
+    <string name="replace_money_bag">钞袋替换报告</string>
+    <string name="bill_print">钞票：</string>
+    <string name="start_print">开始：</string>
+    <string name="end_print">结束：</string>
+    <string name="old_money_bag_print">原钞袋ID</string>
+    <string name="new_money_bag_print">新钞袋ID</string>
+    <string name="old_sealing_print">原封箱ID</string>
+    <string name="new_sealing_print">新封箱ID</string>
+
+    <string name="take_away">请您取走钞票</string>
+
+    <string name="initialization">初始化成功</string>
+
+<!--    设备自检-->
+    <string name="up_money">上钞通道(上)</string>
+    <string name="left_or_right">左 右</string>
+
+    <string name="banknotes_print">钞票</string>
+
+    <string name="start_time">起始时间：2020.10.23</string>
+    <string name="finish_time">结束时间： 2020.11.21</string>
+    <string name="account_all">账号：全部</string>
+    <string name="put_envelope_into">请把信封放在寄存袋里</string>
+    <string name="feeding_pocket">入钞口</string>
 </resources>

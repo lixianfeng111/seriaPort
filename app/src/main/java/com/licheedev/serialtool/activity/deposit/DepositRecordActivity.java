@@ -3,6 +3,7 @@ package com.licheedev.serialtool.activity.deposit;
 import android.os.Build;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -65,6 +66,9 @@ public class DepositRecordActivity extends BaseActivity implements BaseRecyclerA
         recyclerview = findViewById(R.id.recyclerview);
         btnUpload.setText(getResources().getString(R.string.record_allprint));
         btLogout.setText(getResources().getString(R.string.record_updaloddata));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            btLogout.setAutoSizeTextTypeUniformWithConfiguration(4,26,2, TypedValue.COMPLEX_UNIT_SP);
+        }
 
         boolean iscurrent = getIntent().getBooleanExtra("iscurrent", false);
         currency_record = SpzUtils.getInt("currency_record",0);
@@ -91,15 +95,15 @@ public class DepositRecordActivity extends BaseActivity implements BaseRecyclerA
     @Override
     public void initData() {
         if (currency_record==0){
-            KIND="硬币";
+            KIND=getResources().getString(R.string.coin);
         }else if (currency_record==1){
-            KIND="支票";
+            KIND=getResources().getString(R.string.check);
         }else if (currency_record==2){
-            KIND="钞票";
+            KIND=getResources().getString(R.string.bill);
         }else if (currency_record==3){
-            KIND="其他";
+            KIND=getResources().getString(R.string.other);
         }else {
-            KIND="人民币";
+            KIND=getResources().getString(R.string.rmb);
         }
         DepositRecordBean depositRecordBean=new DepositRecordBean(TimeFormartUtils.getTimeDay(),SpzUtils.getString("user"),KIND,money_record,"1234522331133","2813","hhh" );
         list.add(depositRecordBean);
@@ -113,7 +117,7 @@ public class DepositRecordActivity extends BaseActivity implements BaseRecyclerA
                 finish();
                 break;
             case R.id.btnUpload: //汇总打印
-                TestFunction.record_deposit_Print_SampleTicket(DepositRecordActivity.this, currency_record,money_record,h);
+                TestFunction.record_deposit_Print_SampleTicket(this,currency_record,money_record,h);
                 break;
             case R.id.btLogout: //上传数据
 

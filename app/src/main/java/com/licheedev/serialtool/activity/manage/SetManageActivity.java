@@ -1,11 +1,9 @@
 package com.licheedev.serialtool.activity.manage;
 
 import android.app.ActivityManager;
-import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 
-import com.licheedev.serialtool.AppManager;
 import com.licheedev.serialtool.R;
 import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.activity.manage.maintain.MaintainActivity;
@@ -14,6 +12,9 @@ import com.licheedev.serialtool.activity.manage.print.SystemPrintActivity;
 import com.licheedev.serialtool.activity.manage.setting.SettingActivity;
 import com.licheedev.serialtool.activity.manage.update.VersionUpdateActivity;
 import com.licheedev.serialtool.base.BasePresenter;
+import com.licheedev.serialtool.util.LanguageUtils;
+import com.licheedev.serialtool.util.SpzUtils;
+import com.licheedev.serialtool.util.ToastUtil;
 
 import butterknife.OnClick;
 

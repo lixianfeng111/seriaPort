@@ -14,7 +14,7 @@
         android:layout_marginTop="20dp"
         android:text="@string/device_check"
         android:textColor="@color/white"
-        android:textSize="18sp" />
+        android:textSize="28sp" />
 
     <View
         android:layout_width="1dp"
@@ -90,19 +90,20 @@
         <Button
             android:id="@+id/btnBack"
             android:layout_width="0dp"
-            android:layout_height="30dp"
+            android:layout_height="50dp"
             android:layout_marginTop="5dp"
             android:layout_weight="1"
             android:background="@mipmap/dedetails_btn_bg"
             android:minWidth="100dp"
             android:text="@string/back"
             android:textColor="@color/white"
-            android:textSize="13sp" />
+            android:textSize="20sp"
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/btnRerfsh"
             android:layout_width="0dp"
-            android:layout_height="30dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
             android:layout_weight="1"
@@ -110,12 +111,13 @@
             android:minWidth="100dp"
             android:text="@string/refersh"
             android:textColor="@color/white"
-            android:textSize="13sp" />
+            android:textSize="20sp"
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/btnjiaozhun"
             android:layout_width="0dp"
-            android:layout_height="30dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
             android:layout_weight="1"
@@ -123,12 +125,13 @@
             android:minWidth="100dp"
             android:text="@string/calibration"
             android:textColor="@color/white"
-            android:textSize="13sp" />
+            android:textSize="20sp"
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/btnLogout"
             android:layout_width="0dp"
-            android:layout_height="30dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
             android:layout_weight="1"
@@ -136,7 +139,8 @@
             android:minWidth="100dp"
             android:text="@string/logout"
             android:textColor="@color/white"
-            android:textSize="13sp" />
+            android:textSize="20sp"
+            android:textAllCaps="false" />
 
 
     </LinearLayout>

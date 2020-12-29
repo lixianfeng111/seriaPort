@@ -7,8 +7,12 @@ public class Money {
     public static final int Denomination_10_CNY = 10;
     public static final int Denomination_5_CNY = 5;
     public static final int Denomination_1_CNY = 1;
-
     public static final String [] CURRENCY_ARRAY  = {
-            "人民币","欧元","泰铢","美元","人民币","欧元"
+            "美元", "欧元", "英镑", "人民币", "墨西哥", "老挝","肯尼亚"
     };
+    public static final String [] CURRENCY_ARRAY_en  = {
+            "USD","EUR","GBP","CNR","MXN","LAK","KES"
+    };
+
+
 }

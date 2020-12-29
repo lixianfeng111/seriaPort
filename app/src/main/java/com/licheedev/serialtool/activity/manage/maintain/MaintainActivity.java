@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.view.View;
 
 import com.licheedev.serialtool.R;
+import com.licheedev.serialtool.activity.LoginActivity;
 import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.base.BasePresenter;
+import com.licheedev.serialtool.util.LogOutUtil;
 import com.licheedev.serialtool.util.SpzUtils;
 import com.licheedev.serialtool.util.TimeFormartUtils;
 import com.licheedev.serialtool.util.ToastUtil;
@@ -68,12 +70,14 @@ public class MaintainActivity extends BaseActivity {
                 SpzUtils.putString("timeDay2", TimeFormartUtils.getTimeDay());
                 SpzUtils.putString("time2",TimeFormartUtils.getTime());
                 SpzUtils.putBoolean("start",true);
-                ToastUtil.show(this,"初始化成功");
+                ToastUtil.show(this,getResources().getString(R.string.initialization));
                 break;
             case R.id.btnBack:
                 finish();
                 break;
             case R.id.btLogout:
+                LogOutUtil.LogOut(this, LoginActivity.class);
+                finish();
                 break;
         }
     }

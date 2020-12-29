@@ -23,15 +23,15 @@
 
     <TextView
         android:id="@+id/tvDownload"
-        android:layout_width="280dp"
-        android:layout_height="40dp"
+        android:layout_width="400dp"
+        android:layout_height="60dp"
         android:layout_marginTop="30dp"
         android:background="@drawable/blue_button_clicked"
         android:drawablePadding="10dp"
         android:gravity="center"
         android:text="@string/download"
         android:textColor="@color/white"
-        android:textSize="14sp"
+        android:textSize="26sp"
         app:layout_constraintEnd_toEndOf="@+id/textView"
         app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/textView"

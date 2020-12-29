@@ -7,10 +7,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.licheedev.serialtool.R;
+import com.licheedev.serialtool.activity.LoginActivity;
 import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.activity.dapter.BaseRecyclerAdapter;
 import com.licheedev.serialtool.activity.dapter.RecyclerViewHolder;
 import com.licheedev.serialtool.base.BasePresenter;
+import com.licheedev.serialtool.util.LogOutUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,7 +85,8 @@ public class ClearingRecordActivity extends BaseActivity implements BaseRecycler
                 break;
 
             case R.id.btLogout:
-
+                LogOutUtil.LogOut(this, LoginActivity.class);
+                finish();
                 break;
         }
     }

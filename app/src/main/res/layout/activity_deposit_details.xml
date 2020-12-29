@@ -330,6 +330,7 @@
             android:background="@color/white" />
 
         <Button
+            android:textAllCaps="false"
             android:id="@+id/btnOverDeposit"
             android:layout_width="150dp"
             android:layout_height="50dp"
@@ -337,12 +338,12 @@
             android:background="@mipmap/dedetails_btn_bg"
             android:text="@string/over_deposit"
             android:textColor="@color/white"
-            android:textSize="24sp" />
-
+            android:textSize="20sp" />
 
     </LinearLayout>
 
     <Button
+        android:textAllCaps="false"
         android:id="@+id/btnContiniu"
         android:layout_width="160dp"
         android:layout_height="50dp"
@@ -354,6 +355,6 @@
         android:background="@mipmap/dedetails_btn_bg"
         android:text="@string/continue_deposit"
         android:textColor="@color/white"
-        android:textSize="24sp" />
+        android:textSize="20sp" />
 
 </RelativeLayout>
