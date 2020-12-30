@@ -184,7 +184,6 @@ public class DepositDetailsActivity extends BaseActivity implements BaseRecycler
 
 //        tvAlreadySum.setText(sum + "");
 //        tvAlreadyCount.setText(count + "");
-
     }
 
     private void amountReceiveMoney(byte[] received) {

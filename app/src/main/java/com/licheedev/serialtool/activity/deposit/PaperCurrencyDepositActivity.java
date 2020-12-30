@@ -93,16 +93,11 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         swtichWorkMode();
-        int screenWidth = ScreenUtil.getScreenWidth(this);
-        int screenHeight = ScreenUtil.getScreenHeight(this);
-        int a = 0;
     }
 
     private void swtichWorkMode() {
         SerialPortManager.instance().sendCommand(SerialPortManager.byteArrayToHexString(commandWorkMode));
     }
-
-
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @OnClick({R.id.ibtn_ok, R.id.ibtn_cancel, R.id.button4, R.id.btnCurrency, R.id.llLead,R.id.tvStatus})
@@ -251,10 +246,6 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
                 }
             }
             break;
-//            case SAVE_SUCCESS_COMMAND: {
-//                SerialPortManager.instance().sendSaveAck();
-//            }
-//            break;
             case FINISH_DEPOSIT: {
                 finish();
             }
