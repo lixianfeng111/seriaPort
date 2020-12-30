@@ -158,6 +158,7 @@ public class OtherDepositActivity extends BaseActivity {
                 if (isOpenDoor){
                     SerialPortManager.instance().closeMaskDoor();//关闭罩门
                 }
+                TestFunction.clear_thisOther();
                 back();
                 finish();
                 break;

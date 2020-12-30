@@ -7,10 +7,7 @@ import com.licheedev.serialtool.R;
 import com.licheedev.serialtool.activity.LoginActivity;
 import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.base.BasePresenter;
-import com.licheedev.serialtool.util.LanguageUtils;
 import com.licheedev.serialtool.util.LogOutUtil;
-import com.licheedev.serialtool.util.SpzUtils;
-import com.licheedev.serialtool.util.ToastUtil;
 
 import butterknife.OnClick;
 

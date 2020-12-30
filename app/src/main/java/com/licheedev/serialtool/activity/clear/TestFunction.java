@@ -538,12 +538,16 @@ public class TestFunction {
         }
     }
 
-    private static int coin,cheque,paper_money,other;
+    private static int coin,cheque,paper_money,other,how_much,n2;
     //选择存款报告打印
     public static void select_deposit_Print_SampleTicket(Activity activity, int n, Pointer h){
         activity2=activity;
-        int how_much = SpzUtils.getInt("how_much", -1);
-
+        n2=n;
+//         coin = SpzUtils.getInt("coin", -1);
+//         cheque = SpzUtils.getInt("cheque", -1);
+//         paper_money = SpzUtils.getInt("paper_money", -1);
+//         other = SpzUtils.getInt("other", -1);
+        how_much = SpzUtils.getInt("how_much", -1);
         {
             AutoReplyPrint.INSTANCE.CP_Printer_ClearPrinterBuffer(h);
             AutoReplyPrint.INSTANCE.CP_Pos_ResetPrinter(h);
@@ -814,5 +818,21 @@ public class TestFunction {
     private static String content(int site_print) {
         String string = activity2.getResources().getString(site_print);
         return string;
+    }
+    public static void clear_thisOther(){
+        switch (n2){
+            case 0:
+                coin-=how_much;
+                break;
+            case 1:
+                cheque-=how_much;
+                break;
+            case 2:
+                paper_money-=how_much;
+                break;
+            case 3:
+                other-=how_much;
+                break;
+        }
     }
 }

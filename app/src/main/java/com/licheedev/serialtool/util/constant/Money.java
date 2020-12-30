@@ -11,8 +11,7 @@ public class Money {
             "美元", "欧元", "英镑", "人民币", "墨西哥", "老挝","肯尼亚"
     };
     public static final String [] CURRENCY_ARRAY_en  = {
-            "USD","EUR","GBP","CNR","MXN","LAK","KES"
+            "USD","EUR","GBP","CNY","MXN","LAK","KES"
     };
-
 
 }

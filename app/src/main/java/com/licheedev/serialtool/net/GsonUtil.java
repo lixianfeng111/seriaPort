@@ -13,6 +13,7 @@ public class GsonUtil {
     private GsonUtil() {
         mGson = new Gson();
     }
+
     public static GsonUtil getInstance(){
         if (instance==null) {
             synchronized (GsonUtil.class){

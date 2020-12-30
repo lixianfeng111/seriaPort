@@ -62,6 +62,7 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
     Deposit deposit;
     boolean exit;
     Dialog continueDepositDialogdialog, exitFailDialog0, exitFailDialog1;
+    private boolean isSaved;
 
 
     public static class Deposit {
@@ -115,20 +116,23 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
                 }
                 break;
             case R.id.ibtn_cancel:
+                isSaved = SpzUtils.getBoolean("isSaved", false);
                 if (deposit == null || deposit.isEmpty()) {
                     finish();
                     return;
                 }
                 SerialPortManager.instance().sendStatusCommand();
-                continueDepositDialogdialog = CurrenySelectUtil.showContinueDepositDialog(this, new Callback() {
-                    @Override
-                    public void onDialogClick(int which, Dialog dialog) {
-                        if (which == 0) {
-                            continueDepositDialogdialog.dismiss();
-                            SerialPortManager.instance().sendExitWorkModeCommand();
+                if (isSaved){
+                    continueDepositDialogdialog = CurrenySelectUtil.showContinueDepositDialog(this, new Callback() {
+                        @Override
+                        public void onDialogClick(int which, Dialog dialog) {
+                            if (which == 0) {
+                                continueDepositDialogdialog.dismiss();
+                                SerialPortManager.instance().sendExitWorkModeCommand();
+                            }
                         }
-                    }
-                });
+                    });
+                }
                 break;
             case R.id.button4:
                 startActivity(new Intent(this, MainActivity.class));
@@ -190,6 +194,7 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
                 tvRrfuse.setText("" + reject);
                 if (count>0){
                     exit=true;
+                    SpzUtils.putBoolean("isSaved",true);
                 }
 
                 deposit = new Deposit(money, count, reject);
@@ -222,7 +227,7 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
                         public void onDialogClick(int which, Dialog dialog) {
                             SerialPortManager.instance().closeMaskDoor();
                         }
-                    }, "0x16 收钞口有纸币，不能执行退出操作");
+                    }, "0x16 "+getResources().getString(R.string.rejecting_pocket));
 
                 } else if (((char) (received[7] & 0xff) == 0x17)) {
 
@@ -236,11 +241,11 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
 
                         }
 
-                    }, "0x17 退钞口有纸币，不能执行退出操作");
+                    }, "0x17 "+getResources().getString(R.string.rejecting_pocket));
 
                 } else if (((char) (received[7] & 0xff) == 0x18)) {
                     SerialPortManager.instance().openMaskDoor();
-                    ToastUtil.show(this, "请取出置钞口钞票");
+                    ToastUtil.show(this, getResources().getString(R.string.draw_out));
                     LogPlus.e("read_thread", "0x18 置钞口有纸币，不能执行退出操作");
 
                 }

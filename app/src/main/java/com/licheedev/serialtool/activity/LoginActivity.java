@@ -35,7 +35,6 @@ public class LoginActivity extends BaseActivity {
     EditText editText;
     @BindView(R.id.editText2)
     EditText editText2;
-    int ci=0;
     @OnClick({R.id.btLogin})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -87,6 +86,7 @@ public class LoginActivity extends BaseActivity {
                 TestFunction.deposit_Print_SampleTicket(this,list,h);
                 list.clear();//打印之后清空list
                 SpzUtils.setDataList(LoginActivity.this,"list", list);//保存清空后的list
+                //存款打印之后 金额（num）和张数(counts)置为0
                 SpzUtils.putInt("num",0);
                 SpzUtils.putInt("counts",0);
             }else {//如果没有存钞票，只存了其他存款（硬币，支票等）就进入else
@@ -142,6 +142,7 @@ public class LoginActivity extends BaseActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                //波特率为9600
                 h = AutoReplyPrint.INSTANCE.CP_Port_OpenCom("/dev/ttyS3", 9600, AutoReplyPrint.CP_ComDataBits_8, AutoReplyPrint.CP_ComParity_NoParity, AutoReplyPrint.CP_ComStopBits_One, AutoReplyPrint.CP_ComFlowControl_XonXoff, 0);
             }
         }).start();

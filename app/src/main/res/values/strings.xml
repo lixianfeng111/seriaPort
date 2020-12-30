@@ -266,4 +266,7 @@
     <string name="account_all">账号：全部</string>
     <string name="put_envelope_into">请把信封放在寄存袋里</string>
     <string name="feeding_pocket">入钞口</string>
+    
+    <string name="rejecting_pocket">退钞口有纸币，不能执行退出操作</string>
+    <string name="draw_out">请取出置钞口钞票</string>
 </resources>
