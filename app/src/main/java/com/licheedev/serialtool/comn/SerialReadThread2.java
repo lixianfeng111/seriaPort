@@ -2,6 +2,7 @@ package com.licheedev.serialtool.comn;
 
 import android.os.SystemClock;
 
+import com.licheedev.serialtool.comn.event.IsCoveringEvent;
 import com.licheedev.serialtool.comn.event.StatusEvent;
 import com.licheedev.serialtool.comn.message.LogManager;
 import com.licheedev.serialtool.util.ByteUtil;
@@ -174,7 +175,6 @@ public class SerialReadThread2 extends Thread {
             {hexstr1=hexStr+"   PS05左错误"; }
             else if(((char)(received[10]&0xff)&0x08)==0x08)
             {hexstr1=hexStr+"   PS05右错误"; }
-
             else
             {hexstr1=hexStr;}
 

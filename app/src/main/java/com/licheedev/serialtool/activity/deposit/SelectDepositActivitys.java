@@ -8,6 +8,7 @@ import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.base.BasePresenter;
 import com.licheedev.serialtool.comn.SerialPortManager;
 import com.licheedev.serialtool.comn.SerialPortManager2;
+import com.licheedev.serialtool.util.SpzUtils;
 
 import butterknife.OnClick;
 
@@ -22,10 +23,11 @@ public class SelectDepositActivitys extends BaseActivity {
         return R.layout.activity_select_deposit;
     }
 
+
     @Override
     protected void initView() {
-        SerialPortManager2.instance().close();
-        SerialPortManager.instance().initDevice();
+            SerialPortManager2.instance().close();
+            SerialPortManager.instance().initDevice();
         super.initView();
     }
 

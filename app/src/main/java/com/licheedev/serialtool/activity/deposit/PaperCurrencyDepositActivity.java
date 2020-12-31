@@ -42,6 +42,8 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
     public static final int REQUEST_CODE_DEPOSIT = 1;
     public static final int RESULT_CODE_DEPOSIT = 1111;
 
+    private boolean takeOut;
+
     int[] commandWorkMode = new int[]{0xA1, 0xA2, 0xA3, 0xA4,/*STX 4byte*/
             0x12, 0x00,/*size 2byte*/
             0x21,/*CMD 1byte*/
@@ -62,8 +64,6 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
     Deposit deposit;
     boolean exit;
     Dialog continueDepositDialogdialog, exitFailDialog0, exitFailDialog1;
-    private boolean isSaved;
-
 
     public static class Deposit {
 
@@ -93,6 +93,9 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         swtichWorkMode();
+        int screenWidth = ScreenUtil.getScreenWidth(this);
+        int screenHeight = ScreenUtil.getScreenHeight(this);
+        int a = 0;
     }
 
     private void swtichWorkMode() {
@@ -105,19 +108,20 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.ibtn_ok:
                 if (exit){
-                    SerialPortManager.instance().sendSaveCommand();
-                    startActivityForResult(new Intent(this, DepositDetailsActivity.class), REQUEST_CODE_DEPOSIT);
-                    exit=false;
+                        SerialPortManager.instance().sendSaveCommand();
+                        startActivityForResult(new Intent(this, DepositDetailsActivity.class), REQUEST_CODE_DEPOSIT);
+                        exit=false;
                 }
                 break;
             case R.id.ibtn_cancel:
-                isSaved = SpzUtils.getBoolean("isSaved", false);
+//                isSaved = SpzUtils.getBoolean("isSaved", false);
                 if (deposit == null || deposit.isEmpty()) {
                     finish();
                     return;
                 }
                 SerialPortManager.instance().sendStatusCommand();
-                if (isSaved){
+//                if (isSaved){
+//                    takeOut=true;
                     continueDepositDialogdialog = CurrenySelectUtil.showContinueDepositDialog(this, new Callback() {
                         @Override
                         public void onDialogClick(int which, Dialog dialog) {
@@ -127,7 +131,8 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
                             }
                         }
                     });
-                }
+//                }
+//                SpzUtils.putBoolean("isSaved", false);
                 break;
             case R.id.button4:
                 startActivity(new Intent(this, MainActivity.class));
@@ -153,8 +158,6 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
         tvStatus.setText(error + ":点击清除");
         tvStatus .setVisibility(View.VISIBLE);
     }
-
-
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(LogManager.ReceiveData data) {
@@ -189,7 +192,7 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
                 tvRrfuse.setText("" + reject);
                 if (count>0){
                     exit=true;
-                    SpzUtils.putBoolean("isSaved",true);
+//                    SpzUtils.putBoolean("isSaved",true);
                 }
 
                 deposit = new Deposit(money, count, reject);
@@ -205,6 +208,7 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
                  */
                 if (((char) (received[7] & 0xff) == 0x06)) {
                     LogPlus.e("read_thread", "0x06 退出成功");
+                    ToastUtil.show(this,"退出成功");
                     finish();
                 } else if (((char) (received[7] & 0xff) == 0x15)) {
 
@@ -220,7 +224,12 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
                     exitFailDialog0 = CurrenySelectUtil.showExitFailDialog(this, new Callback() {
                         @Override
                         public void onDialogClick(int which, Dialog dialog) {
+                            exitFailDialog0.dismiss();
                             SerialPortManager.instance().closeMaskDoor();
+//                            SerialPortManager.instance().sendStatusCommand();
+                            SerialPortManager.instance().sendSaveAck();
+//                            SerialPortManager.instance().sendExitWorkModeCommand();
+                            finish();
                         }
                     }, "0x16 "+getResources().getString(R.string.rejecting_pocket));
 
@@ -273,7 +282,7 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        SerialPortManager.instance().sendExitWorkModeCommand();
+//        SerialPortManager.instance().sendExitWorkModeCommand();
     }
 
     @Override
@@ -298,7 +307,6 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
 
     @Override
     public void initData() {
-
     }
 
 

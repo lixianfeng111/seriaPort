@@ -132,6 +132,7 @@ public class DepositDetailsActivity extends BaseActivity implements BaseRecycler
                 }
                 SpzUtils.setDataList(DepositDetailsActivity.this,"list", list);
                 SerialPortManager.instance().sendSaveAck();
+//                SpzUtils.putBoolean("is_continue",true);
                 finish();
             }
             break;
@@ -249,6 +250,9 @@ public class DepositDetailsActivity extends BaseActivity implements BaseRecycler
         if (n==0){
             num+=sum;
             counts+=count;
+            if (sum>0){
+                SpzUtils.putBoolean("isPrint", true);
+            }
             tvAlreadySum.setText(num + "");
             tvAlreadyCount.setText(counts + "");
             n++;
@@ -257,9 +261,9 @@ public class DepositDetailsActivity extends BaseActivity implements BaseRecycler
             adapter.notifyDataSetChanged();
         }
 
-        if (sum>0){
-            SpzUtils.putBoolean("isPrint", true);
-        }
+//        if (sum>0){
+//            SpzUtils.putBoolean("isPrint", true);
+//        }
         //保存已存累计
         SpzUtils.putInt("num",num);
         SpzUtils.putInt("counts",counts);

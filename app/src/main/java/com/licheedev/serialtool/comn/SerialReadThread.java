@@ -2,13 +2,10 @@ package com.licheedev.serialtool.comn;
 
 import android.os.SystemClock;
 
-import com.licheedev.serialtool.App;
 import com.licheedev.serialtool.comn.event.IsCoveringEvent;
-import com.licheedev.serialtool.comn.event.StatusEvent;
 import com.licheedev.serialtool.comn.message.LogManager;
 import com.licheedev.serialtool.util.ByteUtil;
 import com.licheedev.serialtool.util.LogPlus;
-import com.licheedev.serialtool.util.ToastUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -186,10 +183,8 @@ public class SerialReadThread extends Thread {
                 hexstr1=hexStr+"   PS05右错误";
                 EventBus.getDefault().post(new IsCoveringEvent(true));
             }
-
             else
             {hexstr1=hexStr;}
-
             SerialPortManager.instance().sendCommand(sendok1);
 
         }

@@ -13,6 +13,8 @@ import com.licheedev.serialtool.activity.clear.TestFunction;
 import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.base.BasePresenter;
 import com.licheedev.serialtool.comn.SerialPortManager;
+import com.licheedev.serialtool.comn.SerialPortManager2;
+import com.licheedev.serialtool.comn.SerialReadThread;
 import com.licheedev.serialtool.comn.event.IsCoveringEvent;
 import com.licheedev.serialtool.comn.message.LogManager;
 import com.licheedev.serialtool.util.SpzUtils;
@@ -20,6 +22,9 @@ import com.licheedev.serialtool.util.ToastUtil;
 import com.sun.jna.Pointer;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.io.InputStream;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import static com.licheedev.serialtool.comn.message.LogManager.SAVE_SUCCESS_COMMAND;
@@ -59,6 +64,7 @@ public class OtherDepositActivity extends BaseActivity {
         rd_bill = findViewById(R.id.rd_bill);
         rd_other = findViewById(R.id.rd_other);
         super.initView();
+
     }
 
     @Override
@@ -126,6 +132,7 @@ public class OtherDepositActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ibtn_ok:
+
                 Editable text = editText.getText();
                 if (!TextUtils.isEmpty(text)){
                     count = Integer.parseInt(text + "");
