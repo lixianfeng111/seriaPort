@@ -61,15 +61,26 @@ public class SerialPortManager {
             0x33,/*CMD 1byte*/
             0xBB, 0xBB, 0x25};
 
-    int[] commandMaskOpen = new int[]{0xA1, 0xA2, 0xA3, 0xA4, 0x05, 0x00, 0x31, 0x5A, 0xBB, 0xBB, 0x6A}; //开防罩门6A
-    int[] commandMaskClose = new int[]{0xA1, 0xA2, 0xA3, 0xA4, 0x05, 0x00, 0x32, 0x5A, 0xBB, 0xBB, 0x69}; //关防罩门69
+    //强制开关防罩门
+//    int[] commandMaskOpen = new int[]{0xA1, 0xA2, 0xA3, 0xA4, 0x05, 0x00, 0x31, 0x5A, 0xBB, 0xBB, 0x6A}; //开防罩门6A
+//    int[] commandMaskClose = new int[]{0xA1, 0xA2, 0xA3, 0xA4, 0x05, 0x00, 0x32, 0x5A, 0xBB, 0xBB, 0x69}; //关防罩门69
+    //正常开关防罩门
+    int[] commandMaskOpen = new int[]{0xA1, 0xA2, 0xA3, 0xA4, 0x05, 0x00, 0x31, 0x01, 0xBB, 0xBB, 0x31}; //开防罩门6A
+    int[] commandMaskClose = new int[]{0xA1, 0xA2, 0xA3, 0xA4, 0x05, 0x00, 0x32, 0x01, 0xBB, 0xBB, 0x32}; //关防罩门69
     int[] commandClearError = new int[]{0xA1, 0xA2, 0xA3, 0xA4, 0x04, 0x00, 0x44,0xBB, 0xBB, 0x44}; //感器状态变化清零
     int[] commandSDcardACK = new int[]{0xA1, 0xA2, 0xA3, 0xA4, 0x04, 0x00, 0x46,0xBB, 0xBB, 0x46}; //SD卡状态变化清零
+
 
     /**
      * 机器状态信息指令 ACK Command 11H
      */
     final String commandStatus = "A1 A2 A3 A4 04 00 11 BB BB 11";
+
+    //进入零钱模式
+    final String looseChange = "A1 A2 A3 A4 04 00 41 BB BB 41";
+
+    //退出零钱模式
+    final String exitLooseChange = "A1 A2 A3 A4 04 00 42 BB BB 42";
 
 
     //退出工作模式再进入，可以二次存钱 CMD25
@@ -129,6 +140,15 @@ public class SerialPortManager {
 //        SerialPortManager.instance().sendCommand(byteArrayToHexString(commandExit));
     }
 
+    public void sendLooseChange(){
+        String replace = looseChange.replace(" ", "");
+        sendCommand(replace);
+    }
+
+    public void sendLooseChangeExit(){
+        String replace = exitLooseChange.replace(" ", "");
+        sendCommand(replace);
+    }
 
     public void sendStatusCommand() {
         String replace = commandStatus.replace(" ", "");

@@ -141,12 +141,13 @@ public class CurrenySelectUtil {
                 .create();
         alertDialog.setView(view);
         alertDialog.show();
+        alertDialog.setCanceledOnTouchOutside(false);
         alertDialog.getWindow().setLayout(400, 210);
         tvMessage.setText(message);
         btConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                alertDialog.dismiss();
+//                alertDialog.dismiss();
                 callback.onDialogClick(1, alertDialog);
             }
         });

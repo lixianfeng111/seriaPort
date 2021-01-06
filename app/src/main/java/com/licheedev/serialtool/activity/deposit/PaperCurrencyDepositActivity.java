@@ -44,6 +44,7 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
 
     private boolean takeOut;
 
+    private boolean close=false;
     int[] commandWorkMode = new int[]{0xA1, 0xA2, 0xA3, 0xA4,/*STX 4byte*/
             0x12, 0x00,/*size 2byte*/
             0x21,/*CMD 1byte*/
@@ -114,14 +115,11 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
                 }
                 break;
             case R.id.ibtn_cancel:
-//                isSaved = SpzUtils.getBoolean("isSaved", false);
                 if (deposit == null || deposit.isEmpty()) {
                     finish();
                     return;
                 }
                 SerialPortManager.instance().sendStatusCommand();
-//                if (isSaved){
-//                    takeOut=true;
                     continueDepositDialogdialog = CurrenySelectUtil.showContinueDepositDialog(this, new Callback() {
                         @Override
                         public void onDialogClick(int which, Dialog dialog) {
@@ -131,8 +129,6 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
                             }
                         }
                     });
-//                }
-//                SpzUtils.putBoolean("isSaved", false);
                 break;
             case R.id.button4:
                 startActivity(new Intent(this, MainActivity.class));
@@ -192,7 +188,9 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
                 tvRrfuse.setText("" + reject);
                 if (count>0){
                     exit=true;
-//                    SpzUtils.putBoolean("isSaved",true);
+                }
+                else if (takeOut){
+                    close=true;
                 }
 
                 deposit = new Deposit(money, count, reject);
@@ -208,7 +206,6 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
                  */
                 if (((char) (received[7] & 0xff) == 0x06)) {
                     LogPlus.e("read_thread", "0x06 退出成功");
-                    ToastUtil.show(this,"退出成功");
                     finish();
                 } else if (((char) (received[7] & 0xff) == 0x15)) {
 
@@ -220,16 +217,19 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
                     if (exitFailDialog0 != null && exitFailDialog0.isShowing()) {
                         exitFailDialog0.dismiss();
                     }
-
+                    takeOut=true;
                     exitFailDialog0 = CurrenySelectUtil.showExitFailDialog(this, new Callback() {
                         @Override
                         public void onDialogClick(int which, Dialog dialog) {
-                            exitFailDialog0.dismiss();
-                            SerialPortManager.instance().closeMaskDoor();
-//                            SerialPortManager.instance().sendStatusCommand();
-                            SerialPortManager.instance().sendSaveAck();
-//                            SerialPortManager.instance().sendExitWorkModeCommand();
-                            finish();
+                            if (close){
+                                exitFailDialog0.dismiss();
+                                dialog.dismiss();
+                                SerialPortManager.instance().closeMaskDoor();
+                                finish();
+                            }else {
+                                ToastUtil.show(PaperCurrencyDepositActivity.this,"Wait for a moment, please");
+                            }
+
                         }
                     }, "0x16 "+getResources().getString(R.string.rejecting_pocket));
 
@@ -280,12 +280,6 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-//        SerialPortManager.instance().sendExitWorkModeCommand();
-    }
-
-    @Override
     protected int getLayoutId() {
         return R.layout.activity_paper_currency_deposit;
     }
@@ -307,7 +301,13 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
 
     @Override
     public void initData() {
+
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SerialPortManager.instance().sendSaveAck();
+        SerialPortManager.instance().sendExitWorkModeCommand();
+    }
 }
