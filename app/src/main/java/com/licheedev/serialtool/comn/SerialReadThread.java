@@ -122,9 +122,9 @@ public class SerialReadThread extends Thread {
         byte[] version=new byte[160];
         String hexStr = ByteUtil.bytes2HexStr(received, 0, size);
         //判断是否遮挡
-        if (s.contains("fb02")||s.contains("fb04")||s.contains("fb08")||s.contains("fb0e")){
+        if (s.contains("fb02")||s.contains("fb04")||s.contains("fb08")||s.contains("fb0e")){//遮挡
             EventBus.getDefault().post(new IsCoveringEvent(true));
-        }else if (s.contains("fb00")){
+        }else if (s.contains("fb00")){//无遮挡
             EventBus.getDefault().post(new IsCoveringEvent(false));
         }
         if((char)(received[6]&0xff)==0x15)

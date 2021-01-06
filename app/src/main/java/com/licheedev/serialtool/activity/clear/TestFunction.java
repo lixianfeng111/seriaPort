@@ -547,6 +547,7 @@ public class TestFunction {
 //         cheque = SpzUtils.getInt("cheque", -1);
 //         paper_money = SpzUtils.getInt("paper_money", -1);
 //         other = SpzUtils.getInt("other", -1);
+        //获取输入金额
         how_much = SpzUtils.getInt("how_much", -1);
         {
             AutoReplyPrint.INSTANCE.CP_Printer_ClearPrinterBuffer(h);
