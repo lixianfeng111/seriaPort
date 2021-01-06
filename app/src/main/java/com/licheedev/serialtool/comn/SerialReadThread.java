@@ -4,6 +4,7 @@ import android.os.SystemClock;
 
 import com.licheedev.serialtool.comn.event.IsCoveringEvent;
 import com.licheedev.serialtool.comn.message.LogManager;
+import com.licheedev.serialtool.comn.message.RecvMessage;
 import com.licheedev.serialtool.util.ByteUtil;
 import com.licheedev.serialtool.util.LogPlus;
 
@@ -24,6 +25,7 @@ public class SerialReadThread extends Thread {
     private static final String TAG = "SerialReadThread";
     private static final String sendok = "A1A2A3A4040044BBBB44";
     private static final String sendok1 = "A1A2A3A4040015BBBB15";
+//    private static final String sendok1 = "A1A2A3A4040011BBBB11";
     private BufferedInputStream mInputStream;
 
     public SerialReadThread(InputStream is) {
@@ -52,7 +54,7 @@ public class SerialReadThread extends Thread {
                     LogPlus.e("收到byte数组", "received size = " + available + " received:" + s);
 
                     if (size > 0) {
-                        onDataReceive(received, size);
+                        onDataReceive(received, size, s);
                     }
                     received = new byte[1024];
                 } else {
@@ -114,12 +116,17 @@ public class SerialReadThread extends Thread {
      * @param received
      * @param size
      */
-    public void onDataReceive(byte[] received, int size) {
+    public void onDataReceive(byte[] received, int size,String s) {
         // TODO: 2018/3/22 解决粘包、分包等
         String hexstr1 = null;
         byte[] version=new byte[160];
         String hexStr = ByteUtil.bytes2HexStr(received, 0, size);
-
+        //判断是否遮挡
+        if (s.contains("fb02")||s.contains("fb04")||s.contains("fb08")||s.contains("fb0e")){
+            EventBus.getDefault().post(new IsCoveringEvent(true));
+        }else if (s.contains("fb00")){
+            EventBus.getDefault().post(new IsCoveringEvent(false));
+        }
         if((char)(received[6]&0xff)==0x15)
         {
             if(((char)(received[7]&0xff)&0x01)==0x01)
@@ -183,10 +190,15 @@ public class SerialReadThread extends Thread {
                 hexstr1=hexStr+"   PS05右错误";
                 EventBus.getDefault().post(new IsCoveringEvent(true));
             }
+            else if(((char)(received[10]&0xff)&0x0E)==0x0E)
+            {
+                hexstr1=hexStr+"   PS05左中右错误";
+                EventBus.getDefault().post(new IsCoveringEvent(true));
+            }
             else
             {hexstr1=hexStr;}
             SerialPortManager.instance().sendCommand(sendok1);
-
+            LogPlus.e("read_thread",hexstr1);
         }
         else if((char)(received[6]&0xff)==0x44)
         {
@@ -381,9 +393,9 @@ public class SerialReadThread extends Thread {
             version[149]=(byte)(received[45]);
             version[150]=(byte)(received[46]);
 
-
             String b=new String(version);
             hexstr1=b;
+            LogPlus.e("read_thread",hexstr1);
 
         }
         else if((char)(received[6]&0xff)== 0x12)
@@ -485,8 +497,10 @@ public class SerialReadThread extends Thread {
             SerialPortManager.instance().sendSDcardAck();
 
         }
+
         {hexstr1=hexStr;}
-//        LogManager.instance().post(new RecvMessage(hexstr1));
+        LogPlus.e("read_thread+444",hexstr1);
+        LogManager.instance().post(new RecvMessage(hexstr1));
     }
 
     private void amountSaveMoney(byte[] received) {

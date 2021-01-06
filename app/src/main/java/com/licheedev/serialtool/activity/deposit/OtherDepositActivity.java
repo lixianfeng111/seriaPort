@@ -1,5 +1,7 @@
 package com.licheedev.serialtool.activity.deposit;
 
+import android.os.Handler;
+import android.os.Message;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -37,21 +39,28 @@ public class OtherDepositActivity extends BaseActivity {
     @BindView(R.id.editText)
     EditText editText;
     private Pointer h=Pointer.NULL;
-    private boolean isOpenDoor=false;
+    private boolean isOpenDoor;
     private int n=0;
-    private boolean isSaved;
     boolean isGo=false;
-    int[] commandWorkMode = new int[]{0xA1, 0xA2, 0xA3, 0xA4,/*STX 4byte*/
-            0x12, 0x00,/*size 2byte*/
-            0x21,/*CMD 1byte*/
-            0x02, 0x00, 0x01, 0x08, 0x00, 0x04, 0x02, 0x06, 0x01, 0x00, 0x01, 0x01, 0x01, 0x05,/*DATA1 14byte*/
-            0xBB, 0xBB, 0x39}; //进入工作模式
     private RadioButton rd_coin;
     private RadioButton rd_check;
     private RadioButton rd_bill;
     private RadioButton rd_other;
     private int count;
-    private boolean isCovered=false;
+    private boolean isCovered;
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what){
+                case 1:
+                    SerialPortManager.instance().sendStatusCommand();
+                    handler.sendEmptyMessageDelayed(1,500);
+                    break;
+            }
+        }
+    };
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_other_deposit;
@@ -59,12 +68,12 @@ public class OtherDepositActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        super.initView();
         rd_coin = findViewById(R.id.rd_coin);
         rd_check = findViewById(R.id.rd_check);
         rd_bill = findViewById(R.id.rd_bill);
         rd_other = findViewById(R.id.rd_other);
-        super.initView();
-
+        SerialPortManager.instance().sendLooseChange();
     }
 
     @Override
@@ -108,7 +117,6 @@ public class OtherDepositActivity extends BaseActivity {
 
     @Override
     protected void onResume() {
-        swtichWorkMode();
         super.onResume();
     }
 
@@ -132,7 +140,6 @@ public class OtherDepositActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ibtn_ok:
-
                 Editable text = editText.getText();
                 if (!TextUtils.isEmpty(text)){
                     count = Integer.parseInt(text + "");
@@ -142,12 +149,11 @@ public class OtherDepositActivity extends BaseActivity {
                             SerialPortManager.instance().sendSaveCommand();
                             isCovered=false;
                             isOpenDoor=false;
-                            isSaved=true;
                             isGo=false;
                             editText.setText("");
-                            SpzUtils.putBoolean("isPrint",true);
+                            handler.removeCallbacksAndMessages(1);//删除handler消息
                         }else {
-                            ToastUtil.show(OtherDepositActivity.this,"Please put envelope into the deposit pocket");
+                            ToastUtil.show(OtherDepositActivity.this,getResources().getString(R.string.put_envelope_into));
                         }
                     }else {
                         if (count >0){
@@ -155,6 +161,7 @@ public class OtherDepositActivity extends BaseActivity {
                             TestFunction.select_deposit_Print_SampleTicket(OtherDepositActivity.this,n,h);
                             SerialPortManager.instance().openMaskDoor();//打开罩门
                             isOpenDoor=true;
+                            isCovereing();
                         }
                     }
                 }else if (isOpenDoor){
@@ -164,12 +171,27 @@ public class OtherDepositActivity extends BaseActivity {
             case R.id.ibtn_cancel:
                 if (isOpenDoor){
                     SerialPortManager.instance().closeMaskDoor();//关闭罩门
+                    //如果打印之后不存直接返回则减去输入金额
+                    TestFunction.clear_thisOther();
                 }
-                TestFunction.clear_thisOther();
-                back();
                 finish();
                 break;
         }
+    }
+
+    private void isCovereing() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(500);
+                    handler.sendEmptyMessage(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }).start();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -185,8 +207,8 @@ public class OtherDepositActivity extends BaseActivity {
                 if (!isGo){
                     SpzUtils.putInt("currency_record",n);
                     SpzUtils.putInt("money_record",count);
+                    SpzUtils.putBoolean("isPrint",true);
                     isGo = true;
-                    back();
                     finish();
                 }
             }
@@ -197,7 +219,9 @@ public class OtherDepositActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        back();
+        handler.removeCallbacksAndMessages(1);
+        SerialPortManager.instance().sendSaveAck();
+        SerialPortManager.instance().sendLooseChangeExit();
     }
 
     private void OpenPort() {
@@ -207,14 +231,5 @@ public class OtherDepositActivity extends BaseActivity {
                 h = AutoReplyPrint.INSTANCE.CP_Port_OpenCom("/dev/ttyS3", 9600, AutoReplyPrint.CP_ComDataBits_8, AutoReplyPrint.CP_ComParity_NoParity, AutoReplyPrint.CP_ComStopBits_One, AutoReplyPrint.CP_ComFlowControl_XonXoff, 0);
             }
         }).start();
-    }
-
-    private void swtichWorkMode() {
-        SerialPortManager.instance().sendCommand(SerialPortManager.byteArrayToHexString(commandWorkMode));
-    }
-
-    private void back(){
-        SerialPortManager.instance().sendSaveAck();
-        SerialPortManager.instance().sendExitWorkModeCommand();
     }
 }
