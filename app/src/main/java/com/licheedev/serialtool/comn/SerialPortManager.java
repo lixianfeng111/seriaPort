@@ -11,6 +11,7 @@ import com.licheedev.serialtool.comn.message.SendMessage;
 import com.licheedev.serialtool.util.ByteUtil;
 import com.licheedev.serialtool.util.LogPlus;
 import com.licheedev.serialtool.util.PrefHelper;
+import com.licheedev.serialtool.util.constant.Constant;
 import com.licheedev.serialtool.util.constant.PreferenceKeys;
 
 import io.reactivex.Observable;
@@ -195,7 +196,7 @@ public class SerialPortManager {
         mDevice = new Device(mDevices[mDeviceIndex], mBaudrates[mBaudrateIndex]);
 
         SerialPortManager.instance().close();
-        mDevice = new Device("/dev/ttyS4", "115200");
+        mDevice = new Device(Constant.PORT_MONEY, Constant.BAUD_RATE_MONEY);
         SerialPortManager.instance().open(mDevice);
     }
 

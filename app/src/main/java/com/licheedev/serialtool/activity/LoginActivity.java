@@ -51,11 +51,11 @@ public class LoginActivity extends BaseActivity {
         if (TextUtils.isEmpty(user)&&TextUtils.isEmpty(passwd)){
             ToastUtil.show(this,getResources().getString(R.string.user_or_psw));
         }else if (user.equals("111")&&passwd.equals("111")){
-            SpzUtils.putString("user",user+"");
+            SpzUtils.putString(Constant.USER,user+"");
             startActivity(new Intent(this, SelectDepositActivitys.class));
             clearUserAndPassword();
         }else if (user.equals("333")&&passwd.equals("333")){
-            SpzUtils.putString("user",user+"");
+            SpzUtils.putString(Constant.USER,user+"");
             startActivity(new Intent(this, ClearDeviceTestActivity.class));
             clearUserAndPassword();
         }else{//进入管理页面

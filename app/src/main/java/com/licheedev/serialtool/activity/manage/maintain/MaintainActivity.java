@@ -11,6 +11,7 @@ import com.licheedev.serialtool.util.LogOutUtil;
 import com.licheedev.serialtool.util.SpzUtils;
 import com.licheedev.serialtool.util.TimeFormartUtils;
 import com.licheedev.serialtool.util.ToastUtil;
+import com.licheedev.serialtool.util.constant.Constant;
 
 import butterknife.OnClick;
 
@@ -65,11 +66,11 @@ public class MaintainActivity extends BaseActivity {
                 startActivity(new Intent(this, DepositErrorActivity.class));
                 break;
             case R.id.tvbillinit:
-                SpzUtils.putString("old_bagId","0");
-                SpzUtils.putString("old_lead_seal","0");
-                SpzUtils.putString("timeDay2", TimeFormartUtils.getTimeDay());
-                SpzUtils.putString("time2",TimeFormartUtils.getTime());
-                SpzUtils.putBoolean("start",true);
+                SpzUtils.putString(Constant.OLD_BAG_ID,"0");
+                SpzUtils.putString(Constant.OLD_LEAD_SEAL,"0");
+                SpzUtils.putString(Constant.timeDay2, TimeFormartUtils.getTimeDay());
+                SpzUtils.putString(Constant.TIME2,TimeFormartUtils.getTime());
+                SpzUtils.putBoolean(Constant.START,true);
                 ToastUtil.show(this,getResources().getString(R.string.initialization));
                 break;
             case R.id.btnBack:

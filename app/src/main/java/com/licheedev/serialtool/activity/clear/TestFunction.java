@@ -546,7 +546,7 @@ public class TestFunction {
         activity2=activity;
         n2=n;
         //获取输入金额
-        how_much = SpzUtils.getInt("how_much", -1);
+        how_much = SpzUtils.getInt(Constant.HOW_MUCH, -1);
         {
             AutoReplyPrint.INSTANCE.CP_Printer_ClearPrinterBuffer(h);
             AutoReplyPrint.INSTANCE.CP_Pos_ResetPrinter(h);

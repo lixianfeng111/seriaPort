@@ -56,20 +56,6 @@ public class OtherDepositActivity extends BaseActivity {
 
     private boolean w=true;
     private Thread thread = null;
-    //循环调用机器状态查询指令
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what){
-                case 1:
-                    //调用机器状态查询指令
-                    SerialPortManager.instance().sendStatusCommand();
-                    //循环发送消息
-                    handler.sendEmptyMessageDelayed(1,500);
-                    break;
-            }
-        }
-    };
 
     @Override
     protected int getLayoutId() {
@@ -156,27 +142,26 @@ public class OtherDepositActivity extends BaseActivity {
                     count = Integer.parseInt(text + "");
                     if (isOpenDoor){
                         if (isCovered){//判断有没有被遮挡
-                            SerialPortManager.instance().closeMaskDoor();//关闭罩门
-//                            SerialPortManager.instance().sendSaveCommand();//存钱
+                            w=false;
                             isCovered=false;
                             isOpenDoor=false;
                             isGo=false;
                             editText.setText("");//金额制空
-//                            handler.removeMessages(1);//删除handler消息
-                            w=false;
+                            SerialPortManager.instance().closeMaskDoor();//关闭罩门
                             SerialPortManager.instance().sendSaveCommand();//存钱
                         }else {
                             ToastUtil.show(OtherDepositActivity.this,getResources().getString(R.string.put_envelope_into));
                         }
                     }else {
                         if (count >0){
-                            SpzUtils.putInt("how_much", count);//保存输入金额
+                            SpzUtils.putInt(Constant.HOW_MUCH, count);//保存输入金额
                             TestFunction.select_deposit_Print_SampleTicket(OtherDepositActivity.this,n,h);//打印
                             SerialPortManager.instance().openMaskDoor();//打开罩门
                             isOpenDoor=true;
                             isCovereing();
                         }
                     }
+
                 }else if (isOpenDoor){
                     ToastUtil.show(OtherDepositActivity.this,getResources().getString(R.string.put_envelope_into));
                 }
@@ -199,7 +184,7 @@ public class OtherDepositActivity extends BaseActivity {
             thread = new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    while (w){
+                    while (w){//循环调用机器状态查询指令
                         try {
                             Thread.sleep(500);
                         } catch (InterruptedException e) {
@@ -226,11 +211,11 @@ public class OtherDepositActivity extends BaseActivity {
             case SAVE_SUCCESS_COMMAND: {
                 if (!isGo){
                     //保存币种
-                    SpzUtils.putInt("currency_record",n);
+                    SpzUtils.putInt(Constant.CURRENCY_RECORD,n);
                     //保存金额
-                    SpzUtils.putInt("money_record",count);
+                    SpzUtils.putInt(Constant.MONEY_RECORD,count);
                     //确定存了钱
-                    SpzUtils.putBoolean("isPrint",true);
+                    SpzUtils.putBoolean(Constant.IS_PRINT,true);
                     isGo = true;
                     finish();
                 }
@@ -242,14 +227,11 @@ public class OtherDepositActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        //删除handler消息
-//        handler.removeMessages(1);
         w=false;
         SerialPortManager.instance().sendSaveAck();
         //退出零钱模式
         SerialPortManager.instance().sendLooseChangeExit();
         ClosePort();
-//        thread.stop();
     }
 
     private void OpenPort() {

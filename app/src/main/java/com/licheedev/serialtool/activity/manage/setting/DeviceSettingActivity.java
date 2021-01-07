@@ -14,6 +14,7 @@ import com.licheedev.serialtool.base.BasePresenter;
 import com.licheedev.serialtool.util.LanguageUtils;
 import com.licheedev.serialtool.util.LogOutUtil;
 import com.licheedev.serialtool.util.SpzUtils;
+import com.licheedev.serialtool.util.constant.Constant;
 
 
 import java.lang.reflect.Method;
@@ -29,7 +30,6 @@ public class DeviceSettingActivity extends BaseActivity {
 
     private TextView basic_information;
     private TextView system_time;
-    private String language;
 
     @Override
     protected int getLayoutId() {
@@ -51,25 +51,6 @@ public class DeviceSettingActivity extends BaseActivity {
                 startActivity(new Intent(Settings.ACTION_DATE_SETTINGS));
             }
         });
-    }
-
-    private void systemLanguage() {
-        try {
-            Class<?> clzIActMag = Class.forName("android.app.IActivityManager");
-            Class<?> clzActMagNative = Class.forName("android.app.ActivityManagerNative");
-            Method mtdActMagNative$getDefault = clzActMagNative.getDeclaredMethod("getDefault");
-            Object objIActMag = mtdActMagNative$getDefault.invoke(clzActMagNative);
-            Method mtdIActMag$getConfiguration = clzIActMag.getDeclaredMethod("getConfiguration");
-            Configuration config = (Configuration) mtdIActMag$getConfiguration.invoke(objIActMag);
-                config.locale = Locale.ENGLISH;
-            if (true) {
-                Class<?>[] clzParams = {Configuration.class};
-                Method mtdIActMag$updateConfiguration = clzIActMag.getDeclaredMethod("updateConfiguration", clzParams);
-                mtdIActMag$updateConfiguration.invoke(objIActMag, config);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
@@ -105,13 +86,13 @@ public class DeviceSettingActivity extends BaseActivity {
                 finish();
                 break;
             case  R.id.tvDeviceManage:
-                boolean language = SpzUtils.getBoolean("language", false);
+                boolean language = SpzUtils.getBoolean(Constant.LANGUAGE, false);
                 if (language){
                     language=false;
                 }else {
                     language=true;
                 }
-                SpzUtils.putBoolean("language",language);
+                SpzUtils.putBoolean(Constant.LANGUAGE,language);
                 LanguageUtils.attachBaseContext(this,language);
                 Intent i = getBaseContext().getPackageManager().getLaunchIntentForPackage(getBaseContext().getPackageName());
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

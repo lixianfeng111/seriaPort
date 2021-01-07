@@ -181,22 +181,22 @@ public class SerialReadThread extends Thread {
             else if(((char)(received[10]&0xff)&0x02)==0x02)
             {
                 hexstr1=hexStr+"   PS05中错误";
-                EventBus.getDefault().post(new IsCoveringEvent(true));
+//                EventBus.getDefault().post(new IsCoveringEvent(true));
             }
             else if(((char)(received[10]&0xff)&0x04)==0x04)
             {
                 hexstr1=hexStr+"   PS05左错误";
-                EventBus.getDefault().post(new IsCoveringEvent(true));
+//                EventBus.getDefault().post(new IsCoveringEvent(true));
             }
             else if(((char)(received[10]&0xff)&0x08)==0x08)
             {
                 hexstr1=hexStr+"   PS05右错误";
-                EventBus.getDefault().post(new IsCoveringEvent(true));
+//                EventBus.getDefault().post(new IsCoveringEvent(true));
             }
             else if(((char)(received[10]&0xff)&0x0E)==0x0E)
             {
                 hexstr1=hexStr+"   PS05左中右错误";
-                EventBus.getDefault().post(new IsCoveringEvent(true));
+//                EventBus.getDefault().post(new IsCoveringEvent(true));
             }
             else
             {hexstr1=hexStr;}

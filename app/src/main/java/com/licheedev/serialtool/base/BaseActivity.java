@@ -18,6 +18,7 @@ import com.licheedev.serialtool.comn.message.LogManager;
 import com.licheedev.serialtool.receiver.NetReceiver;
 import com.licheedev.serialtool.util.LanguageUtils;
 import com.licheedev.serialtool.util.SpzUtils;
+import com.licheedev.serialtool.util.constant.Constant;
 import com.licheedev.serialtool.util.constant.Money;
 
 import org.greenrobot.eventbus.EventBus;
@@ -106,7 +107,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     //切换英语
     @Override
     protected void attachBaseContext(Context newBase) {
-        boolean language = SpzUtils.getBoolean("language",false);
+        boolean language = SpzUtils.getBoolean(Constant.LANGUAGE,false);
         super.attachBaseContext(LanguageUtils.attachBaseContext(newBase,language));
     }
 

@@ -9,6 +9,7 @@ import com.licheedev.serialtool.base.BasePresenter;
 import com.licheedev.serialtool.comn.SerialPortManager;
 import com.licheedev.serialtool.comn.SerialPortManager2;
 import com.licheedev.serialtool.util.SpzUtils;
+import com.licheedev.serialtool.util.constant.Constant;
 
 import butterknife.OnClick;
 
@@ -62,7 +63,7 @@ public class SelectDepositActivitys extends BaseActivity {
                 break;
             case R.id.ibtn_record:
                 Intent intent = new Intent(this, DepositManageActivity.class);
-                intent.putExtra("iscurrent", false);
+                intent.putExtra(Constant.IS_CURRENT, false);
                 startActivity(intent);
                 break;
             case R.id.button:

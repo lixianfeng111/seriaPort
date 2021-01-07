@@ -24,6 +24,7 @@ import com.licheedev.serialtool.activity.deposit.PaperCurrencyDepositActivity;
 import com.licheedev.serialtool.util.LanguageUtils;
 import com.licheedev.serialtool.util.SpzUtils;
 import com.licheedev.serialtool.util.ToastUtil;
+import com.licheedev.serialtool.util.constant.Constant;
 import com.licheedev.serialtool.util.constant.Money;
 
 import java.util.Arrays;
@@ -42,7 +43,7 @@ public class CurrenySelectUtil {
         final AlertDialog alertDialog = new AlertDialog
                 .Builder(context)
                 .create();
-        if (!SpzUtils.getBoolean("language",false)){//判断是否为中文
+        if (!SpzUtils.getBoolean(Constant.LANGUAGE,false)){//判断是否为中文
             stringlist = Arrays.asList(Money.CURRENCY_ARRAY_en);
         }else {
             stringlist = Arrays.asList(Money.CURRENCY_ARRAY);

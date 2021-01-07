@@ -21,6 +21,7 @@ import com.licheedev.serialtool.dialog.CurrenySelectUtil;
 import com.licheedev.serialtool.util.LogPlus;
 import com.licheedev.serialtool.util.SpzUtils;
 import com.licheedev.serialtool.util.ToastUtil;
+import com.licheedev.serialtool.util.constant.Constant;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -101,9 +102,9 @@ public class DepositDetailsActivity extends BaseActivity implements BaseRecycler
 
     @Override
     public void initData() {
-        list2 = SpzUtils.getDataList(this, "list");
-        num = SpzUtils.getInt("num", 0);
-        counts = SpzUtils.getInt("counts", 0);
+        list2 = SpzUtils.getDataList(this, Constant.LIST);
+        num = SpzUtils.getInt(Constant.NUM, 0);
+        counts = SpzUtils.getInt(Constant.COUNTS, 0);
     }
 
     @OnClick({R.id.btnOverDeposit, R.id.btnContiniu})
@@ -117,7 +118,7 @@ public class DepositDetailsActivity extends BaseActivity implements BaseRecycler
                             if (list2.size()!=0){
                                 list.addAll(list2);
                             }
-                            SpzUtils.setDataList(DepositDetailsActivity.this,"list", list);
+                            SpzUtils.setDataList(DepositDetailsActivity.this,Constant.LIST, list);
                             SerialPortManager.instance().sendSaveAck();
                             setResult(RESULT_CODE_DEPOSIT);
                             finish();
@@ -130,7 +131,7 @@ public class DepositDetailsActivity extends BaseActivity implements BaseRecycler
                 if (list2.size()!=0){
                     list.addAll(list2);
                 }
-                SpzUtils.setDataList(DepositDetailsActivity.this,"list", list);
+                SpzUtils.setDataList(DepositDetailsActivity.this,Constant.LIST, list);
                 SerialPortManager.instance().sendSaveAck();
 //                SpzUtils.putBoolean("is_continue",true);
                 finish();
@@ -251,7 +252,7 @@ public class DepositDetailsActivity extends BaseActivity implements BaseRecycler
             num+=sum;
             counts+=count;
             if (sum>0){
-                SpzUtils.putBoolean("isPrint", true);
+                SpzUtils.putBoolean(Constant.IS_PRINT, true);
             }
             tvAlreadySum.setText(num + "");
             tvAlreadyCount.setText(counts + "");
@@ -265,12 +266,12 @@ public class DepositDetailsActivity extends BaseActivity implements BaseRecycler
 //            SpzUtils.putBoolean("isPrint", true);
 //        }
         //保存已存累计
-        SpzUtils.putInt("num",num);
-        SpzUtils.putInt("counts",counts);
+        SpzUtils.putInt(Constant.NUM,num);
+        SpzUtils.putInt(Constant.COUNTS,counts);
         //记录
-        SpzUtils.putInt("money_record",num);
-        SpzUtils.putInt("currency_record",2);
-        SpzUtils.putBoolean("isSaved",false);
+        SpzUtils.putInt(Constant.MONEY_RECORD,num);//金额
+        SpzUtils.putInt(Constant.CURRENCY_RECORD,2);//币种 2是钞票
+        SpzUtils.putBoolean(Constant.IS_SAVED,false);
     }
 
 

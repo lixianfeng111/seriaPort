@@ -6,6 +6,7 @@ import android.view.View;
 import com.licheedev.serialtool.R;
 import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.base.BasePresenter;
+import com.licheedev.serialtool.util.constant.Constant;
 
 import butterknife.OnClick;
 
@@ -44,11 +45,11 @@ public class DepositManageActivity extends BaseActivity {
         Intent intent = new Intent(DepositManageActivity.this, DepositRecordActivity.class);
         switch (view.getId()) {
             case R.id.tv_current_deposit: //当前存款
-                intent.putExtra("iscurrent", true);
+                intent.putExtra(Constant.IS_CURRENT, true);
                 startActivity(intent);
                 break;
             case R.id.tv_record:
-                intent.putExtra("iscurrent", false);
+                intent.putExtra(Constant.IS_CURRENT, false);
                 startActivity(intent);
                 break;
             case R.id.tv_ping:

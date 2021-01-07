@@ -5,6 +5,7 @@ public interface Constant {
      * key
      */
     //LoginActivity
+    String USER = "user";
     String LANGUAGE = "language";
     String IS_PRINT = "isPrint";//是否打印
     String LIST= "list";//存款list
@@ -30,7 +31,7 @@ public interface Constant {
      * 打印 TestFunction
      */
     //清机打印
-// 各个面值的张数
+    // 各个面值的张数
     String NUM100 = "num100";
     String NUM50 = "num50";
     String NUM20 = "num20";
@@ -52,12 +53,19 @@ public interface Constant {
     //打印和基本信息设置页
     String CLIENT = "client";
     String SITE = "site";
-    String USER = "user";
     //打印和清机测试页ClearDeviceTestActivity
     String BAG_ID = "bagId";
     String OLD_LEAD_SEAL = "old_lead_seal";
     String LEAD_SEAL = "lead_seal";
     String OLD_BAG_ID = "old_bagId";
     String NEW_LEAD_SEAL = "new_lead_seal";
+    //其他存款输入金额数
+    String HOW_MUCH = "how_much";
+    //用于存款记录
+    String MONEY_RECORD = "money_record";
+    String CURRENCY_RECORD = "currency_record";
 
+    String IS_SAVED = "isSaved";
+
+    String IS_CURRENT = "iscurrent";
 }

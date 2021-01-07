@@ -71,9 +71,9 @@ public class DepositRecordActivity extends BaseActivity implements BaseRecyclerA
             btLogout.setAutoSizeTextTypeUniformWithConfiguration(4,26,2, TypedValue.COMPLEX_UNIT_SP);
         }
 
-        boolean iscurrent = getIntent().getBooleanExtra("iscurrent", false);
-        currency_record = SpzUtils.getInt("currency_record",0);
-        money_record = SpzUtils.getInt("money_record", 0);
+        boolean iscurrent = getIntent().getBooleanExtra(Constant.IS_CURRENT, false);
+        currency_record = SpzUtils.getInt(Constant.CURRENCY_RECORD,0);
+        money_record = SpzUtils.getInt(Constant.MONEY_RECORD, 0);
         if (iscurrent) {
             tvTitle.setText(getResources().getString(R.string.current_deposit));
         } else {

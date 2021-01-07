@@ -10,6 +10,7 @@ import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.base.BasePresenter;
 import com.licheedev.serialtool.util.SpzUtils;
 import com.licheedev.serialtool.util.ToastUtil;
+import com.licheedev.serialtool.util.constant.Constant;
 
 public class BasicInformationActivity extends BaseActivity {
 
@@ -45,8 +46,8 @@ public class BasicInformationActivity extends BaseActivity {
                 if (TextUtils.isEmpty(text)||TextUtils.isEmpty(text1)){
                     ToastUtil.show(BasicInformationActivity.this,getResources().getString(R.string.please_complete_it));
                 }else {//保存基本信息
-                    SpzUtils.putString("client",text+"");
-                    SpzUtils.putString("site",text1+"");
+                    SpzUtils.putString(Constant.CLIENT,text+"");
+                    SpzUtils.putString(Constant.SITE,text1+"");
                     finish();
                 }
             }
