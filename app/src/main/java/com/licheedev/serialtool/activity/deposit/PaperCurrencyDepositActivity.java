@@ -227,7 +227,7 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
                                 SerialPortManager.instance().closeMaskDoor();
                                 finish();
                             }else {
-                                ToastUtil.show(PaperCurrencyDepositActivity.this,"Wait for a moment, please");
+                                ToastUtil.show(PaperCurrencyDepositActivity.this,getResources().getString(R.string.please_take_out));
                             }
 
                         }

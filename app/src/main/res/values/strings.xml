@@ -269,4 +269,7 @@
     
     <string name="rejecting_pocket">退钞口有纸币，不能执行退出操作</string>
     <string name="draw_out">请取出置钞口钞票</string>
+    <string name="new_bag_id">新钞袋号为空</string>
+    <string name="lead_seal">封铅号为空</string>
+    <string name="please_take_out">请取走暂存口钞票</string>
 </resources>

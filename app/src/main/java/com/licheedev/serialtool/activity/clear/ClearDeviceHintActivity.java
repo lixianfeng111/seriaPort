@@ -20,6 +20,7 @@ import com.licheedev.serialtool.dialog.CurrenySelectUtil;
 import com.licheedev.serialtool.util.DepositRecordUtil;
 import com.licheedev.serialtool.util.SpzUtils;
 import com.licheedev.serialtool.util.TimeFormartUtils;
+import com.licheedev.serialtool.util.constant.Constant;
 import com.sun.jna.Pointer;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -78,8 +79,8 @@ public class ClearDeviceHintActivity extends BaseActivity {
         third = findViewById(R.id.third);
         fourth = findViewById(R.id.fourth);
         start_clear = findViewById(R.id.start_clear);
-        red = Color.parseColor("#FF0404");
-        blue = Color.parseColor("#00FF06");
+        red = getResources().getColor(R.color.clear_red);
+        blue = getResources().getColor(R.color.clear_green);
         color=red;
         handler.sendEmptyMessage(1);
         OpenPort();
@@ -177,17 +178,17 @@ public class ClearDeviceHintActivity extends BaseActivity {
                     handler.sendEmptyMessage(4);
                     isPutIn=false;
 
-                    boolean start = SpzUtils.getBoolean("start", false);
+                    boolean start = SpzUtils.getBoolean(Constant.START, false);
                     if (start){//判断是不是第一次清机
-                        SpzUtils.putString("old_timeDay",SpzUtils.getString("timeDay2"));
-                        SpzUtils.putString("old_time",SpzUtils.getString("time2"));
-                        SpzUtils.putBoolean("start",false);
+                        SpzUtils.putString(Constant.old_timeDay,SpzUtils.getString(Constant.timeDay2));
+                        SpzUtils.putString(Constant.OLD_TIME,SpzUtils.getString(Constant.TIME2));
+                        SpzUtils.putBoolean(Constant.START,false);
                     }else {//存上次放入朝箱时间
-                        SpzUtils.putString("old_timeDay",SpzUtils.getString("timeDay"));
-                        SpzUtils.putString("old_time",SpzUtils.getString("time"));
+                        SpzUtils.putString(Constant.old_timeDay,SpzUtils.getString(Constant.timeDay));
+                        SpzUtils.putString(Constant.OLD_TIME,SpzUtils.getString(Constant.TIME));
                     }
                     //保存放入新钞箱的时间
-                    SpzUtils.putString("timeDay",TimeFormartUtils.getTimeDay());
+                    SpzUtils.putString(Constant.timeDay,TimeFormartUtils.getTimeDay());
                     SpzUtils.putString("time",TimeFormartUtils.getTime());
                 }
                 break;
@@ -278,14 +279,13 @@ public class ClearDeviceHintActivity extends BaseActivity {
             AutoReplyPrint.INSTANCE.CP_Port_Close(h);
             h = Pointer.NULL;
         }
-
     }
 
     private void OpenPort() {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                h = AutoReplyPrint.INSTANCE.CP_Port_OpenCom("/dev/ttyS3", 9600, AutoReplyPrint.CP_ComDataBits_8, AutoReplyPrint.CP_ComParity_NoParity, AutoReplyPrint.CP_ComStopBits_One, AutoReplyPrint.CP_ComFlowControl_XonXoff, 0);
+                h = AutoReplyPrint.INSTANCE.CP_Port_OpenCom(Constant.PORT, Constant.BAUD_RATE, AutoReplyPrint.CP_ComDataBits_8, AutoReplyPrint.CP_ComParity_NoParity, AutoReplyPrint.CP_ComStopBits_One, AutoReplyPrint.CP_ComFlowControl_XonXoff, 0);
             }
         }).start();
     }

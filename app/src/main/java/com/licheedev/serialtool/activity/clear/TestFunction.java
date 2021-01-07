@@ -11,6 +11,7 @@ import com.licheedev.serialtool.activity.deposit.OtherDepositActivity;
 import com.licheedev.serialtool.util.SpzUtils;
 import com.licheedev.serialtool.util.TimeFormartUtils;
 import com.licheedev.serialtool.util.ToastUtil;
+import com.licheedev.serialtool.util.constant.Constant;
 import com.sun.jna.Pointer;
 import com.sun.jna.WString;
 import java.util.List;
@@ -24,24 +25,24 @@ public class TestFunction {
         activity2=activity;
         int num=0,total=0,totalAll=0;
         //获取各个面值的张数
-        int num100 = SpzUtils.getInt("num100", -1);
-        int num50 = SpzUtils.getInt("num50", -1);
-        int num20 = SpzUtils.getInt("num20", -1);
-        int num10 = SpzUtils.getInt("num10", -1);
-        int num5 = SpzUtils.getInt("num5", -1);
-        int num1 = SpzUtils.getInt("num1", -1);
+        int num100 = SpzUtils.getInt(Constant.NUM100, 0);
+        int num50 = SpzUtils.getInt(Constant.NUM50, 0);
+        int num20 = SpzUtils.getInt(Constant.NUM20, 0);
+        int num10 = SpzUtils.getInt(Constant.NUM10, 0);
+        int num5 = SpzUtils.getInt(Constant.NUM5, 0);
+        int num1 = SpzUtils.getInt(Constant.NUM1, 0);
         //获取各面值总金额
-        int money100 = SpzUtils.getInt("money100", -1);
-        int money50 = SpzUtils.getInt("money50", -1);
-        int money20 = SpzUtils.getInt("money20", -1);
-        int money10 = SpzUtils.getInt("money10", -1);
-        int money5 = SpzUtils.getInt("money5", -1);
-        int money1 = SpzUtils.getInt("money1", -1);
+        int money100 = SpzUtils.getInt(Constant.MONEY100, 0);
+        int money50 = SpzUtils.getInt(Constant.MONEY50, 0);
+        int money20 = SpzUtils.getInt(Constant.MONEY20, 0);
+        int money10 = SpzUtils.getInt(Constant.MONEY10, 0);
+        int money5 = SpzUtils.getInt(Constant.MONEY5, 0);
+        int money1 = SpzUtils.getInt(Constant.MONEY1, 0);
         //获取其他存款
-        int coin2 = SpzUtils.getInt("coin2", 0);
-        int cheque2 = SpzUtils.getInt("cheque2", 0);
-        int paper_money2 = SpzUtils.getInt("paper_money2", 0);
-        int other2 = SpzUtils.getInt("other2", 0);
+        int coin2 = SpzUtils.getInt(Constant.COIN2, 0);
+        int cheque2 = SpzUtils.getInt(Constant.CHEQUE2, 0);
+        int paper_money2 = SpzUtils.getInt(Constant.PAPER_MONEY2, 0);
+        int other2 = SpzUtils.getInt(Constant.OTHER2, 0);
         //得到钞票总张数
         num=num1+num5+num10+num20+num50+num100;
         //得到钞票总金额
@@ -69,11 +70,11 @@ public class TestFunction {
             AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 0);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.client_print)));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString("client")+"\r\n"));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString(Constant.CLIENT)+"\r\n"));
 
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.site_print)));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString("site")+"\r\n"));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString(Constant.SITE)+"\r\n"));
 
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.machine_No_print)));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
@@ -81,31 +82,31 @@ public class TestFunction {
 
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.user_print)));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString("user")+"\r\n"));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString(Constant.USER)+"\r\n"));
         }
 
         {
             AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.start_print)));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 130);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString("old_timeDay")));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString(Constant.old_timeDay)));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 280);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString("old_time")+"\r\n"));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString(Constant.OLD_TIME)+"\r\n"));
 
 
             AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 1);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.old_money_bag_print)));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 280);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString("bagId")+"\r\n"));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString(Constant.BAG_ID)+"\r\n"));
 
-            String old_lead_seal = SpzUtils.getString("old_lead_seal");
+            String old_lead_seal = SpzUtils.getString(Constant.OLD_LEAD_SEAL);
             AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 0);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.old_sealing_print)));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 280);
             if (!old_lead_seal.isEmpty()){
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(old_lead_seal+"\r\n"));
             }else {
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString("lead_seal")+"\r\n"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString(Constant.LEAD_SEAL)+"\r\n"));
             }
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.end_print)));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 130);
@@ -116,12 +117,12 @@ public class TestFunction {
             AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 1);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.new_money_bag_print)));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 280);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString("old_bagId")+"\r\n"));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString(Constant.OLD_BAG_ID)+"\r\n"));
 
             AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 0);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.new_sealing_print)));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 280);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString("new_lead_seal")+"\r\n"));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString(Constant.NEW_LEAD_SEAL)+"\r\n"));
 
         }
 
@@ -253,25 +254,26 @@ public class TestFunction {
         activity2=activity;
         int total=0;
         int num=0;
-        int num100 = SpzUtils.getInt("num100", 0);
-        int num50 = SpzUtils.getInt("num50", 0);
-        int num20 = SpzUtils.getInt("num20", 0);
-        int num10 = SpzUtils.getInt("num10", 0);
-        int num5 = SpzUtils.getInt("num5", 0);
-        int num1 = SpzUtils.getInt("num1", 0);
-        int money100 = SpzUtils.getInt("money100", 0);
-        int money50 = SpzUtils.getInt("money50", 0);
-        int money20 = SpzUtils.getInt("money20", 0);
-        int money10 = SpzUtils.getInt("money10", 0);
-        int money5 = SpzUtils.getInt("money5", 0);
-        int money1 = SpzUtils.getInt("money1", 0);
+        int num100 = SpzUtils.getInt(Constant.NUM100, 0);
+        int num50 = SpzUtils.getInt(Constant.NUM50, 0);
+        int num20 = SpzUtils.getInt(Constant.NUM20, 0);
+        int num10 = SpzUtils.getInt(Constant.NUM10, 0);
+        int num5 = SpzUtils.getInt(Constant.NUM5, 0);
+        int num1 = SpzUtils.getInt(Constant.NUM1, 0);
+
+        int money100 = SpzUtils.getInt(Constant.MONEY100, 0);
+        int money50 = SpzUtils.getInt(Constant.MONEY50, 0);
+        int money20 = SpzUtils.getInt(Constant.MONEY20, 0);
+        int money10 = SpzUtils.getInt(Constant.MONEY10, 0);
+        int money5 = SpzUtils.getInt(Constant.MONEY5, 0);
+        int money1 = SpzUtils.getInt(Constant.MONEY1, 0);
         int save_num100=0,save_num50=0,save_num20=0,save_num10=0,save_num5=0,save_num1=0;
         int save_money100=0,save_money50=0,save_money20=0,save_money10=0,save_money5=0,save_money1=0;
 
-        int coin2 = SpzUtils.getInt("coin2", 0);
-        int cheque2 = SpzUtils.getInt("cheque2", 0);
-        int paper_money2 = SpzUtils.getInt("paper_money2", 0);
-        int other2 = SpzUtils.getInt("other2", 0);
+        int coin2 = SpzUtils.getInt(Constant.COIN2, 0);
+        int cheque2 = SpzUtils.getInt(Constant.CHEQUE2, 0);
+        int paper_money2 = SpzUtils.getInt(Constant.PAPER_MONEY2, 0);
+        int other2 = SpzUtils.getInt(Constant.OTHER2, 0);
         //将其他存款数累加
         coin2+=coin;
         cheque2+=cheque;
@@ -513,23 +515,23 @@ public class TestFunction {
             }
 
             {
-                SpzUtils.putInt("num100",num100);
-                SpzUtils.putInt("num50",num50);
-                SpzUtils.putInt("num20",num20);
-                SpzUtils.putInt("num10",num10);
-                SpzUtils.putInt("num5",num5);
-                SpzUtils.putInt("num1",num1);
-                SpzUtils.putInt("money100",money100);
-                SpzUtils.putInt("money50",money50);
-                SpzUtils.putInt("money20",money20);
-                SpzUtils.putInt("money10",money10);
-                SpzUtils.putInt("money5",money5);
-                SpzUtils.putInt("money1",money1);
+                SpzUtils.putInt(Constant.NUM100,num100);
+                SpzUtils.putInt(Constant.NUM50,num50);
+                SpzUtils.putInt(Constant.NUM20,num20);
+                SpzUtils.putInt(Constant.NUM10,num10);
+                SpzUtils.putInt(Constant.NUM5,num5);
+                SpzUtils.putInt(Constant.NUM1,num1);
+                SpzUtils.putInt(Constant.MONEY100,money100);
+                SpzUtils.putInt(Constant.MONEY50,money50);
+                SpzUtils.putInt(Constant.MONEY20,money20);
+                SpzUtils.putInt(Constant.MONEY10,money10);
+                SpzUtils.putInt(Constant.MONEY5,money5);
+                SpzUtils.putInt(Constant.MONEY1,money1);
                 //其他存款
-                SpzUtils.putInt("coin2",coin2);
-                SpzUtils.putInt("cheque2",cheque2);
-                SpzUtils.putInt("paper_money2",paper_money2);
-                SpzUtils.putInt("other2",other2);
+                SpzUtils.putInt(Constant.COIN2,coin2);
+                SpzUtils.putInt(Constant.CHEQUE2,cheque2);
+                SpzUtils.putInt(Constant.PAPER_MONEY2,paper_money2);
+                SpzUtils.putInt(Constant.OTHER2,other2);
                 coin=0;
                 cheque=0;
                 paper_money=0;
@@ -543,10 +545,6 @@ public class TestFunction {
     public static void select_deposit_Print_SampleTicket(Activity activity, int n, Pointer h){
         activity2=activity;
         n2=n;
-//         coin = SpzUtils.getInt("coin", -1);
-//         cheque = SpzUtils.getInt("cheque", -1);
-//         paper_money = SpzUtils.getInt("paper_money", -1);
-//         other = SpzUtils.getInt("other", -1);
         //获取输入金额
         how_much = SpzUtils.getInt("how_much", -1);
         {

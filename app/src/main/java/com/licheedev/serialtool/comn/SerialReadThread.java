@@ -116,17 +116,20 @@ public class SerialReadThread extends Thread {
      * @param received
      * @param size
      */
-    public void onDataReceive(byte[] received, int size,String s) {
+    public void onDataReceive(byte[] received, int size, String s) {
         // TODO: 2018/3/22 解决粘包、分包等
         String hexstr1 = null;
         byte[] version=new byte[160];
         String hexStr = ByteUtil.bytes2HexStr(received, 0, size);
         //判断是否遮挡
-        if (s.contains("fb02")||s.contains("fb04")||s.contains("fb08")||s.contains("fb0e")){//遮挡
-            EventBus.getDefault().post(new IsCoveringEvent(true));
-        }else if (s.contains("fb00")){//无遮挡
-            EventBus.getDefault().post(new IsCoveringEvent(false));
+        if (!s.isEmpty()){
+            if (s.contains("fb02")||s.contains("fb04")||s.contains("fb08")||s.contains("fb0e")){//遮挡
+                EventBus.getDefault().post(new IsCoveringEvent(true));
+            }else if (s.contains("fb00")){//无遮挡
+                EventBus.getDefault().post(new IsCoveringEvent(false));
+            }
         }
+
         if((char)(received[6]&0xff)==0x15)
         {
             if(((char)(received[7]&0xff)&0x01)==0x01)
@@ -499,8 +502,8 @@ public class SerialReadThread extends Thread {
         }
 
         {hexstr1=hexStr;}
-        LogPlus.e("read_thread+444",hexstr1);
-        LogManager.instance().post(new RecvMessage(hexstr1));
+//        LogPlus.e("read_thread",hexstr1);
+//        LogManager.instance().post(new RecvMessage(hexstr1));
     }
 
     private void amountSaveMoney(byte[] received) {

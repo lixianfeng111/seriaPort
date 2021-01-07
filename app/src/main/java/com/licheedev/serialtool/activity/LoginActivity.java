@@ -20,6 +20,7 @@ import com.licheedev.serialtool.util.DepositRecordUtil;
 import com.licheedev.serialtool.util.LanguageUtils;
 import com.licheedev.serialtool.util.SpzUtils;
 import com.licheedev.serialtool.util.ToastUtil;
+import com.licheedev.serialtool.util.constant.Constant;
 import com.licheedev.serialtool.util.constant.Money;
 import com.sun.jna.Pointer;
 
@@ -79,26 +80,26 @@ public class LoginActivity extends BaseActivity {
         print();
     }
     private void print() {
-        boolean isPrint = SpzUtils.getBoolean("isPrint", false);
+        boolean isPrint = SpzUtils.getBoolean(Constant.IS_PRINT, false);
         if (isPrint){//判断是否存了钱
-            List<DepositDetailsActivity.DepositDetailBean> list = SpzUtils.getDataList(this, "list");
+            List<DepositDetailsActivity.DepositDetailBean> list = SpzUtils.getDataList(this, Constant.LIST);
             if (list!=null){//判断是否存了钞票，如果存了钞票就进入if
                 TestFunction.deposit_Print_SampleTicket(this,list,h);
                 list.clear();//打印之后清空list
-                SpzUtils.setDataList(LoginActivity.this,"list", list);//保存清空后的list
+                SpzUtils.setDataList(LoginActivity.this,Constant.LIST, list);//保存清空后的list
                 //存款打印之后 金额（num）和张数(counts)置为0
-                SpzUtils.putInt("num",0);
-                SpzUtils.putInt("counts",0);
+                SpzUtils.putInt(Constant.NUM,0);
+                SpzUtils.putInt(Constant.COUNTS,0);
             }else {//如果没有存钞票，只存了其他存款（硬币，支票等）就进入else
                 TestFunction.deposit_Print_SampleTicket(this,list,h);
             }
             //打印之后isPrint置为false
-            SpzUtils.putBoolean("isPrint", false);
+            SpzUtils.putBoolean(Constant.IS_PRINT, false);
         }
     }
 
     private void switch_theLanguage() {
-        boolean language = SpzUtils.getBoolean("language",false);
+        boolean language = SpzUtils.getBoolean(Constant.LANGUAGE,false);
         LanguageUtils.attachBaseContext(this,language);
     }
 
@@ -132,9 +133,9 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        int ci = SpzUtils.getInt("ci", 0);
+        int ci = SpzUtils.getInt(Constant.CI, 0);
         if (ci!=0) {
-            SpzUtils.putInt("ci", 1);
+            SpzUtils.putInt(Constant.CI, 1);
         }
     }
 
@@ -143,8 +144,20 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void run() {
                 //波特率为9600
-                h = AutoReplyPrint.INSTANCE.CP_Port_OpenCom("/dev/ttyS3", 9600, AutoReplyPrint.CP_ComDataBits_8, AutoReplyPrint.CP_ComParity_NoParity, AutoReplyPrint.CP_ComStopBits_One, AutoReplyPrint.CP_ComFlowControl_XonXoff, 0);
+                h = AutoReplyPrint.INSTANCE.CP_Port_OpenCom(Constant.PORT, Constant.BAUD_RATE, AutoReplyPrint.CP_ComDataBits_8, AutoReplyPrint.CP_ComParity_NoParity, AutoReplyPrint.CP_ComStopBits_One, AutoReplyPrint.CP_ComFlowControl_XonXoff, 0);
             }
         }).start();
+    }
+    private void ClosePort() {
+        if (h != Pointer.NULL) {
+            AutoReplyPrint.INSTANCE.CP_Port_Close(h);
+            h = Pointer.NULL;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ClosePort();
     }
 }

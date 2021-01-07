@@ -16,6 +16,7 @@ import com.licheedev.serialtool.comn.SerialPortManager;
 import com.licheedev.serialtool.comn.SerialPortManager2;
 import com.licheedev.serialtool.util.SpzUtils;
 import com.licheedev.serialtool.util.ToastUtil;
+import com.licheedev.serialtool.util.constant.Constant;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -43,14 +44,14 @@ public class ClearDeviceTestActivity extends BaseActivity {
         SerialPortManager.instance().close();
         SerialPortManager2.instance().initDevice();
         //获取原钞袋号
-        String bag = SpzUtils.getString("old_bagId");
-        String old_lead_seal = SpzUtils.getString("old_lead_seal");
+        String bag = SpzUtils.getString(Constant.OLD_BAG_ID);
+        String old_lead_seal = SpzUtils.getString(Constant.OLD_LEAD_SEAL);
         if (!TextUtils.isEmpty(bag)){
             tvOriginalNum.setText(bag);
-            SpzUtils.putString("bagId",bag);
+            SpzUtils.putString(Constant.BAG_ID,bag);
         }
         if (!TextUtils.isEmpty(old_lead_seal)){
-            SpzUtils.putString("lead_seal",old_lead_seal);
+            SpzUtils.putString(Constant.LEAD_SEAL,old_lead_seal);
         }
         //设置只能输入数字
         tvLead.setInputType( InputType.TYPE_CLASS_NUMBER);
@@ -86,15 +87,15 @@ public class ClearDeviceTestActivity extends BaseActivity {
             case R.id.ibtn_ok:
                 //获取本次钞袋号并保存
                 Editable text1 =  tvNewNum.getText();
-                SpzUtils.putString("old_bagId",text1+"");
+                SpzUtils.putString(Constant.OLD_BAG_ID,text1+"");
                 //获取本次封铅号
                 Editable text2 = tvLead.getText();
-                SpzUtils.putString("old_lead_seal",SpzUtils.getString("new_lead_seal"));
-                SpzUtils.putString("new_lead_seal",text2+"");
+                SpzUtils.putString(Constant.OLD_LEAD_SEAL,SpzUtils.getString(Constant.NEW_LEAD_SEAL));
+                SpzUtils.putString(Constant.NEW_LEAD_SEAL,text2+"");
                 if (TextUtils.isEmpty(text1)){
-                    ToastUtil.show(this,"新钞袋号为空");
+                    ToastUtil.show(this,getResources().getString(R.string.new_bag_id));
                 }else if (TextUtils.isEmpty(text2)){
-                    ToastUtil.show(this,"封铅号为空");
+                    ToastUtil.show(this,getResources().getString(R.string.lead_seal));
                 }else {
                     startActivity(new Intent(this, ClearDeviceHintActivity.class));
                     finish();

@@ -18,6 +18,7 @@ import com.licheedev.serialtool.activity.dapter.RecyclerViewHolder;
 import com.licheedev.serialtool.base.BasePresenter;
 import com.licheedev.serialtool.util.SpzUtils;
 import com.licheedev.serialtool.util.TimeFormartUtils;
+import com.licheedev.serialtool.util.constant.Constant;
 import com.sun.jna.Pointer;
 
 import java.util.ArrayList;
@@ -171,9 +172,21 @@ public class DepositRecordActivity extends BaseActivity implements BaseRecyclerA
         new Thread(new Runnable() {
             @Override
             public void run() {
-                h = AutoReplyPrint.INSTANCE.CP_Port_OpenCom("/dev/ttyS3", 9600, AutoReplyPrint.CP_ComDataBits_8, AutoReplyPrint.CP_ComParity_NoParity, AutoReplyPrint.CP_ComStopBits_One, AutoReplyPrint.CP_ComFlowControl_XonXoff, 0);
+                h = AutoReplyPrint.INSTANCE.CP_Port_OpenCom(Constant.PORT, Constant.BAUD_RATE, AutoReplyPrint.CP_ComDataBits_8, AutoReplyPrint.CP_ComParity_NoParity, AutoReplyPrint.CP_ComStopBits_One, AutoReplyPrint.CP_ComFlowControl_XonXoff, 0);
             }
         }).start();
+    }
+    private void ClosePort() {
+        if (h != Pointer.NULL) {
+            AutoReplyPrint.INSTANCE.CP_Port_Close(h);
+            h = Pointer.NULL;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ClosePort();
     }
 
     private static class DepositRecordBean{

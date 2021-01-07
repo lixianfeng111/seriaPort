@@ -18,6 +18,7 @@ import com.licheedev.serialtool.comn.SerialPortManager;
 import com.licheedev.serialtool.util.AllCapTransformationMethod;
 import com.licheedev.serialtool.util.LanguageUtils;
 import com.licheedev.serialtool.util.PrefHelper;
+import com.licheedev.serialtool.util.constant.Constant;
 import com.licheedev.serialtool.util.constant.PreferenceKeys;
 
 import java.util.Locale;
@@ -183,7 +184,7 @@ public class MainActivity extends BaseActivity  {
         mDevice = new Device(mDevices[mDeviceIndex], mBaudrates[mBaudrateIndex]);
 
         SerialPortManager.instance().close();
-        mDevice = new Device("/dev/ttyS4", "115200");
+        mDevice = new Device(Constant.PORT_MONEY, Constant.BAUD_RATE_MONEY);
         SerialPortManager.instance().open(mDevice);
 
     }
@@ -207,7 +208,7 @@ public class MainActivity extends BaseActivity  {
                 break;
             case R.id.send_custom:
                 SerialPortManager.instance().close();
-                mDevice = new Device("/dev/ttyS4", "115200");
+                mDevice = new Device(Constant.PORT_MONEY, Constant.BAUD_RATE_MONEY);
                 SerialPortManager.instance().open(mDevice);
                 SerialPortManager.instance().sendCommand(comandRecjectReason);
                 break;
@@ -231,27 +232,27 @@ public class MainActivity extends BaseActivity  {
                 break;
             case R.id.btn_send_data:
                 SerialPortManager.instance().close();
-                mDevice = new Device("/dev/ttyS3", "9600");
+                mDevice = new Device(Constant.PORT, Constant.BAUD_RATE_String);
                 SerialPortManager.instance().open(mDevice);
                 sendData(command1);
                 break;
             case R.id.send_receive:
                 SerialPortManager.instance().close();
-                mDevice = new Device("/dev/ttyS4", "115200");
+                mDevice = new Device(Constant.PORT_MONEY, Constant.BAUD_RATE_MONEY);
                 SerialPortManager.instance().open(mDevice);
                 sendData(command11);
                 break;
 
             case R.id.btn_send_data2:
                 SerialPortManager.instance().close();
-                mDevice = new Device("/dev/ttyS1", "9600");
+                mDevice = new Device(Constant.PORT_ON_THE_BACK, Constant.BAUD_RATE_String);
                 SerialPortManager.instance().open(mDevice);
                 sendData(command1);
                 break;
 
             case R.id.btn_send_data3:
                 SerialPortManager.instance().close();
-                mDevice = new Device("/dev/ttyS4", "115200");
+                mDevice = new Device(Constant.PORT_MONEY, Constant.BAUD_RATE_MONEY);
                 SerialPortManager.instance().open(mDevice);
                 sendData(command3);
                 //Toast.makeText(getApplicationContext(),"PS08 错误",Toast.LENGTH_SHORT).show();
@@ -259,35 +260,35 @@ public class MainActivity extends BaseActivity  {
 
             case R.id.btn_send_data4:
                 SerialPortManager.instance().close();
-                mDevice = new Device("/dev/ttyS4", "115200");
+                mDevice = new Device(Constant.PORT_MONEY, Constant.BAUD_RATE_MONEY);
                 SerialPortManager.instance().open(mDevice);
                 sendData(command4);
                 break;
 
             case R.id.btn_send_data5:
                 SerialPortManager.instance().close();
-                mDevice = new Device("/dev/ttyS4", "115200");
+                mDevice = new Device(Constant.PORT_MONEY, Constant.BAUD_RATE_MONEY);
                 SerialPortManager.instance().open(mDevice);
                 sendData(command5);
                 break;
 
             case R.id.btn_send_data6:
                 SerialPortManager.instance().close();
-                mDevice = new Device("/dev/ttyS4", "115200");
+                mDevice = new Device(Constant.PORT_MONEY, Constant.BAUD_RATE_MONEY);
                 SerialPortManager.instance().open(mDevice);
                 sendData(command6);
                 break;
 
             case R.id.btn_send_data7:
                 SerialPortManager.instance().close();
-                mDevice = new Device("/dev/ttyS4", "115200");
+                mDevice = new Device(Constant.PORT_MONEY, Constant.BAUD_RATE_MONEY);
                 SerialPortManager.instance().open(mDevice);
                 sendData(command7);
                 break;
 
             case R.id.btn_send_data8:
                 SerialPortManager.instance().close();
-                mDevice = new Device("/dev/ttyS4", "115200");
+                mDevice = new Device(Constant.PORT_MONEY, Constant.BAUD_RATE_MONEY);
                 SerialPortManager.instance().open(mDevice);
                 sendData(command8);
                 break;

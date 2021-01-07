@@ -252,4 +252,8 @@
 	<string name="feeding_pocket">Feeding Pocket</string>
 	<string name="rejecting_pocket">There are banknotes in the reject port, so it can not exit </string>
 	<string name="draw_out">Please draw out the notes</string>
+<!--	有道-->
+	<string name="new_bag_id">Number of new banknotes is empty</string>
+	<string name="lead_seal">The seal number is empty</string>
+	<string name="please_take_out">Please retrieve the banknotes from the Temporary Pocket</string>
 </resources>

@@ -21,6 +21,7 @@ import com.licheedev.serialtool.comn.event.IsCoveringEvent;
 import com.licheedev.serialtool.comn.message.LogManager;
 import com.licheedev.serialtool.util.SpzUtils;
 import com.licheedev.serialtool.util.ToastUtil;
+import com.licheedev.serialtool.util.constant.Constant;
 import com.sun.jna.Pointer;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -53,6 +54,8 @@ public class OtherDepositActivity extends BaseActivity {
     //遮挡状态
     private boolean isCovered;
 
+    private boolean w=true;
+    private Thread thread = null;
     //循环调用机器状态查询指令
     private Handler handler = new Handler() {
         @Override
@@ -154,12 +157,14 @@ public class OtherDepositActivity extends BaseActivity {
                     if (isOpenDoor){
                         if (isCovered){//判断有没有被遮挡
                             SerialPortManager.instance().closeMaskDoor();//关闭罩门
-                            SerialPortManager.instance().sendSaveCommand();//存钱
+//                            SerialPortManager.instance().sendSaveCommand();//存钱
                             isCovered=false;
                             isOpenDoor=false;
                             isGo=false;
                             editText.setText("");//金额制空
-                            handler.removeCallbacksAndMessages(1);//删除handler消息
+//                            handler.removeMessages(1);//删除handler消息
+                            w=false;
+                            SerialPortManager.instance().sendSaveCommand();//存钱
                         }else {
                             ToastUtil.show(OtherDepositActivity.this,getResources().getString(R.string.put_envelope_into));
                         }
@@ -177,29 +182,35 @@ public class OtherDepositActivity extends BaseActivity {
                 }
                 break;
             case R.id.ibtn_cancel:
-                if (isOpenDoor){
-                    SerialPortManager.instance().closeMaskDoor();//关闭罩门
-                    //如果打印之后不存直接返回则减去输入金额
-                    TestFunction.clear_thisOther();
+                if (!isCovered){
+                    if (isOpenDoor){
+                        SerialPortManager.instance().closeMaskDoor();//关闭罩门
+                        //如果打印之后不存直接返回则减去输入金额
+                        TestFunction.clear_thisOther();
+                    }
+                    finish();
                 }
-                finish();
                 break;
         }
     }
 
     private void isCovereing() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(500);
-                    handler.sendEmptyMessage(1);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+        if (thread==null){
+            thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    while (w){
+                        try {
+                            Thread.sleep(500);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        SerialPortManager.instance().sendStatusCommand();
+                    }
                 }
-
-            }
-        }).start();
+            });
+        }
+        thread.start();
     }
 
     //SerialReadThread的遮挡状态
@@ -232,18 +243,28 @@ public class OtherDepositActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         //删除handler消息
-        handler.removeCallbacksAndMessages(1);
+//        handler.removeMessages(1);
+        w=false;
         SerialPortManager.instance().sendSaveAck();
         //退出零钱模式
         SerialPortManager.instance().sendLooseChangeExit();
+        ClosePort();
+//        thread.stop();
     }
 
     private void OpenPort() {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                h = AutoReplyPrint.INSTANCE.CP_Port_OpenCom("/dev/ttyS3", 9600, AutoReplyPrint.CP_ComDataBits_8, AutoReplyPrint.CP_ComParity_NoParity, AutoReplyPrint.CP_ComStopBits_One, AutoReplyPrint.CP_ComFlowControl_XonXoff, 0);
+                h = AutoReplyPrint.INSTANCE.CP_Port_OpenCom(Constant.PORT, Constant.BAUD_RATE, AutoReplyPrint.CP_ComDataBits_8, AutoReplyPrint.CP_ComParity_NoParity, AutoReplyPrint.CP_ComStopBits_One, AutoReplyPrint.CP_ComFlowControl_XonXoff, 0);
             }
         }).start();
+    }
+
+    private void ClosePort() {
+        if (h != Pointer.NULL) {
+            AutoReplyPrint.INSTANCE.CP_Port_Close(h);
+            h = Pointer.NULL;
+        }
     }
 }

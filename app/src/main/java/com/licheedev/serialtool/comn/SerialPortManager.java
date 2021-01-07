@@ -344,7 +344,6 @@ public class SerialPortManager {
 
         // TODO: 2018/3/22  
         LogPlus.i("发送命令：" + command);
-//        ToastUtil.show(App.instance(),"发送命令command = " + command);
         mWriteThread = new HandlerThread("write-thread");
         mWriteThread.start();
         byte[] bytes = ByteUtil.hexStr2bytes(command);

@@ -22,5 +22,6 @@
     <color name="color_888888">#888888</color>
     <color name="color_20ffffff">#20ffffff</color>
 
-
+    <color name="clear_red">#FF0404</color>
+    <color name="clear_green">#00FF06</color>
 </resources>
