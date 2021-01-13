@@ -2,7 +2,13 @@ package com.licheedev.serialtool.comn;
 
 import android.os.SystemClock;
 
+import com.licheedev.serialtool.comn.event.BootEvent;
+import com.licheedev.serialtool.comn.event.ClearEvent;
+import com.licheedev.serialtool.comn.event.DepositEvent;
 import com.licheedev.serialtool.comn.event.IsCoveringEvent;
+import com.licheedev.serialtool.comn.event.StatusEvent;
+import com.licheedev.serialtool.comn.event.SystemInfoEvent;
+import com.licheedev.serialtool.comn.event.ZPKEvent;
 import com.licheedev.serialtool.comn.message.LogManager;
 import com.licheedev.serialtool.comn.message.RecvMessage;
 import com.licheedev.serialtool.util.ByteUtil;
@@ -201,7 +207,7 @@ public class SerialReadThread extends Thread {
             else
             {hexstr1=hexStr;}
             SerialPortManager.instance().sendCommand(sendok1);
-            LogPlus.e("read_thread",hexstr1);
+            LogPlus.e("read_thread1",hexstr1);
         }
         else if((char)(received[6]&0xff)==0x44)
         {
@@ -234,172 +240,71 @@ public class SerialReadThread extends Thread {
             else
             {hexstr1=hexStr;}
 
-            LogPlus.e("read_thread","传感器 " + hexstr1);
-//            SerialPortManager.instance().sendCommand(sendok);
+            LogPlus.e("read_thread2","传感器 " + hexstr1);
+            SerialPortManager.instance().sendCommand(sendok);
         }
         else if((char)(received[6]&0xff)==0x90)
-        {   version[0]='B';
-            version[1]='o';
-            version[2]='o';
-            version[3]='t';
-            version[4]=':';
-            version[5]= (byte)((char)(received[7]&0xff)/100+0x30) ;
-            version[6]= (byte)(((char)(received[7]&0xff)/10)%10+0x30) ;
-            version[7]= (byte)((char)(received[7]&0xff)%10+0x30) ;
-            version[8]='-';
-            version[9]= (byte)((char)(received[8]&0xff)/100+0x30) ;
-            version[10]= (byte)(((char)(received[8]&0xff)/10)%10+0x30) ;
-            version[11]= (byte)((char)(received[8]&0xff)%10+0x30) ;
-            version[12]='-';
-            version[13]= (byte)((char)(received[9]&0xff)/100+0x30) ;
-            version[14]= (byte)(((char)(received[9]&0xff)/10)%10+0x30) ;
-            version[15]= (byte)((char)(received[9]&0xff)%10+0x30) ;
-            version[16]='-';
-            version[17]= (byte)((char)(received[10]&0xff)/100+0x30) ;
-            version[18]= (byte)(((char)(received[10]&0xff)/10)%10+0x30) ;
-            version[19]= (byte)((char)(received[10]&0xff)%10+0x30) ;
-            version[20]=' ';
-            version[21]=' ';
-            version[22]=' ';
+        {   //boot
+            version[0]= (byte)((char)(received[7]&0xff)/100+0x30) ;
+            version[1]= (byte)(((char)(received[7]&0xff)/10)%10+0x30) ;
+            version[2]= (byte)((char)(received[7]&0xff)%10+0x30) ;
+            version[3]='-';
+            version[4]= (byte)((char)(received[8]&0xff)/100+0x30) ;
+            version[5]= (byte)(((char)(received[8]&0xff)/10)%10+0x30) ;
+            version[6]= (byte)((char)(received[8]&0xff)%10+0x30) ;
+            version[7]='-';
+            version[8]= (byte)((char)(received[9]&0xff)/100+0x30) ;
+            version[9]= (byte)(((char)(received[9]&0xff)/10)%10+0x30) ;
+            version[10]= (byte)((char)(received[9]&0xff)%10+0x30) ;
+            version[11]='-';
+            version[12]= (byte)((char)(received[10]&0xff)/100+0x30) ;
+            version[13]= (byte)(((char)(received[10]&0xff)/10)%10+0x30) ;
+            version[14]= (byte)((char)(received[10]&0xff)%10+0x30) ;
 
-            version[23]='H';
-            version[24]='O';
-            version[25]='S';
-            version[26]='T';
-            version[27]=':';
-            version[28]= (byte)((char)(received[11]&0xff)/100+0x30) ;
-            version[29]= (byte)(((char)(received[11]&0xff)/10)%10+0x30) ;
-            version[30]= (byte)((char)(received[11]&0xff)%10+0x30) ;
-            version[31]='-';
-            version[32]= (byte)((char)(received[12]&0xff)/100+0x30) ;
-            version[33]= (byte)(((char)(received[12]&0xff)/10)%10+0x30) ;
-            version[34]= (byte)((char)(received[12]&0xff)%10+0x30) ;
-            version[35]='-';
-            version[36]= (byte)((char)(received[13]&0xff)/100+0x30) ;
-            version[37]= (byte)(((char)(received[13]&0xff)/10)%10+0x30) ;
-            version[38]= (byte)((char)(received[13]&0xff)%10+0x30) ;
-            version[39]='-';
-            version[40]= (byte)((char)(received[14]&0xff)/100+0x30) ;
-            version[41]= (byte)(((char)(received[14]&0xff)/10)%10+0x30) ;
-            version[42]= (byte)((char)(received[14]&0xff)%10+0x30) ;
-            version[43]=' ';
-            version[44]=' ';
-            version[45]=' ';
+            String boot=new String(version);
+            EventBus.getDefault().post(new BootEvent(boot));
 
-            version[46]='M';
-            version[47]='G';
-            version[48]=':';
-            version[49]= (byte)((char)(received[15]&0xff)/100+0x30) ;
-            version[50]= (byte)(((char)(received[15]&0xff)/10)%10+0x30) ;
-            version[51]= (byte)((char)(received[15]&0xff)%10+0x30) ;
-            version[52]='-';
-            version[53]= (byte)((char)(received[16]&0xff)/100+0x30) ;
-            version[54]= (byte)(((char)(received[16]&0xff)/10)%10+0x30) ;
-            version[55]= (byte)((char)(received[16]&0xff)%10+0x30) ;
-            version[56]='-';
-            version[57]= (byte)((char)(received[17]&0xff)/100+0x30) ;
-            version[58]= (byte)(((char)(received[17]&0xff)/10)%10+0x30) ;
-            version[59]= (byte)((char)(received[17]&0xff)%10+0x30) ;
-            version[60]='-';
-            version[61]= (byte)((char)(received[18]&0xff)/100+0x30) ;
-            version[62]= (byte)(((char)(received[18]&0xff)/10)%10+0x30) ;
-            version[63]= (byte)((char)(received[18]&0xff)%10+0x30) ;
-            version[64]=' ';
-            version[65]=' ';
-            version[66]=' ';
+            //ZPK
+            version[0]= (byte)((char)(received[27]&0xff)/100+0x30) ;
+            version[1]= (byte)(((char)(received[27]&0xff)/10)%10+0x30) ;
+            version[2]= (byte)((char)(received[27]&0xff)%10+0x30) ;
+            version[3]='-';
+            version[4]= (byte)((char)(received[28]&0xff)/100+0x30) ;
+            version[5]= (byte)(((char)(received[28]&0xff)/10)%10+0x30) ;
+            version[6]= (byte)((char)(received[28]&0xff)%10+0x30) ;
+            version[7]='-';
+            version[8]= (byte)((char)(received[29]&0xff)/100+0x30) ;
+            version[9]= (byte)(((char)(received[29]&0xff)/10)%10+0x30) ;
+            version[10]= (byte)((char)(received[29]&0xff)%10+0x30) ;
+            version[11]='-';
+            version[12]= (byte)((char)(received[30]&0xff)/100+0x30) ;
+            version[13]= (byte)(((char)(received[30]&0xff)/10)%10+0x30) ;
+            version[14]= (byte)((char)(received[30]&0xff)%10+0x30) ;
 
-            version[67]='F';
-            version[68]='P';
-            version[69]='G';
-            version[70]='A';
-            version[71]=':';
-            version[72]= (byte)((char)(received[19]&0xff)/100+0x30) ;
-            version[73]= (byte)(((char)(received[19]&0xff)/10)%10+0x30) ;
-            version[74]= (byte)((char)(received[19]&0xff)%10+0x30) ;
-            version[75]='-';
-            version[76]= (byte)((char)(received[20]&0xff)/100+0x30) ;
-            version[77]= (byte)(((char)(received[20]&0xff)/10)%10+0x30) ;
-            version[78]= (byte)((char)(received[20]&0xff)%10+0x30) ;
-            version[79]='-';
-            version[80]= (byte)((char)(received[21]&0xff)/100+0x30) ;
-            version[81]= (byte)(((char)(received[21]&0xff)/10)%10+0x30) ;
-            version[82]= (byte)((char)(received[21]&0xff)%10+0x30) ;
-            version[83]='-';
-            version[84]= (byte)((char)(received[22]&0xff)/100+0x30) ;
-            version[85]= (byte)(((char)(received[22]&0xff)/10)%10+0x30) ;
-            version[86]= (byte)((char)(received[22]&0xff)%10+0x30) ;
-            version[87]=' ';
-            version[88]=' ';
-            version[89]=' ';
+            String zpk=new String(version);
+            EventBus.getDefault().post(new ZPKEvent(zpk));
 
-            version[90]=' ';
-            version[91]='A';
-            version[92]='P';
-            version[93]='P';
-            version[94]=':';
-            version[95]= (byte)((char)(received[23]&0xff)/100+0x30) ;
-            version[96]= (byte)(((char)(received[23]&0xff)/10)%10+0x30) ;
-            version[97]= (byte)((char)(received[23]&0xff)%10+0x30) ;
-            version[98]='-';
-            version[99]= (byte)((char)(received[24]&0xff)/100+0x30) ;
-            version[100]= (byte)(((char)(received[24]&0xff)/10)%10+0x30) ;
-            version[101]= (byte)((char)(received[24]&0xff)%10+0x30) ;
-            version[102]='-';
-            version[103]= (byte)((char)(received[25]&0xff)/100+0x30) ;
-            version[104]= (byte)(((char)(received[25]&0xff)/10)%10+0x30) ;
-            version[105]= (byte)((char)(received[25]&0xff)%10+0x30) ;
-            version[106]='-';
-            version[107]= (byte)((char)(received[26]&0xff)/100+0x30) ;
-            version[108]= (byte)(((char)(received[26]&0xff)/10)%10+0x30) ;
-            version[109]= (byte)((char)(received[26]&0xff)%10+0x30) ;
-            version[110]=' ';
-            version[111]=' ';
-            version[112]=' ';
+            //SN
+            version[0]=(byte)(received[35]);
+            version[1]=(byte)(received[36]);
+            version[2]=(byte)(received[37]);
+            version[3]=(byte)(received[38]);
+            version[4]=(byte)(received[39]);
+            version[5]=(byte)(received[40]);
+            version[6]=(byte)(received[41]);
+            version[7]=(byte)(received[42]);
+            version[8]=(byte)(received[43]);
+            version[9]=(byte)(received[44]);
+            version[10]=(byte)(received[45]);
+            version[11]=(byte)(received[46]);
 
-            version[113]=' ';
-            version[114]='Z';
-            version[115]='P';
-            version[116]='K';
-            version[117]=':';
-            version[118]= (byte)((char)(received[27]&0xff)/100+0x30) ;
-            version[119]= (byte)(((char)(received[27]&0xff)/10)%10+0x30) ;
-            version[120]= (byte)((char)(received[27]&0xff)%10+0x30) ;
-            version[121]='-';
-            version[122]= (byte)((char)(received[28]&0xff)/100+0x30) ;
-            version[123]= (byte)(((char)(received[28]&0xff)/10)%10+0x30) ;
-            version[124]= (byte)((char)(received[28]&0xff)%10+0x30) ;
-            version[125]='-';
-            version[126]= (byte)((char)(received[29]&0xff)/100+0x30) ;
-            version[127]= (byte)(((char)(received[29]&0xff)/10)%10+0x30) ;
-            version[128]= (byte)((char)(received[29]&0xff)%10+0x30) ;
-            version[129]='-';
-            version[130]= (byte)((char)(received[30]&0xff)/100+0x30) ;
-            version[131]= (byte)(((char)(received[30]&0xff)/10)%10+0x30) ;
-            version[132]= (byte)((char)(received[30]&0xff)%10+0x30) ;
-            version[133]=' ';
-            version[134]=' ';
-            version[135]=' ';
-
-            version[136]='S';
-            version[137]='N';
-            version[138]=':';
-            version[139]=(byte)(received[35]);
-            version[140]=(byte)(received[36]);
-            version[141]=(byte)(received[37]);
-            version[142]=(byte)(received[38]);
-            version[143]=(byte)(received[39]);
-            version[144]=(byte)(received[40]);
-            version[145]=(byte)(received[41]);
-            version[146]=(byte)(received[42]);
-            version[147]=(byte)(received[43]);
-            version[148]=(byte)(received[44]);
-            version[149]=(byte)(received[45]);
-            version[150]=(byte)(received[46]);
 
             String b=new String(version);
+            EventBus.getDefault().post(new SystemInfoEvent(b));
+            EventBus.getDefault().post(new ClearEvent(b));
+            EventBus.getDefault().post(new DepositEvent(b));
             hexstr1=b;
-            LogPlus.e("read_thread",hexstr1);
-
+            LogPlus.d("read_thread",hexstr1);
         }
         else if((char)(received[6]&0xff)== 0x12)
         {

@@ -39,6 +39,7 @@
 
         <TextView
             android:id="@+id/editIp"
+            android:gravity="center_vertical"
             android:layout_width="274dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="4dp"
@@ -68,6 +69,8 @@
             android:textSize="15sp" />
 
         <TextView
+            android:id="@+id/device_num"
+            android:gravity="center_vertical"
             android:layout_width="274dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="4dp"
@@ -97,6 +100,8 @@
             android:textSize="15sp" />
 
         <TextView
+            android:id="@+id/software_num"
+            android:gravity="center_vertical"
             android:layout_width="274dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="4dp"
@@ -126,6 +131,8 @@
             android:textSize="15sp" />
 
         <TextView
+            android:id="@+id/mainBoard_No"
+            android:gravity="center_vertical"
             android:layout_width="274dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="4dp"
@@ -155,6 +162,8 @@
             android:textSize="15sp" />
 
         <TextView
+            android:id="@+id/image_num"
+            android:gravity="center_vertical"
             android:layout_width="274dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="4dp"

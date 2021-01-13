@@ -8,8 +8,14 @@ import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.base.BasePresenter;
 import com.licheedev.serialtool.comn.SerialPortManager;
 import com.licheedev.serialtool.comn.SerialPortManager2;
+import com.licheedev.serialtool.comn.SerialReadThread2;
+import com.licheedev.serialtool.comn.event.ClearEvent;
+import com.licheedev.serialtool.comn.event.DepositEvent;
 import com.licheedev.serialtool.util.SpzUtils;
 import com.licheedev.serialtool.util.constant.Constant;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.OnClick;
 
@@ -18,7 +24,7 @@ import butterknife.OnClick;
  */
 public class SelectDepositActivitys extends BaseActivity {
 
-
+    int[] command8=new  int[]{0xA1,0xA2,0xA3,0xA4,0x04,0x00,0x90,0xBB,0xBB,0x90};
     @Override
     protected int getLayoutId() {
         return R.layout.activity_select_deposit;
@@ -49,7 +55,10 @@ public class SelectDepositActivitys extends BaseActivity {
 
     @Override
     public void initData() {
-
+        String string = SpzUtils.getString(Constant.SN);
+        if (string.isEmpty()){
+            SerialPortManager.instance().sendCommand(SerialPortManager.byteArrayToHexString(command8));
+        }
     }
 
     @OnClick({R.id.ibtn_paper_select, R.id.ibtn_other_select, R.id.ibtn_record,R.id.button})
@@ -72,4 +81,14 @@ public class SelectDepositActivitys extends BaseActivity {
         }
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void depositEvent(DepositEvent depositEvent){
+        SpzUtils.putString(Constant.SN,depositEvent.getSystem_info());
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SerialPortManager.instance().close();
+    }
 }

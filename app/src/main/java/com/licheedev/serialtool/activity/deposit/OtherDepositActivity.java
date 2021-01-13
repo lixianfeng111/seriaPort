@@ -137,9 +137,9 @@ public class OtherDepositActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ibtn_ok:
-                Editable text = editText.getText();
-                if (!TextUtils.isEmpty(text)){
-                    count = Integer.parseInt(text + "");
+                String s = editText.getText().toString();
+                if (!TextUtils.isEmpty(s)){
+                    count = Integer.parseInt(s);
                     if (isOpenDoor){
                         if (isCovered){//判断有没有被遮挡
                             w=false;

@@ -20,7 +20,6 @@ import com.licheedev.serialtool.comn.message.LogManager;
 import com.licheedev.serialtool.dialog.CurrenySelectUtil;
 import com.licheedev.serialtool.util.LogPlus;
 import com.licheedev.serialtool.util.SpzUtils;
-import com.licheedev.serialtool.util.ToastUtil;
 import com.licheedev.serialtool.util.constant.Constant;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -133,7 +132,6 @@ public class DepositDetailsActivity extends BaseActivity implements BaseRecycler
                 }
                 SpzUtils.setDataList(DepositDetailsActivity.this,Constant.LIST, list);
                 SerialPortManager.instance().sendSaveAck();
-//                SpzUtils.putBoolean("is_continue",true);
                 finish();
             }
             break;
@@ -187,7 +185,6 @@ public class DepositDetailsActivity extends BaseActivity implements BaseRecycler
 //        tvAlreadySum.setText(sum + "");
 //        tvAlreadyCount.setText(count + "");
     }
-
     private void amountReceiveMoney(byte[] received) {
         if (list != null) {
             list.clear();
@@ -262,9 +259,6 @@ public class DepositDetailsActivity extends BaseActivity implements BaseRecycler
             adapter.notifyDataSetChanged();
         }
 
-//        if (sum>0){
-//            SpzUtils.putBoolean("isPrint", true);
-//        }
         //保存已存累计
         SpzUtils.putInt(Constant.NUM,num);
         SpzUtils.putInt(Constant.COUNTS,counts);
@@ -310,8 +304,6 @@ public class DepositDetailsActivity extends BaseActivity implements BaseRecycler
         }
 
     }
-
-
 
     public static class DepositDetailBean implements Serializable{
         public int deposit;

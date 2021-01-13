@@ -18,7 +18,6 @@ import com.licheedev.serialtool.comn.SerialPortManager;
 import com.licheedev.serialtool.comn.message.LogManager;
 import com.licheedev.serialtool.dialog.CurrenySelectUtil;
 import com.licheedev.serialtool.util.LogPlus;
-import com.licheedev.serialtool.util.SpzUtils;
 import com.licheedev.serialtool.util.ToastUtil;
 import com.licheedev.serialtool.util.constant.Money;
 
@@ -38,7 +37,6 @@ import static com.licheedev.serialtool.comn.message.LogManager.SEARCH_LEAD;
  */
 public class PaperCurrencyDepositActivity extends BaseActivity {
 
-    private boolean isPutPrint=false;
     public static final int REQUEST_CODE_DEPOSIT = 1;
     public static final int RESULT_CODE_DEPOSIT = 1111;
 

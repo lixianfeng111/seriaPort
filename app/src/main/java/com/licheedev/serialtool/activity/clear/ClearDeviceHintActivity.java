@@ -15,6 +15,8 @@ import com.caysn.autoreplyprint.AutoReplyPrint;
 import com.licheedev.serialtool.R;
 import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.base.BasePresenter;
+import com.licheedev.serialtool.comn.SerialPortManager;
+import com.licheedev.serialtool.comn.SerialPortManager2;
 import com.licheedev.serialtool.comn.event.StatusEvent;
 import com.licheedev.serialtool.dialog.CurrenySelectUtil;
 import com.licheedev.serialtool.util.DepositRecordUtil;
@@ -189,7 +191,7 @@ public class ClearDeviceHintActivity extends BaseActivity {
                     }
                     //保存放入新钞箱的时间
                     SpzUtils.putString(Constant.timeDay,TimeFormartUtils.getTimeDay());
-                    SpzUtils.putString("time",TimeFormartUtils.getTime());
+                    SpzUtils.putString(Constant.TIME,TimeFormartUtils.getTime());
                 }
                 break;
             case 2:
@@ -294,6 +296,7 @@ public class ClearDeviceHintActivity extends BaseActivity {
         ClosePort();
         isCleared=false;
         n=0;
+        SerialPortManager2.instance().close();
         super.onDestroy();
     }
 }

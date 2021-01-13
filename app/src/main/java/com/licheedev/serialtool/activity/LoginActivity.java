@@ -1,7 +1,6 @@
 package com.licheedev.serialtool.activity;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
@@ -16,12 +15,10 @@ import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.activity.deposit.SelectDepositActivitys;
 import com.licheedev.serialtool.activity.manage.SetManageActivity;
 import com.licheedev.serialtool.base.BasePresenter;
-import com.licheedev.serialtool.util.DepositRecordUtil;
 import com.licheedev.serialtool.util.LanguageUtils;
 import com.licheedev.serialtool.util.SpzUtils;
 import com.licheedev.serialtool.util.ToastUtil;
 import com.licheedev.serialtool.util.constant.Constant;
-import com.licheedev.serialtool.util.constant.Money;
 import com.sun.jna.Pointer;
 
 import java.util.List;
@@ -69,7 +66,6 @@ public class LoginActivity extends BaseActivity {
         editText2.setText("");
         editText.setText("");
     }
-
 
     @Override
     protected void onResume() {
@@ -148,6 +144,7 @@ public class LoginActivity extends BaseActivity {
             }
         }).start();
     }
+
     private void ClosePort() {
         if (h != Pointer.NULL) {
             AutoReplyPrint.INSTANCE.CP_Port_Close(h);

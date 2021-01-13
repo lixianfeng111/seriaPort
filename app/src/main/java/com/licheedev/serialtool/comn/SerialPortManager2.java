@@ -72,6 +72,7 @@ public class SerialPortManager2 {
     final String commandStatus = "A1 A2 A3 A4 04 00 11 BB BB 11";
 
 
+
     //退出工作模式再进入，可以二次存钱 CMD25
     final String exitCommand0 = "A1 A2 A3 A4 2F 00 25 06 01 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 02 00 01 00 03 00 00 00 01 00 00 00 00 00 00 00 00 00 00 00 00 BB BB 09";
 
@@ -90,6 +91,7 @@ public class SerialPortManager2 {
     final String exitCommand9 = "A1 A2 A3 A4 44 00 4D B2 0C B2 0C B2 0C B5 0C 3B 0C 3D 0C 3C 0C 3A 0C 3D 0C 3C 0C 3A 0C 91 00 3C 0C 3A 0C 00 00 00 00 00 00 3A 0C 00 00 00 00 19 00 03 00 38 0C 3B 0C 00 00 3B 0C 3C 0C 39 0C 00 00 00 00 00 00 00 00 BB BB B7 ";
     final String exitCommand10 = "A1 A2 A3 A4 48 00 50 DC 05 DC 05 DC 05 DC 05 58 02 CF 07 CF 07 CF 07 CF 07 C3 09 C3 09 C3 09 C3 09 8B 0A DC 05 DC 05 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 BB BB C7 ";
     final String exitCommand11 = "A1 A2 A3 A4 05 00 4F 00 BB BB 4E ";
+
 
     public void sendCountCommand() {
         sendCommand(commandCount);
@@ -204,6 +206,7 @@ public class SerialPortManager2 {
         return open(device.getPath(), device.getBaudrate());
     }
 
+
     /**
      * 打开串口
      *
@@ -238,7 +241,6 @@ public class SerialPortManager2 {
             return null;
         }
     }
-
 
 
 

@@ -17,7 +17,7 @@ import com.sun.jna.WString;
 import java.util.List;
 
 public class TestFunction {
-    private static String serial = Build.SERIAL;//HARDWARE
+//    private static String serial = Build.SERIAL;//HARDWARE
     public static Activity activity2;
 
     //清机测试打印
@@ -69,19 +69,19 @@ public class TestFunction {
             AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
             AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 0);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.client_print)));
-            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 200);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString(Constant.CLIENT)+"\r\n"));
 
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.site_print)));
-            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 200);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString(Constant.SITE)+"\r\n"));
 
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.machine_No_print)));
-            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(serial+"\r\n"));
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 200);
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString(Constant.SN)+"\r\n"));
 
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.user_print)));
-            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 200);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString(Constant.USER)+"\r\n"));
         }
 
@@ -299,27 +299,27 @@ public class TestFunction {
             AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
             AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 0);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.client_print)));
-            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 200);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString("client")+"\r\n"));
 
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.site_print)));
-            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 200);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString("site")+"\r\n"));
 
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.deposit_category_print)));
-            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 200);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.bill)+"\r\n"));
 
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.machine_No_print)));
-            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(serial+"\r\n"));
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 200);
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString(Constant.SN)+"\r\n"));
 
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.user_print)));
-            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 200);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString("user")+"\r\n"));
 
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(TimeFormartUtils.getTimeDay()+""));
-            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 200);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(TimeFormartUtils.getTime()+"\r\n"));
         }
 
@@ -567,15 +567,15 @@ public class TestFunction {
             AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
             AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 0);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.client_print)));
-            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 200);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString("client")+"\r\n"));
 
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.site_print)));
-            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 200);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString("site")+"\r\n"));
 
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.deposit_category_print)));
-            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 200);
             if (n==0){
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.coin)+"\r\n"));
             }else if (n==1){
@@ -587,15 +587,15 @@ public class TestFunction {
             }
 
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.machine_No_print)));
-            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(serial+"\r\n"));
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 200);
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString(Constant.SN)+"\r\n"));
 
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.user_print)));
-            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 200);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString("user")+"\r\n"));
 
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(TimeFormartUtils.getTimeDay()+""));
-            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 200);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(TimeFormartUtils.getTime()+"\r\n"));
         }
         {
@@ -698,15 +698,15 @@ public class TestFunction {
             AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
             AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 0);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.client_print)));
-            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 200);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString("client")+"\r\n"));
 
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.site_print)));
-            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 200);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString("site")+"\r\n"));
 
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.deposit_category_print)));
-            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 200);
             if (n==0){
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.coin)+"\r\n"));
             }else if (n==1){
@@ -718,15 +718,15 @@ public class TestFunction {
             }
 
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.machine_No_print)));
-            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(serial+"\r\n"));
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 200);
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString(Constant.SN)+"\r\n"));
 
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.user_print)));
-            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 200);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString("user")+"\r\n"));
 
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(TimeFormartUtils.getTimeDay()+""));
-            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 200);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(TimeFormartUtils.getTime()+"\r\n"));
         }
 

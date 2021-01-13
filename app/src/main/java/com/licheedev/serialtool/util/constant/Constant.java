@@ -68,4 +68,7 @@ public interface Constant {
     String IS_SAVED = "isSaved";
 
     String IS_CURRENT = "iscurrent";
+    //系统信息SN
+    String SN = "SN";
+
 }
