@@ -32,6 +32,9 @@ public interface Constant {
      */
     //清机打印
     // 各个面值的张数
+    String NUM1000 = "num1000";
+    String NUM500 = "num500";
+    String NUM200 = "num200";
     String NUM100 = "num100";
     String NUM50 = "num50";
     String NUM20 = "num20";
@@ -39,6 +42,9 @@ public interface Constant {
     String NUM5 = "num5";
     String NUM1 = "num1";
     //各面值总金额
+    String MONEY1000 = "money1000";
+    String MONEY500 = "money500";
+    String MONEY200 = "money200";
     String MONEY100 = "money100";
     String MONEY50 = "money50";
     String MONEY20 = "money20";

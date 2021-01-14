@@ -25,6 +25,9 @@ public class TestFunction {
         activity2=activity;
         int num=0,total=0,totalAll=0;
         //获取各个面值的张数
+        int num1000 = SpzUtils.getInt(Constant.NUM1000, 0);
+        int num500 = SpzUtils.getInt(Constant.NUM500, 0);
+        int num200 = SpzUtils.getInt(Constant.NUM200, 0);
         int num100 = SpzUtils.getInt(Constant.NUM100, 0);
         int num50 = SpzUtils.getInt(Constant.NUM50, 0);
         int num20 = SpzUtils.getInt(Constant.NUM20, 0);
@@ -32,6 +35,9 @@ public class TestFunction {
         int num5 = SpzUtils.getInt(Constant.NUM5, 0);
         int num1 = SpzUtils.getInt(Constant.NUM1, 0);
         //获取各面值总金额
+        int money1000 = SpzUtils.getInt(Constant.MONEY1000, 0);
+        int money500 = SpzUtils.getInt(Constant.MONEY500, 0);
+        int money200 = SpzUtils.getInt(Constant.MONEY200, 0);
         int money100 = SpzUtils.getInt(Constant.MONEY100, 0);
         int money50 = SpzUtils.getInt(Constant.MONEY50, 0);
         int money20 = SpzUtils.getInt(Constant.MONEY20, 0);
@@ -44,9 +50,9 @@ public class TestFunction {
         int paper_money2 = SpzUtils.getInt(Constant.PAPER_MONEY2, 0);
         int other2 = SpzUtils.getInt(Constant.OTHER2, 0);
         //得到钞票总张数
-        num=num1+num5+num10+num20+num50+num100;
+        num=num1+num5+num10+num20+num50+num100+num200+num500+num1000;
         //得到钞票总金额
-        total=money1+money5+money10+money20+money50+money100;
+        total=money1+money5+money10+money20+money50+money100+money200+money500+money1000;
         //总计
         totalAll=total+coin2+cheque2+paper_money2+other2;
         {
@@ -154,6 +160,25 @@ public class TestFunction {
 
         {
             AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 0);
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("1000"));
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(num1000+""));
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 300);
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(money1000+"\r\n"));
+
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("500"));
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(num500+""));
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 300);
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(money500+"\r\n"));
+
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("200"));
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(num200+""));
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 300);
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(money200+"\r\n"));
+
+            AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 0);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("100"));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(num100+""));
@@ -254,6 +279,9 @@ public class TestFunction {
         activity2=activity;
         int total=0;
         int num=0;
+        int num1000 = SpzUtils.getInt(Constant.NUM1000, 0);
+        int num500 = SpzUtils.getInt(Constant.NUM500, 0);
+        int num200 = SpzUtils.getInt(Constant.NUM200, 0);
         int num100 = SpzUtils.getInt(Constant.NUM100, 0);
         int num50 = SpzUtils.getInt(Constant.NUM50, 0);
         int num20 = SpzUtils.getInt(Constant.NUM20, 0);
@@ -261,14 +289,17 @@ public class TestFunction {
         int num5 = SpzUtils.getInt(Constant.NUM5, 0);
         int num1 = SpzUtils.getInt(Constant.NUM1, 0);
 
+        int money1000 = SpzUtils.getInt(Constant.MONEY1000, 0);
+        int money500 = SpzUtils.getInt(Constant.MONEY500, 0);
+        int money200 = SpzUtils.getInt(Constant.MONEY200, 0);
         int money100 = SpzUtils.getInt(Constant.MONEY100, 0);
         int money50 = SpzUtils.getInt(Constant.MONEY50, 0);
         int money20 = SpzUtils.getInt(Constant.MONEY20, 0);
         int money10 = SpzUtils.getInt(Constant.MONEY10, 0);
         int money5 = SpzUtils.getInt(Constant.MONEY5, 0);
         int money1 = SpzUtils.getInt(Constant.MONEY1, 0);
-        int save_num100=0,save_num50=0,save_num20=0,save_num10=0,save_num5=0,save_num1=0;
-        int save_money100=0,save_money50=0,save_money20=0,save_money10=0,save_money5=0,save_money1=0;
+        int save_num1000=0,save_num500=0,save_num200=0, save_num100=0,save_num50=0,save_num20=0,save_num10=0,save_num5=0,save_num1=0;
+        int save_money1000=0,save_money500=0,save_money200=0, save_money100=0,save_money50=0,save_money20=0,save_money10=0,save_money5=0,save_money1=0;
 
         int coin2 = SpzUtils.getInt(Constant.COIN2, 0);
         int cheque2 = SpzUtils.getInt(Constant.CHEQUE2, 0);
@@ -343,7 +374,30 @@ public class TestFunction {
             if (list!=null){
                 for (int i = 0; i <list.size() ; i++) {
                     DepositDetailsActivity.DepositDetailBean depositDetailBean = list.get(i);
-                    if (depositDetailBean.deposit==100){
+                    if (depositDetailBean.deposit==1000){
+                        save_money1000+=depositDetailBean.sum;
+                        save_num1000+=depositDetailBean.count;
+                        total+=depositDetailBean.sum;
+                        num+=depositDetailBean.count;
+                        num1000+=depositDetailBean.count;
+                        money1000+=depositDetailBean.sum;
+
+                    }else if (depositDetailBean.deposit==500){
+                        save_money500+=depositDetailBean.sum;
+                        save_num500+=depositDetailBean.count;
+                        total+=depositDetailBean.sum;
+                        num+=depositDetailBean.count;
+                        num500+=depositDetailBean.count;
+                        money500+=depositDetailBean.sum;
+
+                    }else if (depositDetailBean.deposit==200){
+                        save_money200+=depositDetailBean.sum;
+                        save_num200+=depositDetailBean.count;
+                        total+=depositDetailBean.sum;
+                        num+=depositDetailBean.count;
+                        num200+=depositDetailBean.count;
+                        money200+=depositDetailBean.sum;
+                    } else if (depositDetailBean.deposit==100){
                         save_money100+=depositDetailBean.sum;
                         save_num100+=depositDetailBean.count;
                         total+=depositDetailBean.sum;
@@ -394,6 +448,24 @@ public class TestFunction {
                     }
                 }
             }
+
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("1000"));
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(save_num1000+""));
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 300);
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(save_money1000+"\r\n"));
+
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("500"));
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(save_num500+""));
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 300);
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(save_money500+"\r\n"));
+
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("200"));
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(save_num200+""));
+            AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 300);
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(save_money200+"\r\n"));
 
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("100"));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
@@ -515,12 +587,18 @@ public class TestFunction {
             }
 
             {
+                SpzUtils.putInt(Constant.NUM1000,num1000);
+                SpzUtils.putInt(Constant.NUM500,num500);
+                SpzUtils.putInt(Constant.NUM200,num200);
                 SpzUtils.putInt(Constant.NUM100,num100);
                 SpzUtils.putInt(Constant.NUM50,num50);
                 SpzUtils.putInt(Constant.NUM20,num20);
                 SpzUtils.putInt(Constant.NUM10,num10);
                 SpzUtils.putInt(Constant.NUM5,num5);
                 SpzUtils.putInt(Constant.NUM1,num1);
+                SpzUtils.putInt(Constant.MONEY100,money1000);
+                SpzUtils.putInt(Constant.MONEY50,money500);
+                SpzUtils.putInt(Constant.MONEY20,money200);
                 SpzUtils.putInt(Constant.MONEY100,money100);
                 SpzUtils.putInt(Constant.MONEY50,money50);
                 SpzUtils.putInt(Constant.MONEY20,money20);

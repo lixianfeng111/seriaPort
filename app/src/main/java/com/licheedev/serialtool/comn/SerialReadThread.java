@@ -244,7 +244,29 @@ public class SerialReadThread extends Thread {
             SerialPortManager.instance().sendCommand(sendok);
         }
         else if((char)(received[6]&0xff)==0x90)
-        {   //boot
+        {
+            //SN
+            version[0]=(byte)(received[35]);
+            version[1]=(byte)(received[36]);
+            version[2]=(byte)(received[37]);
+            version[3]=(byte)(received[38]);
+            version[4]=(byte)(received[39]);
+            version[5]=(byte)(received[40]);
+            version[6]=(byte)(received[41]);
+            version[7]=(byte)(received[42]);
+            version[8]=(byte)(received[43]);
+            version[9]=(byte)(received[44]);
+            version[10]=(byte)(received[45]);
+            version[11]=(byte)(received[46]);
+
+            String sn=new String(version);
+            EventBus.getDefault().post(new SystemInfoEvent(sn));
+            EventBus.getDefault().post(new ClearEvent(sn));
+            EventBus.getDefault().post(new DepositEvent(sn));
+            hexstr1=sn;
+            LogPlus.d("SN",hexstr1);
+
+            //boot
             version[0]= (byte)((char)(received[7]&0xff)/100+0x30) ;
             version[1]= (byte)(((char)(received[7]&0xff)/10)%10+0x30) ;
             version[2]= (byte)((char)(received[7]&0xff)%10+0x30) ;
@@ -263,7 +285,7 @@ public class SerialReadThread extends Thread {
 
             String boot=new String(version);
             EventBus.getDefault().post(new BootEvent(boot));
-
+            LogPlus.d("Boot:",boot);
             //ZPK
             version[0]= (byte)((char)(received[27]&0xff)/100+0x30) ;
             version[1]= (byte)(((char)(received[27]&0xff)/10)%10+0x30) ;
@@ -280,31 +302,28 @@ public class SerialReadThread extends Thread {
             version[12]= (byte)((char)(received[30]&0xff)/100+0x30) ;
             version[13]= (byte)(((char)(received[30]&0xff)/10)%10+0x30) ;
             version[14]= (byte)((char)(received[30]&0xff)%10+0x30) ;
+            version[15]='-';
+            //APP
+            version[16]= (byte)((char)(received[23]&0xff)/100+0x30) ;
+            version[17]= (byte)(((char)(received[23]&0xff)/10)%10+0x30) ;
+            version[18]= (byte)((char)(received[23]&0xff)%10+0x30) ;
+            version[19]='-';
+            version[20]= (byte)((char)(received[24]&0xff)/100+0x30) ;
+            version[21]= (byte)(((char)(received[24]&0xff)/10)%10+0x30) ;
+            version[22]= (byte)((char)(received[24]&0xff)%10+0x30) ;
+            version[23]='-';
+            version[24]= (byte)((char)(received[25]&0xff)/100+0x30) ;
+            version[25]= (byte)(((char)(received[25]&0xff)/10)%10+0x30) ;
+            version[26]= (byte)((char)(received[25]&0xff)%10+0x30) ;
+            version[27]='-';
+            version[28]= (byte)((char)(received[26]&0xff)/100+0x30) ;
+            version[29]= (byte)(((char)(received[26]&0xff)/10)%10+0x30) ;
+            version[30]= (byte)((char)(received[26]&0xff)%10+0x30) ;
 
             String zpk=new String(version);
             EventBus.getDefault().post(new ZPKEvent(zpk));
+            LogPlus.d("ZPK",zpk);
 
-            //SN
-            version[0]=(byte)(received[35]);
-            version[1]=(byte)(received[36]);
-            version[2]=(byte)(received[37]);
-            version[3]=(byte)(received[38]);
-            version[4]=(byte)(received[39]);
-            version[5]=(byte)(received[40]);
-            version[6]=(byte)(received[41]);
-            version[7]=(byte)(received[42]);
-            version[8]=(byte)(received[43]);
-            version[9]=(byte)(received[44]);
-            version[10]=(byte)(received[45]);
-            version[11]=(byte)(received[46]);
-
-
-            String b=new String(version);
-            EventBus.getDefault().post(new SystemInfoEvent(b));
-            EventBus.getDefault().post(new ClearEvent(b));
-            EventBus.getDefault().post(new DepositEvent(b));
-            hexstr1=b;
-            LogPlus.d("read_thread",hexstr1);
         }
         else if((char)(received[6]&0xff)== 0x12)
         {
