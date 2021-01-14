@@ -4,11 +4,6 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * Author：@Fairy
- * Data：2019/1/17
- * Effect：
- */
 public class RetrofitUtil {
     private static Retrofit mRetrofit;
     private static RetrofitUtil instance;
