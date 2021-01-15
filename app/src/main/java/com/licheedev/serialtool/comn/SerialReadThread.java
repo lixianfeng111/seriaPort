@@ -127,6 +127,7 @@ public class SerialReadThread extends Thread {
         String hexstr1 = null;
         byte[] version=new byte[160];
         String hexStr = ByteUtil.bytes2HexStr(received, 0, size);
+        LogPlus.d("read_thread",hexStr);
         //判断是否遮挡
         if (!s.isEmpty()){
             if (s.contains("fb02")||s.contains("fb04")||s.contains("fb08")||s.contains("fb0e")){//遮挡
@@ -423,6 +424,10 @@ public class SerialReadThread extends Thread {
             }
             SerialPortManager.instance().sendSDcardAck();
 
+        }
+        else if ((char)(received[6]&0xff)== 0x49)
+        {
+            LogPlus.d("read_thread","设置币种");
         }
 
         {hexstr1=hexStr;}

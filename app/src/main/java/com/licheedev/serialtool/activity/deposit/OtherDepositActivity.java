@@ -19,6 +19,7 @@ import com.licheedev.serialtool.comn.SerialPortManager2;
 import com.licheedev.serialtool.comn.SerialReadThread;
 import com.licheedev.serialtool.comn.event.IsCoveringEvent;
 import com.licheedev.serialtool.comn.message.LogManager;
+import com.licheedev.serialtool.util.GetCurrencyUtil;
 import com.licheedev.serialtool.util.SpzUtils;
 import com.licheedev.serialtool.util.ToastUtil;
 import com.licheedev.serialtool.util.constant.Constant;
@@ -56,6 +57,7 @@ public class OtherDepositActivity extends BaseActivity {
 
     private boolean w=true;
     private Thread thread = null;
+    private String currency;
 
     @Override
     protected int getLayoutId() {
@@ -131,6 +133,7 @@ public class OtherDepositActivity extends BaseActivity {
     public void initData() {
         editText.setInputType(InputType.TYPE_CLASS_NUMBER);
         OpenPort();
+        currency = GetCurrencyUtil.getCurrency();
     }
 
     @OnClick({R.id.ibtn_ok, R.id.ibtn_cancel})
@@ -139,27 +142,8 @@ public class OtherDepositActivity extends BaseActivity {
             case R.id.ibtn_ok:
                 String s = editText.getText().toString();
                 if (!TextUtils.isEmpty(s)){
-                    count = Integer.parseInt(s);
-                    if (isOpenDoor){
-                        if (isCovered){//判断有没有被遮挡
-                            w=false;
-                            isCovered=false;
-                            isOpenDoor=false;
-                            isGo=false;
-                            editText.setText("");//金额制空
-                            SerialPortManager.instance().closeMaskDoor();//关闭罩门
-                            SerialPortManager.instance().sendSaveCommand();//存钱
-                        }else {
-                            ToastUtil.show(OtherDepositActivity.this,getResources().getString(R.string.put_envelope_into));
-                        }
-                    }else {
-                        if (count >0){
-                            SpzUtils.putInt(Constant.HOW_MUCH, count);//保存输入金额
-                            TestFunction.select_deposit_Print_SampleTicket(OtherDepositActivity.this,n,h);//打印
-                            SerialPortManager.instance().openMaskDoor();//打开罩门
-                            isOpenDoor=true;
-                            isCovereing();
-                        }
+                    if (!currency.isEmpty()){
+                        initif(s);
                     }
 
                 }else if (isOpenDoor){
@@ -176,6 +160,35 @@ public class OtherDepositActivity extends BaseActivity {
                     finish();
                 }
                 break;
+        }
+    }
+
+    private void initif(String s) {
+        count = Integer.parseInt(s);
+        if (isOpenDoor){
+            if (isCovered){//判断有没有被遮挡
+                w=false;
+                isCovered=false;
+                isOpenDoor=false;
+                isGo=false;
+                editText.setText("");//金额制空
+                SerialPortManager.instance().closeMaskDoor();//关闭罩门
+                SerialPortManager.instance().sendSaveCommand();//存钱
+            }else {
+                ToastUtil.show(OtherDepositActivity.this,getResources().getString(R.string.put_envelope_into));
+            }
+        }else {
+            if (count >0){
+                SpzUtils.putInt(Constant.HOW_MUCH, count);//保存输入金额
+                if (currency.equals(Constant.CNR)){
+                    TestFunction.select_deposit_Print_SampleTicket(OtherDepositActivity.this,n,h);//打印
+                }else if (currency.equals(Constant.MXN)){
+                    TestFunction.select_deposit_Print_SampleTicket_MXN(OtherDepositActivity.this,n,h);//打印
+                }
+                SerialPortManager.instance().openMaskDoor();//打开罩门
+                isOpenDoor=true;
+                isCovereing();
+            }
         }
     }
 

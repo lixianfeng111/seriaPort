@@ -31,31 +31,46 @@ public interface Constant {
      * 打印 TestFunction
      */
     //清机打印
-    // 各个面值的张数
-    String NUM1000 = "num1000";
-    String NUM500 = "num500";
-    String NUM200 = "num200";
+    // 人民币各个面值的张数
     String NUM100 = "num100";
     String NUM50 = "num50";
     String NUM20 = "num20";
     String NUM10 = "num10";
     String NUM5 = "num5";
     String NUM1 = "num1";
-    //各面值总金额
-    String MONEY1000 = "money1000";
-    String MONEY500 = "money500";
-    String MONEY200 = "money200";
+    // 墨西哥币各个面值的张数
+    String NUM_MXN1000 = "num_max1000";
+    String NUM_MXN500 = "num_max500";
+    String NUM_MXN200 = "num_max200";
+    String NUM_MXN100 = "num_max100";
+    String NUM_MXN50 = "num_max50";
+    String NUM_MXN20 = "num_max20";
+    //人民币各面值总金额
     String MONEY100 = "money100";
     String MONEY50 = "money50";
     String MONEY20 = "money20";
     String MONEY10 = "money10";
     String MONEY5 = "money5";
     String MONEY1 = "money1";
+    //墨西哥各面值总金额
+    String MONEY_MXN1000 = "money_max1000";
+    String MONEY_MXN500 = "money_max500";
+    String MONEY_MXN200 = "money_max200";
+    String MONEY_MXN100 = "money_max100";
+    String MONEY_MXN50 = "money_max50";
+    String MONEY_MXN20 = "money_max20";
+
     //其他存款
     String COIN2 = "coin2";
     String CHEQUE2 = "cheque2";
     String PAPER_MONEY2 = "paper_money2";
     String OTHER2 = "other2";
+
+    //其他存款
+    String COIN2_MXN = "coin2_max";
+    String CHEQUE2_MXN = "cheque2_max";
+    String PAPER_MONEY2_MXN = "paper_money2_max";
+    String OTHER2_MXN = "other2_max";
     //打印和基本信息设置页
     String CLIENT = "client";
     String SITE = "site";
@@ -77,4 +92,11 @@ public interface Constant {
     //系统信息SN
     String SN = "SN";
 
+    //墨西哥币种
+    String MXN = "MXN";
+    //人民币
+    String CNR = "CNR";
+    //打印币种
+    String PRINT_CURRENCY = "print_currency";
+    String OUT_OF_THIS="out_of_this";
 }

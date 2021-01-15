@@ -15,6 +15,7 @@ import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.activity.deposit.SelectDepositActivitys;
 import com.licheedev.serialtool.activity.manage.SetManageActivity;
 import com.licheedev.serialtool.base.BasePresenter;
+import com.licheedev.serialtool.util.GetCurrencyUtil;
 import com.licheedev.serialtool.util.LanguageUtils;
 import com.licheedev.serialtool.util.SpzUtils;
 import com.licheedev.serialtool.util.ToastUtil;
@@ -33,6 +34,9 @@ public class LoginActivity extends BaseActivity {
     EditText editText;
     @BindView(R.id.editText2)
     EditText editText2;
+    int[] str = new int[]{};
+    private String print_currency;
+
     @OnClick({R.id.btLogin})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -70,24 +74,37 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        //得到币种
+        print_currency = GetCurrencyUtil.getCurrency();
         //切换语言
         switch_theLanguage();
         //打印
         print();
+
     }
+
+
     private void print() {
         boolean isPrint = SpzUtils.getBoolean(Constant.IS_PRINT, false);
         if (isPrint){//判断是否存了钱
             List<DepositDetailsActivity.DepositDetailBean> list = SpzUtils.getDataList(this, Constant.LIST);
             if (list!=null){//判断是否存了钞票，如果存了钞票就进入if
-                TestFunction.deposit_Print_SampleTicket(this,list,h);
+                if (print_currency.equals(Constant.CNR)){
+                    TestFunction.deposit_Print_SampleTicket(this,list,h);
+                }else if (print_currency.equals(Constant.MXN)){
+                    TestFunction.deposit_Print_SampleTicket_MXN(this,list,h);
+                }
                 list.clear();//打印之后清空list
                 SpzUtils.setDataList(LoginActivity.this,Constant.LIST, list);//保存清空后的list
                 //存款打印之后 金额（num）和张数(counts)置为0
                 SpzUtils.putInt(Constant.NUM,0);
                 SpzUtils.putInt(Constant.COUNTS,0);
             }else {//如果没有存钞票，只存了其他存款（硬币，支票等）就进入else
-                TestFunction.deposit_Print_SampleTicket(this,list,h);
+                if (print_currency.equals(Constant.CNR)){
+                    TestFunction.deposit_Print_SampleTicket(this,list,h);
+                }else if (print_currency.equals(Constant.MXN)){
+                    TestFunction.deposit_Print_SampleTicket_MXN(this,list,h);
+                }
             }
             //打印之后isPrint置为false
             SpzUtils.putBoolean(Constant.IS_PRINT, false);

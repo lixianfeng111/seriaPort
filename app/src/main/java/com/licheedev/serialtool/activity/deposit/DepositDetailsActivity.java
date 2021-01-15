@@ -18,6 +18,7 @@ import com.licheedev.serialtool.base.BasePresenter;
 import com.licheedev.serialtool.comn.SerialPortManager;
 import com.licheedev.serialtool.comn.message.LogManager;
 import com.licheedev.serialtool.dialog.CurrenySelectUtil;
+import com.licheedev.serialtool.util.GetCurrencyUtil;
 import com.licheedev.serialtool.util.LogPlus;
 import com.licheedev.serialtool.util.SpzUtils;
 import com.licheedev.serialtool.util.constant.Constant;

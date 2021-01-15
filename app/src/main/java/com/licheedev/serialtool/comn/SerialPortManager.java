@@ -71,7 +71,6 @@ public class SerialPortManager {
     int[] commandClearError = new int[]{0xA1, 0xA2, 0xA3, 0xA4, 0x04, 0x00, 0x44,0xBB, 0xBB, 0x44}; //感器状态变化清零
     int[] commandSDcardACK = new int[]{0xA1, 0xA2, 0xA3, 0xA4, 0x04, 0x00, 0x46,0xBB, 0xBB, 0x46}; //SD卡状态变化清零
 
-
     /**
      * 机器状态信息指令 ACK Command 11H
      */
@@ -83,7 +82,11 @@ public class SerialPortManager {
     //退出零钱模式
     final String exitLooseChange = "A1 A2 A3 A4 04 00 42 BB BB 42";
 
+    //设置墨西哥币存款
+    final String MXNCommand = "A1 A2 A3 A4 07 00 49 4D 58 4E BB BB 11";
 
+    //设置人民币存款434e59
+    final String CNRCommand = "A1 A2 A3 A4 07 00 49 43 4E 59 BB BB 1E";
     //退出工作模式再进入，可以二次存钱 CMD25
     final String exitCommand0 = "A1 A2 A3 A4 2F 00 25 06 01 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 02 00 01 00 03 00 00 00 01 00 00 00 00 00 00 00 00 00 00 00 00 BB BB 09";
 
@@ -141,13 +144,27 @@ public class SerialPortManager {
 //        SerialPortManager.instance().sendCommand(byteArrayToHexString(commandExit));
     }
 
+    //进入零钱模式
     public void sendLooseChange(){
         String replace = looseChange.replace(" ", "");
         sendCommand(replace);
     }
 
+    //退出零钱模式
     public void sendLooseChangeExit(){
         String replace = exitLooseChange.replace(" ", "");
+        sendCommand(replace);
+    }
+
+    //设置墨西哥币存款
+    public void sendMXNCommand(){
+        String replace = MXNCommand.replace(" ", "");
+        sendCommand(replace);
+    }
+
+    //设置人民币币存款
+    public void sendCNRCommand(){
+        String replace = CNRCommand.replace(" ", "");
         sendCommand(replace);
     }
 
@@ -259,9 +276,6 @@ public class SerialPortManager {
             return null;
         }
     }
-
-
-
 
 
     /**

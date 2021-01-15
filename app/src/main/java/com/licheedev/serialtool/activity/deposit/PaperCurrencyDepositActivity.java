@@ -18,7 +18,9 @@ import com.licheedev.serialtool.comn.SerialPortManager;
 import com.licheedev.serialtool.comn.message.LogManager;
 import com.licheedev.serialtool.dialog.CurrenySelectUtil;
 import com.licheedev.serialtool.util.LogPlus;
+import com.licheedev.serialtool.util.SpzUtils;
 import com.licheedev.serialtool.util.ToastUtil;
+import com.licheedev.serialtool.util.constant.Constant;
 import com.licheedev.serialtool.util.constant.Money;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -299,7 +301,11 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
 
     @Override
     public void initData() {
-
+        String string = SpzUtils.getString(Constant.PRINT_CURRENCY);
+        if (string.isEmpty()){
+            SerialPortManager.instance().sendCNRCommand();
+            SpzUtils.putString(Constant.PRINT_CURRENCY,Constant.CNR);
+        }
     }
 
     @Override

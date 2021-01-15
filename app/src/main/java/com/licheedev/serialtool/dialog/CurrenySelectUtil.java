@@ -21,6 +21,8 @@ import com.licheedev.serialtool.R;
 import com.licheedev.serialtool.activity.clear.ClearDeviceHintActivity;
 import com.licheedev.serialtool.activity.dapter.CurrenySelectAdapter;
 import com.licheedev.serialtool.activity.deposit.PaperCurrencyDepositActivity;
+import com.licheedev.serialtool.comn.SerialPortManager;
+import com.licheedev.serialtool.util.GetCurrencyUtil;
 import com.licheedev.serialtool.util.LanguageUtils;
 import com.licheedev.serialtool.util.SpzUtils;
 import com.licheedev.serialtool.util.ToastUtil;
@@ -39,7 +41,8 @@ public class CurrenySelectUtil {
      * @param context
      */
     @RequiresApi(api = Build.VERSION_CODES.M)
-    public static void showCurreny(Context context) {
+    public static void showCurreny(final Context context) {
+        final boolean isPrint = SpzUtils.getBoolean(Constant.IS_PRINT, false);
         final AlertDialog alertDialog = new AlertDialog
                 .Builder(context)
                 .create();
@@ -58,7 +61,20 @@ public class CurrenySelectUtil {
         adapter.setMyViewHolerClicks(new CurrenySelectAdapter.MyViewHolerClicks() {
             @Override
             public void onItemClick(int position) {
-                alertDialog.dismiss();
+                if (position==3){
+                    if (!isPrint){
+                        alertDialog.dismiss();
+                        SerialPortManager.instance().sendCNRCommand();
+                        SpzUtils.putString(Constant.PRINT_CURRENCY,Constant.CNR);
+                    }
+
+                }else if (position==4){
+                    if (!isPrint){
+                        alertDialog.dismiss();
+                        SerialPortManager.instance().sendMXNCommand();
+                        SpzUtils.putString(Constant.PRINT_CURRENCY,Constant.MXN);
+                    }
+                }
             }
         });
 
