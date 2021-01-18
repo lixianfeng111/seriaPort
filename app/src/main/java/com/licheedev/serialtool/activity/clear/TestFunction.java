@@ -169,8 +169,8 @@ public class TestFunction {
             AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
             AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 1);
             if (num>0){
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.currency_print)+"CNY\r\n"));
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("Banknote\r\n"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.currency_print)+Constant.CNR+"\r\n"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(Constant.Banknote+"\r\n"));
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.face_value)));
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.piece)));
@@ -221,7 +221,7 @@ public class TestFunction {
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(total+"\r\n"));
             }else if (num_mxn>0){
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.currency_print)+"MXN\r\n"));
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("Banknote\r\n"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(Constant.Banknote+"\r\n"));
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.face_value)));
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.piece)));
@@ -287,22 +287,22 @@ public class TestFunction {
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 20);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.bill)));
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("CNY "+paper_money2+"\r\n"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(Constant.CNR+" "+paper_money2+"\r\n"));
             }else if (coin2>0){
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 20);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.coin)));
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("CNY "+coin2+"\r\n"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(Constant.CNR+" "+coin2+"\r\n"));
             }else if (cheque2>0){
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 20);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.check)));
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("CNY "+cheque2+"\r\n"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(Constant.CNR+" "+cheque2+"\r\n"));
             }else if (other2>0){
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 20);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.other)));
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("CNY "+other2+"\r\n"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(Constant.CNR+" "+other2+"\r\n"));
             }else if (paper_money2_mxn>0){
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 20);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.bill)));
@@ -330,14 +330,14 @@ public class TestFunction {
         {
             AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
             AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 1);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("STC "+content(R.string.total_print)+"\r\n"));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(Constant.STC+" "+content(R.string.total_print)+"\r\n"));
         }
 
         {
             if (totalAll>0){
                 AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 0);
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 10);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("CNY"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(Constant.CNR));
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 100);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(totalAll+"\r\n"));
 
@@ -575,7 +575,7 @@ public class TestFunction {
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 22);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.sum_print)));
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("CNY "+coin+"\r\n"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(Constant.CNR+" "+coin+"\r\n"));
 
                 AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 22);
@@ -586,7 +586,7 @@ public class TestFunction {
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 22);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.sum_print)));
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("CNY "+cheque+"\r\n"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(Constant.CNR+" "+cheque+"\r\n"));
 
                 AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 22);
@@ -597,7 +597,7 @@ public class TestFunction {
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 22);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.sum_print)));
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("CNY "+paper_money+"\r\n"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(Constant.CNR+" "+paper_money+"\r\n"));
 
                 AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 22);
@@ -608,7 +608,7 @@ public class TestFunction {
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 22);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.sum_print)));
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("CNY "+other+"\r\n"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(Constant.CNR+" "+other+"\r\n"));
 
             }
 
@@ -616,7 +616,7 @@ public class TestFunction {
                 total=total+coin+cheque+paper_money+other;
                 AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
                 AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 1);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("STC "+content(R.string.total_print)));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(Constant.STC+" "+content(R.string.total_print)));
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(total+""));
             }
@@ -911,7 +911,7 @@ public class TestFunction {
                 total=total+coin+cheque+paper_money+other;
                 AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
                 AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 1);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("STC "+content(R.string.total_print)));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(Constant.STC+" "+content(R.string.total_print)));
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(total+""));
             }
@@ -1029,7 +1029,7 @@ public class TestFunction {
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 22);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.sum_print)));
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("CNY "+how_much+"\r\n"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(Constant.CNR+" "+how_much+"\r\n"));
                 coin+=how_much;
             }else if (n==1){
                 AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
@@ -1041,7 +1041,7 @@ public class TestFunction {
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 22);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.kind_print)));
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("CNY "+how_much+"\r\n"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(Constant.CNR+" "+how_much+"\r\n"));
                 cheque+=how_much;
             }else if (n==2){
                 AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
@@ -1053,7 +1053,7 @@ public class TestFunction {
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 22);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.sum_print)));
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("CNY "+how_much+"\r\n"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(Constant.CNR+" "+how_much+"\r\n"));
                 paper_money+=how_much;
             }else if (n==3){
                 AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
@@ -1065,7 +1065,7 @@ public class TestFunction {
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 22);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.sum_print)));
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("CNY "+how_much+"\r\n"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(Constant.CNR+" "+how_much+"\r\n"));
                 other+=how_much;
             }
         }
@@ -1073,7 +1073,7 @@ public class TestFunction {
             {
                 AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
                 AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 1);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("STC "+content(R.string.total_print)));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(Constant.STC+" "+content(R.string.total_print)));
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(how_much+""));
             }
@@ -1207,7 +1207,7 @@ public class TestFunction {
         {
             AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
             AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 1);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("STC "+content(R.string.total_print)));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(Constant.STC+" "+content(R.string.total_print)));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(how_much+""));
         }
@@ -1298,7 +1298,7 @@ public class TestFunction {
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 22);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.sum_print)));
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("CNY "+money+"\r\n"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(Constant.CNR+" "+money+"\r\n"));
 
             }else if (n==1){
                 AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
@@ -1311,7 +1311,7 @@ public class TestFunction {
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 22);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.sum_print)));
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("CNY "+money+"\r\n"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(Constant.CNR+" "+money+"\r\n"));
 
             }else if (n==2){
                 AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
@@ -1324,7 +1324,7 @@ public class TestFunction {
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 22);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.sum_print)));
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("CNY "+money+"\r\n"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(Constant.CNR+" "+money+"\r\n"));
 
             }else if (n==3){
                 AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
@@ -1337,7 +1337,7 @@ public class TestFunction {
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 22);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.sum_print)));
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("CNY "+money+"\r\n"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(Constant.CNR+" "+money+"\r\n"));
 
             }
 
@@ -1346,7 +1346,7 @@ public class TestFunction {
         {
             AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
             AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 1);
-            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString("STC "+content(R.string.total_print)));
+            AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(Constant.STC+" "+content(R.string.total_print)));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 240);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(money+""));
         }
@@ -1368,6 +1368,7 @@ public class TestFunction {
         String string = activity2.getResources().getString(site_print);
         return string;
     }
+
     public static void clear_thisOther(){
         switch (n2){
             case 0:

@@ -41,8 +41,8 @@ public class CurrenySelectUtil {
      * @param context
      */
     @RequiresApi(api = Build.VERSION_CODES.M)
-    public static void showCurreny(final Context context) {
-        final boolean isPrint = SpzUtils.getBoolean(Constant.IS_PRINT, false);
+    public static void showCurreny(final Context context, final PaperCurrencyDepositActivity.Callback callback) {
+//        final boolean isPrint = SpzUtils.getBoolean(Constant.IS_PRINT, false);
         final AlertDialog alertDialog = new AlertDialog
                 .Builder(context)
                 .create();
@@ -51,7 +51,7 @@ public class CurrenySelectUtil {
         }else {
             stringlist = Arrays.asList(Money.CURRENCY_ARRAY);
         }
-        CurrenySelectAdapter adapter = new CurrenySelectAdapter(context, stringlist);
+        final CurrenySelectAdapter adapter = new CurrenySelectAdapter(context, stringlist);
         LinearLayout view = (LinearLayout) LayoutInflater.from(context).inflate(R.layout.currency_select_view, null, false);
         RecyclerView recyclerView = view.findViewById(R.id.currencyList);
 
@@ -61,20 +61,7 @@ public class CurrenySelectUtil {
         adapter.setMyViewHolerClicks(new CurrenySelectAdapter.MyViewHolerClicks() {
             @Override
             public void onItemClick(int position) {
-                if (position==3){
-                    if (!isPrint){
-                        alertDialog.dismiss();
-                        SerialPortManager.instance().sendCNRCommand();
-                        SpzUtils.putString(Constant.PRINT_CURRENCY,Constant.CNR);
-                    }
-
-                }else if (position==4){
-                    if (!isPrint){
-                        alertDialog.dismiss();
-                        SerialPortManager.instance().sendMXNCommand();
-                        SpzUtils.putString(Constant.PRINT_CURRENCY,Constant.MXN);
-                    }
-                }
+                callback.onDialogClick(position,alertDialog);
             }
         });
 

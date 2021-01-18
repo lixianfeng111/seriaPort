@@ -295,6 +295,7 @@ public class SerialPortManager {
 
         if (mWriteThread != null) {
             mWriteThread.quit();
+            mReadThread.close();
         }
 
         if (mSerialPort != null) {

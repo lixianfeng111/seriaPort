@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -41,7 +42,7 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
 
     public static final int REQUEST_CODE_DEPOSIT = 1;
     public static final int RESULT_CODE_DEPOSIT = 1111;
-
+    public static final int CURRENCY = 11;//币种
     private boolean takeOut;
 
     private boolean close=false;
@@ -61,10 +62,15 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
     LinearLayout mLead;
     @BindView(R.id.tvStatus)
     TextView tvStatus;
+    @BindView(R.id.btnCurrency)
+    Button btnCurrency;
 
     Deposit deposit;
     boolean exit;
     Dialog continueDepositDialogdialog, exitFailDialog0, exitFailDialog1;
+    private String currency;
+    private int count;
+    private int money;
 
     public static class Deposit {
 
@@ -135,7 +141,25 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
                 break;
 
             case R.id.btnCurrency: //币种选择
-                CurrenySelectUtil.showCurreny(this);
+
+                CurrenySelectUtil.showCurreny(this, new Callback() {
+                    @Override
+                    public void onDialogClick(int position, Dialog dialog) {
+                        if (position==3){
+                                dialog.dismiss();
+                                btnCurrency.setText(Constant.CNR);
+                                currency=Constant.CNR;
+                                SerialPortManager.instance().sendCNRCommand();
+                                SpzUtils.putString(Constant.PRINT_CURRENCY,Constant.CNR);
+                            }else if (position==4){
+                                dialog.dismiss();
+                                btnCurrency.setText(Constant.MXN);
+                                currency=Constant.MXN;
+                                SerialPortManager.instance().sendMXNCommand();
+                                SpzUtils.putString(Constant.PRINT_CURRENCY,Constant.MXN);
+                        }
+                    }
+                });
                 break;
             case R.id.llLead: // 查看拒钞详情
                 // Step 1： 发送查询拒钞原因指令
@@ -157,27 +181,46 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(LogManager.ReceiveData data) {
+        int CNY_1000=0,CNY_500=0,CNY_200=0,CNY_100=0,CNY_50=0,CNY_20=0,CNY_10=0,CNY_5=0,CNY_1=0;
         byte[] received = data.data;
         switch (data.what) {
             case COUNT_COMMAND: {
-                int CNY_100 = received[9] + (received[10] << 8);
-                int CNY_50 = received[11] + (received[12] << 8);
-                int CNY_20 = received[13] + (received[14] << 8);
-                int CNY_10 = received[15] + (received[16] << 8);
-                int CNY_5 = received[17] + (received[18] << 8);
-                int CNY_1 = received[19] + (received[20] << 8);
-                final String amount = " 收到  100x" + CNY_100 + " 50x" +
-                        CNY_50 + " 20x" + CNY_20 + " 10x" + CNY_10 + " 5x" + CNY_5 + " 1x" + CNY_1;
-                LogPlus.e("read_thread", amount);
+                if (currency.equals(Constant.CNR)){
+                    CNY_100 = received[9] + (received[10] << 8);
+                    CNY_50 = received[11] + (received[12] << 8);
+                    CNY_20 = received[13] + (received[14] << 8);
+                    CNY_10 = received[15] + (received[16] << 8);
+                    CNY_5 = received[17] + (received[18] << 8);
+                    CNY_1 = received[19] + (received[20] << 8);
+                    final String amount =" 收到  100x" + CNY_100 + " 50x" +
+                            CNY_50 + " 20x" + CNY_20 + " 10x" + CNY_10 + " 5x" + CNY_5 + " 1x" + CNY_1;
+                    LogPlus.e("read_thread", amount);
 
-                int count = CNY_100 +
+                }else if (currency.equals(Constant.MXN)){
+                    CNY_1000 = received[9] + (received[10] << 8);
+                    CNY_500 = received[11] + (received[12] << 8);
+                    CNY_200 = received[13] + (received[14] << 8);
+                    CNY_100 = received[15] + (received[16] << 8);
+                    CNY_50 = received[17] + (received[18] << 8);
+                    CNY_20 = received[19] + (received[20] << 8);
+                    final String amount =" 收到  1000x" + CNY_1000 + " 500x" +
+                            CNY_500 + " 200x" + CNY_200 + " 100x" + CNY_100 + " 50x" + CNY_50 + " 20x" + CNY_20;
+                    LogPlus.e("read_thread", amount);
+                }
+                count = CNY_1000 +
+                        CNY_500 +
+                        CNY_200 +
+                        CNY_100 +
                         CNY_50 +
                         CNY_20 +
                         CNY_10 +
                         CNY_5 +
                         CNY_1;
                 tvCurrencyNum.setText("" + count);
-                int money = CNY_100 * Money.Denomination_100_CNY +
+                money =CNY_1000 * Money.Denomination_1000_CNY +
+                        CNY_500 * Money.Denomination_500_CNY +
+                        CNY_200 * Money.Denomination_200_CNY +
+                        CNY_100 * Money.Denomination_100_CNY +
                         CNY_50 * Money.Denomination_50_CNY +
                         CNY_20 * Money.Denomination_20_CNY +
                         CNY_10 * Money.Denomination_10_CNY +
@@ -286,7 +329,10 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
 
     @Override
     public void initListener() {
-
+        currency = SpzUtils.getString(Constant.PRINT_CURRENCY);
+        if (!currency.isEmpty()){
+            btnCurrency.setText(currency);
+        }
     }
 
     @Override
@@ -305,6 +351,7 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
         if (string.isEmpty()){
             SerialPortManager.instance().sendCNRCommand();
             SpzUtils.putString(Constant.PRINT_CURRENCY,Constant.CNR);
+            currency=Constant.CNR;
         }
     }
 

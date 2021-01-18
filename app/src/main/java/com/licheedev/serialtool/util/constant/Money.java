@@ -1,6 +1,9 @@
 package com.licheedev.serialtool.util.constant;
 
 public class Money {
+    public static final int Denomination_1000_CNY = 1000;
+    public static final int Denomination_500_CNY = 500;
+    public static final int Denomination_200_CNY = 200;
     public static final int Denomination_100_CNY = 100;
     public static final int Denomination_50_CNY = 50;
     public static final int Denomination_20_CNY = 20;

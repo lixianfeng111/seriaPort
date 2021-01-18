@@ -382,11 +382,8 @@ public class SerialReadThread extends Thread {
         else if((char)(received[6]&0xff)== 0x25)
         {
             LogPlus.e("read_thread","存储收钞口纸币 " + hexStr);
-            byte status = received[7];
+            byte status = received[8];
             switch (status){
-                case 1:
-                    LogPlus.e("read_thread","人民币 ");
-                    break;
                 case 6:
                     LogPlus.e("read_thread","纸币存储成功 ");
 //                    amountReceiveMoney(received);
@@ -429,15 +426,6 @@ public class SerialReadThread extends Thread {
         }
         else if ((char)(received[6]&0xff)== 0x49)
         {
-            byte status = received[7];
-            switch (status){
-                case 1:
-                    LogPlus.d("read_thread","币种设置成功");
-                    break;
-                case 2:
-                    LogPlus.d("read_thread","不支持此币种");
-                    break;
-            }
             LogPlus.d("read_thread","设置币种");
         }
 

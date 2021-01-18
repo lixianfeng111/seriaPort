@@ -99,4 +99,6 @@ public interface Constant {
     //打印币种
     String PRINT_CURRENCY = "print_currency";
     String OUT_OF_THIS="out_of_this";
+    String Banknote = "Banknote";
+    String STC = "STC";
 }

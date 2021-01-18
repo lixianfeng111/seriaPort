@@ -36,10 +36,13 @@ import butterknife.OnClick;
 import static com.licheedev.serialtool.activity.deposit.PaperCurrencyDepositActivity.REQUEST_CODE_DEPOSIT;
 import static com.licheedev.serialtool.activity.deposit.PaperCurrencyDepositActivity.RESULT_CODE_DEPOSIT;
 import static com.licheedev.serialtool.comn.message.LogManager.SAVE_SUCCESS_COMMAND;
+import static com.licheedev.serialtool.util.constant.Money.Denomination_1000_CNY;
 import static com.licheedev.serialtool.util.constant.Money.Denomination_100_CNY;
 import static com.licheedev.serialtool.util.constant.Money.Denomination_10_CNY;
 import static com.licheedev.serialtool.util.constant.Money.Denomination_1_CNY;
+import static com.licheedev.serialtool.util.constant.Money.Denomination_200_CNY;
 import static com.licheedev.serialtool.util.constant.Money.Denomination_20_CNY;
+import static com.licheedev.serialtool.util.constant.Money.Denomination_500_CNY;
 import static com.licheedev.serialtool.util.constant.Money.Denomination_50_CNY;
 import static com.licheedev.serialtool.util.constant.Money.Denomination_5_CNY;
 
@@ -66,6 +69,8 @@ public class DepositDetailsActivity extends BaseActivity implements BaseRecycler
     private int num;
     private int counts;
     private int n=0;
+
+    private String currency;//币种
 
     @Override
     protected void initView() {
@@ -105,6 +110,7 @@ public class DepositDetailsActivity extends BaseActivity implements BaseRecycler
         list2 = SpzUtils.getDataList(this, Constant.LIST);
         num = SpzUtils.getInt(Constant.NUM, 0);
         counts = SpzUtils.getInt(Constant.COUNTS, 0);
+        currency = SpzUtils.getString(Constant.PRINT_CURRENCY);
     }
 
     @OnClick({R.id.btnOverDeposit, R.id.btnContiniu})
@@ -187,22 +193,48 @@ public class DepositDetailsActivity extends BaseActivity implements BaseRecycler
 //        tvAlreadyCount.setText(count + "");
     }
     private void amountReceiveMoney(byte[] received) {
+        int CNY_1000=0,CNY_500=0,CNY_200=0,CNY_100=0,CNY_50=0,CNY_20=0,CNY_10=0,CNY_5=0,CNY_1=0;
         if (list != null) {
             list.clear();
         }
+        if (currency.equals(Constant.CNR)){
+            CNY_100 = received[9] + (received[10] << 8);
+            CNY_50 = received[11] + (received[12] << 8);
+            CNY_20 = received[13] + (received[14] << 8);
+            CNY_10 = received[15] + (received[16] << 8);
+            CNY_5 = received[17] + (received[18] << 8);
+            CNY_1 = received[19] + (received[20] << 8);
 
-        int CNY_100 = received[9] + (received[10] << 8);
-        int CNY_50 = received[11] + (received[12] << 8);
-        int CNY_20 = received[13] + (received[14] << 8);
-        int CNY_10 = received[15] + (received[16] << 8);
-        int CNY_5 = received[17] + (received[18] << 8);
-        int CNY_1 = received[19] + (received[20] << 8);
+            final String amount =" 收到  100x" + CNY_100 + " 50x" +
+                    CNY_50 + " 20x" + CNY_20 + " 10x" + CNY_10 + " 5x" + CNY_5 + " 1x" + CNY_1;
+            LogPlus.e("read_thread", amount);
+        }else if (currency.equals(Constant.MXN)){
+            CNY_1000 = received[9] + (received[10] << 8);
+            CNY_500 = received[11] + (received[12] << 8);
+            CNY_200 = received[13] + (received[14] << 8);
+            CNY_100 = received[15] + (received[16] << 8);
+            CNY_50 = received[17] + (received[18] << 8);
+            CNY_20 = received[19] + (received[20] << 8);
 
-        final String amount = " 收到  100x" + CNY_100 + " 50x" +
-                CNY_50 + " 20x" + CNY_20 + " 10x" + CNY_10 + " 5x" + CNY_5 + " 1x" + CNY_1;
-        LogPlus.e("read_thread", amount);
+            final String amount =" 收到  1000x" + CNY_1000 + " 500x" +
+                    CNY_500 + " 200x" + CNY_200 + " 100x" + CNY_100 + " 50x" + CNY_50 + " 20x" + CNY_20;
+            LogPlus.e("read_thread", amount);
+        }
+        if (CNY_1000 > 0) {
+            DepositDetailBean depositDetailBean = new DepositDetailBean(Denomination_1000_CNY, CNY_100);
+            listBean.getList().add(depositDetailBean);
+        }
+        if (CNY_500 > 0) {
+            DepositDetailBean depositDetailBean = new DepositDetailBean(Denomination_500_CNY, CNY_50);
+            listBean.getList().add(depositDetailBean);
 
-        if (CNY_100 > 0) {
+        }
+        if (CNY_200 > 0) {
+            DepositDetailBean depositDetailBean = new DepositDetailBean(Denomination_200_CNY, CNY_20);
+            listBean.getList().add(depositDetailBean);
+
+        }
+         if (CNY_100 > 0) {
             DepositDetailBean depositDetailBean = new DepositDetailBean(Denomination_100_CNY, CNY_100);
             listBean.getList().add(depositDetailBean);
         }
@@ -230,13 +262,19 @@ public class DepositDetailsActivity extends BaseActivity implements BaseRecycler
             DepositDetailBean depositDetailBean = new DepositDetailBean(Denomination_1_CNY, CNY_1);
             listBean.getList().add(depositDetailBean);
         }
-        long sum = CNY_100 * Denomination_100_CNY +
+        long sum = CNY_100 * Denomination_1000_CNY +
+                CNY_500 * Denomination_500_CNY +
+                CNY_200 * Denomination_200_CNY +
+                CNY_100 * Denomination_100_CNY +
                 CNY_50 * Denomination_50_CNY +
                 CNY_20 * Denomination_20_CNY +
                 CNY_10 * Denomination_10_CNY +
                 CNY_5 * Denomination_5_CNY +
                 CNY_1 * Denomination_1_CNY;
         long count = CNY_100 +
+                CNY_500 +
+                CNY_200 +
+                CNY_100 +
                 CNY_50 +
                 CNY_20 +
                 CNY_10 +
