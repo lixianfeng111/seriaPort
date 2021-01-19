@@ -147,10 +147,10 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
                     public void onDialogClick(int position, Dialog dialog) {
                         if (position==3){
                                 dialog.dismiss();
-                                btnCurrency.setText(Constant.CNR);
-                                currency=Constant.CNR;
+                                btnCurrency.setText(Constant.CNY);
+                                currency=Constant.CNY;
                                 SerialPortManager.instance().sendCNRCommand();
-                                SpzUtils.putString(Constant.PRINT_CURRENCY,Constant.CNR);
+                                SpzUtils.putString(Constant.PRINT_CURRENCY,Constant.CNY);
                             }else if (position==4){
                                 dialog.dismiss();
                                 btnCurrency.setText(Constant.MXN);
@@ -185,7 +185,7 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
         byte[] received = data.data;
         switch (data.what) {
             case COUNT_COMMAND: {
-                if (currency.equals(Constant.CNR)){
+                if (currency.equals(Constant.CNY)){
                     CNY_100 = received[9] + (received[10] << 8);
                     CNY_50 = received[11] + (received[12] << 8);
                     CNY_20 = received[13] + (received[14] << 8);
@@ -350,8 +350,8 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
         String string = SpzUtils.getString(Constant.PRINT_CURRENCY);
         if (string.isEmpty()){
             SerialPortManager.instance().sendCNRCommand();
-            SpzUtils.putString(Constant.PRINT_CURRENCY,Constant.CNR);
-            currency=Constant.CNR;
+            SpzUtils.putString(Constant.PRINT_CURRENCY,Constant.CNY);
+            currency=Constant.CNY;
         }
     }
 

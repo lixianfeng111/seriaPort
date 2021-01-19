@@ -1,8 +1,5 @@
 package com.licheedev.serialtool.activity.deposit;
 
-import android.os.Handler;
-import android.os.Message;
-import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
@@ -15,8 +12,6 @@ import com.licheedev.serialtool.activity.clear.TestFunction;
 import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.base.BasePresenter;
 import com.licheedev.serialtool.comn.SerialPortManager;
-import com.licheedev.serialtool.comn.SerialPortManager2;
-import com.licheedev.serialtool.comn.SerialReadThread;
 import com.licheedev.serialtool.comn.event.IsCoveringEvent;
 import com.licheedev.serialtool.comn.message.LogManager;
 import com.licheedev.serialtool.util.GetCurrencyUtil;
@@ -26,8 +21,6 @@ import com.licheedev.serialtool.util.constant.Constant;
 import com.sun.jna.Pointer;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-
-import java.io.InputStream;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -180,7 +173,7 @@ public class OtherDepositActivity extends BaseActivity {
         }else {
             if (count >0){
                 SpzUtils.putInt(Constant.HOW_MUCH, count);//保存输入金额
-                if (currency.equals(Constant.CNR)){
+                if (currency.equals(Constant.CNY)){
                     TestFunction.select_deposit_Print_SampleTicket(OtherDepositActivity.this,n,h);//打印
                 }else if (currency.equals(Constant.MXN)){
                     TestFunction.select_deposit_Print_SampleTicket_MXN(OtherDepositActivity.this,n,h);//打印

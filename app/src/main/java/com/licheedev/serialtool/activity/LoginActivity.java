@@ -89,7 +89,7 @@ public class LoginActivity extends BaseActivity {
         if (isPrint){//判断是否存了钱
             List<DepositDetailsActivity.DepositDetailBean> list = SpzUtils.getDataList(this, Constant.LIST);
             if (list!=null){//判断是否存了钞票，如果存了钞票就进入if
-                if (print_currency.equals(Constant.CNR)){
+                if (print_currency.equals(Constant.CNY)){
                     TestFunction.deposit_Print_SampleTicket(this,list,h);
                 }else if (print_currency.equals(Constant.MXN)){
                     TestFunction.deposit_Print_SampleTicket_MXN(this,list,h);
@@ -100,7 +100,7 @@ public class LoginActivity extends BaseActivity {
                 SpzUtils.putInt(Constant.NUM,0);
                 SpzUtils.putInt(Constant.COUNTS,0);
             }else {//如果没有存钞票，只存了其他存款（硬币，支票等）就进入else
-                if (print_currency.equals(Constant.CNR)){
+                if (print_currency.equals(Constant.CNY)){
                     TestFunction.deposit_Print_SampleTicket(this,list,h);
                 }else if (print_currency.equals(Constant.MXN)){
                     TestFunction.deposit_Print_SampleTicket_MXN(this,list,h);

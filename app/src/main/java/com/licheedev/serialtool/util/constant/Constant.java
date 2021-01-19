@@ -95,7 +95,7 @@ public interface Constant {
     //墨西哥币种
     String MXN = "MXN";
     //人民币
-    String CNR = "CNR";
+    String CNY = "CNY";
     //打印币种
     String PRINT_CURRENCY = "print_currency";
     String OUT_OF_THIS="out_of_this";
