@@ -20,6 +20,8 @@ public class LogManager {
      * 查询退钞详情
      */
     public static final int SEARCH_LEAD = 0x5;
+    //系统上报错误
+    public static final int SYSTEM_ERRORS = 0x6;
 
     public final List<IMessage> messages;
     private boolean mAutoEnd = true;

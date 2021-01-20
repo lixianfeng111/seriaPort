@@ -20,6 +20,7 @@ import com.licheedev.serialtool.comn.message.LogManager;
 import com.licheedev.serialtool.dialog.CurrenySelectUtil;
 import com.licheedev.serialtool.util.LogPlus;
 import com.licheedev.serialtool.util.SpzUtils;
+import com.licheedev.serialtool.util.SystemErrorsUtil;
 import com.licheedev.serialtool.util.ToastUtil;
 import com.licheedev.serialtool.util.constant.Constant;
 import com.licheedev.serialtool.util.constant.Money;
@@ -34,6 +35,7 @@ import static com.licheedev.serialtool.comn.message.LogManager.COUNT_COMMAND;
 import static com.licheedev.serialtool.comn.message.LogManager.EXIT_WORK_COMMAND;
 import static com.licheedev.serialtool.comn.message.LogManager.FINISH_DEPOSIT;
 import static com.licheedev.serialtool.comn.message.LogManager.SEARCH_LEAD;
+import static com.licheedev.serialtool.comn.message.LogManager.SYSTEM_ERRORS;
 
 /**
  * 纸币存款
@@ -306,6 +308,9 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
                 ToastUtil.show(this, "查询退钞命令完成，结果待解析～");
             }
             break;
+            case SYSTEM_ERRORS:{
+                SystemErrorsUtil.getError(received);
+            }
         }
 
     }

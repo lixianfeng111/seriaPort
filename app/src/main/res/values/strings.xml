@@ -272,4 +272,7 @@
     <string name="new_bag_id">新钞袋号为空</string>
     <string name="lead_seal">封铅号为空</string>
     <string name="please_take_out">请取走暂存口钞票</string>
+    <!--    系统错误上报-->
+    <string name="left_errors">左错误</string>
+    <string name="right_errors">右错误</string>
 </resources>

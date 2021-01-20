@@ -18,6 +18,7 @@ import com.licheedev.serialtool.base.BasePresenter;
 import com.licheedev.serialtool.util.GetCurrencyUtil;
 import com.licheedev.serialtool.util.LanguageUtils;
 import com.licheedev.serialtool.util.SpzUtils;
+import com.licheedev.serialtool.util.SystemErrorsUtil;
 import com.licheedev.serialtool.util.ToastUtil;
 import com.licheedev.serialtool.util.constant.Constant;
 import com.sun.jna.Pointer;
@@ -36,6 +37,7 @@ public class LoginActivity extends BaseActivity {
     EditText editText2;
     int[] str = new int[]{};
     private String print_currency;
+    private SystemErrorsUtil systemErrorsUtil=null;
 
     @OnClick({R.id.btLogin})
     public void onViewClicked(View view) {
@@ -122,6 +124,9 @@ public class LoginActivity extends BaseActivity {
         super.initView();
         //打开串口
         OpenPort();
+        if (systemErrorsUtil==null){
+            systemErrorsUtil = new SystemErrorsUtil(this);
+        }
     }
 
     @Override

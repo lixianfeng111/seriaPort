@@ -12,9 +12,6 @@ import com.licheedev.serialtool.activity.manage.print.SystemPrintActivity;
 import com.licheedev.serialtool.activity.manage.setting.SettingActivity;
 import com.licheedev.serialtool.activity.manage.update.VersionUpdateActivity;
 import com.licheedev.serialtool.base.BasePresenter;
-import com.licheedev.serialtool.util.LanguageUtils;
-import com.licheedev.serialtool.util.SpzUtils;
-import com.licheedev.serialtool.util.ToastUtil;
 
 import butterknife.OnClick;
 
@@ -53,28 +50,28 @@ public class SetManageActivity extends BaseActivity {
             , R.id.ibtn_device_register, R.id.ibtn_update, R.id.ibtn_stop, R.id.ibtn_close})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.ibtn_manager:
+            case R.id.ibtn_manager://管理
                 startActivity(new Intent(SetManageActivity.this, ManageActivity.class));
                 break;
-            case R.id.ibtn_setting:
+            case R.id.ibtn_setting://设定
                 startActivity(new Intent(SetManageActivity.this, SettingActivity.class));
                 break;
-            case R.id.ibtn_maintain:
+            case R.id.ibtn_maintain://维护
                 startActivity(new Intent(SetManageActivity.this, MaintainActivity.class));
                 break;
-            case R.id.ibtn_print:
+            case R.id.ibtn_print://系统打印
                 startActivity(new Intent(SetManageActivity.this, SystemPrintActivity.class));
                 break;
-            case R.id.ibtn_device_register:
+            case R.id.ibtn_device_register://设备注册
                 startActivity(new Intent(SetManageActivity.this, DeviceRegisterActivity.class));
                 break;
-            case R.id.ibtn_update:
+            case R.id.ibtn_update://版本更新
                 startActivity(new Intent(SetManageActivity.this, VersionUpdateActivity.class));
                 break;
-            case R.id.ibtn_stop:
+            case R.id.ibtn_stop://注销
                 finish();
                 break;
-            case R.id.ibtn_close:
+            case R.id.ibtn_close://退出
                 int currentVersion = android.os.Build.VERSION.SDK_INT;
                 if (currentVersion > android.os.Build.VERSION_CODES.ECLAIR_MR1) {
                     Intent startMain =new Intent(Intent.ACTION_MAIN);

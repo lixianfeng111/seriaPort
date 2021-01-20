@@ -256,4 +256,7 @@
 	<string name="new_bag_id">Number of new banknotes is empty</string>
 	<string name="lead_seal">The seal number is empty</string>
 	<string name="please_take_out">Please retrieve the banknotes from the Temporary Pocket</string>
+	<!--    系统错误上报-->
+	<string name="left_errors">the left errors</string>
+	<string name="right_errors">the right errors</string>
 </resources>
