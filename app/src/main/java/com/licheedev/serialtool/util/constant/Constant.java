@@ -80,6 +80,10 @@ public interface Constant {
     String LEAD_SEAL = "lead_seal";
     String OLD_BAG_ID = "old_bagId";
     String NEW_LEAD_SEAL = "new_lead_seal";
+
+    String BAG_ID2 = "bagId2";
+    String LEAD_SEAL2 = "lead_seal2";
+
     //其他存款输入金额数
     String HOW_MUCH = "how_much";
     //用于存款记录
@@ -98,7 +102,8 @@ public interface Constant {
     String CNY = "CNY";
     //打印币种
     String PRINT_CURRENCY = "print_currency";
-    String OUT_OF_THIS="out_of_this";
+    String LAST_CHANGE="last_change";
     String Banknote = "Banknote";
     String STC = "STC";
+    String IS_CHANGE = "is_change";
 }

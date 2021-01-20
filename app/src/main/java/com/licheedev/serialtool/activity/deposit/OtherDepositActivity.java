@@ -108,11 +108,6 @@ public class OtherDepositActivity extends BaseActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
     public void initVariable() {
 
     }
@@ -252,7 +247,6 @@ public class OtherDepositActivity extends BaseActivity {
     private void ClosePort() {
         if (h != Pointer.NULL) {
             AutoReplyPrint.INSTANCE.CP_Port_Close(h);
-            h = Pointer.NULL;
         }
     }
 }

@@ -42,7 +42,7 @@ public class CurrenySelectUtil {
      */
     @RequiresApi(api = Build.VERSION_CODES.M)
     public static void showCurreny(final Context context, final PaperCurrencyDepositActivity.Callback callback) {
-//        final boolean isPrint = SpzUtils.getBoolean(Constant.IS_PRINT, false);
+        final boolean isPrint = SpzUtils.getBoolean(Constant.IS_PRINT, false);
         final AlertDialog alertDialog = new AlertDialog
                 .Builder(context)
                 .create();
@@ -61,7 +61,9 @@ public class CurrenySelectUtil {
         adapter.setMyViewHolerClicks(new CurrenySelectAdapter.MyViewHolerClicks() {
             @Override
             public void onItemClick(int position) {
-                callback.onDialogClick(position,alertDialog);
+                if (!isPrint){
+                    callback.onDialogClick(position,alertDialog);
+                }
             }
         });
 

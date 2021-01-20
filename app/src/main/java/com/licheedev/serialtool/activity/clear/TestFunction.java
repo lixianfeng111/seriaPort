@@ -5,6 +5,7 @@ import android.app.Activity;
 import com.caysn.autoreplyprint.AutoReplyPrint;
 import com.licheedev.serialtool.R;
 import com.licheedev.serialtool.activity.deposit.DepositDetailsActivity;
+import com.licheedev.serialtool.util.LogPlus;
 import com.licheedev.serialtool.util.SpzUtils;
 import com.licheedev.serialtool.util.TimeFormartUtils;
 import com.licheedev.serialtool.util.constant.Constant;
@@ -119,7 +120,6 @@ public class TestFunction {
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.old_money_bag_print)));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 280);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString(Constant.BAG_ID)+"\r\n"));
-
             String old_lead_seal = SpzUtils.getString(Constant.OLD_LEAD_SEAL);
             AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 0);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.old_sealing_print)));

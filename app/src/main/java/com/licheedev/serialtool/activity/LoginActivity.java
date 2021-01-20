@@ -165,7 +165,6 @@ public class LoginActivity extends BaseActivity {
     private void ClosePort() {
         if (h != Pointer.NULL) {
             AutoReplyPrint.INSTANCE.CP_Port_Close(h);
-            h = Pointer.NULL;
         }
     }
 

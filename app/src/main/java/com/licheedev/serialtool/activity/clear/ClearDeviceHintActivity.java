@@ -22,6 +22,7 @@ import com.licheedev.serialtool.dialog.CurrenySelectUtil;
 import com.licheedev.serialtool.util.DepositRecordUtil;
 import com.licheedev.serialtool.util.SpzUtils;
 import com.licheedev.serialtool.util.TimeFormartUtils;
+import com.licheedev.serialtool.util.ToastUtil;
 import com.licheedev.serialtool.util.constant.Constant;
 import com.sun.jna.Pointer;
 
@@ -54,7 +55,7 @@ public class ClearDeviceHintActivity extends BaseActivity {
     private TextView second;
     private TextView third;
     private TextView fourth;
-
+    private boolean isChange;
 
     @Override
     protected int getLayoutId() {
@@ -116,8 +117,9 @@ public class ClearDeviceHintActivity extends BaseActivity {
         start_clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isCleared){
-                    if (n>0){
+                if (isCleared){//是否更换了钞袋
+                    if (n>0){//是否到最多打印次数
+                        isChange=true;
                         n--;
                         TestFunction.Test_Pos_SampleTicket_80MM(ClearDeviceHintActivity.this,h);
                     }else {
@@ -135,7 +137,17 @@ public class ClearDeviceHintActivity extends BaseActivity {
                 CurrenySelectUtil.showQuitDialog(ClearDeviceHintActivity.this, new Callback() {
                     @Override
                     public void onQuitDialogClick() {
-                        DepositRecordUtil.saveDepositRecord();
+                        if (isCleared){//是否更换了钞袋
+                            if (!isChange){//更换钞袋后没有打印则退出时打印
+                                print();
+                            }
+                        }else {//没有更换钞袋
+                            String string = SpzUtils.getString(Constant.LEAD_SEAL2);//获取上次封铅号
+                            SpzUtils.putString(Constant.OLD_BAG_ID,SpzUtils.getString(Constant.BAG_ID2));
+                            SpzUtils.putString(Constant.NEW_LEAD_SEAL,string);//新钞袋号还是上次的
+                            SpzUtils.putString(Constant.OLD_LEAD_SEAL,string);
+                            SpzUtils.putString(Constant.LEAD_SEAL,string);
+                        }
                         finish();
                     }
                 });
@@ -210,6 +222,7 @@ public class ClearDeviceHintActivity extends BaseActivity {
                     handler.removeMessages(4);
                     close_door.setColorFilter(blue);
                     fourth.setTextColor(blue);
+                    SpzUtils.putBoolean(Constant.IS_CHANGE,true);
                     isPutIn=false;
                     isTakeOut=false;
                     isOpen=false;
@@ -279,7 +292,6 @@ public class ClearDeviceHintActivity extends BaseActivity {
     private void ClosePort() {
         if (h != Pointer.NULL) {
             AutoReplyPrint.INSTANCE.CP_Port_Close(h);
-            h = Pointer.NULL;
         }
     }
 
@@ -291,12 +303,21 @@ public class ClearDeviceHintActivity extends BaseActivity {
             }
         }).start();
     }
+
     @Override
     protected void onDestroy() {
+        if (n>0&&isCleared){
+            SpzUtils.putBoolean(Constant.LAST_CHANGE,false);
+        }
         ClosePort();
         isCleared=false;
         n=0;
         SerialPortManager2.instance().close();
         super.onDestroy();
+    }
+    private void print(){
+        TestFunction.Test_Pos_SampleTicket_80MM(ClearDeviceHintActivity.this,h);
+        DepositRecordUtil.saveDepositRecord();
+        SpzUtils.putBoolean(Constant.LAST_CHANGE,false);
     }
 }

@@ -71,6 +71,7 @@ public class MaintainActivity extends BaseActivity {
                 SpzUtils.putString(Constant.timeDay2, TimeFormartUtils.getTimeDay());
                 SpzUtils.putString(Constant.TIME2,TimeFormartUtils.getTime());
                 SpzUtils.putBoolean(Constant.START,true);
+                SpzUtils.putString(Constant.LEAD_SEAL,"");
                 ToastUtil.show(this,getResources().getString(R.string.initialization));
                 break;
             case R.id.btnBack:
