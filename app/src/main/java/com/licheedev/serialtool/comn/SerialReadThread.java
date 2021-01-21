@@ -139,189 +139,14 @@ public class SerialReadThread extends Thread {
             }
         }
 
-        if((char)(received[6]&0xff)==0x15)
-        {
-//            LogManager.ReceiveData data = new LogManager.ReceiveData(received,LogManager.SYSTEM_ERRORS);
-//            LogManager.instance().post(data);
-//            if(((char)(received[7]&0xff)&0x01)==0x01)
-//            {
-//                hexstr1=hexStr+"   PS01左错误";
-//
-//            }
-//            else if(((char)(received[7]&0xff)&0x02)==0x02)
-//            {
-//                hexstr1=hexStr+"   PS01右错误";
-//
-//            }
-//            else if(((char)(received[7]&0xff)&0x04)==0x04)
-//            {
-//                hexstr1=hexStr+"   PS02左错误";
-//
-//            }
-//            else if(((char)(received[7]&0xff)&0x08)==0x08)
-//            {
-//                hexstr1=hexStr+"   PS02右错误";
-//
-//            }
-//            else if(((char)(received[7]&0xff)&0x10)==0x10)
-//            {
-//                hexstr1=hexStr+"   PS03左1错误";
-//
-//            }
-//            else if(((char)(received[7]&0xff)&0x20)==0x20)
-//            {
-//                hexstr1=hexStr+"   PS03左2错误";
-//
-//            }
-//            else if(((char)(received[7]&0xff)&0x40)==0x40)
-//            {
-//                hexstr1=hexStr+"   PS03右1错误";
-//
-//            }
-//            else if(((char)(received[7]&0xff)&0x80)==0x80)
-//            {
-//                hexstr1=hexStr+"   PS03右2错误";
-//
-//            }
-//            if(((char)(received[8]&0xff)&0x01)==0x01)
-//            {
-//                hexstr1=hexStr+"   PS04错误";
-//
-//            }
-//            else if(((char)(received[8]&0xff)&0x02)==0x02)
-//            {
-//                hexstr1=hexStr+"   PS06错误";
-//
-//            }
-//            else if(((char)(received[8]&0xff)&0x04)==0x04)
-//            {
-//                hexstr1=hexStr+"   收钞电机错误";
-//
-//            }
-//            else if(((char)(received[8]&0xff)&0x08)==0x08)
-//            {
-//                hexstr1=hexStr+"   存款口打开错误";
-//
-//            }
-//            else if(((char)(received[8]&0xff)&0x10)==0x10)
-//            {
-//                hexstr1=hexStr+"   PS08左错误";
-//
-//            }
-//            else if(((char)(received[8]&0xff)&0x20)==0x20)
-//            {
-//                hexstr1=hexStr+"   PS08右错误";
-//
-//            }
-//            if(((char)(received[9]&0xff)&0x01)==0x01)
-//            {
-//                hexstr1=hexStr+"   ";
-//
-//            }
-//            else if(((char)(received[9]&0xff)&0x02)==0x02)
-//            {
-//                hexstr1=hexStr+"   罩门打开出错";
-//
-//            }
-//            else if(((char)(received[9]&0xff)&0x04)==0x04)
-//            {
-//                hexstr1=hexStr+"   罩门关闭出错";
-//
-//            }
-//            else if(((char)(received[9]&0xff)&0x08)==0x08)
-//            {
-//                hexstr1=hexStr+"   落钞门关闭出错";
-//
-//            }
-//            else if(((char)(received[9]&0xff)&0x10)==0x10)
-//            {
-//                hexstr1=hexStr+"   ";
-//
-//            }
-//            else if(((char)(received[9]&0xff)&0x20)==0x20)
-//            {
-//                hexstr1=hexStr+"   ";
-//
-//            }
-//            else if(((char)(received[9]&0xff)&0x40)==0x40)
-//            {
-//                hexstr1=hexStr+"   PS09左错误";
-//
-//            }
-//            else if(((char)(received[9]&0xff)&0x80)==0x80)
-//            {
-//                hexstr1=hexStr+"   PS09右错误";
-//
-//            }
-//            if(((char)(received[10]&0xff)&0x01)==0x01)
-//            {
-//                hexstr1=hexStr+"   置钞口有纸币";
-//
-//            }
-//            else if(((char)(received[10]&0xff)&0x02)==0x02)
-//            {
-//                hexstr1=hexStr+"   PS05中错误";
-//
-//            }
-//            else if(((char)(received[10]&0xff)&0x04)==0x04)
-//            {
-//                hexstr1=hexStr+"   PS05左错误";
-//
-//            }
-//            else if(((char)(received[10]&0xff)&0x08)==0x08)
-//            {
-//                hexstr1=hexStr+"   PS05右错误";
-//
-//            }
-//            else if(((char)(received[10]&0xff)&0x0E)==0x0E)
-//            {
-//                hexstr1=hexStr+"   PS05左中右错误";
-//
-//            }
-//            else
-//            {hexstr1=hexStr;}
-            String error = SystemErrorsUtil.getError(received);
-            LogManager.instance().postError(error);
-            hexstr1=hexStr+"  "+error;
+        if((char)(received[6]&0xff)==0x15) {
+            SystemErrorsUtil.getError15(received,hexStr);
             SerialPortManager.instance().sendCommand(sendok);
-            LogPlus.e("read_thread1",hexstr1);
-        }
-        else if((char)(received[6]&0xff)==0x44)
-        {
-            if(((char)(received[7]&0xff)&0x01)==0x00)
-            {hexstr1=hexStr+"   钞箱未到位";
-                LogManager.instance().postError("钞箱未到位");
-            }
 
-            else if(((char)(received[7]&0xff)&0x02)==0x00)
-            {hexstr1=hexStr+"   保险柜门未关";
-                LogManager.instance().postError("保险柜门未关");
-            }
-
-            else if(((char)(received[7]&0xff)&0x04)==0x00)
-            {hexstr1=hexStr+"   报警器报警";
-                LogManager.instance().postError("报警器报警");
-            }
-            else if(((char)(received[8]&0xff)&0x01)==0x01)
-            {hexstr1=hexStr+"   罩门传感器错误";
-                LogManager.instance().postError("罩门传感器错误");
-            }
-            else if(((char)(received[8]&0xff)&0x02)==0x02)
-            {hexstr1=hexStr+"   落钞门传感器错误";
-                LogManager.instance().postError("落钞门传感器错误");
-            }
-            else if(((char)(received[7]&0x08))==0x08)
-            {hexstr1=hexStr+"   传感器检测到钞票";
-                SerialPortManager.instance().sendCountCommand();
-            }
-            else
-            {hexstr1=hexStr;}
-
-            LogPlus.e("read_thread2","传感器 " + hexstr1);
+        } else if((char)(received[6]&0xff)==0x44) {
+           SystemErrorsUtil.getError44(received,hexStr);
             SerialPortManager.instance().sendCommand(sendok);
-        }
-        else if((char)(received[6]&0xff)==0x90)
-        {
+        } else if((char)(received[6]&0xff)==0x90) {
             //SN
             version[0]=(byte)(received[35]);
             version[1]=(byte)(received[36]);
@@ -421,8 +246,7 @@ public class SerialReadThread extends Thread {
             }
             return;
         }
-        else if((char)(received[6]&0xff)== 0x20)
-        {
+        else if((char)(received[6]&0xff)== 0x20) {
             LogManager.ReceiveData data = new LogManager.ReceiveData(received,LogManager.EXIT_WORK_COMMAND);
             LogManager.instance().post(data);
             LogPlus.e("read_thread","退出工作模式");
@@ -431,120 +255,23 @@ public class SerialReadThread extends Thread {
         {
             LogPlus.e("read_thread","进入工作模式");
         }
-        else if((char)(received[6]&0xff)== 0x22)
-        {
-            LogPlus.e("read_thread","开始点算指令 " + hexStr);
-            int result = received[8];
-            switch (result){
-                case 6:
-                    LogPlus.e("read_thread","开始点算 ");
-                    break;
-                case 0x15:
-                    LogPlus.e("read_thread","开始点算 未处在工作模式，不能开始");
-                    LogManager.instance().postError("未处在工作模式，不能开始");
-                    break;
-                case 0x16:
-                    LogPlus.e("read_thread","开始点算 置钞口无纸币，不能开始");
-                    LogManager.instance().postError("置钞口无纸币，不能开始");
-                    break;
-                case 0x18:
-                    LogPlus.e("read_thread","开始点算 收钞口满（张数上限），不能开始");
-                    LogManager.instance().postError("收钞口满（张数上限），不能开始");
-                    break;
-                case 0x19:
-                    LogPlus.e("read_thread","收钞口满（面值上限），不能开始");
-                    LogManager.instance().postError("收钞口满（面值上限），不能开始");
-                    break;
-                case 0x1A:
-                    LogPlus.e("read_thread","开始点算 其他原因，不能开始，请重置置钞口");
-                    LogManager.instance().postError("其他原因，不能开始，请重置置钞口");
-                    break;
-            }
+        else if((char)(received[6]&0xff)== 0x22) {
+            SystemErrorsUtil.getError22(received);
         }
-        else if((char)(received[6]&0xff)== 0x25)
-        {
-            LogPlus.e("read_thread","存储收钞口纸币 " + hexStr);
-            byte status = received[8];
-            switch (status){
-                case 6:
-                    LogPlus.e("read_thread","纸币存储成功 ");
-//                    amountReceiveMoney(received);
-//                    amountSaveMoney(received);
-                    break;
-                case 16:
-                    LogPlus.e("read_thread","纸币存储失败 ");
-                    LogManager.instance().postError("纸币存储失败");
-                    break;
-                case 17:
-                    LogPlus.e("read_thread","纸币存储失败，位置8有吊币 ");
-                    LogManager.instance().postError("纸币存储失败，位置8有吊币");
-                    break;
-                case 18:
-                    LogPlus.e("read_thread","纸币存储失败，存款操作超时 ");
-                    LogManager.instance().postError("纸币存储失败，存款操作超时");
-                    break;
-            }
-            LogManager.instance().post(new LogManager.ReceiveData(received, SAVE_SUCCESS_COMMAND));
+        else if((char)(received[6]&0xff)== 0x25) {
+            SystemErrorsUtil.getError25(received,hexStr);
             return;
         }
-        else if((char)(received[6]&0xff)== 0x33)
-        {
+        else if((char)(received[6]&0xff)== 0x33) {
             LogPlus.e("read_thread","查询退钞原因 " + hexStr);
             LogManager.instance().post(new LogManager.ReceiveData(received, SEARCH_LEAD));
         }
-        else if((char)(received[6]&0xff)== 0x46)
-        {
-            byte status = received[7];
-            switch (status){
-                case 1:
-                    LogPlus.e("read_thread","sd卡状态 无SD卡");
-                    LogManager.instance().postError("sd卡状态 无SD卡");
-                    break;
-                case 2:
-                    LogPlus.e("read_thread","sd卡状态 初始化失败");
-                    LogManager.instance().postError("sd卡状态 初始化失败");
-                    break;
-                case 3:
-                    LogPlus.e("read_thread","sd卡状态 初始化成功");
-                    break;
-            }
-            SerialPortManager.instance().sendSDcardAck();
-
+        else if((char)(received[6]&0xff)== 0x46) {
+            SystemErrorsUtil.getError46(received);
         }
-        else if ((char)(received[6]&0xff)== 0x49)
-        {
+        else if ((char)(received[6]&0xff)== 0x49) {
             LogPlus.d("read_thread","设置币种");
         }
-
-        {hexstr1=hexStr;}
-//        LogPlus.e("read_thread",hexstr1);
-//        LogManager.instance().post(new RecvMessage(hexstr1));
-    }
-
-    private void amountSaveMoney(byte[] received) {
-        int CNY_100 = received[29] + (received[30]<<8);
-        int CNY_50 = received[31] + (received[32]<<8);
-        int CNY_20 = received[33] + (received[34]<<8);
-        int CNY_10 = received[35] + (received[36]<<8);
-        int CNY_5 = received[37] + (received[38]<<8);
-        int CNY_1 = received[39] + (received[40]<<8);
-        final String amount = " 共存  100x" + CNY_100 + " 50x" +
-                CNY_50 + " 20x" + CNY_20 + " 10x" + CNY_10 + " 5x" + CNY_5 + " 1x" + CNY_1;
-        LogPlus.e("read_thread",amount);
-    }
-
-    private void amountReceiveMoney(byte[] received) {
-
-        int CNY_100 = received[9] + (received[10]<<8);
-        int CNY_50 = received[11] + (received[12]<<8);
-        int CNY_20 = received[13] + (received[14]<<8);
-        int CNY_10 = received[15] + (received[16]<<8);
-        int CNY_5 = received[17] + (received[18]<<8);
-        int CNY_1 = received[19] + (received[20]<<8);
-        final String amount = " 收到  100x" + CNY_100 + " 50x" +
-                CNY_50 + " 20x" + CNY_20 + " 10x" + CNY_10 + " 5x" + CNY_5 + " 1x" + CNY_1;
-        LogPlus.e("read_thread",amount);
-
     }
 
     /**

@@ -35,7 +35,6 @@ import static com.licheedev.serialtool.comn.message.LogManager.COUNT_COMMAND;
 import static com.licheedev.serialtool.comn.message.LogManager.EXIT_WORK_COMMAND;
 import static com.licheedev.serialtool.comn.message.LogManager.FINISH_DEPOSIT;
 import static com.licheedev.serialtool.comn.message.LogManager.SEARCH_LEAD;
-import static com.licheedev.serialtool.comn.message.LogManager.SYSTEM_ERRORS;
 
 /**
  * 纸币存款
@@ -177,7 +176,7 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(String error) {
-        tvStatus.setText(error + ":点击清除");
+        tvStatus.setText(error + " : "+getResources().getString(R.string.press_to_clear));
         tvStatus .setVisibility(View.VISIBLE);
     }
 
@@ -308,9 +307,6 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
                 ToastUtil.show(this, "查询退钞命令完成，结果待解析～");
             }
             break;
-            case SYSTEM_ERRORS:{
-                SystemErrorsUtil.getError(received);
-            }
         }
 
     }

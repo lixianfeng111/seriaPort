@@ -185,7 +185,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:text="点击清除"
+        android:text="@string/press_to_clear"
         android:textSize="20sp"
         android:visibility="gone"
         android:textColor="@color/white"

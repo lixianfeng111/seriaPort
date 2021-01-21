@@ -257,6 +257,39 @@
 	<string name="lead_seal">The seal number is empty</string>
 	<string name="please_take_out">Please retrieve the banknotes from the Temporary Pocket</string>
 	<!--    系统错误上报-->
-	<string name="left_errors">the left errors</string>
-	<string name="right_errors">the right errors</string>
+	<string name="left_errors">Left Error</string>
+	<string name="right_errors">Right Error</string>
+	<string name="left1_errors">Left 1 Error</string>
+	<string name="left2_errors">Left 2 Error</string>
+	<string name="right1_errors">Right 1 Error</string>
+	<string name="right2_errors">Right 2 Error</string>
+	<string name="middle_errors">Middle Error</string>
+	<string name="left_middle_right_error">Left Middle Right Error</string>
+	<string name="errors">errors</string>
+	<string name="stacker_error">Stacker Motor Error</string>
+	<string name="pocket_open_error">Deposit Pocket Open Error</string>
+	<string name="cover_door_open_error">Cover Door Open Error</string>
+	<string name="cover_door_close_error">Cover Door Close Error</string>
+	<string name="gate_door_open_error">Cover Door Open Error</string>
+	<string name="paper_on_hopper">Warning ! Banknotes on the Hopper !</string>
+	<string name="bag_not_in_position">Warning ! Cash Bag is not in position !</string>
+	<string name="door_not_close">Warning ! Safe Door not closed !</string>
+	<string name="alertor_alarms">The Alertor Alarms !</string>
+	<string name="cover_door_sensor_error">Cover Door Sensor Error</string>
+	<string name="gate_door_sensor_error">Gate Door Sensor Error</string>
+	<string name="cannot_start_no_work">Not in working mode, can not start !</string>
+	<string name="cannot_start_no_paper">No banknote on the hopper, can not start !</string>
+	<string name="cannot_start_paper_limit">Full Stacker (Piece Limit ), cannot start !</string>
+	<string name="cannot_start_value_limit">Full Stacker (Value Limit), cannot start !</string>
+	<string name="cannot_start_other_reason">Other reasons,can not start,put the banknote back in !</string>
+	<string name="banknote_deposit_fail">Banknote deposit fails !</string>
+	<string name="banknote_on_8">Banknote deposit fails ! Banknotes on Position 8 !</string>
+	<string name="deposit_timeout">Banknote deposit fails! Deposit operation timeout !</string>
+	<string name="press_to_clear">Press to clear</string>
+	<string name="no_sd_card">SD card status, but no SD card</string>
+	<string name="sd_initialization_failed">SD card state initialization failed</string>
+
+	<string name="to_be_analyzed">The query of cash return order is completed, and the result is to be analyzed </string>
+
+
 </resources>

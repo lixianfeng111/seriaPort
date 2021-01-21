@@ -275,4 +275,36 @@
     <!--    系统错误上报-->
     <string name="left_errors">左错误</string>
     <string name="right_errors">右错误</string>
+    <string name="left1_errors">左1错误</string>
+    <string name="left2_errors">左2错误</string>
+    <string name="right1_errors">右1错误</string>
+    <string name="right2_errors">右2错误</string>
+    <string name="middle_errors">中错误</string>
+    <string name="left_middle_right_error">左中右错误</string>
+    <string name="errors">错误</string>
+    <string name="stacker_error">收钞电机错误</string>
+    <string name="pocket_open_error">存款口打开错误</string>
+    <string name="cover_door_open_error">罩门打开出错</string>
+    <string name="cover_door_close_error">罩门关闭出错</string>
+    <string name="gate_door_open_error">落钞门关闭出错</string>
+    <string name="paper_on_hopper">置钞口有纸币</string>
+    <string name="bag_not_in_position">钞箱未到位</string>
+    <string name="door_not_close">保险柜门未关</string>
+    <string name="alertor_alarms">报警器报警</string>
+    <string name="cover_door_sensor_error">罩门传感器错误</string>
+    <string name="gate_door_sensor_error">落钞门传感器错误</string>
+    <string name="cannot_start_no_work">未处在工作模式，不能开始</string>
+    <string name="cannot_start_no_paper">置钞口无纸币，不能开始</string>
+    <string name="cannot_start_paper_limit">收钞口满（张数上限），不能开始</string>
+    <string name="cannot_start_value_limit">收钞口满（面值上限），不能开始</string>
+    <string name="cannot_start_other_reason">其他原因，不能开始，请重置置钞口</string>
+    <string name="banknote_deposit_fail">纸币存储失败</string>
+    <string name="banknote_on_8">纸币存储失败，位置8有吊币</string>
+    <string name="deposit_timeout">纸币存储失败，存款操作超时</string>
+    <string name="press_to_clear">点击清除</string>
+
+    <string name="no_sd_card">sd卡状态 无SD卡</string>
+    <string name="sd_initialization_failed">SD卡状态 初始化失败</string>
+    
+    <string name="to_be_analyzed">查询退钞命令完成，结果待解析～</string>
 </resources>
