@@ -303,7 +303,7 @@
     <string name="deposit_timeout">纸币存储失败，存款操作超时</string>
     <string name="press_to_clear">点击清除</string>
 
-    <string name="no_sd_card">sd卡状态 无SD卡</string>
+    <string name="no_sd_card">SD卡状态 无SD卡</string>
     <string name="sd_initialization_failed">SD卡状态 初始化失败</string>
     
     <string name="to_be_analyzed">查询退钞命令完成，结果待解析～</string>

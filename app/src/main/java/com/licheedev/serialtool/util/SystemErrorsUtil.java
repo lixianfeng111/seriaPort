@@ -9,7 +9,9 @@ import com.licheedev.serialtool.comn.message.LogManager;
 import static com.licheedev.serialtool.comn.message.LogManager.SAVE_SUCCESS_COMMAND;
 
 public class SystemErrorsUtil {
+
     private static String hexstr1 = null;
+
     private static Activity activity;
 
     public SystemErrorsUtil(Activity activity) {
@@ -49,7 +51,7 @@ public class SystemErrorsUtil {
                 hexstr1 = "PS08 "+content(R.string.right_errors);
             }
             if (((char) (received[9] & 0xff) & 0x01) == 0x01) {
-                hexstr1 = content(R.string.errors)+"1";
+                hexstr1 = content(R.string.errors)+" 1";//错误未定义，暂时标记错误1
             } else if (((char) (received[9] & 0xff) & 0x02) == 0x02) {
                 hexstr1 = content(R.string.cover_door_open_error);
             } else if (((char) (received[9] & 0xff) & 0x04) == 0x04) {
@@ -57,10 +59,10 @@ public class SystemErrorsUtil {
             } else if (((char) (received[9] & 0xff) & 0x08) == 0x08) {
                 hexstr1 = content(R.string.cover_door_open_error);
             } else if (((char) (received[9] & 0xff) & 0x10) == 0x10) {
-                hexstr1 = content(R.string.errors)+"2";
+                hexstr1 = content(R.string.errors)+" 2";//错误未定义，暂时标记错误2
 
             } else if (((char) (received[9] & 0xff) & 0x20) == 0x20) {
-                hexstr1 = content(R.string.errors)+"3";
+                hexstr1 = content(R.string.errors)+" 3";//错误未定义，暂时标记错误3
             } else if (((char) (received[9] & 0xff) & 0x40) == 0x40) {
                 hexstr1 = "PS09 "+content(R.string.left_errors);
             } else if (((char) (received[9] & 0xff) & 0x80) == 0x80) {

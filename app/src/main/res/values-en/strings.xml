@@ -265,7 +265,7 @@
 	<string name="right2_errors">Right 2 Error</string>
 	<string name="middle_errors">Middle Error</string>
 	<string name="left_middle_right_error">Left Middle Right Error</string>
-	<string name="errors">errors</string>
+	<string name="errors">Error</string>
 	<string name="stacker_error">Stacker Motor Error</string>
 	<string name="pocket_open_error">Deposit Pocket Open Error</string>
 	<string name="cover_door_open_error">Cover Door Open Error</string>

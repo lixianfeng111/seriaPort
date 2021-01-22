@@ -307,6 +307,7 @@ public class ClearDeviceHintActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         if (n>0&&isCleared){
+            DepositRecordUtil.saveDepositRecord();
             SpzUtils.putBoolean(Constant.LAST_CHANGE,false);
         }
         ClosePort();

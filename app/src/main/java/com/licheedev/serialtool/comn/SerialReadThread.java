@@ -1,29 +1,22 @@
 package com.licheedev.serialtool.comn;
 
-import android.app.Activity;
 import android.os.SystemClock;
-
-import com.licheedev.serialtool.App;
 import com.licheedev.serialtool.comn.event.BootEvent;
 import com.licheedev.serialtool.comn.event.ClearEvent;
 import com.licheedev.serialtool.comn.event.DepositEvent;
 import com.licheedev.serialtool.comn.event.IsCoveringEvent;
-import com.licheedev.serialtool.comn.event.StatusEvent;
 import com.licheedev.serialtool.comn.event.SystemInfoEvent;
 import com.licheedev.serialtool.comn.event.ZPKEvent;
 import com.licheedev.serialtool.comn.message.LogManager;
-import com.licheedev.serialtool.comn.message.RecvMessage;
 import com.licheedev.serialtool.util.ByteUtil;
 import com.licheedev.serialtool.util.LogPlus;
 import com.licheedev.serialtool.util.SystemErrorsUtil;
-
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import static com.licheedev.serialtool.comn.message.LogManager.SAVE_SUCCESS_COMMAND;
 import static com.licheedev.serialtool.comn.message.LogManager.SEARCH_LEAD;
 
 /**
@@ -85,25 +78,16 @@ public class SerialReadThread extends Thread {
         StringBuilder stringBuilder = new StringBuilder("");
 
         if (src == null || length <= 0) {
-
             return null;
-
         }
 
         for (int i = 0; i < length; i++) {
-
             int v = src[i] & 0xFF;
-
             String hv = Integer.toHexString(v);
-
             if (hv.length() < 2) {
-
                 stringBuilder.append(0);
-
             }
-
             stringBuilder.append(hv);
-
         }
 
         return stringBuilder.toString();
@@ -227,8 +211,7 @@ public class SerialReadThread extends Thread {
             LogPlus.d("ZPK",zpk);
 
         }
-        else if((char)(received[6]&0xff)== 0x12)
-        {
+        else if((char)(received[6]&0xff)== 0x12) {
             LogPlus.e("read_thread","点钞信息 " + hexStr);
             byte status = received[7];
             switch (status){
@@ -251,8 +234,7 @@ public class SerialReadThread extends Thread {
             LogManager.instance().post(data);
             LogPlus.e("read_thread","退出工作模式");
         }
-        else if((char)(received[6]&0xff)== 0x21)
-        {
+        else if((char)(received[6]&0xff)== 0x21) {
             LogPlus.e("read_thread","进入工作模式");
         }
         else if((char)(received[6]&0xff)== 0x22) {

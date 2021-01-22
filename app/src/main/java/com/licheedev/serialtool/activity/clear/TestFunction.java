@@ -336,12 +336,6 @@ public class TestFunction {
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(Constant.CNY));
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 100);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(totalAll+"\r\n"));
-
-                AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 0);
-                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 10);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(Constant.MXN));
-                AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 100);
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(totalAll+"\r\n"));
             }else if (totalAll_mxn>0){
                 AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 0);
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 10);
@@ -349,7 +343,6 @@ public class TestFunction {
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 100);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(totalAll_mxn+"\r\n"));
             }
-
 
             AutoReplyPrint.INSTANCE.CP_Pos_FeedLine(h, 1);
             AutoReplyPrint.INSTANCE.CP_Pos_SetAlignment(h, AutoReplyPrint.CP_Pos_Alignment_HCenter);
@@ -680,10 +673,10 @@ public class TestFunction {
         int save_num1000=0,save_num500=0,save_num200=0, save_num100=0,save_num50=0,save_num20=0;
         int save_money1000=0,save_money500=0,save_money200=0, save_money100=0,save_money50=0,save_money20=0;
 
-        int coin2 = SpzUtils.getInt(Constant.COIN2, 0);
-        int cheque2 = SpzUtils.getInt(Constant.CHEQUE2, 0);
-        int paper_money2 = SpzUtils.getInt(Constant.PAPER_MONEY2, 0);
-        int other2 = SpzUtils.getInt(Constant.OTHER2, 0);
+        int coin2 = SpzUtils.getInt(Constant.COIN2_MXN, 0);
+        int cheque2 = SpzUtils.getInt(Constant.CHEQUE2_MXN, 0);
+        int paper_money2 = SpzUtils.getInt(Constant.PAPER_MONEY2_MXN, 0);
+        int other2 = SpzUtils.getInt(Constant.OTHER2_MXN, 0);
         //将其他存款数累加
         coin2+=coin;
         cheque2+=cheque;
