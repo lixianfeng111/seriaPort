@@ -12,12 +12,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.licheedev.serialtool.App;
 import com.licheedev.serialtool.R;
+import com.licheedev.serialtool.activity.CheckingActivity;
 import com.licheedev.serialtool.activity.clear.ClearDeviceHintActivity;
 import com.licheedev.serialtool.activity.dapter.CurrenySelectAdapter;
 import com.licheedev.serialtool.activity.deposit.PaperCurrencyDepositActivity;
@@ -196,7 +198,40 @@ public class CurrenySelectUtil {
         return alertDialog;
     }
 
+    /**
+     * 开机自检
+     * @param context
+     * @param
+     * @return
+     */
+    public static Dialog showCheckingDialog(final Context context, final CheckingActivity.Callback callback) {
+        ViewGroup view = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.checking_dialog, null, false);
+        Button btRetry = view.findViewById(R.id.btRetry);
+        Button btSkip = view.findViewById(R.id.btSkip);
 
+        final AlertDialog alertDialog = new AlertDialog
+                .Builder(context)
+                .create();
+        alertDialog.setView(view);
+        alertDialog.show();
+        alertDialog.getWindow().setLayout(400, 210);
+//        alertDialog.getWindow().setLayout(300, 170);
+        btRetry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+                callback.onDialogClick(1,alertDialog);
+            }
+        });
+        btSkip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+                callback.onDialogClick(2,alertDialog);
+            }
+        });
+        return alertDialog;
+    }
 
 
     public static class DialogItemAdapter extends BaseAdapter {

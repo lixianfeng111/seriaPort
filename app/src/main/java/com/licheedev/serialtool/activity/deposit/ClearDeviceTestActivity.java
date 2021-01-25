@@ -112,6 +112,7 @@ public class ClearDeviceTestActivity extends BaseActivity {
                 }
                 break;
             case R.id.ibtn_cancel:
+                SerialPortManager2.instance().close();
                 finish();
                 break;
         }

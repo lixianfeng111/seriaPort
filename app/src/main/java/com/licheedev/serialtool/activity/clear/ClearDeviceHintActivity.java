@@ -56,7 +56,6 @@ public class ClearDeviceHintActivity extends BaseActivity {
     private TextView third;
     private TextView fourth;
     private boolean isChange;
-
     @Override
     protected int getLayoutId() {
         return R.layout.activity_clear_hint;
@@ -134,23 +133,29 @@ public class ClearDeviceHintActivity extends BaseActivity {
         clear_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CurrenySelectUtil.showQuitDialog(ClearDeviceHintActivity.this, new Callback() {
-                    @Override
-                    public void onQuitDialogClick() {
-                        if (isCleared){//是否更换了钞袋
-                            if (!isChange){//更换钞袋后没有打印则退出时打印
-                                print();
-                            }
-                        }else {//没有更换钞袋
-                            String string = SpzUtils.getString(Constant.LEAD_SEAL2);//获取上次封铅号
-                            SpzUtils.putString(Constant.OLD_BAG_ID,SpzUtils.getString(Constant.BAG_ID2));
-                            SpzUtils.putString(Constant.NEW_LEAD_SEAL,string);//新钞袋号还是上次的
-                            SpzUtils.putString(Constant.OLD_LEAD_SEAL,string);
-                            SpzUtils.putString(Constant.LEAD_SEAL,string);
-                        }
-                        finish();
+                if (!isOpen){
+                    initQuit();
+                }
+            }
+        });
+    }
+
+    private void initQuit() {
+        CurrenySelectUtil.showQuitDialog(ClearDeviceHintActivity.this, new Callback() {
+            @Override
+            public void onQuitDialogClick() {
+                if (isCleared){//是否更换了钞袋
+                    if (!isChange){//更换钞袋后没有打印则退出时打印
+                        print();
                     }
-                });
+                }else {//没有更换钞袋
+                    String string = SpzUtils.getString(Constant.LEAD_SEAL2);//获取上次封铅号
+                    SpzUtils.putString(Constant.OLD_BAG_ID,SpzUtils.getString(Constant.BAG_ID2));
+                    SpzUtils.putString(Constant.NEW_LEAD_SEAL,string);//新钞袋号还是上次的
+                    SpzUtils.putString(Constant.OLD_LEAD_SEAL,string);
+                    SpzUtils.putString(Constant.LEAD_SEAL,string);
+                }
+                finish();
             }
         });
     }
@@ -225,9 +230,9 @@ public class ClearDeviceHintActivity extends BaseActivity {
                     SpzUtils.putBoolean(Constant.IS_CHANGE,true);
                     isPutIn=false;
                     isTakeOut=false;
-                    isOpen=false;
                     isCleared=true;
                 }
+                isOpen=false;
                 break;
         }
     }
@@ -315,6 +320,7 @@ public class ClearDeviceHintActivity extends BaseActivity {
         n=0;
         SerialPortManager2.instance().close();
         super.onDestroy();
+        handler.removeCallbacksAndMessages(null);
     }
     private void print(){
         TestFunction.Test_Pos_SampleTicket_80MM(ClearDeviceHintActivity.this,h);

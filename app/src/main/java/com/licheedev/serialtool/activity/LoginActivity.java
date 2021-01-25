@@ -15,6 +15,7 @@ import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.activity.deposit.SelectDepositActivitys;
 import com.licheedev.serialtool.activity.manage.SetManageActivity;
 import com.licheedev.serialtool.base.BasePresenter;
+import com.licheedev.serialtool.comn.SerialPortManager;
 import com.licheedev.serialtool.util.GetCurrencyUtil;
 import com.licheedev.serialtool.util.LanguageUtils;
 import com.licheedev.serialtool.util.SpzUtils;

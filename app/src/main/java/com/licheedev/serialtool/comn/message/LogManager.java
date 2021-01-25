@@ -20,7 +20,7 @@ public class LogManager {
      * 查询退钞详情
      */
     public static final int SEARCH_LEAD = 0x5;
-
+    public static final int CHECKING = 0x6;
     public final List<IMessage> messages;
     private boolean mAutoEnd = true;
 
@@ -29,6 +29,10 @@ public class LogManager {
     }
 
     public void post(ReceiveData map) {
+        EventBus.getDefault().post(map);
+    }
+
+    public void post(ReceiveCheckData map) {
         EventBus.getDefault().post(map);
     }
 
@@ -76,6 +80,15 @@ public class LogManager {
         public ReceiveData(byte[] data, int what) {
             this.data = data;
             this.what = what;
+        }
+    }
+    public static class ReceiveCheckData {
+        public byte[] data;
+        public String hexStr;
+
+        public ReceiveCheckData(byte[] data, String hexStr) {
+            this.data = data;
+            this.hexStr = hexStr;
         }
     }
 }

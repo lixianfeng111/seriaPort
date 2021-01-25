@@ -4,17 +4,20 @@ import android.app.Activity;
 
 import com.licheedev.serialtool.R;
 import com.licheedev.serialtool.comn.SerialPortManager;
+import com.licheedev.serialtool.comn.event.CheckEvent;
 import com.licheedev.serialtool.comn.message.LogManager;
+
+import org.greenrobot.eventbus.EventBus;
 
 import static com.licheedev.serialtool.comn.message.LogManager.SAVE_SUCCESS_COMMAND;
 
-public class SystemErrorsUtil {
+public class CheckingErrorsUtil {
 
     private static String hexstr1 = null;
 
     private static Activity activity;
 
-    public SystemErrorsUtil(Activity activity) {
+    public CheckingErrorsUtil(Activity activity) {
         this.activity = activity;
     }
 
@@ -80,13 +83,14 @@ public class SystemErrorsUtil {
             } else if (((char) (received[10] & 0xff) & 0x0E) == 0x0E) {
                 hexstr1 = "PS05 "+content(R.string.left_middle_right_error);
             }
+
             if (hexstr1!=null){
-                LogManager.instance().postError(hexstr1);
+                EventBus.getDefault().post(new CheckEvent(hexstr1));
+
+//                LogManager.instance().post(new LogManager.ReceiveCheckError(hexstr1));
             }
 
-            if (hexstr1.isEmpty()){
-                hexstr1=hexStr;
-            }
+
         LogPlus.e("read_thread2","传感器 " + hexStr);
         LogPlus.e("read_thread2","传感器 " + hexstr1);
     }
@@ -94,30 +98,23 @@ public class SystemErrorsUtil {
         hexstr1 = null;
         if(((char)(received[7]&0xff)&0x01)==0x00) {
             hexstr1= content(R.string.bag_not_in_position);
-            LogManager.instance().postError(hexstr1);
+
         } else if(((char)(received[7]&0xff)&0x02)==0x00) {
             hexstr1= content(R.string.door_not_close);
-            LogManager.instance().postError(hexstr1);
+
         } else if(((char)(received[7]&0xff)&0x04)==0x00) {
             hexstr1= content(R.string.alertor_alarms);
-            LogManager.instance().postError(hexstr1);
         } else if(((char)(received[8]&0xff)&0x01)==0x01) {
             hexstr1= content(R.string.cover_door_sensor_error);
-            LogManager.instance().postError(hexstr1);
         }
         else if(((char)(received[8]&0xff)&0x02)==0x02) {
             hexstr1= content(R.string.gate_door_sensor_error);
-            LogManager.instance().postError(hexstr1);
         }
+
         if (hexstr1!=null){
-            LogManager.instance().postError(hexstr1);
+            EventBus.getDefault().post(new CheckEvent(hexstr1));
         }
-        if(((char)(received[7]&0x08))==0x08) {
-            hexstr1="传感器检测到钞票";
-            SerialPortManager.instance().sendCountCommand();
-        }else if (hexstr1==null){
-            hexstr1=hexStr;
-        }
+
         LogPlus.e("read_thread2","传感器 " + hexStr);
         LogPlus.e("read_thread2","传感器 " + hexstr1);
     }
@@ -145,8 +142,8 @@ public class SystemErrorsUtil {
                 hexstr1 = content(R.string.cannot_start_other_reason);
                 break;
         }
-        if (!hexstr1.isEmpty()){
-            LogManager.instance().postError(hexstr1);
+        if (hexstr1!=null){
+            EventBus.getDefault().post(new CheckEvent(hexstr1));
         }
 
         LogPlus.e("read_thread","开始点算 "+hexstr1);
@@ -171,10 +168,9 @@ public class SystemErrorsUtil {
                 break;
         }
         if (hexstr1!=null){
-            LogManager.instance().postError(hexstr1);
+            EventBus.getDefault().post(new CheckEvent(hexstr1));
         }
 
-        LogManager.instance().post(new LogManager.ReceiveData(received, SAVE_SUCCESS_COMMAND));
         LogPlus.e("read_thread",hexStr);
         LogPlus.e("read_thread",hexstr1);
     }
@@ -194,7 +190,7 @@ public class SystemErrorsUtil {
                 break;
         }
         if (hexstr1!=null){
-            LogManager.instance().postError(hexstr1);
+            EventBus.getDefault().post(new CheckEvent(hexstr1));
         }
         SerialPortManager.instance().sendSDcardAck();
         LogPlus.e("read_thread",hexstr1);

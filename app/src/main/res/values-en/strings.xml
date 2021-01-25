@@ -291,5 +291,7 @@
 
 	<string name="to_be_analyzed">The query of cash return order is completed, and the result is to be analyzed </string>
 
+	<string name="retry">Retry</string>
+	<string name="skip">Skip</string>
 
 </resources>
