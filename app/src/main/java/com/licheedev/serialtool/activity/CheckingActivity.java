@@ -142,6 +142,5 @@ public class CheckingActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        SerialPortManager.instance().close();
     }
 }

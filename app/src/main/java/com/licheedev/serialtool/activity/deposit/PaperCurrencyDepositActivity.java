@@ -16,6 +16,7 @@ import com.licheedev.serialtool.activity.ScreenUtil;
 import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.base.BasePresenter;
 import com.licheedev.serialtool.comn.SerialPortManager;
+import com.licheedev.serialtool.comn.event.IsCoveringEvent;
 import com.licheedev.serialtool.comn.message.LogManager;
 import com.licheedev.serialtool.dialog.CurrenySelectUtil;
 import com.licheedev.serialtool.util.LogPlus;
@@ -65,7 +66,8 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
     TextView tvStatus;
     @BindView(R.id.btnCurrency)
     Button btnCurrency;
-
+    //遮挡状态
+    private boolean isCovered;
     Deposit deposit;
     boolean exit;
     Dialog continueDepositDialogdialog, exitFailDialog0, exitFailDialog1;
@@ -232,10 +234,12 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
                 tvRrfuse.setText("" + reject);
                 if (count>0){
                     exit=true;
+
                 }
                 else if (takeOut){
                     close=true;
                 }
+
 
                 deposit = new Deposit(money, count, reject);
             }
@@ -266,7 +270,7 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
                         @Override
                         public void onDialogClick(int which, Dialog dialog) {
                             if (close){
-                                exitFailDialog0.dismiss();
+                                ToastUtil.show(PaperCurrencyDepositActivity.this,close+"");
                                 dialog.dismiss();
                                 SerialPortManager.instance().closeMaskDoor();
                                 finish();

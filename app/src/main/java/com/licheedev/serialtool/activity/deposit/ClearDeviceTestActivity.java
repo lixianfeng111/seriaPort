@@ -50,6 +50,8 @@ public class ClearDeviceTestActivity extends BaseActivity {
         //获取原钞袋号
         String bag = SpzUtils.getString(Constant.OLD_BAG_ID);
         String old_lead_seal = SpzUtils.getString(Constant.OLD_LEAD_SEAL);
+        SpzUtils.putString(Constant.LEAD_SEAL2,old_lead_seal);
+        SpzUtils.putString(Constant.BAG_ID2,bag);
         if (!TextUtils.isEmpty(bag)){//判断是否为空，为空就是第一次
             tvOriginalNum.setText(bag);
             SpzUtils.putString(Constant.BAG_ID,bag);//保存第一次钞袋号

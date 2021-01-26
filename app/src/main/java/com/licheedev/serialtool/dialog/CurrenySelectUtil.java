@@ -155,7 +155,6 @@ public class CurrenySelectUtil {
         btConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                alertDialog.dismiss();
                 callback.onDialogClick(1, alertDialog);
             }
         });

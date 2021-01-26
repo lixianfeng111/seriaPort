@@ -34,7 +34,7 @@ public class SelectDepositActivitys extends BaseActivity {
     @Override
     protected void initView() {
 //            SerialPortManager2.instance().close();
-//            SerialPortManager.instance().initDevice();
+            SerialPortManager.instance().initDevice();
         super.initView();
     }
 
