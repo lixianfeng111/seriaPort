@@ -35,6 +35,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
+        android:id="@+id/scan"
         android:layout_width="400dp"
         android:layout_height="60dp"
         android:layout_marginTop="30dp"
@@ -52,6 +53,42 @@
 
 
     <include layout="@layout/common_btnlogout" />
+    <LinearLayout
+        android:gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/scan"
+        tools:ignore="MissingConstraints" >
+        <TextView
+            android:id="@+id/debug_hood_door_open"
+            android:layout_width="195dp"
+            android:layout_height="60dp"
+            android:background="@drawable/blue_button_clicked"
+            android:gravity="center"
+            android:text="@string/debug_hood_door_open"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            tools:ignore="MissingConstraints"
+            />
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:id="@+id/debug_hood_door_close"
+            android:layout_width="195dp"
+            android:layout_height="60dp"
+            android:background="@drawable/blue_button_clicked"
+            android:gravity="center"
+            android:text="@string/debug_hood_door_close"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+
+
+            tools:ignore="MissingConstraints"
+            />
+    </LinearLayout>
+
+
 
 
 </android.support.constraint.ConstraintLayout>

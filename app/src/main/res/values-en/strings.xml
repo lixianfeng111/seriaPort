@@ -294,4 +294,6 @@
 	<string name="retry">Retry</string>
 	<string name="skip">Skip</string>
 
+	<string name="debug_hood_door_open">Debug hood door(Open)</string>
+	<string name="debug_hood_door_close">Debug hood door(Close)</string>
 </resources>

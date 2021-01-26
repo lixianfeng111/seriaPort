@@ -309,4 +309,8 @@
     <string name="to_be_analyzed">查询退钞命令完成，结果待解析～</string>
     <string name="retry">重试</string>
     <string name="skip">跳过</string>
+
+    <string name="debug_hood_door_open">防罩门调试（开）</string>
+    <string name="debug_hood_door_close">防罩门调试（关）</string>
+
 </resources>
