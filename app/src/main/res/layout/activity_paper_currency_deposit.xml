@@ -188,7 +188,7 @@
         android:text="@string/press_to_clear"
         android:textSize="20sp"
         android:visibility="gone"
-        android:textColor="@color/white"
+        android:textColor="@color/red"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

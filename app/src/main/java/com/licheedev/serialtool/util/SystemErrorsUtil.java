@@ -6,6 +6,8 @@ import com.licheedev.serialtool.R;
 import com.licheedev.serialtool.comn.SerialPortManager;
 import com.licheedev.serialtool.comn.message.LogManager;
 
+import java.util.ArrayList;
+
 import static com.licheedev.serialtool.comn.message.LogManager.SAVE_SUCCESS_COMMAND;
 
 public class SystemErrorsUtil {
@@ -13,9 +15,14 @@ public class SystemErrorsUtil {
     private static String hexstr1 = null;
 
     private static Activity activity;
+    private static ArrayList<String> errorList;
 
     public SystemErrorsUtil(Activity activity) {
         this.activity = activity;
+        if (errorList ==null){
+            errorList = new ArrayList<>();
+        }
+
     }
 
 
@@ -23,69 +30,91 @@ public class SystemErrorsUtil {
         hexstr1 = null;
             if (((char) (received[7] & 0xff) & 0x01) == 0x01) {
                 hexstr1 = "PS01 "+content(R.string.left_errors);
+                errorList.add(hexstr1);
             } else if (((char) (received[7] & 0xff) & 0x02) == 0x02) {
                 hexstr1 = "PS01 "+content(R.string.right_errors);
+                errorList.add(hexstr1);
             } else if (((char) (received[7] & 0xff) & 0x04) == 0x04) {
                 hexstr1 = "PS02 "+content(R.string.left_errors);
+                errorList.add(hexstr1);
             } else if (((char) (received[7] & 0xff) & 0x08) == 0x08) {
                 hexstr1 = "PS02 "+content(R.string.right_errors);
+                errorList.add(hexstr1);
             } else if (((char) (received[7] & 0xff) & 0x10) == 0x10) {
                 hexstr1 = "PS03 "+content(R.string.left1_errors);
+                errorList.add(hexstr1);
             } else if (((char) (received[7] & 0xff) & 0x20) == 0x20) {
                 hexstr1 = "PS03 "+content(R.string.left2_errors);
+                errorList.add(hexstr1);
             } else if (((char) (received[7] & 0xff) & 0x40) == 0x40) {
                 hexstr1 = "PS03 "+content(R.string.right1_errors);
+                errorList.add(hexstr1);
             } else if (((char) (received[7] & 0xff) & 0x80) == 0x80) {
                 hexstr1 = "PS03 "+content(R.string.right2_errors);
+                errorList.add(hexstr1);
             }
             if (((char) (received[8] & 0xff) & 0x01) == 0x01) {
                 hexstr1 = "PS04 "+content(R.string.errors);
+                errorList.add(hexstr1);
             } else if (((char) (received[8] & 0xff) & 0x02) == 0x02) {
                 hexstr1 = "PS06 "+content(R.string.errors);
+                errorList.add(hexstr1);
             } else if (((char) (received[8] & 0xff) & 0x04) == 0x04) {
                 hexstr1 = content(R.string.stacker_error);
+                errorList.add(hexstr1);
             } else if (((char) (received[8] & 0xff) & 0x08) == 0x08) {
                 hexstr1 = content(R.string.pocket_open_error);
+                errorList.add(hexstr1);
             } else if (((char) (received[8] & 0xff) & 0x10) == 0x10) {
                 hexstr1 = "PS08 "+content(R.string.left_errors);
+                errorList.add(hexstr1);
             } else if (((char) (received[8] & 0xff) & 0x20) == 0x20) {
                 hexstr1 = "PS08 "+content(R.string.right_errors);
+                errorList.add(hexstr1);
             }
             if (((char) (received[9] & 0xff) & 0x01) == 0x01) {
                 hexstr1 = content(R.string.errors)+" 1";//错误未定义，暂时标记错误1
+                errorList.add(hexstr1);
             } else if (((char) (received[9] & 0xff) & 0x02) == 0x02) {
                 hexstr1 = content(R.string.cover_door_open_error);
+                errorList.add(hexstr1);
             } else if (((char) (received[9] & 0xff) & 0x04) == 0x04) {
                 hexstr1 = content(R.string.cover_door_close_error);
+                errorList.add(hexstr1);
             } else if (((char) (received[9] & 0xff) & 0x08) == 0x08) {
                 hexstr1 = content(R.string.cover_door_open_error);
+                errorList.add(hexstr1);
             } else if (((char) (received[9] & 0xff) & 0x10) == 0x10) {
                 hexstr1 = content(R.string.errors)+" 2";//错误未定义，暂时标记错误2
-
+                errorList.add(hexstr1);
             } else if (((char) (received[9] & 0xff) & 0x20) == 0x20) {
                 hexstr1 = content(R.string.errors)+" 3";//错误未定义，暂时标记错误3
+                errorList.add(hexstr1);
             } else if (((char) (received[9] & 0xff) & 0x40) == 0x40) {
                 hexstr1 = "PS09 "+content(R.string.left_errors);
+                errorList.add(hexstr1);
             } else if (((char) (received[9] & 0xff) & 0x80) == 0x80) {
                 hexstr1 = "PS09 "+content(R.string.right_errors);
+                errorList.add(hexstr1);
             }
             if (((char) (received[10] & 0xff) & 0x01) == 0x01) {
                 hexstr1 = content(R.string.paper_on_hopper);
+                errorList.add(hexstr1);
             } else if (((char) (received[10] & 0xff) & 0x02) == 0x02) {
                 hexstr1 = "PS05 "+content(R.string.middle_errors);
+                errorList.add(hexstr1);
             } else if (((char) (received[10] & 0xff) & 0x04) == 0x04) {
                 hexstr1 = "PS05 "+content(R.string.left_errors);
+                errorList.add(hexstr1);
             } else if (((char) (received[10] & 0xff) & 0x08) == 0x08) {
                 hexstr1 = "PS05 "+content(R.string.right_errors);
+                errorList.add(hexstr1);
             } else if (((char) (received[10] & 0xff) & 0x0E) == 0x0E) {
                 hexstr1 = "PS05 "+content(R.string.left_middle_right_error);
+                errorList.add(hexstr1);
             }
-            if (hexstr1!=null){
-                LogManager.instance().postError(hexstr1);
-            }
-
-            if (hexstr1.isEmpty()){
-                hexstr1=hexStr;
+            if (errorList.size()>0){
+                LogManager.instance().post(errorList);
             }
         LogPlus.e("read_thread2","传感器 " + hexStr);
         LogPlus.e("read_thread2","传感器 " + hexstr1);

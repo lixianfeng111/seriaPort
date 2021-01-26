@@ -23,7 +23,7 @@ public class LogManager {
     public static final int CHECKING = 0x6;
     public final List<IMessage> messages;
     private boolean mAutoEnd = true;
-
+    private ArrayList<String> errorList;
     public LogManager() {
         messages = new ArrayList<>();
     }
@@ -34,6 +34,10 @@ public class LogManager {
 
     public void post(ReceiveCheckData map) {
         EventBus.getDefault().post(map);
+    }
+
+    public void post(ArrayList<String> errorList){
+        EventBus.getDefault().post(errorList);
     }
 
     public void postError(String error) {

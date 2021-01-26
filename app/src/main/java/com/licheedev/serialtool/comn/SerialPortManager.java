@@ -82,6 +82,9 @@ public class SerialPortManager {
     //退出零钱模式
     final String exitLooseChange = "A1 A2 A3 A4 04 00 42 BB BB 42";
 
+    //故障清零
+    final String FAILURE_RESET = "A1 A2 A3 A4 04 00 16 BB BB 16";
+
     //设置墨西哥币存款
     final String MXNCommand = "A1 A2 A3 A4 07 00 49 4D 58 4E BB BB 11";
 
@@ -153,6 +156,12 @@ public class SerialPortManager {
     //退出零钱模式
     public void sendLooseChangeExit(){
         String replace = exitLooseChange.replace(" ", "");
+        sendCommand(replace);
+    }
+
+    //故障清零
+    public void sendFAILURE_RESET(){
+        String replace = FAILURE_RESET.replace(" ", "");
         sendCommand(replace);
     }
 

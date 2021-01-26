@@ -29,6 +29,8 @@ import com.licheedev.serialtool.util.constant.Money;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -47,6 +49,8 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
     public static final int CURRENCY = 11;//币种
     private boolean takeOut;
 
+    private int n=0;
+    private int m=0;
     private boolean close=false;
     int[] commandWorkMode = new int[]{0xA1, 0xA2, 0xA3, 0xA4,/*STX 4byte*/
             0x12, 0x00,/*size 2byte*/
@@ -74,7 +78,7 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
     private String currency;
     private int count;
     private int money;
-
+    private ArrayList<String> errorList2;
     public static class Deposit {
 
         public Deposit(long moneyNum, long currencyNum, long refuse) {
@@ -169,17 +173,36 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
                 SerialPortManager.instance().sendLeadCommand();
                 break;
             case R.id.tvStatus:
-                SerialPortManager.instance().sendClearError();
-                SerialPortManager.instance().sendCommand(SerialPortManager.byteArrayToHexString(commandWorkMode));
-                tvStatus .setVisibility(View.GONE);
+                m++;
+                int size = errorList2.size();
+                if (size>1){
+                    if (m<size){
+                        String s = errorList2.get(m);
+                        tvStatus.setText(s + " : "+getResources().getString(R.string.press_to_clear));
+                    }else {
+                        n=0;
+                        tvStatus .setVisibility(View.GONE);
+                    }
+                }
+                SerialPortManager.instance().sendFAILURE_RESET();
+
+//                SerialPortManager.instance().sendClearError();
+//                SerialPortManager.instance().sendCommand(SerialPortManager.byteArrayToHexString(commandWorkMode));
+
                 break;
         }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessageEvent(String error) {
-        tvStatus.setText(error + " : "+getResources().getString(R.string.press_to_clear));
-        tvStatus .setVisibility(View.VISIBLE);
+    public void onMessageEvent(ArrayList<String> errorList) {
+        if (n==0){
+            errorList2=errorList;
+            String s = errorList.get(0);
+            tvStatus.setText(s + " : "+getResources().getString(R.string.press_to_clear));
+            tvStatus .setVisibility(View.VISIBLE);
+            n=1;
+        }
+
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
