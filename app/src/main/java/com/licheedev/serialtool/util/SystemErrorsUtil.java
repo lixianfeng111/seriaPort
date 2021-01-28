@@ -4,7 +4,10 @@ import android.app.Activity;
 
 import com.licheedev.serialtool.R;
 import com.licheedev.serialtool.comn.SerialPortManager;
+import com.licheedev.serialtool.comn.event.IsCoveringEvent;
 import com.licheedev.serialtool.comn.message.LogManager;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 
@@ -101,15 +104,19 @@ public class SystemErrorsUtil {
                 hexstr1 = content(R.string.paper_on_hopper);
                 errorList.add(hexstr1);
             } else if (((char) (received[10] & 0xff) & 0x02) == 0x02) {
+                EventBus.getDefault().post(new IsCoveringEvent(true));
                 hexstr1 = "PS05 "+content(R.string.middle_errors);
                 errorList.add(hexstr1);
             } else if (((char) (received[10] & 0xff) & 0x04) == 0x04) {
+                EventBus.getDefault().post(new IsCoveringEvent(true));
                 hexstr1 = "PS05 "+content(R.string.left_errors);
                 errorList.add(hexstr1);
             } else if (((char) (received[10] & 0xff) & 0x08) == 0x08) {
+                EventBus.getDefault().post(new IsCoveringEvent(true));
                 hexstr1 = "PS05 "+content(R.string.right_errors);
                 errorList.add(hexstr1);
             } else if (((char) (received[10] & 0xff) & 0x0E) == 0x0E) {
+                EventBus.getDefault().post(new IsCoveringEvent(true));
                 hexstr1 = "PS05 "+content(R.string.left_middle_right_error);
                 errorList.add(hexstr1);
             }

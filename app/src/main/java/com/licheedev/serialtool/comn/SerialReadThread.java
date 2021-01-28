@@ -241,6 +241,7 @@ public class SerialReadThread extends Thread {
             LogManager.instance().post(data);
             LogPlus.e("read_thread","退出工作模式");
         }
+
         else if((char)(received[6]&0xff)== 0x21) {
             LogPlus.e("read_thread","进入工作模式");
         }
@@ -254,7 +255,9 @@ public class SerialReadThread extends Thread {
             return;
         }
         else if((char)(received[6]&0xff)== 0x33) {
+            byte status = received[7];
             LogPlus.e("read_thread","查询退钞原因 " + hexStr);
+            LogPlus.d("查询退钞原因",status+"");
             LogManager.instance().post(new LogManager.ReceiveData(received, SEARCH_LEAD));
         }
         else if((char)(received[6]&0xff)== 0x46) {

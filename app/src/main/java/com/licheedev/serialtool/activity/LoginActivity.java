@@ -15,7 +15,6 @@ import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.activity.deposit.SelectDepositActivitys;
 import com.licheedev.serialtool.activity.manage.SetManageActivity;
 import com.licheedev.serialtool.base.BasePresenter;
-import com.licheedev.serialtool.comn.SerialPortManager;
 import com.licheedev.serialtool.util.CheckingErrorsUtil;
 import com.licheedev.serialtool.util.GetCurrencyUtil;
 import com.licheedev.serialtool.util.LanguageUtils;
@@ -30,9 +29,11 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import static com.sun.jna.Pointer.NULL;
+
 public class LoginActivity extends BaseActivity {
 
-    private Pointer h=Pointer.NULL;
+    private Pointer h;
     @BindView(R.id.editText)
     EditText editText;
     @BindView(R.id.editText2)
@@ -63,7 +64,7 @@ public class LoginActivity extends BaseActivity {
             SpzUtils.putString(Constant.USER,user+"");
             startActivity(new Intent(this, ClearDeviceTestActivity.class));
             clearUserAndPassword();
-        }else{//进入管理页面
+        }else {//进入管理页面
             startActivity(new Intent(this, SetManageActivity.class));
             clearUserAndPassword();
         }
@@ -171,9 +172,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void ClosePort() {
-        if (h != Pointer.NULL) {
-            AutoReplyPrint.INSTANCE.CP_Port_Close(h);
-        }
+        AutoReplyPrint.INSTANCE.CP_Port_Close(h);
     }
 
     @Override

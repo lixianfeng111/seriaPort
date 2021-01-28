@@ -313,4 +313,5 @@
     <string name="debug_hood_door_open">防罩门调试（开）</string>
     <string name="debug_hood_door_close">防罩门调试（关）</string>
 
+    <string name="refund_money_because">退钞原因</string>
 </resources>

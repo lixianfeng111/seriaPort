@@ -10,6 +10,8 @@ import android.util.Base64;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.licheedev.serialtool.activity.deposit.DepositDetailsActivity;
+import com.licheedev.serialtool.activity.deposit.PaperCurrencyDepositActivity;
+import com.licheedev.serialtool.activity.deposit.RefundMoneyActivity;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -341,6 +343,20 @@ public class SpzUtils {
         editor.commit();
     }
 
+    public static void setErrorReasonList(Context context, String key, List<RefundMoneyActivity.RefundMoneyBean> dataList) {
+        if (null == dataList || dataList.size() < 0) {
+            return;
+        }
+
+        SharedPreferences sp = context.getSharedPreferences("list_error", Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        //转换成json数据，再保存
+        String strJson = gson.toJson(dataList);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString(key, strJson);
+        editor.commit();
+    }
+
     /**
      * 获取SharedPreferences保存的List
      *
@@ -360,6 +376,23 @@ public class SpzUtils {
 
         //使用泛型解析数据会出错，返回的数据类型是LinkedTreeMap
         dataList = gson.fromJson(strJson, new TypeToken<List<DepositDetailsActivity.DepositDetailBean>>() {
+        }.getType());
+
+        return dataList;
+    }
+
+    public static List<RefundMoneyActivity.RefundMoneyBean> getErrorReasonList(Context context, String key) {
+        SharedPreferences sp = context.getSharedPreferences("list_error", Context.MODE_PRIVATE);
+        List<RefundMoneyActivity.RefundMoneyBean> dataList = new ArrayList<>();
+        String strJson = sp.getString(key, null);
+        if (null == strJson) {
+            return dataList;
+        }
+
+        Gson gson = new Gson();
+
+        //使用泛型解析数据会出错，返回的数据类型是LinkedTreeMap
+        dataList = gson.fromJson(strJson, new TypeToken<List<RefundMoneyActivity.RefundMoneyBean>>() {
         }.getType());
 
         return dataList;

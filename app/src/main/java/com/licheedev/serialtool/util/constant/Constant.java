@@ -106,4 +106,7 @@ public interface Constant {
     String Banknote = "Banknote";
     String STC = "STC";
     String IS_CHANGE = "is_change";
+
+    //错误原因
+    String LIST_ERROR = "list_error";
 }

@@ -90,6 +90,8 @@ public class SerialPortManager {
 
     //设置人民币存款434e59
     final String CNRCommand = "A1 A2 A3 A4 07 00 49 43 4E 59 BB BB 1E";
+    //读取退钞代码指令
+    final String RefundMoney = "A1 A2 A3 A4 04 00 33 BB BB 33";
     //退出工作模式再进入，可以二次存钱 CMD25
     final String exitCommand0 = "A1 A2 A3 A4 2F 00 25 06 01 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 02 00 01 00 03 00 00 00 01 00 00 00 00 00 00 00 00 00 00 00 00 BB BB 09";
 
@@ -156,6 +158,12 @@ public class SerialPortManager {
     //退出零钱模式
     public void sendLooseChangeExit(){
         String replace = exitLooseChange.replace(" ", "");
+        sendCommand(replace);
+    }
+
+    //读取退钞代码指令
+    public void sendRefundMoney(){
+        String replace = RefundMoney.replace(" ", "");
         sendCommand(replace);
     }
 

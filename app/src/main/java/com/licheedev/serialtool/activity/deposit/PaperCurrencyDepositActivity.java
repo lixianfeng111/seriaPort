@@ -1,18 +1,22 @@
 package com.licheedev.serialtool.activity.deposit;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.licheedev.serialtool.R;
-import com.licheedev.serialtool.activity.MainActivity;
-import com.licheedev.serialtool.activity.ScreenUtil;
+import com.licheedev.serialtool.activity.dapter.BaseRecyclerAdapter;
+import com.licheedev.serialtool.activity.dapter.RecyclerViewHolder;
 import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.base.BasePresenter;
 import com.licheedev.serialtool.comn.SerialPortManager;
@@ -21,7 +25,6 @@ import com.licheedev.serialtool.comn.message.LogManager;
 import com.licheedev.serialtool.dialog.CurrenySelectUtil;
 import com.licheedev.serialtool.util.LogPlus;
 import com.licheedev.serialtool.util.SpzUtils;
-import com.licheedev.serialtool.util.SystemErrorsUtil;
 import com.licheedev.serialtool.util.ToastUtil;
 import com.licheedev.serialtool.util.constant.Constant;
 import com.licheedev.serialtool.util.constant.Money;
@@ -30,6 +33,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -49,6 +53,7 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
     public static final int CURRENCY = 11;//币种
     private boolean takeOut;
 
+    private int refundMoney=0;
     private int n=0;
     private int m=0;
     private boolean close=false;
@@ -70,6 +75,8 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
     TextView tvStatus;
     @BindView(R.id.btnCurrency)
     Button btnCurrency;
+    @BindView(R.id.refund_reason)
+    TextView refund_reason;
     //遮挡状态
     private boolean isCovered;
     Deposit deposit;
@@ -79,6 +86,10 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
     private int count;
     private int money;
     private ArrayList<String> errorList2;
+    private List<RefundMoneyActivity.RefundMoneyBean> list=new ArrayList<>();
+    RecyclerView recyclerview;
+    BaseRecyclerAdapter adapter;
+    private RefundMoneyActivity.RefundMoneyBean refundMoneyBean;
     public static class Deposit {
 
         public Deposit(long moneyNum, long currencyNum, long refuse) {
@@ -107,9 +118,7 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         swtichWorkMode();
-        int screenWidth = ScreenUtil.getScreenWidth(this);
-        int screenHeight = ScreenUtil.getScreenHeight(this);
-        int a = 0;
+
     }
 
     private void swtichWorkMode() {
@@ -117,7 +126,7 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    @OnClick({R.id.ibtn_ok, R.id.ibtn_cancel, R.id.button4, R.id.btnCurrency, R.id.llLead,R.id.tvStatus})
+    @OnClick({R.id.ibtn_ok, R.id.ibtn_cancel, R.id.btnCurrency, R.id.llLead,R.id.tvStatus,R.id.refund_reason})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ibtn_ok:
@@ -142,9 +151,6 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
                             }
                         }
                     });
-                break;
-            case R.id.button4:
-                startActivity(new Intent(this, MainActivity.class));
                 break;
 
             case R.id.btnCurrency: //币种选择
@@ -181,6 +187,7 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
                         tvStatus.setText(s + " : "+getResources().getString(R.string.press_to_clear));
                     }else {
                         n=0;
+                        m=0;
                         tvStatus .setVisibility(View.GONE);
                     }
                 }
@@ -189,6 +196,11 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
 //                SerialPortManager.instance().sendClearError();
 //                SerialPortManager.instance().sendCommand(SerialPortManager.byteArrayToHexString(commandWorkMode));
 
+                break;
+            case R.id.refund_reason:
+                SpzUtils.setErrorReasonList(this,Constant.LIST_ERROR,list);
+                startActivity(new Intent(this,RefundMoneyActivity.class));
+//                errorDialog();
                 break;
         }
     }
@@ -254,15 +266,23 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
                         CNY_1 * Money.Denomination_1_CNY;
                 tvMoneyNum.setText("" + money);
                 int reject = received[49];
+
                 tvRrfuse.setText("" + reject);
+                if (reject>0){
+//                    refundMoney=0;
+                    SerialPortManager.instance().sendRefundMoney();
+                    refund_reason.setVisibility(View.VISIBLE);
+                }else {
+                    refund_reason.setVisibility(View.GONE);
+                    list.clear();
+                }
                 if (count>0){
                     exit=true;
-
+                    isCovered=false;
                 }
                 else if (takeOut){
                     close=true;
                 }
-
 
                 deposit = new Deposit(money, count, reject);
             }
@@ -292,8 +312,7 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
                     exitFailDialog0 = CurrenySelectUtil.showExitFailDialog(this, new Callback() {
                         @Override
                         public void onDialogClick(int which, Dialog dialog) {
-                            if (close){
-                                ToastUtil.show(PaperCurrencyDepositActivity.this,close+"");
+                            if (close&!isCovered){
                                 dialog.dismiss();
                                 SerialPortManager.instance().closeMaskDoor();
                                 finish();
@@ -331,11 +350,155 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
             }
             break;
             case SEARCH_LEAD: { // 查询退钞
-                ToastUtil.show(this, "查询退钞命令完成，结果待解析～");
+
+                if (refundMoney==0){
+                    refundMoney(received);
+                    refundMoney++;
+                }
+//                ToastUtil.show(this, "查询退钞命令完成，结果待解析～");
             }
             break;
         }
 
+    }
+
+    private void refundMoney(byte[] received) {
+        int num=0;
+        int count = (received[7]+(received[8]<<8));
+        for (int n = 0; n < count; n++) {
+            int ERROR = (received[9+n*6]+(received[10+n*6]<<8))+(received[11+n*6]<<16)+(received[12+n*6]<<24);
+            for (int i = 0; i < 32; i++) {
+                if (((ERROR>>i)&0x1)==0x01){
+                    switch (i){
+                        case 0:
+                            num=n+1;
+                            i=32;
+                            refundMoneyBean = new RefundMoneyActivity.RefundMoneyBean(num,"纸币无磁信号特征");
+                            list.add(refundMoneyBean);
+                            ToastUtil.show(PaperCurrencyDepositActivity.this,0+"");
+                            break;
+                        case 1:
+                            ToastUtil.show(PaperCurrencyDepositActivity.this,1+"");
+                            break;
+                        case 2:
+                            ToastUtil.show(PaperCurrencyDepositActivity.this,2+"");
+                            break;
+                        case 3:
+                            ToastUtil.show(PaperCurrencyDepositActivity.this,3+"");
+                            break;
+                        case 4:
+                            ToastUtil.show(PaperCurrencyDepositActivity.this,4+"");
+                            break;
+                        case 5:
+                            ToastUtil.show(PaperCurrencyDepositActivity.this,5+"");
+                            break;
+                        case 6:
+                            ToastUtil.show(PaperCurrencyDepositActivity.this,6+"");
+                            break;
+                        case 7:
+                            ToastUtil.show(PaperCurrencyDepositActivity.this,7+"");
+                            break;
+                        case 8:
+                            ToastUtil.show(PaperCurrencyDepositActivity.this,8+"");
+                            break;
+                        case 9:
+                            ToastUtil.show(PaperCurrencyDepositActivity.this,9+"");
+                            break;
+                        case 10:
+                            ToastUtil.show(PaperCurrencyDepositActivity.this,10+"");
+                            break;
+                        case 11:
+                            ToastUtil.show(PaperCurrencyDepositActivity.this,11+"");
+                            break;
+                        case 12:
+                            ToastUtil.show(PaperCurrencyDepositActivity.this,12+"");
+                            break;
+                        case 13:
+                            ToastUtil.show(PaperCurrencyDepositActivity.this,13+"");
+                            break;
+                        case 14:
+                            ToastUtil.show(PaperCurrencyDepositActivity.this,14+"");
+                            break;
+                        case 15:
+                            ToastUtil.show(PaperCurrencyDepositActivity.this,15+"");
+                            break;
+                        case 16:
+                            ToastUtil.show(PaperCurrencyDepositActivity.this,16+"");
+                            break;
+                        case 17:
+                            ToastUtil.show(PaperCurrencyDepositActivity.this,17+"");
+                            break;
+                        case 18:
+                            ToastUtil.show(PaperCurrencyDepositActivity.this,18+"");
+                            break;
+                        case 19:
+                            ToastUtil.show(PaperCurrencyDepositActivity.this,19+"");
+                            break;
+                        case 20:
+                            ToastUtil.show(PaperCurrencyDepositActivity.this,20+"");
+                            break;
+                        case 21:
+                            ToastUtil.show(PaperCurrencyDepositActivity.this,21+"");
+                            break;
+                        case 22:
+                            ToastUtil.show(PaperCurrencyDepositActivity.this,22+"");
+                            break;
+                        case 23:
+                            num=n+1;
+                            i=32;
+                            refundMoneyBean = new RefundMoneyActivity.RefundMoneyBean(num,"纸币无磁信号特征");
+                            list.add(refundMoneyBean);
+                            break;
+                        case 24:
+                            num=n+1;
+                            i=32;
+                            refundMoneyBean = new RefundMoneyActivity.RefundMoneyBean(num,"纸币无信号特征");
+                            list.add(refundMoneyBean);
+                            break;
+                        case 25:
+                            ToastUtil.show(PaperCurrencyDepositActivity.this,25+"");
+                            break;
+                        case 26:
+                            ToastUtil.show(PaperCurrencyDepositActivity.this,25+"");
+                            break;
+                        case 27:
+                            ToastUtil.show(PaperCurrencyDepositActivity.this,26+"");
+                            break;
+                        case 28:
+                            ToastUtil.show(PaperCurrencyDepositActivity.this,27+"");
+                            break;
+                        case 29:
+                            ToastUtil.show(PaperCurrencyDepositActivity.this,28+"");
+                            break;
+                        case 30:
+                            ToastUtil.show(PaperCurrencyDepositActivity.this,29+"");
+                            break;
+                        case 31:
+                            ToastUtil.show(PaperCurrencyDepositActivity.this,31+"");
+                            break;
+
+                    }
+
+//                    ToastUtil.show(PaperCurrencyDepositActivity.this,list.size()+"");
+                }
+
+            }
+
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void coverEvent(IsCoveringEvent isCoveringEvent){
+        isCovered=isCoveringEvent.isCovering();
+        ToastUtil.show(this,isCovered+"");
+        while (isCovered){//循环调用机器状态查询指令
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            SerialPortManager.instance().sendStatusCommand();
+        }
     }
 
     @Override
@@ -389,4 +552,5 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
         SerialPortManager.instance().sendSaveAck();
         SerialPortManager.instance().sendExitWorkModeCommand();
     }
+
 }

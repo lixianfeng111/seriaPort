@@ -296,4 +296,6 @@
 
 	<string name="debug_hood_door_open">Debug hood door(Open)</string>
 	<string name="debug_hood_door_close">Debug hood door(Close)</string>
+
+	<string name="refund_money_because">Refund money because</string>
 </resources>

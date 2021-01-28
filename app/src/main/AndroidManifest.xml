@@ -237,6 +237,9 @@
         <activity
             android:name=".activity.manage.setting.BasicInformationActivity"
             android:screenOrientation="landscape" />
+
+        <activity android:name=".activity.deposit.RefundMoneyActivity"
+            android:screenOrientation="landscape"/>
     </application>
 
 </manifest>
