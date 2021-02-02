@@ -15,7 +15,6 @@ import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.activity.deposit.SelectDepositActivitys;
 import com.licheedev.serialtool.activity.manage.SetManageActivity;
 import com.licheedev.serialtool.base.BasePresenter;
-import com.licheedev.serialtool.util.CheckingErrorsUtil;
 import com.licheedev.serialtool.util.GetCurrencyUtil;
 import com.licheedev.serialtool.util.LanguageUtils;
 import com.licheedev.serialtool.util.SpzUtils;
@@ -129,7 +128,6 @@ public class LoginActivity extends BaseActivity {
         OpenPort();
         if (systemErrorsUtil==null){
             systemErrorsUtil = new SystemErrorsUtil(this);
-            CheckingErrorsUtil checkingErrorsUtil = new CheckingErrorsUtil(this);
         }
     }
 

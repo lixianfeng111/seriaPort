@@ -7,6 +7,7 @@ import android.content.res.Configuration;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -14,32 +15,30 @@ import com.licheedev.serialtool.R;
 import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.base.BasePresenter;
 import com.licheedev.serialtool.comn.SerialPortManager;
-import com.licheedev.serialtool.comn.event.CheckEvent;
-import com.licheedev.serialtool.comn.event.IntentEvent;
 import com.licheedev.serialtool.comn.message.LogManager;
-import com.licheedev.serialtool.dialog.CurrenySelectUtil;
-import com.licheedev.serialtool.util.CheckingErrorsUtil;
-import com.licheedev.serialtool.util.LogPlus;
 import com.licheedev.serialtool.util.SystemErrorsUtil;
 import com.licheedev.serialtool.util.ToastUtil;
 
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 
 public class CheckingActivity extends BaseActivity {
 
+    private ArrayList<String> errorList;
+    private ArrayList<String> errorList2;
     @BindView(R.id.text_check)
     TextView text_check;
-    private String hexstr1=null;
-    private boolean isDialog=true;
+    private int isDialog=0;
     int[] commandWorkMode = new int[]{0xA1, 0xA2, 0xA3, 0xA4,/*STX 4byte*/
             0x12, 0x00,/*size 2byte*/
             0x21,/*CMD 1byte*/
             0x02, 0x00, 0x01, 0x08, 0x00, 0x04, 0x02, 0x06, 0x01, 0x00, 0x01, 0x01, 0x01, 0x05,/*DATA1 14byte*/
             0xBB, 0xBB, 0x39}; //进入工作模式
+    private SystemErrorsUtil systemErrorsUtil=null;
 
     @Override
     protected int getLayoutId() {
@@ -49,35 +48,56 @@ public class CheckingActivity extends BaseActivity {
 
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onCheckEvent(CheckEvent checkEvent) {
-        hexstr1 = checkEvent.getCheck();
-        if (isDialog){
-            isDialog=false;
-            text_check.setText(hexstr1);
-            checkDialog();
+    public void onCheckEvent(LogManager.ReceiveCheckData data) {
+        errorList = data.errorList;
+//        ToastUtil.show(this,errorList.size()+"");
+        if (isDialog<=1){
+            isDialog++;
+//            isDialog++;
+            if(errorList!=null){
+                errorList2 = data.errorList;
+                for (int i = 0; i <errorList2.size() ; i++) {
+                    String s = errorList2.get(i);
+                    checkDialog(i,s);
+                    text_check.setText(s);
+                }
+            }else {
+                intent();
+            }
+
         }
     }
 
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void intentEvent(IntentEvent intentEvent){
-        startActivity(new Intent(this,LoginActivity.class));
-        finish();
+    private void intent(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1000);
+                    startActivity(new Intent(CheckingActivity.this,LoginActivity.class));
+                    finish();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
     @Override
     protected void initView() {
         super.initView();
+        if (systemErrorsUtil==null){
+            systemErrorsUtil = new SystemErrorsUtil(this);
+        }
         SerialPortManager.instance().initDevice();
-        SystemErrorsUtil systemErrorsUtil = new SystemErrorsUtil(this);
-        CheckingErrorsUtil checkingErrorsUtil = new CheckingErrorsUtil(this);
-
+        SerialPortManager.instance().sendStatusCommand();
     }
 
     @Override
     public void initListener() {
 
-        SerialPortManager.instance().sendCommand(SerialPortManager.byteArrayToHexString(commandWorkMode));
+//        SerialPortManager.instance().sendCommand(SerialPortManager.byteArrayToHexString(commandWorkMode));
+//        SerialPortManager.instance().sendStatusCommand();
     }
 
     @Override
@@ -103,29 +123,24 @@ public class CheckingActivity extends BaseActivity {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
     }
-    private String content(int system_error) {
-        String string = getResources().getString(system_error);
-        return string;
-    }
 
-    private void checkDialog(){
-        ViewGroup view = (ViewGroup) LayoutInflater.from(this).inflate(R.layout.checking_dialog, null, false);
-        Button btRetry = view.findViewById(R.id.btRetry);
-        Button btSkip = view.findViewById(R.id.btSkip);
-        TextView textView2 = findViewById(R.id.textView2);
-
-        final AlertDialog alertDialog = new AlertDialog
-                .Builder(this)
-                .create();
-        alertDialog.setView(view);
+    private void checkDialog(final int i, String s){
+        final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         alertDialog.show();
+        Window window = alertDialog.getWindow();
+        window.setContentView(R.layout.checking_dialog);
+        Button btRetry = window.findViewById(R.id.btRetry);
+        Button btSkip = window.findViewById(R.id.btSkip);
+        TextView error_season = window.findViewById(R.id.error_season);
+        error_season.setText(s);
         alertDialog.getWindow().setLayout(400, 210);
 
         btRetry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 alertDialog.dismiss();
-                isDialog=true;
+                SystemErrorsUtil.clearErrorList();
+                isDialog=0;
                 SerialPortManager.instance().sendStatusCommand();
             }
         });
@@ -133,14 +148,17 @@ public class CheckingActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 alertDialog.dismiss();
-                isDialog=true;
+                if (i ==errorList2.size()-1){
+                    intent();
+                }
+                ToastUtil.show(CheckingActivity.this,i+"");
             }
         });
-        textView2.setText(hexstr1);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        SerialPortManager.instance().close();
     }
 }

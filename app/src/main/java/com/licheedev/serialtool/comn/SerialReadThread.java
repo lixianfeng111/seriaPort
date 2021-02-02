@@ -4,13 +4,11 @@ import android.os.SystemClock;
 import com.licheedev.serialtool.comn.event.BootEvent;
 import com.licheedev.serialtool.comn.event.ClearEvent;
 import com.licheedev.serialtool.comn.event.DepositEvent;
-import com.licheedev.serialtool.comn.event.IntentEvent;
 import com.licheedev.serialtool.comn.event.IsCoveringEvent;
 import com.licheedev.serialtool.comn.event.SystemInfoEvent;
 import com.licheedev.serialtool.comn.event.ZPKEvent;
 import com.licheedev.serialtool.comn.message.LogManager;
 import com.licheedev.serialtool.util.ByteUtil;
-import com.licheedev.serialtool.util.CheckingErrorsUtil;
 import com.licheedev.serialtool.util.LogPlus;
 import com.licheedev.serialtool.util.SystemErrorsUtil;
 import org.greenrobot.eventbus.EventBus;
@@ -19,8 +17,6 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import static com.licheedev.serialtool.comn.message.LogManager.CHECKING;
-import static com.licheedev.serialtool.comn.message.LogManager.SAVE_SUCCESS_COMMAND;
 import static com.licheedev.serialtool.comn.message.LogManager.SEARCH_LEAD;
 
 /**
@@ -118,24 +114,27 @@ public class SerialReadThread extends Thread {
         String hexstr1 = null;
         byte[] version=new byte[160];
         String hexStr = ByteUtil.bytes2HexStr(received, 0, size);
-        LogManager.instance().post(new LogManager.ReceiveCheckData(received,hexStr));
+//        LogManager.instance().post(new LogManager.ReceiveCheckData(received,hexStr));
         //判断是否遮挡
         if (!s.isEmpty()){
             if (s.contains("fb02")||s.contains("fb04")||s.contains("fb08")||s.contains("fb0e")){//遮挡
                 EventBus.getDefault().post(new IsCoveringEvent(true));
+                LogPlus.d("遮挡遮挡遮挡遮挡遮挡",s);
             }else if (s.contains("fb00")){//无遮挡
                 EventBus.getDefault().post(new IsCoveringEvent(false));
+                LogPlus.d("遮挡遮挡遮挡遮挡遮挡",s);
             }
         }
 
         if((char)(received[6]&0xff)==0x15) {
             SystemErrorsUtil.getError15(received,hexStr);
-            CheckingErrorsUtil.getError15(received,hexStr);
+//            CheckingErrorsUtil.getError15(received,hexStr);
             SerialPortManager.instance().sendCommand(sendok);
+
 
         } else if((char)(received[6]&0xff)==0x44) {
            SystemErrorsUtil.getError44(received,hexStr);
-           CheckingErrorsUtil.getError44(received,hexStr);
+//           CheckingErrorsUtil.getError44(received,hexStr);
             SerialPortManager.instance().sendCommand(sendok);
         } else if((char)(received[6]&0xff)==0x90) {
             //SN
@@ -241,17 +240,16 @@ public class SerialReadThread extends Thread {
             LogManager.instance().post(data);
             LogPlus.e("read_thread","退出工作模式");
         }
-
         else if((char)(received[6]&0xff)== 0x21) {
             LogPlus.e("read_thread","进入工作模式");
         }
         else if((char)(received[6]&0xff)== 0x22) {
             SystemErrorsUtil.getError22(received);
-            CheckingErrorsUtil.getError22(received);
+//            CheckingErrorsUtil.getError22(received);
         }
         else if((char)(received[6]&0xff)== 0x25) {
             SystemErrorsUtil.getError25(received,hexStr);
-            CheckingErrorsUtil.getError25(received,hexStr);
+//            CheckingErrorsUtil.getError25(received,hexStr);
             return;
         }
         else if((char)(received[6]&0xff)== 0x33) {
@@ -266,7 +264,7 @@ public class SerialReadThread extends Thread {
         else if ((char)(received[6]&0xff)== 0x49) {
             LogPlus.d("read_thread","设置币种");
         }
-        EventBus.getDefault().post(new IntentEvent());
+        SystemErrorsUtil.errorList();
     }
 
     /**

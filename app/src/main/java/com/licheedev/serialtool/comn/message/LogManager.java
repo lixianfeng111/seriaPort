@@ -86,12 +86,10 @@ public class LogManager {
         }
     }
     public static class ReceiveCheckData {
-        public byte[] data;
-        public String hexStr;
+        public ArrayList<String> errorList;
 
-        public ReceiveCheckData(byte[] data, String hexStr) {
-            this.data = data;
-            this.hexStr = hexStr;
+        public ReceiveCheckData( ArrayList<String> errorList) {
+            this.errorList = errorList;
         }
     }
 }

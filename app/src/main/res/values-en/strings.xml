@@ -298,4 +298,40 @@
 	<string name="debug_hood_door_close">Debug hood door(Close)</string>
 
 	<string name="refund_money_because">Refund money because</string>
+
+
+	<string name="no_magnetic">Error! No magnetic signal</string>
+	<string name="no_magnetic_error">Error ! Incorrect magnetic signal</string>
+	<string name="length_width_is_not">Error ! Width and length</string>
+	<string name="results_are_inconsistent">Error ! Incorrect comparing of magnetic signal and denomination</string>
+	<string name="UV_error">Error ! Incorrect UV feature</string>
+	<string name="image_error">Image Error !</string>
+	<string name="paper_money_others">Double Error !</string>
+	<string name="no_edge_magnetic">Error ! No side magnetic feature</string>
+	<string name="version_is_not">Incorrect banknotes on version sorting !</string>
+	<string name="bank_draft_is_not">Incorrect banknotes on denomination sorting !</string>
+	<string name="face_is_not">Incorrect banknotes on orientation sorting !</string>
+<!--	<string name=""></string>-->
+	<string name="a_paste">Tapes on banknote </string>
+	<string name="too_old">Too old banknote</string>
+	<string name="incomplete">Hole/missing parts on banknote</string>
+	<string name="have_blot">Stain/soil on banknote</string>
+	<string name="OVD_damaged">Stain/soil on banknote</string>
+	<string name="length_error">Incorrect banknote length</string>
+	<string name="broken_or_missing">Folding/missing corner on banknote</string>
+	<string name="image_authentication_error">Error ! Image counterfeit detection</string>
+	<string name="edge_damage">Torn edge on banknote</string>
+	<string name="magnetic_image_version_inconformity">Incorrect comparing of magnetic signal and version</string>
+	<string name="magnetic_image_face_inconformity">Incorrect comparing of magnetic signal and orientaiton</string>
+	<string name="currency_error">Currency Error !</string>
+	<string name="money_full">Full stacker pocket, rejected banknotes in the passageway</string>
+	<string name="paper_money_tilt">Inclined Banknote !</string>
+	<string name="spacing_is_too_small">Chain Error !</string>
+	<string name="transmission_error">Data transmission Error ! (Restart)</string>
+	<string name="debugging_mode">Reject on debug mode</string>
+<!--	<string name="have_blot">纸币有污渍</string>-->
+	<string name="error_in_data">Banknote data error</string>
+	<string name="serial_number_error">Serial number error</string>
+	<string name="data_transmission_error">Data transmission Error ! (Restart)</string>
+	<string name="the_infrared_transmission">Double banknotes (IR transmission)</string>
 </resources>

@@ -49,7 +49,7 @@ public class ClearDeviceHintActivity extends BaseActivity {
     private boolean isTakeOut=false;
     private boolean isPutIn=false;
     private boolean isClose=false;
-    private Pointer h=Pointer.NULL;
+    private Pointer h;
     private boolean isCleared=false;
     private TextView first;
     private TextView second;
@@ -295,9 +295,10 @@ public class ClearDeviceHintActivity extends BaseActivity {
     };
 
     private void ClosePort() {
-        if (h != Pointer.NULL) {
-            AutoReplyPrint.INSTANCE.CP_Port_Close(h);
-        }
+        AutoReplyPrint.INSTANCE.CP_Port_Close(h);
+//        if (h != Pointer.NULL) {
+//            AutoReplyPrint.INSTANCE.CP_Port_Close(h);
+//        }
     }
 
     private void OpenPort() {

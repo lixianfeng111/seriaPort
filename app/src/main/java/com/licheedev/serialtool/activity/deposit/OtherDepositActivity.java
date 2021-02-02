@@ -33,7 +33,7 @@ public class OtherDepositActivity extends BaseActivity {
 
     @BindView(R.id.editText)
     EditText editText;
-    private Pointer h=Pointer.NULL;
+    private Pointer h;
     //防罩门状态
     private boolean isOpenDoor;
     private int n=0;
@@ -245,8 +245,9 @@ public class OtherDepositActivity extends BaseActivity {
     }
 
     private void ClosePort() {
-        if (h != Pointer.NULL) {
-            AutoReplyPrint.INSTANCE.CP_Port_Close(h);
-        }
+//        if (h != Pointer.NULL) {
+//            AutoReplyPrint.INSTANCE.CP_Port_Close(h);
+//        }
+        AutoReplyPrint.INSTANCE.CP_Port_Close(h);
     }
 }

@@ -1,22 +1,15 @@
 package com.licheedev.serialtool.activity.deposit;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.licheedev.serialtool.R;
-import com.licheedev.serialtool.activity.dapter.BaseRecyclerAdapter;
-import com.licheedev.serialtool.activity.dapter.RecyclerViewHolder;
 import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.base.BasePresenter;
 import com.licheedev.serialtool.comn.SerialPortManager;
@@ -28,16 +21,12 @@ import com.licheedev.serialtool.util.SpzUtils;
 import com.licheedev.serialtool.util.ToastUtil;
 import com.licheedev.serialtool.util.constant.Constant;
 import com.licheedev.serialtool.util.constant.Money;
-
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.OnClick;
-
 import static com.licheedev.serialtool.comn.message.LogManager.COUNT_COMMAND;
 import static com.licheedev.serialtool.comn.message.LogManager.EXIT_WORK_COMMAND;
 import static com.licheedev.serialtool.comn.message.LogManager.FINISH_DEPOSIT;
@@ -87,9 +76,9 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
     private int money;
     private ArrayList<String> errorList2;
     private List<RefundMoneyActivity.RefundMoneyBean> list=new ArrayList<>();
-    RecyclerView recyclerview;
-    BaseRecyclerAdapter adapter;
     private RefundMoneyActivity.RefundMoneyBean refundMoneyBean;
+    private Thread thread;
+
     public static class Deposit {
 
         public Deposit(long moneyNum, long currencyNum, long refuse) {
@@ -193,14 +182,10 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
                 }
                 SerialPortManager.instance().sendFAILURE_RESET();
 
-//                SerialPortManager.instance().sendClearError();
-//                SerialPortManager.instance().sendCommand(SerialPortManager.byteArrayToHexString(commandWorkMode));
-
                 break;
             case R.id.refund_reason:
                 SpzUtils.setErrorReasonList(this,Constant.LIST_ERROR,list);
                 startActivity(new Intent(this,RefundMoneyActivity.class));
-//                errorDialog();
                 break;
         }
     }
@@ -364,6 +349,7 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
 
     private void refundMoney(byte[] received) {
         int num=0;
+        String rejecting_information=null;
         int count = (received[7]+(received[8]<<8));
         for (int n = 0; n < count; n++) {
             int ERROR = (received[9+n*6]+(received[10+n*6]<<8))+(received[11+n*6]<<16)+(received[12+n*6]<<24);
@@ -373,113 +359,167 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
                         case 0:
                             num=n+1;
                             i=32;
-                            refundMoneyBean = new RefundMoneyActivity.RefundMoneyBean(num,"纸币无磁信号特征");
-                            list.add(refundMoneyBean);
-                            ToastUtil.show(PaperCurrencyDepositActivity.this,0+"");
+                            rejecting_information= getResources().getString(R.string.no_magnetic);
                             break;
                         case 1:
-                            ToastUtil.show(PaperCurrencyDepositActivity.this,1+"");
+                            num=n+1;
+                            i=32;
+                            rejecting_information= getResources().getString(R.string.no_magnetic_error);
                             break;
                         case 2:
-                            ToastUtil.show(PaperCurrencyDepositActivity.this,2+"");
+                            num=n+1;
+                            i=32;
+                            rejecting_information= getResources().getString(R.string.length_width_is_not);
                             break;
                         case 3:
-                            ToastUtil.show(PaperCurrencyDepositActivity.this,3+"");
+                            num=n+1;
+                            i=32;
+                            rejecting_information= getResources().getString(R.string.results_are_inconsistent);
                             break;
                         case 4:
-                            ToastUtil.show(PaperCurrencyDepositActivity.this,4+"");
+                            num=n+1;
+                            i=32;
+                            rejecting_information= getResources().getString(R.string.UV_error);
                             break;
                         case 5:
-                            ToastUtil.show(PaperCurrencyDepositActivity.this,5+"");
+                            num=n+1;
+                            i=32;
+                            rejecting_information= getResources().getString(R.string.image_error);
                             break;
                         case 6:
-                            ToastUtil.show(PaperCurrencyDepositActivity.this,6+"");
+                            num=n+1;
+                            i=32;
+                            rejecting_information= getResources().getString(R.string.paper_money_others);
                             break;
                         case 7:
-                            ToastUtil.show(PaperCurrencyDepositActivity.this,7+"");
+                            num=n+1;
+                            i=32;
+                            rejecting_information= getResources().getString(R.string.no_edge_magnetic);
                             break;
                         case 8:
-                            ToastUtil.show(PaperCurrencyDepositActivity.this,8+"");
+                            num=n+1;
+                            i=32;
+                            rejecting_information= getResources().getString(R.string.version_is_not);
                             break;
                         case 9:
-                            ToastUtil.show(PaperCurrencyDepositActivity.this,9+"");
+                            num=n+1;
+                            i=32;
+                            rejecting_information= getResources().getString(R.string.bank_draft_is_not);
                             break;
                         case 10:
-                            ToastUtil.show(PaperCurrencyDepositActivity.this,10+"");
+                            num=n+1;
+                            i=32;
+                            rejecting_information= getResources().getString(R.string.face_is_not);
                             break;
                         case 11:
-                            ToastUtil.show(PaperCurrencyDepositActivity.this,11+"");
+                            num=n+1;
+                            i=32;
+//                            rejecting_information= getResources().getString(R.string.a_paste);
                             break;
                         case 12:
-                            ToastUtil.show(PaperCurrencyDepositActivity.this,12+"");
+                            num=n+1;
+                            i=32;
+                            rejecting_information= getResources().getString(R.string.a_paste);
                             break;
                         case 13:
-                            ToastUtil.show(PaperCurrencyDepositActivity.this,13+"");
+                            num=n+1;
+                            i=32;
+                            rejecting_information= getResources().getString(R.string.too_old);
                             break;
                         case 14:
-                            ToastUtil.show(PaperCurrencyDepositActivity.this,14+"");
+                            num=n+1;
+                            i=32;
+                            rejecting_information= getResources().getString(R.string.incomplete);
                             break;
                         case 15:
-                            ToastUtil.show(PaperCurrencyDepositActivity.this,15+"");
+                            num=n+1;
+                            i=32;
+                            rejecting_information= getResources().getString(R.string.have_blot);
                             break;
                         case 16:
-                            ToastUtil.show(PaperCurrencyDepositActivity.this,16+"");
+                            num=n+1;
+                            i=32;
+                            rejecting_information= getResources().getString(R.string.broken_or_missing);
                             break;
                         case 17:
-                            ToastUtil.show(PaperCurrencyDepositActivity.this,17+"");
+                            num=n+1;
+                            i=32;
+                            rejecting_information= getResources().getString(R.string.image_authentication_error);
                             break;
                         case 18:
-                            ToastUtil.show(PaperCurrencyDepositActivity.this,18+"");
+                            num=n+1;
+                            i=32;
+                            rejecting_information= getResources().getString(R.string.edge_damage);
                             break;
                         case 19:
-                            ToastUtil.show(PaperCurrencyDepositActivity.this,19+"");
+                            num=n+1;
+                            i=32;
+                            rejecting_information= getResources().getString(R.string.magnetic_image_version_inconformity);
                             break;
                         case 20:
-                            ToastUtil.show(PaperCurrencyDepositActivity.this,20+"");
+                            num=n+1;
+                            i=32;
+                            rejecting_information= getResources().getString(R.string.magnetic_image_face_inconformity);
                             break;
                         case 21:
-                            ToastUtil.show(PaperCurrencyDepositActivity.this,21+"");
+                            num=n+1;
+                            i=32;
+                            rejecting_information= getResources().getString(R.string.currency_error);
                             break;
                         case 22:
-                            ToastUtil.show(PaperCurrencyDepositActivity.this,22+"");
+                            num=n+1;
+                            i=32;
+                            rejecting_information= getResources().getString(R.string.money_full);
                             break;
                         case 23:
                             num=n+1;
                             i=32;
-                            refundMoneyBean = new RefundMoneyActivity.RefundMoneyBean(num,"纸币无磁信号特征");
-                            list.add(refundMoneyBean);
+                            rejecting_information= getResources().getString(R.string.paper_money_tilt);
                             break;
                         case 24:
                             num=n+1;
                             i=32;
-                            refundMoneyBean = new RefundMoneyActivity.RefundMoneyBean(num,"纸币无信号特征");
-                            list.add(refundMoneyBean);
+                            rejecting_information= getResources().getString(R.string.spacing_is_too_small);
                             break;
                         case 25:
-                            ToastUtil.show(PaperCurrencyDepositActivity.this,25+"");
+                            num=n+1;
+                            i=32;
+                            rejecting_information= getResources().getString(R.string.transmission_error);
                             break;
                         case 26:
-                            ToastUtil.show(PaperCurrencyDepositActivity.this,25+"");
+                            num=n+1;
+                            i=32;
+                            rejecting_information= getResources().getString(R.string.debugging_mode);
                             break;
                         case 27:
-                            ToastUtil.show(PaperCurrencyDepositActivity.this,26+"");
+                            num=n+1;
+                            i=32;
+                            rejecting_information= getResources().getString(R.string.have_blot);
                             break;
                         case 28:
-                            ToastUtil.show(PaperCurrencyDepositActivity.this,27+"");
+                            num=n+1;
+                            i=32;
+                            rejecting_information= getResources().getString(R.string.error_in_data);
                             break;
                         case 29:
-                            ToastUtil.show(PaperCurrencyDepositActivity.this,28+"");
+                            num=n+1;
+                            i=32;
+                            rejecting_information= getResources().getString(R.string.serial_number_error);
                             break;
                         case 30:
-                            ToastUtil.show(PaperCurrencyDepositActivity.this,29+"");
+                            num=n+1;
+                            i=32;
+                            rejecting_information= getResources().getString(R.string.data_transmission_error);
                             break;
                         case 31:
-                            ToastUtil.show(PaperCurrencyDepositActivity.this,31+"");
+                            num=n+1;
+                            i=32;
+                            rejecting_information= getResources().getString(R.string.the_infrared_transmission);
                             break;
 
                     }
-
-//                    ToastUtil.show(PaperCurrencyDepositActivity.this,list.size()+"");
+                    refundMoneyBean = new RefundMoneyActivity.RefundMoneyBean(num,rejecting_information);
+                    list.add(refundMoneyBean);
                 }
 
             }
@@ -490,15 +530,10 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void coverEvent(IsCoveringEvent isCoveringEvent){
         isCovered=isCoveringEvent.isCovering();
-        ToastUtil.show(this,isCovered+"");
-        while (isCovered){//循环调用机器状态查询指令
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            SerialPortManager.instance().sendStatusCommand();
+        if (!isCovered){
+            tvStatus .setVisibility(View.GONE);
         }
+        ToastUtil.show(this,isCovered+"");
     }
 
     @Override

@@ -314,4 +314,40 @@
     <string name="debug_hood_door_close">防罩门调试（关）</string>
 
     <string name="refund_money_because">退钞原因</string>
+
+    <string name="no_magnetic">纸币无磁信号特征</string>
+    <string name="no_magnetic_error">纸币磁信号特征不正确</string>
+    <string name="length_width_is_not">长宽不符</string>
+    <string name="results_are_inconsistent">磁信号和图像的券别结果对比不一致</string>
+    <string name="UV_error">纸币紫外特征不正确</string>
+    <string name="image_error">图像判别错误</string>
+    <string name="paper_money_others">纸币重张</string>
+    <string name="no_edge_magnetic">纸币没有边磁特征不正确</string>
+    <string name="version_is_not">版本清分时，版本不符的纸币</string>
+    <string name="bank_draft_is_not">券别清分时，券别不符的纸币</string>
+    <string name="face_is_not">面向清分时，面向不符的纸币</string>
+<!--    <string name=""></string>-->
+    <string name="a_paste">纸币上有粘帖物</string>
+    <string name="too_old">纸币成色等级低（纸币过旧）</string>
+    <string name="incomplete">纸币残缺，有孔洞</string>
+    <string name="have_blot">纸币有污渍</string>
+    <string name="OVD_damaged">纸币OVD破损</string>
+    <string name="length_error">纸币长度不符</string>
+    <string name="broken_or_missing">纸币有折角或缺角</string>
+    <string name="image_authentication_error">图像鉴伪错误</string>
+    <string name="edge_damage">纸币边沿破损</string>
+    <string name="magnetic_image_version_inconformity">磁信号和图像的版本结果对比不一致</string>
+    <string name="magnetic_image_face_inconformity">磁信号和图像的面向结果对比不一致</string>
+    <string name="currency_error">币种错误，或不是当前机器接收的币种</string>
+    <string name="money_full">收钞口满，停机前走道里送出到退钞口的纸币</string>
+    <string name="paper_money_tilt">纸币倾斜</string>
+    <string name="spacing_is_too_small">两张纸币间的间距过小</string>
+    <string name="transmission_error">纸币信息数据传输出错（若连续出现，可重启机器）</string>
+    <string name="debugging_mode">调试模式时退钞</string>
+<!--    <string name="have_blot">纸币有污渍</string>-->
+    <string name="error_in_data">纸币数据错误</string>
+    <string name="serial_number_error">冠字号出错</string>
+    <string name="data_transmission_error">纸币信息数据传输出错（若连续出现，可重启机器）</string>
+    <string name="the_infrared_transmission">纸币重张（红外透射）</string>
+
 </resources>

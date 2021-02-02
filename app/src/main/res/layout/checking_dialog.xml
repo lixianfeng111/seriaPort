@@ -18,7 +18,7 @@
         app:layout_constraintEnd_toStartOf="@+id/btSkip"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/error_season" />
 
     <Button
         android:layout_marginRight="5dp"
@@ -38,12 +38,12 @@
     <TextView
         android:typeface="normal"
         android:textSize="24sp"
-        android:id="@+id/textView2"
+        android:id="@+id/error_season"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:gravity="center_horizontal"
-        android:text="@string/clear_hint_quit"
+        android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view" />

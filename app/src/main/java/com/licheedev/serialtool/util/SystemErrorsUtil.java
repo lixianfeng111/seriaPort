@@ -17,19 +17,22 @@ public class SystemErrorsUtil {
 
     private static String hexstr1 = null;
 
+    private static int cover=0;
+    private static int n=0;
     private static Activity activity;
-    private static ArrayList<String> errorList;
+    private static ArrayList<String> errorList=null;
+    private static Thread thread;
 
     public SystemErrorsUtil(Activity activity) {
         this.activity = activity;
         if (errorList ==null){
             errorList = new ArrayList<>();
         }
-
     }
 
 
     public static void getError15(byte[] received,String hexStr) {
+
         hexstr1 = null;
             if (((char) (received[7] & 0xff) & 0x01) == 0x01) {
                 hexstr1 = "PS01 "+content(R.string.left_errors);
@@ -104,21 +107,21 @@ public class SystemErrorsUtil {
                 hexstr1 = content(R.string.paper_on_hopper);
                 errorList.add(hexstr1);
             } else if (((char) (received[10] & 0xff) & 0x02) == 0x02) {
-                EventBus.getDefault().post(new IsCoveringEvent(true));
                 hexstr1 = "PS05 "+content(R.string.middle_errors);
                 errorList.add(hexstr1);
-            } else if (((char) (received[10] & 0xff) & 0x04) == 0x04) {
                 EventBus.getDefault().post(new IsCoveringEvent(true));
+            } else if (((char) (received[10] & 0xff) & 0x04) == 0x04) {
                 hexstr1 = "PS05 "+content(R.string.left_errors);
                 errorList.add(hexstr1);
-            } else if (((char) (received[10] & 0xff) & 0x08) == 0x08) {
                 EventBus.getDefault().post(new IsCoveringEvent(true));
+            } else if (((char) (received[10] & 0xff) & 0x08) == 0x08) {
                 hexstr1 = "PS05 "+content(R.string.right_errors);
                 errorList.add(hexstr1);
-            } else if (((char) (received[10] & 0xff) & 0x0E) == 0x0E) {
                 EventBus.getDefault().post(new IsCoveringEvent(true));
+            } else if (((char) (received[10] & 0xff) & 0x0E) == 0x0E) {
                 hexstr1 = "PS05 "+content(R.string.left_middle_right_error);
                 errorList.add(hexstr1);
+                EventBus.getDefault().post(new IsCoveringEvent(true));
             }
             if (errorList.size()>0){
                 LogManager.instance().post(errorList);
@@ -131,19 +134,24 @@ public class SystemErrorsUtil {
         if(((char)(received[7]&0xff)&0x01)==0x00) {
             hexstr1= content(R.string.bag_not_in_position);
             LogManager.instance().postError(hexstr1);
+            errorList.add(hexstr1);
         } else if(((char)(received[7]&0xff)&0x02)==0x00) {
             hexstr1= content(R.string.door_not_close);
+            errorList.add(hexstr1);
             LogManager.instance().postError(hexstr1);
         } else if(((char)(received[7]&0xff)&0x04)==0x00) {
             hexstr1= content(R.string.alertor_alarms);
+            errorList.add(hexstr1);
             LogManager.instance().postError(hexstr1);
         } else if(((char)(received[8]&0xff)&0x01)==0x01) {
             hexstr1= content(R.string.cover_door_sensor_error);
             LogManager.instance().postError(hexstr1);
+            errorList.add(hexstr1);
         }
         else if(((char)(received[8]&0xff)&0x02)==0x02) {
             hexstr1= content(R.string.gate_door_sensor_error);
             LogManager.instance().postError(hexstr1);
+            errorList.add(hexstr1);
         }
         if (hexstr1!=null){
             LogManager.instance().postError(hexstr1);
@@ -183,6 +191,7 @@ public class SystemErrorsUtil {
         }
         if (!hexstr1.isEmpty()){
             LogManager.instance().postError(hexstr1);
+            errorList.add(hexstr1);
         }
 
         LogPlus.e("read_thread","开始点算 "+hexstr1);
@@ -208,6 +217,7 @@ public class SystemErrorsUtil {
         }
         if (hexstr1!=null){
             LogManager.instance().postError(hexstr1);
+            errorList.add(hexstr1);
         }
 
         LogManager.instance().post(new LogManager.ReceiveData(received, SAVE_SUCCESS_COMMAND));
@@ -231,9 +241,20 @@ public class SystemErrorsUtil {
         }
         if (hexstr1!=null){
             LogManager.instance().postError(hexstr1);
+            errorList.add(hexstr1);
         }
         SerialPortManager.instance().sendSDcardAck();
         LogPlus.e("read_thread",hexstr1);
+    }
+
+    public static void errorList(){
+        LogManager.instance().post(new LogManager.ReceiveCheckData(errorList));
+    }
+
+    public static void clearErrorList(){
+        if (errorList!=null){
+            errorList.clear();
+        }
     }
 
 

@@ -38,7 +38,7 @@ public class DepositRecordActivity extends BaseActivity implements BaseRecyclerA
     private Button btLogout;
     private TextView tvTitle;
     private RecyclerView recyclerview;
-    private Pointer h=Pointer.NULL;
+    private Pointer h;
     private int currency_record;
     private String KIND;
     private int money_record;
@@ -177,10 +177,7 @@ public class DepositRecordActivity extends BaseActivity implements BaseRecyclerA
         }).start();
     }
     private void ClosePort() {
-        if (h != Pointer.NULL) {
-            AutoReplyPrint.INSTANCE.CP_Port_Close(h);
-            h = Pointer.NULL;
-        }
+        AutoReplyPrint.INSTANCE.CP_Port_Close(h);
     }
 
     @Override
