@@ -1,6 +1,5 @@
 package com.licheedev.serialtool.activity;
 
-
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
@@ -17,19 +16,11 @@ import com.licheedev.serialtool.activity.dapter.RecyclerViewHolder;
 import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.base.BasePresenter;
 import com.licheedev.serialtool.comn.SerialPortManager;
-import com.licheedev.serialtool.comn.message.LogManager;
 import com.licheedev.serialtool.util.LogPlus;
 import com.licheedev.serialtool.util.SystemErrorsUtil;
-import com.licheedev.serialtool.util.ToastUtil;
-
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.BindView;
 
 public class CheckingActivity extends BaseActivity implements BaseRecyclerAdapter.Delegate{
 
@@ -63,7 +54,8 @@ public class CheckingActivity extends BaseActivity implements BaseRecyclerAdapte
     private static String check_pocket_opening;
     private static String check_reject_pocket;
     private static String check_temporary_pocket_closing;
-
+    private static int n=1;
+    private static int n2=0;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_checking;
@@ -72,242 +64,183 @@ public class CheckingActivity extends BaseActivity implements BaseRecyclerAdapte
     public static void getCheckState(byte[] received) {
         if (((char) (received[9] & 0xff) & 0x01) == 0x00) {
             hexstr1 = "PSO1 left";
-            CheckBean checkBean = new CheckBean(hexstr1, 1);
-            list.add(checkBean);
+            checkBean(hexstr1,n);
         }else {
             hexstr1 = "PSO1 left";
-            CheckBean checkBean = new CheckBean(hexstr1, 0);
-            list.add(checkBean);
+            checkBean(hexstr1,n2);
         }
         if (((char) (received[9] & 0xff) & 0x02) == 0x00) {
             hexstr1 = "PS01 right";
-            CheckBean checkBean = new CheckBean(hexstr1, 1);
-            list.add(checkBean);
+            checkBean(hexstr1,n);
         }else {
             hexstr1 = "PS01 right";
-            CheckBean checkBean = new CheckBean(hexstr1, 0);
-            list.add(checkBean);
+            checkBean(hexstr1,n2);
         }
         if (((char) (received[9] & 0xff) & 0x04) == 0x00) {
             hexstr1 = "PS02 left";
-            CheckBean checkBean = new CheckBean(hexstr1, 1);
-            list.add(checkBean);
+            checkBean(hexstr1,n);
         }else {
             hexstr1 = "PS02 left";
-            CheckBean checkBean = new CheckBean(hexstr1, 0);
-            list.add(checkBean);
+            checkBean(hexstr1,n2);
         }
         if (((char) (received[9] & 0xff) & 0x08) == 0x00) {
             hexstr1 = "PS02 right";
-            CheckBean checkBean = new CheckBean(hexstr1, 1);
-            list.add(checkBean);
+            checkBean(hexstr1,n);
         }else {
             hexstr1 = "PS02 right";
-            CheckBean checkBean = new CheckBean(hexstr1, 0);
-            list.add(checkBean);
+            checkBean(hexstr1,n2);
         }
         if (((char) (received[9] & 0xff) & 0x10) == 0x00) {
             hexstr1 = "PS03 left1";
-            CheckBean checkBean = new CheckBean(hexstr1, 1);
-            list.add(checkBean);
+            checkBean(hexstr1,n);
         }else {
             hexstr1 = "PS03 left1";
-            CheckBean checkBean = new CheckBean(hexstr1, 0);
-            list.add(checkBean);
+            checkBean(hexstr1,n2);
         }
         if (((char) (received[9] & 0xff) & 0x20) == 0x00) {
             hexstr1 = "PS03 left2";
-            CheckBean checkBean = new CheckBean(hexstr1, 1);
-            list.add(checkBean);
+            checkBean(hexstr1,n);
         }else {
             hexstr1 = "PS03 left2";
-            CheckBean checkBean = new CheckBean(hexstr1, 0);
-            list.add(checkBean);
+            checkBean(hexstr1,n2);
         }
         if (((char) (received[9] & 0xff) & 0x40) == 0x00) {
             hexstr1 = "PS03 right2";
-            CheckBean checkBean = new CheckBean(hexstr1, 1);
-            list.add(checkBean);
+            checkBean(hexstr1,n);
         }else {
             hexstr1 = "PS03 right2";
-            CheckBean checkBean = new CheckBean(hexstr1, 0);
-            list.add(checkBean);
+            checkBean(hexstr1,n2);
         }
         if (((char) (received[9] & 0xff) & 0x80) == 0x00) {
             hexstr1 = "PS03 right1";
-            CheckBean checkBean = new CheckBean(hexstr1, 1);
-            list.add(checkBean);
+            checkBean(hexstr1,n);
         }else {
             hexstr1 = "PS03 right1";
-            CheckBean checkBean = new CheckBean(hexstr1, 0);
-            list.add(checkBean);
+            checkBean(hexstr1,n2);
         }
 
         if (((char) (received[10] & 0xff) & 0x01) == 0x00) {
             hexstr1 = "PS04";
-            CheckBean checkBean = new CheckBean(hexstr1, 1);
-            list.add(checkBean);
+            checkBean(hexstr1,n);
         }else {
             hexstr1 = "PS04";
-            CheckBean checkBean = new CheckBean(hexstr1, 0);
-            list.add(checkBean);
+            checkBean(hexstr1,n2);
         }
         if (((char) (received[10] & 0xff) & 0x02) == 0x00) {
             hexstr1 = check_reject_pocket;
-            CheckBean checkBean = new CheckBean(hexstr1, 1);
-            list.add(checkBean);
+            checkBean(hexstr1,n);
         }else {
             hexstr1 = check_reject_pocket;
-            CheckBean checkBean = new CheckBean(hexstr1, 0);
-            list.add(checkBean);
+            checkBean(hexstr1,n2);
         }
         if (((char) (received[10] & 0xff) & 0x04) == 0x04) {
             hexstr1 = "PS06";
-            CheckBean checkBean = new CheckBean(hexstr1, 1);
-            list.add(checkBean);
+            checkBean(hexstr1,n);
         }else {
             hexstr1 = "PS06";
-            CheckBean checkBean = new CheckBean(hexstr1, 0);
-            list.add(checkBean);
+            checkBean(hexstr1,n2);
         }
         if (((char) (received[10] & 0xff) & 0x08) == 0x01) {//非正常
             hexstr1 = check_pocket_opening;
-            CheckBean checkBean = new CheckBean(hexstr1, 0);
-            list.add(checkBean);
+            checkBean(hexstr1,n2);
         }
         if (((char) (received[10] & 0xff) & 0x10) == 0x00) {
             hexstr1 = "PS08 left";
-            CheckBean checkBean = new CheckBean(hexstr1, 1);
-            list.add(checkBean);
+            checkBean(hexstr1,n);
         }else {
             hexstr1 = "PS08 left";
-            CheckBean checkBean = new CheckBean(hexstr1, 0);
-            list.add(checkBean);
+            checkBean(hexstr1,n2);
         }
         if (((char) (received[10] & 0xff) & 0x20) == 0x00) {
             hexstr1 = "PS08 right";
-            CheckBean checkBean = new CheckBean(hexstr1, 1);
-            list.add(checkBean);
+            checkBean(hexstr1,n);
         }else {
             hexstr1 = "PS08 right";
-            CheckBean checkBean = new CheckBean(hexstr1, 0);
-            list.add(checkBean);
+            checkBean(hexstr1,n2);
         }
 
         if (((char) (received[11] & 0xff) & 0x01) == 0x01) {
             hexstr1 = check_box_in_position;
-            CheckBean checkBean = new CheckBean(hexstr1, 1);
-            list.add(checkBean);
+            checkBean(hexstr1,n);
         }else {
             hexstr1 = check_box_in_position;
-            CheckBean checkBean = new CheckBean(hexstr1, 0);
-            list.add(checkBean);
+            checkBean(hexstr1,n2);
         }
         if (((char) (received[11] & 0xff) & 0x02) == 0x01) {//非正常
             hexstr1 = check_temporary_pocket_opening;
-            CheckBean checkBean = new CheckBean(hexstr1, 0);
-            list.add(checkBean);
+            checkBean(hexstr1,n2);
         }
         if (((char) (received[11] & 0xff) & 0x04) == 0x01) {//正常
             hexstr1 = check_temporary_pocket_closing;
-            CheckBean checkBean = new CheckBean(hexstr1, 1);
-            list.add(checkBean);
+            checkBean(hexstr1,n);
         }
         if (((char) (received[11] & 0xff) & 0x08) == 0x01) {
             hexstr1 = check_pocket_closing;
-            CheckBean checkBean = new CheckBean(hexstr1, 1);
-            list.add(checkBean);
+            checkBean(hexstr1,n);
         }
         if (((char) (received[11] & 0xff) & 0x10) == 0x10) {
             hexstr1 = check_vibration_alarm;
-            CheckBean checkBean = new CheckBean(hexstr1, 1);
-            list.add(checkBean);
+            checkBean(hexstr1,n);
         }else {
             hexstr1 = check_vibration_alarm;
-            CheckBean checkBean = new CheckBean(hexstr1, 0);
-            list.add(checkBean);
+            checkBean(hexstr1,n2);
         }
         if (((char) (received[11] & 0xff) & 0x20) == 0x20) {
             hexstr1 = check_safe_door_closing;
-            CheckBean checkBean = new CheckBean(hexstr1, 1);
-            list.add(checkBean);
+            checkBean(hexstr1,n);
         }else {
             hexstr1 = check_safe_door_closing;
-            CheckBean checkBean = new CheckBean(hexstr1, 0);
-            list.add(checkBean);
+            checkBean(hexstr1,n2);
         }
         if (((char) (received[11] & 0xff) & 0x40) == 0x00) {
             hexstr1 = "PS09 left";
-            CheckBean checkBean = new CheckBean(hexstr1, 1);
-            list.add(checkBean);
+            checkBean(hexstr1,n);
         }else {
             hexstr1 = "PS09 left";
-            CheckBean checkBean = new CheckBean(hexstr1, 0);
-            list.add(checkBean);
+            checkBean(hexstr1,n2);
         }
         if (((char) (received[11] & 0xff) & 0x80) == 0x00) {
             hexstr1 = "PS09 right";
-            CheckBean checkBean = new CheckBean(hexstr1, 1);
-            list.add(checkBean);
+            checkBean(hexstr1,n);
         }else {
             hexstr1 = "PS09 right";
-            CheckBean checkBean = new CheckBean(hexstr1, 0);
-            list.add(checkBean);
+            checkBean(hexstr1,n2);
         }
 
         if (((char) (received[12] & 0xff) & 0x01) == 0x01) {//非正常
             hexstr1 = check_hopper;
-            CheckBean checkBean = new CheckBean(hexstr1, 0);
-            list.add(checkBean);
+            checkBean(hexstr1,n2);
         }else {
             hexstr1 = check_hopper;
-            CheckBean checkBean = new CheckBean(hexstr1, 1);
-            list.add(checkBean);
+            checkBean(hexstr1,n);
         }
         if (((char) (received[12] & 0xff) & 0x02) == 0x00) {//非正常
             hexstr1 = "PS05 "+check_pocket_sensor_middle;
-            CheckBean checkBean = new CheckBean(hexstr1, 1);
-            list.add(checkBean);
+            checkBean(hexstr1,n);
         }else {
             hexstr1 = "PS05 "+check_pocket_sensor_middle;
-            CheckBean checkBean = new CheckBean(hexstr1, 0);
-            list.add(checkBean);
+            checkBean(hexstr1,n2);
         }
         if (((char) (received[12] & 0xff) & 0x04) == 0x00) {//非正常
             hexstr1 = "PS05 "+check_pocket_sensor_left;
-            CheckBean checkBean = new CheckBean(hexstr1, 1);
-            list.add(checkBean);
+            checkBean(hexstr1,n);
         }else {
             hexstr1 = "PS05 "+check_pocket_sensor_left;
-            CheckBean checkBean = new CheckBean(hexstr1, 0);
-            list.add(checkBean);
+            checkBean(hexstr1,n2);
         }
         if (((char) (received[12] & 0xff) & 0x08) == 0x00) {//非正常
             hexstr1 = "PS05 "+check_pocket_sensor_right;
-            CheckBean checkBean = new CheckBean(hexstr1, 1);
-            list.add(checkBean);
+            checkBean(hexstr1,n);
         }else {
             hexstr1 = "PS05 "+check_pocket_sensor_right;
-            CheckBean checkBean = new CheckBean(hexstr1, 0);
-            list.add(checkBean);
+            checkBean(hexstr1,n2);
         }
         LogPlus.d("wwwww",list.size()+"");
     }
-    private void getContent(){
-//        check_pocket_sensor_right = content(R.string.check_pocket_sensor_right);
-//        check_pocket_sensor_left = content(R.string.check_pocket_sensor_left);
-//        check_pocket_sensor_middle = content(R.string.check_pocket_sensor_middle);
-//        check_hopper = content(R.string.check_hopper);
-//        check_safe_door_closing = content(R.string.check_safe_door_closing);
-//        check_vibration_alarm = content(R.string.check_vibration_alarm);
-//        check_pocket_closing = content(R.string.check_pocket_closing);
-//        check_temporary_pocket_opening = content(R.string.check_temporary_pocket_opening);
-//        check_box_in_position = content(R.string.check_box_in_position);
-//        check_pocket_opening = content(R.string.check_pocket_opening);
-//        check_reject_pocket = content(R.string.check_reject_pocket);
-//        check_temporary_pocket_closing = content(R.string.check_temporary_pocket_closing);
+    private static void checkBean(String content,int n){
+        CheckBean checkBean = new CheckBean(content, n);
+        list.add(checkBean);
     }
-
 
     @Override
     protected void initView() {
@@ -434,6 +367,7 @@ public class CheckingActivity extends BaseActivity implements BaseRecyclerAdapte
             this.state = state;
         }
     }
+
     public String content(int system_error) {
         String string = getResources().getString(system_error);
         return string;
