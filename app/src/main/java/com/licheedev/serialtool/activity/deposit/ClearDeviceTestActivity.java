@@ -45,6 +45,7 @@ public class ClearDeviceTestActivity extends BaseActivity {
     @Override
     protected void initView() {
         super.initView();
+        SerialPortManager.instance().close();
         SerialPortManager2.instance().initDevice();
 
         //获取原钞袋号

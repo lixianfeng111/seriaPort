@@ -112,7 +112,7 @@
 	<string name="current_deposit">Current Deposit</string>
 	<string name="ping">Ping</string>
 	<string name="deposit_details">Deposit Details</string>
-	<string name="miane">Amount</string>
+	<string name="miane">Denomination</string>
 	<string name="zhangshu">Pieces</string>
 	<string name="total">Total</string>
 	<string name="current_total">Current Total</string>
@@ -297,8 +297,8 @@
 	<string name="debug_hood_door_open">Debug hood door(Open)</string>
 	<string name="debug_hood_door_close">Debug hood door(Close)</string>
 
-	<string name="refund_money_because">Refund money because</string>
-
+	<string name="refund_money_because">Because</string>
+<!--	<string name="refund_money_because">Refund money because</string>-->
 
 	<string name="no_magnetic">Error! No magnetic signal</string>
 	<string name="no_magnetic_error">Error ! Incorrect magnetic signal</string>
@@ -334,4 +334,21 @@
 	<string name="serial_number_error">Serial number error</string>
 	<string name="data_transmission_error">Data transmission Error ! (Restart)</string>
 	<string name="the_infrared_transmission">Double banknotes (IR transmission)</string>
+
+	<string name="normal">Normal</string>
+	<string name="abnormal">Abnormal</string>
+	<string name="check_reject_pocket">Reject pocket</string>
+	<string name="check_pocket_opening">Sensor of stacker pocket opening</string>
+	<string name="check_box_in_position">Sensor of cash box in position</string>
+	<string name="check_temporary_pocket_opening">Sensor of Temporary pocket opening</string>
+	<string name="check_temporary_pocket_closing">Sensor of Temporary pocket closing</string>
+	<string name="check_pocket_closing">Sensor of stacker pocket closing</string>
+
+	<string name="check_vibration_alarm">Vibration alarm sensor</string>
+	<string name="check_safe_door_closing">Sensor of safe door</string>
+	<string name="check_hopper">Sensor of hopper</string>
+	<string name="check_pocket_sensor_middle">PS05 Temporary pocket sensor- middle</string>
+	<string name="check_pocket_sensor_left">PS05 Temporary pocket sensor- left</string>
+	<string name="check_pocket_sensor_right">PS05 Temporary pocket sensor- right</string>
+	<string name="power_on_self_test">Power On Self Test</string>
 </resources>

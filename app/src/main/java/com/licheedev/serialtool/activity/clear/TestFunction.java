@@ -127,7 +127,7 @@ public class TestFunction {
             if (!old_lead_seal.isEmpty()){
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(old_lead_seal+"\r\n"));
             }else {
-                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString(Constant.LEAD_SEAL2)+"\r\n"));
+                AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString(Constant.LEAD_SEAL)+"\r\n"));
             }
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.end_print)));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 130);

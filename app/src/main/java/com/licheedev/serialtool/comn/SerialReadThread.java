@@ -1,14 +1,18 @@
 package com.licheedev.serialtool.comn;
 
 import android.os.SystemClock;
+
+import com.licheedev.serialtool.activity.CheckingActivity;
 import com.licheedev.serialtool.comn.event.BootEvent;
 import com.licheedev.serialtool.comn.event.ClearEvent;
 import com.licheedev.serialtool.comn.event.DepositEvent;
 import com.licheedev.serialtool.comn.event.IsCoveringEvent;
+import com.licheedev.serialtool.comn.event.StatusEvent;
 import com.licheedev.serialtool.comn.event.SystemInfoEvent;
 import com.licheedev.serialtool.comn.event.ZPKEvent;
 import com.licheedev.serialtool.comn.message.LogManager;
 import com.licheedev.serialtool.util.ByteUtil;
+import com.licheedev.serialtool.util.CheckingErrorsUtil;
 import com.licheedev.serialtool.util.LogPlus;
 import com.licheedev.serialtool.util.SystemErrorsUtil;
 import org.greenrobot.eventbus.EventBus;
@@ -125,16 +129,15 @@ public class SerialReadThread extends Thread {
                 LogPlus.d("遮挡遮挡遮挡遮挡遮挡",s);
             }
         }
-
-        if((char)(received[6]&0xff)==0x15) {
+        if((char)(received[6]&0xff)== 0x11) {
+            LogPlus.e("read_thread","11指令");
+            CheckingActivity.getCheckState(received);
+        }
+        else if((char)(received[6]&0xff)==0x15) {
             SystemErrorsUtil.getError15(received,hexStr);
-//            CheckingErrorsUtil.getError15(received,hexStr);
             SerialPortManager.instance().sendCommand(sendok);
-
-
         } else if((char)(received[6]&0xff)==0x44) {
            SystemErrorsUtil.getError44(received,hexStr);
-//           CheckingErrorsUtil.getError44(received,hexStr);
             SerialPortManager.instance().sendCommand(sendok);
         } else if((char)(received[6]&0xff)==0x90) {
             //SN
@@ -245,12 +248,9 @@ public class SerialReadThread extends Thread {
         }
         else if((char)(received[6]&0xff)== 0x22) {
             SystemErrorsUtil.getError22(received);
-//            CheckingErrorsUtil.getError22(received);
         }
         else if((char)(received[6]&0xff)== 0x25) {
             SystemErrorsUtil.getError25(received,hexStr);
-//            CheckingErrorsUtil.getError25(received,hexStr);
-            return;
         }
         else if((char)(received[6]&0xff)== 0x33) {
             byte status = received[7];

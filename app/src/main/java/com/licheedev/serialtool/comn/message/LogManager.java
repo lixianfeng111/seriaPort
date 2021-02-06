@@ -1,5 +1,7 @@
 package com.licheedev.serialtool.comn.message;
 
+import com.licheedev.serialtool.activity.CheckingActivity;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

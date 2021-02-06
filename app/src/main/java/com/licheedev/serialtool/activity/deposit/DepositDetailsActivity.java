@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import com.licheedev.serialtool.R;
 import com.licheedev.serialtool.activity.deposit.bean.ListBean;
 import com.licheedev.serialtool.base.BaseActivity;
@@ -21,17 +20,13 @@ import com.licheedev.serialtool.dialog.CurrenySelectUtil;
 import com.licheedev.serialtool.util.LogPlus;
 import com.licheedev.serialtool.util.SpzUtils;
 import com.licheedev.serialtool.util.constant.Constant;
-
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.OnClick;
-
 import static com.licheedev.serialtool.activity.deposit.PaperCurrencyDepositActivity.RESULT_CODE_DEPOSIT;
 import static com.licheedev.serialtool.comn.message.LogManager.SAVE_SUCCESS_COMMAND;
 import static com.licheedev.serialtool.util.constant.Money.Denomination_1000_CNY;
@@ -97,7 +92,6 @@ public class DepositDetailsActivity extends BaseActivity implements BaseRecycler
 
     }
 
-
     @Override
     public BasePresenter initPresenter() {
         return null;
@@ -150,6 +144,7 @@ public class DepositDetailsActivity extends BaseActivity implements BaseRecycler
             finish();
         }
     }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(LogManager.ReceiveData data) {
         byte[] received = data.data;
@@ -234,7 +229,7 @@ public class DepositDetailsActivity extends BaseActivity implements BaseRecycler
         }
          if (CNY_100 > 0) {
             DepositDetailBean depositDetailBean = new DepositDetailBean(Denomination_100_CNY, CNY_100);
-            listBean.getList().add(depositDetailBean);
+             listBean.getList().add(depositDetailBean);
         }
         if (CNY_50 > 0) {
             DepositDetailBean depositDetailBean = new DepositDetailBean(Denomination_50_CNY, CNY_50);
@@ -249,12 +244,10 @@ public class DepositDetailsActivity extends BaseActivity implements BaseRecycler
         if (CNY_10 > 0) {
             DepositDetailBean depositDetailBean = new DepositDetailBean(Denomination_10_CNY, CNY_10);
             listBean.getList().add(depositDetailBean);
-
         }
         if (CNY_5 > 0) {
             DepositDetailBean depositDetailBean = new DepositDetailBean(Denomination_5_CNY, CNY_5);
             listBean.getList().add(depositDetailBean);
-
         }
         if (CNY_1 > 0) {
             DepositDetailBean depositDetailBean = new DepositDetailBean(Denomination_1_CNY, CNY_1);

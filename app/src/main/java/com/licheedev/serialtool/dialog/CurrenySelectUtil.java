@@ -197,40 +197,40 @@ public class CurrenySelectUtil {
         return alertDialog;
     }
 
-    /**
-     * 开机自检
-     * @param context
-     * @param
-     * @return
-     */
-    public static Dialog showCheckingDialog(final Context context, final CheckingActivity.Callback callback) {
-        ViewGroup view = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.checking_dialog, null, false);
-        Button btRetry = view.findViewById(R.id.btRetry);
-        Button btSkip = view.findViewById(R.id.btSkip);
-
-        final AlertDialog alertDialog = new AlertDialog
-                .Builder(context)
-                .create();
-        alertDialog.setView(view);
-        alertDialog.show();
-        alertDialog.getWindow().setLayout(400, 210);
-//        alertDialog.getWindow().setLayout(300, 170);
-        btRetry.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                alertDialog.dismiss();
-                callback.onDialogClick(1,alertDialog);
-            }
-        });
-        btSkip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                alertDialog.dismiss();
-                callback.onDialogClick(2,alertDialog);
-            }
-        });
-        return alertDialog;
-    }
+//    /**
+//     * 开机自检
+//     * @param context
+//     * @param
+//     * @return
+//     */
+//    public static Dialog showCheckingDialog(final Context context, final CheckingActivity.Callback callback) {
+//        ViewGroup view = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.checking_dialog, null, false);
+//        Button btRetry = view.findViewById(R.id.btRetry);
+//        Button btSkip = view.findViewById(R.id.btSkip);
+//
+//        final AlertDialog alertDialog = new AlertDialog
+//                .Builder(context)
+//                .create();
+//        alertDialog.setView(view);
+//        alertDialog.show();
+//        alertDialog.getWindow().setLayout(400, 210);
+////        alertDialog.getWindow().setLayout(300, 170);
+//        btRetry.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                alertDialog.dismiss();
+//                callback.onDialogClick(1,alertDialog);
+//            }
+//        });
+//        btSkip.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                alertDialog.dismiss();
+//                callback.onDialogClick(2,alertDialog);
+//            }
+//        });
+//        return alertDialog;
+//    }
 
 
     public static class DialogItemAdapter extends BaseAdapter {

@@ -203,6 +203,7 @@ public class SerialReadThread2 extends Thread {
                 LogPlus.d(hexstr1);
                 EventBus.getDefault().post(new StatusEvent(4));
             }
+
             else if(((char)(received[7]&0xff)&0x04)==0x00)
             {hexstr1=hexStr+"   报警器报警";
                 LogManager.instance().postError("报警器报警");
@@ -381,6 +382,11 @@ public class SerialReadThread2 extends Thread {
                     break;
             }
             SerialPortManager2.instance().sendSDcardAck();
+
+        }
+        else if((char)(received[6]&0xff)== 0x11)
+        {
+            LogPlus.e("read_thread","11指令");
 
         }
         {hexstr1=hexStr;}

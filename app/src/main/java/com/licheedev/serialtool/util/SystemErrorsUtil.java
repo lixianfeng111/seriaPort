@@ -3,6 +3,7 @@ package com.licheedev.serialtool.util;
 import android.app.Activity;
 
 import com.licheedev.serialtool.R;
+import com.licheedev.serialtool.activity.CheckingActivity;
 import com.licheedev.serialtool.comn.SerialPortManager;
 import com.licheedev.serialtool.comn.event.IsCoveringEvent;
 import com.licheedev.serialtool.comn.message.LogManager;
@@ -23,16 +24,18 @@ public class SystemErrorsUtil {
     private static ArrayList<String> errorList=null;
     private static Thread thread;
 
+    private static ArrayList<CheckingActivity.CheckBean> list=null;
+
     public SystemErrorsUtil(Activity activity) {
         this.activity = activity;
         if (errorList ==null){
             errorList = new ArrayList<>();
+            list = new ArrayList<>();
         }
     }
 
-
     public static void getError15(byte[] received,String hexStr) {
-
+        errorList.clear();
         hexstr1 = null;
             if (((char) (received[7] & 0xff) & 0x01) == 0x01) {
                 hexstr1 = "PS01 "+content(R.string.left_errors);
@@ -124,7 +127,11 @@ public class SystemErrorsUtil {
                 EventBus.getDefault().post(new IsCoveringEvent(true));
             }
             if (errorList.size()>0){
-                LogManager.instance().post(errorList);
+                boolean errorList2 = SpzUtils.getBoolean("errorList2", false);
+                if (!errorList2){
+                    LogManager.instance().post(errorList);
+                }
+//                errorList.clear();
             }
         LogPlus.e("read_thread2","传感器 " + hexStr);
         LogPlus.e("read_thread2","传感器 " + hexstr1);
@@ -137,6 +144,7 @@ public class SystemErrorsUtil {
             errorList.add(hexstr1);
         } else if(((char)(received[7]&0xff)&0x02)==0x00) {
             hexstr1= content(R.string.door_not_close);
+            LogPlus.e("read_thread2","传感器 " + "保险柜门未关");
             errorList.add(hexstr1);
             LogManager.instance().postError(hexstr1);
         } else if(((char)(received[7]&0xff)&0x04)==0x00) {
@@ -155,6 +163,7 @@ public class SystemErrorsUtil {
         }
         if (hexstr1!=null){
             LogManager.instance().postError(hexstr1);
+            LogPlus.e("read_thread2","传感器 " + "保险柜门未关hexstr1");
         }
         if(((char)(received[7]&0x08))==0x08) {
             hexstr1="传感器检测到钞票";

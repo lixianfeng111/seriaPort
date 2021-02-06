@@ -350,4 +350,21 @@
     <string name="data_transmission_error">纸币信息数据传输出错（若连续出现，可重启机器）</string>
     <string name="the_infrared_transmission">纸币重张（红外透射）</string>
 
+
+    <string name="normal">正常</string>
+    <string name="abnormal">异常</string>
+    <string name="check_reject_pocket">退钞口</string>
+    <string name="check_pocket_opening">存款口打开传感器</string>
+    <string name="check_box_in_position">钞箱到位传感器</string>
+    <string name="check_temporary_pocket_opening">收钞口罩打开传感器</string>
+    <string name="check_temporary_pocket_closing">收钞口罩关闭传感器</string>
+    <string name="check_pocket_closing">存款口罩关闭传感器</string>
+
+    <string name="check_vibration_alarm">震动报警传感器</string>
+    <string name="check_safe_door_closing">保险柜门关闭传感器</string>
+    <string name="check_hopper">置钞口传感器</string>
+    <string name="check_pocket_sensor_middle">PS05 收钞口传感器中</string>
+    <string name="check_pocket_sensor_left">PS05 收钞口传感器左</string>
+    <string name="check_pocket_sensor_right">PS05 收钞口传感器右</string>
+    <string name="power_on_self_test">开机自检</string>
 </resources>

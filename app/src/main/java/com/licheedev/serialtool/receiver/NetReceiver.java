@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
+import com.licheedev.serialtool.activity.CheckingActivity;
 import com.licheedev.serialtool.activity.LoginActivity;
 
 /**
@@ -16,7 +17,7 @@ public class NetReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction().equals(ACTION_BOOT)){
-            Intent bootIntent = new Intent(context, LoginActivity.class);
+            Intent bootIntent = new Intent(context, CheckingActivity.class);
             // 这里必须为FLAG_ACTIVITY_NEW_TASK
             bootIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(bootIntent);

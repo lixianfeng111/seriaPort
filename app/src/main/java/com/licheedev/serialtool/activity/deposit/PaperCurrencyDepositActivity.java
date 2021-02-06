@@ -107,7 +107,7 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         swtichWorkMode();
-
+        SpzUtils.putBoolean("errorList2",false);
     }
 
     private void swtichWorkMode() {
@@ -168,16 +168,23 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
                 SerialPortManager.instance().sendLeadCommand();
                 break;
             case R.id.tvStatus:
-                m++;
                 int size = errorList2.size();
-                if (size>1){
+                if (size>=1){
                     if (m<size){
                         String s = errorList2.get(m);
                         tvStatus.setText(s + " : "+getResources().getString(R.string.press_to_clear));
+                        m++;
+                        if (m==size){
+                            n=0;
+                            m=0;
+                            tvStatus .setVisibility(View.GONE);
+                            SpzUtils.putBoolean("errorList2",false);
+                        }
                     }else {
                         n=0;
                         m=0;
                         tvStatus .setVisibility(View.GONE);
+                        SpzUtils.putBoolean("errorList2",false);
                     }
                 }
                 SerialPortManager.instance().sendFAILURE_RESET();
@@ -193,11 +200,13 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(ArrayList<String> errorList) {
         if (n==0){
+            n=1;
             errorList2=errorList;
             String s = errorList.get(0);
             tvStatus.setText(s + " : "+getResources().getString(R.string.press_to_clear));
             tvStatus .setVisibility(View.VISIBLE);
-            n=1;
+
+            SpzUtils.putBoolean("errorList2",true);
         }
 
     }
@@ -414,7 +423,7 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
                         case 11:
                             num=n+1;
                             i=32;
-//                            rejecting_information= getResources().getString(R.string.a_paste);
+                            rejecting_information= "";
                             break;
                         case 12:
                             num=n+1;
@@ -533,7 +542,6 @@ public class PaperCurrencyDepositActivity extends BaseActivity {
         if (!isCovered){
             tvStatus .setVisibility(View.GONE);
         }
-        ToastUtil.show(this,isCovered+"");
     }
 
     @Override
