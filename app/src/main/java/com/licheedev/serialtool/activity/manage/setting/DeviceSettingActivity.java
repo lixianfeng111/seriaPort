@@ -1,12 +1,9 @@
 package com.licheedev.serialtool.activity.manage.setting;
 
 import android.content.Intent;
-import android.content.res.Configuration;
-
 import android.provider.Settings;
 import android.view.View;
 import android.widget.TextView;
-
 import com.licheedev.serialtool.R;
 import com.licheedev.serialtool.activity.LoginActivity;
 import com.licheedev.serialtool.base.BaseActivity;
@@ -15,10 +12,6 @@ import com.licheedev.serialtool.util.LanguageUtils;
 import com.licheedev.serialtool.util.LogOutUtil;
 import com.licheedev.serialtool.util.SpzUtils;
 import com.licheedev.serialtool.util.constant.Constant;
-
-
-import java.lang.reflect.Method;
-import java.util.Locale;
 
 import butterknife.OnClick;
 
@@ -85,7 +78,7 @@ public class DeviceSettingActivity extends BaseActivity {
                 LogOutUtil.LogOut(this, LoginActivity.class);
                 finish();
                 break;
-            case  R.id.tvDeviceManage:
+            case  R.id.tvDeviceManage://语言切换
                 boolean language = SpzUtils.getBoolean(Constant.LANGUAGE, false);
                 if (language){
                     language=false;

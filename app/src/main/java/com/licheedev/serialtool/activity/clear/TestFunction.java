@@ -124,7 +124,7 @@ public class TestFunction {
             AutoReplyPrint.INSTANCE.CP_Pos_SetTextBold(h, 0);
             AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.old_sealing_print)));
             AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 280);
-            if (!old_lead_seal.isEmpty()){
+            if (!old_lead_seal.isEmpty()||old_lead_seal.equals(Constant.ZERO)){
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(old_lead_seal+"\r\n"));
             }else {
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(SpzUtils.getString(Constant.LEAD_SEAL)+"\r\n"));
@@ -284,37 +284,44 @@ public class TestFunction {
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.bill)));
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(Constant.CNY +" "+paper_money2+"\r\n"));
-            }else if (coin2>0){
+            }
+            if (coin2>0){
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 20);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.coin)));
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(Constant.CNY +" "+coin2+"\r\n"));
-            }else if (cheque2>0){
+            }
+            if (cheque2>0){
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 20);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.check)));
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(Constant.CNY +" "+cheque2+"\r\n"));
-            }else if (other2>0){
+            }
+            if (other2>0){
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 20);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.other)));
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(Constant.CNY +" "+other2+"\r\n"));
-            }else if (paper_money2_mxn>0){
+            }
+            if (paper_money2_mxn>0){
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 20);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.bill)));
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(Constant.MXN+" "+paper_money2_mxn+"\r\n"));
-            }else if (coin2_mxn>0){
+            }
+            if (coin2_mxn>0){
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 20);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.coin)));
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(Constant.MXN+" "+coin2_mxn+"\r\n"));
-            }else if (cheque2_mxn>0){
+            }
+            if (cheque2_mxn>0){
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 20);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.check)));
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(Constant.MXN+" "+cheque2_mxn+"\r\n"));
-            }else if (other2_mxn>0){
+            }
+            if (other2_mxn>0){
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 20);
                 AutoReplyPrint.INSTANCE.CP_Pos_PrintTextInUTF8(h, new WString(content(R.string.other)));
                 AutoReplyPrint.INSTANCE.CP_Pos_SetHorizontalAbsolutePrintPosition(h, 150);

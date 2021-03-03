@@ -84,6 +84,8 @@ public interface Constant {
     String BAG_ID2 = "bagId2";
     String LEAD_SEAL2 = "lead_seal2";
 
+    String ZERO = "0";
+
     //其他存款输入金额数
     String HOW_MUCH = "how_much";
     //用于存款记录

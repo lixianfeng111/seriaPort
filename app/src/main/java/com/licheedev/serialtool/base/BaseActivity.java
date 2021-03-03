@@ -1,26 +1,19 @@
 package com.licheedev.serialtool.base;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-
 import butterknife.ButterKnife;
-
-import com.licheedev.serialtool.App;
 import com.licheedev.serialtool.AppManager;
 import com.licheedev.serialtool.R;
 import com.licheedev.serialtool.fragment.LogFragment;
 import com.licheedev.serialtool.comn.message.IMessage;
 import com.licheedev.serialtool.comn.message.LogManager;
-import com.licheedev.serialtool.receiver.NetReceiver;
 import com.licheedev.serialtool.util.LanguageUtils;
 import com.licheedev.serialtool.util.SpzUtils;
 import com.licheedev.serialtool.util.constant.Constant;
-import com.licheedev.serialtool.util.constant.Money;
-
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -42,7 +35,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
             miBasePresenter = initPresenter();
             initData();
             initListener();
-//            AppManager.getAppManager().addActivity(this);
+            AppManager.getAppManager().addActivity(this);
 
         } else {
             finish();
@@ -107,6 +100,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     //切换英语
     @Override
     protected void attachBaseContext(Context newBase) {
+        //默认为false是英文
         boolean language = SpzUtils.getBoolean(Constant.LANGUAGE,false);
         super.attachBaseContext(LanguageUtils.attachBaseContext(newBase,language));
     }

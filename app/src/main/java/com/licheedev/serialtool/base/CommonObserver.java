@@ -3,11 +3,9 @@ package com.licheedev.serialtool.base;
 import com.licheedev.serialtool.App;
 import com.licheedev.serialtool.net.GsonUtil;
 import com.licheedev.serialtool.net.NetUtils;
-
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
-
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
@@ -24,7 +22,7 @@ public class CommonObserver<T> implements Observer<BaseEntity> {
     @Override
     public void onSubscribe(Disposable d) {
         //请求网络前
-        boolean networkConnected = NetUtils.isconnected(App.mContext);
+        boolean networkConnected = NetUtils.isConnected(App.mContext);
         if (networkConnected) {
             mHttpCallBack.onRequest();
         }else {
@@ -72,10 +70,9 @@ public class CommonObserver<T> implements Observer<BaseEntity> {
                 } else if (baseEntity.message.equals("点赞成功")) {
                     mHttpCallBack.onDataSuccess(baseEntity);
                 } else if (baseEntity.message.equals("查询成功")){
-                    mHttpCallBack.onFailer(baseEntity.message);}
-                 else {
+                    mHttpCallBack.onFailer(baseEntity.message);
+                } else {
                     mHttpCallBack.onDataSuccess(baseEntity);
-                    //mHttpCallBack.onFailer(baseEntity.message);
                 }
                 mHttpCallBack.onFailer(baseEntity.message);
             }

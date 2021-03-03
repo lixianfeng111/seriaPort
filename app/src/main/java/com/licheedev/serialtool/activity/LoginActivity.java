@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
-
 import com.caysn.autoreplyprint.AutoReplyPrint;
 import com.licheedev.serialtool.R;
 import com.licheedev.serialtool.activity.clear.TestFunction;
@@ -14,7 +13,10 @@ import com.licheedev.serialtool.activity.deposit.DepositDetailsActivity;
 import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.activity.deposit.SelectDepositActivitys;
 import com.licheedev.serialtool.activity.manage.SetManageActivity;
+import com.licheedev.serialtool.base.BaseEntity;
 import com.licheedev.serialtool.base.BasePresenter;
+import com.licheedev.serialtool.base.IBaseView;
+import com.licheedev.serialtool.bean.LoginBean;
 import com.licheedev.serialtool.util.GetCurrencyUtil;
 import com.licheedev.serialtool.util.LanguageUtils;
 import com.licheedev.serialtool.util.SpzUtils;
@@ -28,9 +30,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-import static com.sun.jna.Pointer.NULL;
-
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends BaseActivity implements IBaseView<LoginBean> {
 
     private Pointer h;
     @BindView(R.id.editText)
@@ -84,7 +84,6 @@ public class LoginActivity extends BaseActivity {
         switch_theLanguage();
         //打印
         print();
-
     }
 
 
@@ -177,5 +176,35 @@ public class LoginActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         ClosePort();
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void onDataSuccess(LoginBean data) {
+        ToastUtil.show(this,"成功");
+    }
+
+    @Override
+    public void onDataFailer(String msg) {
+
+    }
+
+    @Override
+    public void onDataList(List<LoginBean> list) {
+
+    }
+
+    @Override
+    public void modifySuccess(BaseEntity baseEntity) {
+
     }
 }

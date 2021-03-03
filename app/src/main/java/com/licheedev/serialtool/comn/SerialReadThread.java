@@ -123,15 +123,26 @@ public class SerialReadThread extends Thread {
         if (!s.isEmpty()){
             if (s.contains("fb02")||s.contains("fb04")||s.contains("fb08")||s.contains("fb0e")){//遮挡
                 EventBus.getDefault().post(new IsCoveringEvent(true));
-                LogPlus.d("遮挡遮挡遮挡遮挡遮挡",s);
             }else if (s.contains("fb00")){//无遮挡
                 EventBus.getDefault().post(new IsCoveringEvent(false));
-                LogPlus.d("遮挡遮挡遮挡遮挡遮挡",s);
             }
         }
         if((char)(received[6]&0xff)== 0x11) {
             LogPlus.e("read_thread","11指令");
             CheckingActivity.getCheckState(received);
+            byte state = received[7];
+            switch (state){
+                case 0:
+                    LogPlus.d("钞袋状态","<80%");
+                    break;
+                case 1:
+                    LogPlus.d("钞袋状态","==80%");
+                    break;
+                case 2:
+                    LogPlus.d("钞袋状态","full");
+                    break;
+            }
+            return;
         }
         else if((char)(received[6]&0xff)==0x15) {
             SystemErrorsUtil.getError15(received,hexStr);

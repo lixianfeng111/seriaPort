@@ -14,6 +14,9 @@ import java.lang.ref.WeakReference;
 import java.util.Iterator;
 import java.util.Stack;
 
+import static android.content.Context.ACTIVITY_SERVICE;
+import static com.blankj.utilcode.util.ActivityUtils.startActivity;
+
 
 /**
  * 应用程序管理类
@@ -143,7 +146,6 @@ public class AppManager {
                     activity.finish();
                 }
             }
-
         }
     }
 
@@ -161,6 +163,23 @@ public class AppManager {
             System.exit(0);
         }
     }
+
+    /**
+     * 应用程序退出
+     */
+//    public void AppExit(Context context) {
+//        int currentVersion = android.os.Build.VERSION.SDK_INT;
+//        if (currentVersion > android.os.Build.VERSION_CODES.ECLAIR_MR1) {
+//            Intent startMain =new Intent(Intent.ACTION_MAIN);
+//            startMain.addCategory(Intent.CATEGORY_HOME);
+//            startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            startActivity(startMain);
+//            System.exit(0);
+//        }else {// android2.1
+//            ActivityManager am = (ActivityManager) context.getSystemService(ACTIVITY_SERVICE);
+//            am.restartPackage(getPackageName());
+//        }
+//    }
 
     public Activity getTopActivity() {
         WeakReference<Activity> activity = activityStack.lastElement();

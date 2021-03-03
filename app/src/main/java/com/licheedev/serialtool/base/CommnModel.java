@@ -1,16 +1,15 @@
 package com.licheedev.serialtool.base;
 
 import com.licheedev.serialtool.net.RetrofitUtil;
-
 import java.io.File;
 import java.util.Map;
-
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+
 public class CommnModel {
 
     private BaseService mBaseService;
@@ -79,6 +78,7 @@ public class CommnModel {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(commonObserver);
     }
+
     /*public <T> void doPosttwo(String url, Map<String, Object> params, T t, HttpCallBack httpCallBack,HashMap<String,Object> headMap) {
 
         mBaseService = RetrofitUtil.getInstance().createApi(BaseService.class);

@@ -151,7 +151,7 @@ public class ClearDeviceHintActivity extends BaseActivity {
                 }else {//没有更换钞袋
                     String string = SpzUtils.getString(Constant.LEAD_SEAL2);//获取上次封铅号
                     SpzUtils.putString(Constant.OLD_BAG_ID,SpzUtils.getString(Constant.BAG_ID2));
-                    SpzUtils.putString(Constant.NEW_LEAD_SEAL,string);//新钞袋号还是上次的
+                    SpzUtils.putString(Constant.NEW_LEAD_SEAL,string);//新封签号号还是上次的
                     SpzUtils.putString(Constant.OLD_LEAD_SEAL,string);
                     SpzUtils.putString(Constant.LEAD_SEAL,string);
                 }

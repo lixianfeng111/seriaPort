@@ -69,6 +69,7 @@ public class ClearDeviceTestActivity extends BaseActivity {
     public void ClearEvent(ClearEvent clearEvent){
         SpzUtils.putString(Constant.SN,clearEvent.getSystem_info());
     }
+
     @Override
     public void initListener() {
 

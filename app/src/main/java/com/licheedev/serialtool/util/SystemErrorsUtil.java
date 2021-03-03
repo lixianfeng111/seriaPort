@@ -198,7 +198,7 @@ public class SystemErrorsUtil {
                 hexstr1 = content(R.string.cannot_start_other_reason);
                 break;
         }
-        if (!hexstr1.isEmpty()){
+        if (hexstr1!=null){
             LogManager.instance().postError(hexstr1);
             errorList.add(hexstr1);
         }

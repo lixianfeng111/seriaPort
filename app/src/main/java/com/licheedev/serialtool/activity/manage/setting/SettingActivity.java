@@ -17,7 +17,6 @@ import butterknife.OnClick;
  */
 public class SettingActivity extends BaseActivity {
 
-
     @Override
     protected int getLayoutId() {
         return R.layout.activity_setting;
@@ -33,7 +32,6 @@ public class SettingActivity extends BaseActivity {
 
     }
 
-
     @Override
     public BasePresenter initPresenter() {
         return null;
@@ -47,16 +45,16 @@ public class SettingActivity extends BaseActivity {
     @OnClick({R.id.tvDevice, R.id.tvNetwork, R.id.tvFunction, R.id.tvenvelope, R.id.btnBack, R.id.btLogout})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.tvDevice:
+            case R.id.tvDevice://机器设定
                 startActivity(new Intent(SettingActivity.this, DeviceSettingActivity.class));
                 break;
-            case R.id.tvNetwork:
+            case R.id.tvNetwork://网络设定
                 startActivity(new Intent(SettingActivity.this, NetworkSettingActivity.class));
                 break;
-            case R.id.tvFunction:
+            case R.id.tvFunction://功能设定
                 startActivity(new Intent(SettingActivity.this, FunctionSettingActivity.class));
                 break;
-            case R.id.tvenvelope:
+            case R.id.tvenvelope://信封金额
                 startActivity(new Intent(SettingActivity.this, EnvelopeSettingActivity.class));
                 break;
             case R.id.btnBack:

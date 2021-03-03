@@ -8,7 +8,7 @@ import android.net.NetworkInfo;
  * 网络判断
  */
 public class NetUtils {
-    public static boolean isconnected(Context context){
+    public static boolean isConnected(Context context){
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = connectivityManager.getActiveNetworkInfo();
         if (info!=null){

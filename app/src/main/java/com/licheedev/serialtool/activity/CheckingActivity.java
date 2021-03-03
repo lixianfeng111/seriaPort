@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
 import com.licheedev.serialtool.R;
 import com.licheedev.serialtool.activity.dapter.BaseRecyclerAdapter;
 import com.licheedev.serialtool.activity.dapter.RecyclerViewHolder;
@@ -24,17 +23,7 @@ import java.util.List;
 
 public class CheckingActivity extends BaseActivity implements BaseRecyclerAdapter.Delegate{
 
-    private ArrayList<String> errorList;
-    private ArrayList<String> errorList2;
     private String sendok = "A1A2A3A4040011BBBB11";
-//    @BindView(R.id.text_check)
-//    TextView text_check;
-    private int isDialog=0;
-    int[] commandWorkMode = new int[]{0xA1, 0xA2, 0xA3, 0xA4,/*STX 4byte*/
-            0x12, 0x00,/*size 2byte*/
-            0x21,/*CMD 1byte*/
-            0x02, 0x00, 0x01, 0x08, 0x00, 0x04, 0x02, 0x06, 0x01, 0x00, 0x01, 0x01, 0x01, 0x05,/*DATA1 14byte*/
-            0xBB, 0xBB, 0x39}; //进入工作模式
     private SystemErrorsUtil systemErrorsUtil=null;
     private RecyclerView recyclerview;
     private  BaseRecyclerAdapter adapter;
@@ -56,6 +45,7 @@ public class CheckingActivity extends BaseActivity implements BaseRecyclerAdapte
     private static String check_temporary_pocket_closing;
     private static int n=1;
     private static int n2=0;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_checking;
@@ -118,7 +108,6 @@ public class CheckingActivity extends BaseActivity implements BaseRecyclerAdapte
             hexstr1 = "PS03 right1";
             checkBean(hexstr1,n2);
         }
-
         if (((char) (received[10] & 0xff) & 0x01) == 0x00) {
             hexstr1 = "PS04";
             checkBean(hexstr1,n);
@@ -215,28 +204,29 @@ public class CheckingActivity extends BaseActivity implements BaseRecyclerAdapte
             checkBean(hexstr1,n);
         }
         if (((char) (received[12] & 0xff) & 0x02) == 0x00) {//非正常
-            hexstr1 = "PS05 "+check_pocket_sensor_middle;
+            hexstr1 = check_pocket_sensor_middle;
             checkBean(hexstr1,n);
         }else {
-            hexstr1 = "PS05 "+check_pocket_sensor_middle;
+            hexstr1 = check_pocket_sensor_middle;
             checkBean(hexstr1,n2);
         }
         if (((char) (received[12] & 0xff) & 0x04) == 0x00) {//非正常
-            hexstr1 = "PS05 "+check_pocket_sensor_left;
+            hexstr1 = check_pocket_sensor_left;
             checkBean(hexstr1,n);
         }else {
-            hexstr1 = "PS05 "+check_pocket_sensor_left;
+            hexstr1 = check_pocket_sensor_left;
             checkBean(hexstr1,n2);
         }
         if (((char) (received[12] & 0xff) & 0x08) == 0x00) {//非正常
-            hexstr1 = "PS05 "+check_pocket_sensor_right;
+            hexstr1 = check_pocket_sensor_right;
             checkBean(hexstr1,n);
         }else {
-            hexstr1 = "PS05 "+check_pocket_sensor_right;
+            hexstr1 = check_pocket_sensor_right;
             checkBean(hexstr1,n2);
         }
         LogPlus.d("wwwww",list.size()+"");
     }
+
     private static void checkBean(String content,int n){
         CheckBean checkBean = new CheckBean(content, n);
         list.add(checkBean);

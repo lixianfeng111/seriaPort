@@ -1,9 +1,8 @@
 package com.licheedev.serialtool.activity.manage;
 
-import android.app.ActivityManager;
 import android.content.Intent;
 import android.view.View;
-
+import com.licheedev.serialtool.AppManager;
 import com.licheedev.serialtool.R;
 import com.licheedev.serialtool.base.BaseActivity;
 import com.licheedev.serialtool.activity.manage.maintain.MaintainActivity;
@@ -19,7 +18,6 @@ import butterknife.OnClick;
  * 设置管理
  */
 public class SetManageActivity extends BaseActivity {
-
 
     @Override
     protected int getLayoutId() {
@@ -71,19 +69,21 @@ public class SetManageActivity extends BaseActivity {
             case R.id.ibtn_stop://注销
                 finish();
                 break;
-            case R.id.ibtn_close://退出
-                int currentVersion = android.os.Build.VERSION.SDK_INT;
-                if (currentVersion > android.os.Build.VERSION_CODES.ECLAIR_MR1) {
-                    Intent startMain =new Intent(Intent.ACTION_MAIN);
-                    startMain.addCategory(Intent.CATEGORY_HOME);
-                    startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(startMain);
-                    System.exit(0);
-                }else {// android2.1
-                    ActivityManager am = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
-                    am.restartPackage(getPackageName());
-                }
+            case R.id.ibtn_close://.
+//                int currentVersion = android.os.Build.VERSION.SDK_INT;
+//                if (currentVersion > android.os.Build.VERSION_CODES.ECLAIR_MR1) {
+//                    Intent startMain =new Intent(Intent.ACTION_MAIN);
+//                    startMain.addCategory(Intent.CATEGORY_HOME);
+//                    startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    startActivity(startMain);
+//                    System.exit(0);
+//                }else {// android2.1
+//                    ActivityManager am = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+//                    am.restartPackage(getPackageName());
+//                }
 //                AppManager.getAppManager().AppExit(this);
+                AppManager.getAppManager().AppExit(this);
+
                 break;
         }
     }

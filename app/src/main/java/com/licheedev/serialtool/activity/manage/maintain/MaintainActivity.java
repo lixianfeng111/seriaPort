@@ -66,8 +66,9 @@ public class MaintainActivity extends BaseActivity {
                 startActivity(new Intent(this, DepositErrorActivity.class));
                 break;
             case R.id.tvbillinit:
-                SpzUtils.putString(Constant.OLD_BAG_ID,"0");
-                SpzUtils.putString(Constant.OLD_LEAD_SEAL,"0");
+                SpzUtils.putString(Constant.OLD_BAG_ID,Constant.ZERO);
+                SpzUtils.putString(Constant.OLD_LEAD_SEAL,Constant.ZERO);
+                SpzUtils.putString(Constant.NEW_LEAD_SEAL,Constant.ZERO);
                 SpzUtils.putString(Constant.timeDay2, TimeFormartUtils.getTimeDay());
                 SpzUtils.putString(Constant.TIME2,TimeFormartUtils.getTime());
                 SpzUtils.putBoolean(Constant.START,true);
