@@ -111,4 +111,11 @@ public interface Constant {
 
     //错误原因
     String LIST_ERROR = "list_error";
+    //面值大小
+    String ONE_HUNDRED = "100";
+    String FIFTY = "50";
+    String TWENTY = "20";
+    String TEN = "10";
+    String FIVE = "5";
+    String ONE = "1";
 }

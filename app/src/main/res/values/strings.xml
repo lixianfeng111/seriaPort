@@ -367,4 +367,6 @@
     <string name="check_pocket_sensor_left">PS05 收钞口传感器左</string>
     <string name="check_pocket_sensor_right">PS05 收钞口传感器右</string>
     <string name="power_on_self_test">开机自检</string>
+
+    <string name="kind_print2">种类：</string>
 </resources>

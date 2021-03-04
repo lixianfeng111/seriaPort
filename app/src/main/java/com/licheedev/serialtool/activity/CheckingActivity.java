@@ -235,6 +235,8 @@ public class CheckingActivity extends BaseActivity implements BaseRecyclerAdapte
     @Override
     protected void initView() {
         super.initView();
+        SerialPortManager.instance().initDevice();
+        SerialPortManager.instance().sendCommand(sendok);
         check_pocket_sensor_right = content(R.string.check_pocket_sensor_right);
         check_pocket_sensor_left = content(R.string.check_pocket_sensor_left);
         check_pocket_sensor_middle = content(R.string.check_pocket_sensor_middle);
@@ -255,15 +257,16 @@ public class CheckingActivity extends BaseActivity implements BaseRecyclerAdapte
         btLogout = findViewById(R.id.btLogout);
 //        btnBack.setText(getResources().getString(R.string.retry));
         btLogout.setText(getResources().getString(R.string.skip));
-        SerialPortManager.instance().initDevice();
+//        SerialPortManager.instance().initDevice();
+//        SerialPortManager.instance().sendCommand(sendok);
     }
 
     @Override
     public void initListener() {
-        LinearLayoutManager manager = new LinearLayoutManager(this);
-        recyclerview.setLayoutManager(manager);
-        adapter = new BaseRecyclerAdapter(this, this);
-        recyclerview.setAdapter(adapter);
+//        LinearLayoutManager manager = new LinearLayoutManager(this);
+//        recyclerview.setLayoutManager(manager);
+//        adapter = new BaseRecyclerAdapter(this, this);
+//        recyclerview.setAdapter(adapter);
 
         btLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -293,7 +296,11 @@ public class CheckingActivity extends BaseActivity implements BaseRecyclerAdapte
 
     @Override
     public void initData() {
-        SerialPortManager.instance().sendCommand(sendok);
+//        SerialPortManager.instance().sendCommand(sendok);
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+        recyclerview.setLayoutManager(manager);
+        adapter = new BaseRecyclerAdapter(this, this);
+        recyclerview.setAdapter(adapter);
     }
 
 

@@ -241,6 +241,8 @@
 
         <activity android:name=".activity.deposit.RefundMoneyActivity"
             android:screenOrientation="landscape"/>
+        <activity android:name=".activity.manage.print.BagActivity"
+            android:screenOrientation="landscape"/>
     </application>
 
 </manifest>

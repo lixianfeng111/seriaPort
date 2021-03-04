@@ -351,4 +351,6 @@
 	<string name="check_pocket_sensor_left">PS05 Temporary pocket sensor- left</string>
 	<string name="check_pocket_sensor_right">PS05 Temporary pocket sensor- right</string>
 	<string name="power_on_self_test">Power On Self Test</string>
+
+	<string name="kind_print2">Type:</string>
 </resources>

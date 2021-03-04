@@ -50,7 +50,7 @@ public class SystemPrintActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tvcreenbill:
-
+                startActivity(new Intent(this, BagActivity.class));
                 break;
 
             case R.id.tvclearrecord:
