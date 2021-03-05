@@ -530,6 +530,7 @@
                         android:background="@color/white" />
 
                     <TextView
+                        android:id="@+id/amount"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -545,6 +546,7 @@
                         android:background="@color/white" />
 
                     <TextView
+                        android:id="@+id/piece_amount"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -559,6 +561,7 @@
                         android:background="@color/white" />
 
                     <TextView
+                        android:id="@+id/amount_sum"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -907,7 +910,7 @@
 
             <RelativeLayout
                 android:layout_marginTop="15dp"
-                android:id="@+id/M"
+                android:id="@+id/mxn"
                 android:layout_below="@+id/cnr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -1406,6 +1409,7 @@
                         android:background="@color/white" />
 
                     <TextView
+                        android:id="@+id/amount_mxn"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -1421,6 +1425,8 @@
                         android:background="@color/white" />
 
                     <TextView
+                        android:id="@+id/piece_amount_mxn"
+
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -1435,6 +1441,7 @@
                         android:background="@color/white" />
 
                     <TextView
+                        android:id="@+id/amount_sum_mxn"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -1772,7 +1779,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <TextView
-                        android:id="@+id/total_mxn"
+                        android:id="@+id/total_MXN"
                         android:textSize="20sp"
                         android:textColor="@color/white"
                         android:text="STC"
